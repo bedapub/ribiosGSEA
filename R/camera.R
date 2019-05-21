@@ -269,7 +269,9 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design), weight
     } else {
         tab$FDR <- tab$PValue
     }
-    tab$Score <- -log10(tab$PValue) * ifelse(Direction=="Up", 1, -1)
+    tab$Score <- ribiosUtils::pScore(tab$PValue,
+                                     sign=Direction=="Up",
+                                     method="absLog10")
     tab$ContributingGenes <- as.character(conts)
     tab$GeneSet <- names(index)
     tab <- putColsFirst(tab, "GeneSet")
