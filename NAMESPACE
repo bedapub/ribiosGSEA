@@ -10,7 +10,7 @@ importFrom("limma",
 importFrom("MASS", "mvrnorm")
 importFrom("lattice", "xyplot", "panel.xyplot",
            "trellis.par.get")
-importFrom("BioQC", "wmwTest")
+importFrom("BioQC", "wmwTest", "readGmt")
 importFrom("globaltest", "gt")
 importFrom("Biobase", "exprs", "exprs<-")
 importFrom("ribiosExpression",
@@ -25,8 +25,7 @@ import(ribiosIO)
 import(ribiosMath)
 import(ribiosUtils)
 
-exportClass(GeneSets,
-            gseaResItem, annoGseaResItem,
+exportClass(gseaResItem, annoGseaResItem,
             annoGseaRes, annoGseaResList)
 
 exportClass(FisherResult)
@@ -75,9 +74,7 @@ export(gseaResQvalue, gseaResES,
 export(buildGSEAcomm)
 
 ## GMT functions
-export(readGmt, writeGmt, parseGmt,
-       appendGeneSets,
-       matchGenes,
+export(readGmt, 
        readDefaultGenesets)
 
 ## Fisher test (using hypergeometric test)
