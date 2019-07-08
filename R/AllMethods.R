@@ -1,19 +1,6 @@
-setMethod("[","GeneSets", function(x, i, ...) {
-              x@.Data <- x@.Data[i]
-              return(x)
-          })
-
-setMethod("gsCategory", "GeneSet", function(object) return(object@category))
-setMethod("gsCategory", "GeneSets", function(object) return(sapply(object@.Data, gsCategory)))
-
-setMethod("gsName", "GeneSet", function(object) return(object@name))
 setMethod("gsName", "gseaResItem", function(object) return(object@geneset))
 setMethod("gsName", "annoGseaRes", function(object) sapply(object, gsName))
-setMethod("gsName", "GeneSets", function(object, i) {
-  res <- names(object)
-  if(!missing(i) && !is.null(i)) res <- res[i]
-  return(res)
-})
+
 setMethod("gsName", "FisherResult", function(object) object@gsName)
 setMethod("gsName", "FisherResultList", function(object) names(object@.Data))
 
@@ -88,17 +75,6 @@ setMethod("gseaCoreEnrichThr", "annoGseaRes", function(object) {
   return(res)
 })
 
-setMethod("gsDesc", "GeneSet", function(object) {
-              return(object@desc)
-          })
-setMethod("gsDesc", "GeneSets", function(object, i) {
-  res <- sapply(object@.Data, function(x) x@desc)
-  if(!missing(i)) res <- res[i]
-  return(res)
-})
-
-setMethod("gsGenes", "GeneSet", function(object) return(object@genes))
-
 setMethod("gsGenes", "annoGseaResItem", function(object) return(object@gsGenes))
 setMethod("gsGenes", "annoGseaRes", function(object) {
   res <- lapply(object@.Data, gsGenes)
@@ -115,13 +91,6 @@ setMethod("gsGenes", "GeneSets", function(object, i) {
   }
   return(res)
 })
-
-setMethod("gsGeneCount", "GeneSet", function(object) return(length(object@genes)))
-setMethod("gsGeneCount", "GeneSets", function(object, i) {
-              res <- sapply(object@.Data, function(x) length(x@genes))
-              if(!missing(i)) res <- res[i]
-              return(res)
-          })
 
 setMethod("gsGeneValues", "annoGseaResItem", function(object) return(object@gsGeneValues))
 setMethod("gsGeneValues", "annoGseaRes", function(object) {
@@ -195,26 +164,6 @@ setMethod("[", "annoGseaRes", function(x, i,...) {
     i <- match(i, gsName(x))
   res <- callGeneric(x@.Data, i)
   return(as(res, "annoGseaRes"))
-})
-
-setMethod("show", "GeneSets", function(object) {
-  categories <- gsCategory(object)
-  cateTbl <- table(categories)
-  categoryTerm <- ifelse(length(cateTbl)>1, "categories", "category")
-  cat("A GeneSets object\n")
-  cat("  Unique ", categoryTerm," (", length(cateTbl), "):\n", sep="")
-  cat(paste("    [", seq(along=cateTbl), "] ",
-            names(cateTbl), " (", cateTbl, ")", collapse="\n",
-            sep=""),
-      "\n",sep="")
-  cat("  Gene sets (", length(object), "):\n",sep="")
-  heads <- 1:pmin(3L, length(object))
-  for(i in heads) {
-    cat("    [", i, "] ", object[[i]]@name, "\n",sep="")
-    cat("        description:", object[[i]]@desc, "\n")
-    cat("        genes : ", paste(head(object[[i]]@genes), collapse=","), ",...", "\n", sep="")
-  }
-  cat("...\n")
 })
 
 setMethod("show", "gseaResItem", function(object) {
@@ -348,17 +297,7 @@ setMethod("as.data.frame", "FisherResultList", function(x, row.names) {
 setMethod("gsName", "FisherResultList", function(object,...) {
               names(object)
           })
-setMethod("[", "GeneSets", function(x, i) {
-              resList <- x@.Data[i]
-              names(resList) <- names(x)[i]
-              res <- new("GeneSets", resList)
-              return(res)
-          })
-## setMethod("[", c("FisherResultList", "character", "missing", "missing"),
-##           function(x, i,j, drop) {
-##              isCategory <- gsCategory(x) %in% i
-##              return(x[isCategory])
-##          })
+
 setMethod("[", c("FisherResultList", "ANY", "missing", "missing"), function(x, i) {
               resList <- x@.Data[i]
               res <- new("FisherResultList", resList, input=x@input, universe=x@universe)
@@ -471,12 +410,6 @@ setMethod("show", "FisherResultList", function(object) {
               print(object)
           })
 
-setMethod("gsSize", "GeneSet", function(object) {
-              return(length(object@genes))
-          })
-setMethod("gsSize", "GeneSets", function(object) {
-              return(sapply(object@.Data, gsSize))
-          })
 filterMinMax <- function(sizes, min, max) {
     sel <- rep(TRUE, length(sizes))
     if(!missing(min)) {
