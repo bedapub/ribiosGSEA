@@ -16,18 +16,6 @@ setClass("annoGseaResItem",
 
 setClass("annoGseaRes", contains="list")
 setClass("annoGseaResList", contains="list") #3 a list of annoGseaRes objects
-setClass("GeneSet",
-         representation=list(
-             category="character",
-             name="character",
-             desc="character",
-             genes="character"),
-         prototype=list(category=as.character(NA),
-                        name=as.character(NA),
-                        desc=as.character(NA),
-                        genes=as.character(NA)))
-setClass("GeneSets",contain="list")
-## setClass("GeneSetsList", contain="list")
 
 setClass("GeneSetResult",
          representation=list(
