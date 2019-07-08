@@ -17,7 +17,7 @@
 #'  \item gsCompOverlapSelInd Factor vector, indicating the gene-set clusters represented by each representative gene-set.
 #' }
 #' 
-#' @importFrom ribios munion
+### @importFrom ribiosUtils munion
 #' 
 #' @examples
 #' set.seed(1887)
