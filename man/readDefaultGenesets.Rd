@@ -9,7 +9,7 @@ readDefaultGenesets(path, mps = FALSE)
 \arguments{
 \item{path}{Character, path to the directory where the gmt files are stored}
 
-\item{mps}{Logical,  whether molecular-phenotypic screening (MPS) genesets should be read in as pathway-centric categories (\code{TRUE}) or as one category named \code{MolecularPhenotyping} (\code{FALSE}).}
+\item{mps}{Logical,  whether molecular-phenotypic screening (MPS) genesets should be read in as pathway-centric namespaces (\code{TRUE}) or as one namespace named \code{MolecularPhenotyping} (\code{FALSE}).}
 }
 \description{
 In Roche Bioinformatics we use a default collection of gene-sets for gene-set enrichment analysis. This function loads this collection.
