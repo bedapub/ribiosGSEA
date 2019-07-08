@@ -17,7 +17,7 @@ Imports:
     MASS,
     lattice,
     latticeExtra,
-    BioQC,
+    BioQC (>= 1.13.2),
     globaltest,
     ribiosExpression,
     edgeR,
