@@ -1,4 +1,4 @@
-## AUTOMATICALLY GENERATED FROM TEMPLATE (Thu Feb 21 16:59:30 CET 2019). DO NOT EDIT IT MANUALLY!
+## AUTOMATICALLY GENERATED FROM TEMPLATE (Mo Jul  8 20:50:58 CEST 2019). DO NOT EDIT IT MANUALLY!
 ################################################################################
 ##
 ##  Makefile
@@ -11,7 +11,7 @@ R:=R
 
 roxygenise:
 	@echo '====== roxygenize ======'	
-	@(${R} -q -e "library(devtools);document('.')")
+	@(${R} -q -e "library(devtools);load_all();document('.')")
 	@echo ' '
 
 test:
