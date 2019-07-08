@@ -163,6 +163,9 @@ export(fishersMethod)
 
 export(getPvalCol, getFDRCol)
 
+## kmeansGeneset
+export(kmeansGeneset)
+
 ## util
 export(ronetGeneSetCategory)
 export(readRonetGmt)
