@@ -10,7 +10,9 @@ importFrom("limma",
 importFrom("MASS", "mvrnorm")
 importFrom("lattice", "xyplot", "panel.xyplot",
            "trellis.par.get")
-importFrom("BioQC", "wmwTest", "readGmt")
+importFrom("BioQC", "wmwTest", "readGmt", "GmtList",
+           "gsName", "gsDesc", "gsGenes", "gsGeneCount", "gsSize", "gsNamespace", 
+           "gsNamespace<-", "appendGmtList")
 importFrom("globaltest", "gt")
 importFrom("Biobase", "exprs", "exprs<-")
 importFrom("ribiosExpression",
@@ -25,6 +27,7 @@ import(ribiosIO)
 import(ribiosMath)
 import(ribiosUtils)
 
+
 exportClass(gseaResItem, annoGseaResItem,
             annoGseaRes, annoGseaResList)
 
@@ -34,7 +37,6 @@ exportClass(FisherResult)
 
 exportClass(CameraResult,
             CameraResultList)
-export(GeneSet, GeneSets)
 export(geneSetPerm)
 exportClass("TwoGroupExprsSimulator",
             "BenchmarkDataset",
@@ -42,8 +44,7 @@ exportClass("TwoGroupExprsSimulator",
             "BenchmarkResult")
 
 ## S4 methods
-export(gsName, gsDesc, gsGenes, gsGeneCount, gsGeneValues, gsCategory,
-       "gsGenes<-", "gsGeneValues<-",
+export("gsGenes<-", "gsGeneValues<-",
        isGseaCoreEnrich,
        gseaES, gseaNES, gseaNP, gseaFDR, gseaFWER,
        gsGeneIndices, gseaESprofile,
@@ -74,7 +75,8 @@ export(gseaResQvalue, gseaResES,
 export(buildGSEAcomm)
 
 ## GMT functions
-export(readGmt, 
+export(readMPSGmt,
+       writeGmt, 
        readDefaultGenesets)
 
 ## Fisher test (using hypergeometric test)
@@ -164,8 +166,9 @@ export(getPvalCol, getFDRCol)
 export(kmeansGeneset)
 
 ## util
-export(ronetGeneSetCategory)
+export(ronetGeneSetNamespace)
 export(readRonetGmt)
+export(prettyRonetGenesetNames)
 
 ## Use Dynamic Lib
 useDynLib(ribiosGSEA)
