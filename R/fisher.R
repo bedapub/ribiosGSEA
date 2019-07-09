@@ -9,7 +9,7 @@
 #'
 #' This function performs one-sided Fisher's exact test to test the over-representation of the genes given as \code{geneSetGenes} in the input \code{genes} list.
 #' 
-#' If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that category. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.
+#' If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that namespace. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.
 #'
 #' @return A list of three elements
 #' \enumerate{
@@ -87,7 +87,7 @@ gsFisherTestCore <- function(genes, geneSetGenes, universe,
 #'
 #' This function performs one-sided Fisher's exact test to test the over-representation of the genes given as \code{geneSetGenes} in the input \code{genes} list.
 #' 
-#' If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that category. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.
+#' If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that namespace. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.
 #'
 #' @return A list of lists, of the same length as the input geneSetGenesList, each list consisting of three elements
 #' \enumerate{
@@ -142,14 +142,14 @@ gsListFisherTestCore <- function(genes, geneSetGenesList, universe,
 #' @param geneSetGenes genes belonging to a gene set
 #' @param universe universe of genes
 #' @param gsName gene set name, can be left missing
-#' @param gsCategory gene set category name, can be left missing
+#' @param gsNamespace gene set namespace name, can be left missing
 #' @param makeUniqueNonNA Logical, whether genes, geneSetGenes, and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.
 #' @param checkUniverse Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}
 #' @param useEASE Logical, whether to use the EASE method to report the p-value. 
 #'
 #' This function performs one-sided Fisher's exact test to test the over-representation of gene set genes in the input gene list.
 #' 
-#' If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that category. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.
+#' If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that namespace. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.
 #'
 #' @references 
 #' \describe{
@@ -165,7 +165,7 @@ gsListFisherTestCore <- function(genes, geneSetGenesList, universe,
 #' myUniverse <- LETTERS
 #' fisherTest(myGenes, myGeneSet1, myUniverse)
 #' fisherTest(myGenes, myGeneSet2, myUniverse)
-#' fisherTest(myGenes, myGeneSet1, myUniverse, gsName="My gene set1", gsCategory="Letters")
+#' fisherTest(myGenes, myGeneSet1, myUniverse, gsName="My gene set1", gsNamespace="Letters")
 #'
 #' ## note that duplicated items are removed by default
 #' resWoRp <- fisherTest(rep(myGenes,2), myGeneSet1, myUniverse)
@@ -175,14 +175,14 @@ gsListFisherTestCore <- function(genes, geneSetGenesList, universe,
 #' resWithRpNoUnique <- fisherTest(rep(myGenes,2), myGeneSet1, rep(myUniverse,2), makeUniqueNonNA=FALSE)
 #' identical(resWoRp, resWithRpNoUnique)
 setMethod("fisherTest", c("character", "character", "character"),
-          function(genes, genesets, universe, gsName, gsCategory,
+          function(genes, genesets, universe, gsName, gsNamespace,
                    makeUniqueNonNA=TRUE, 
                    checkUniverse=TRUE,
                    useEASE=FALSE) {
               if(missing(gsName))
                   gsName <- as.character(NA)
-              if(missing(gsCategory))
-                  gsCategory <- as.character(NA)
+              if(missing(gsNamespace))
+                  gsNamespace <- as.character(NA)
               coreRes <- gsFisherTestCore(genes = genes, 
                            geneSetGenes = genesets,
                            universe = universe,
@@ -190,7 +190,7 @@ setMethod("fisherTest", c("character", "character", "character"),
                            checkUniverse = checkUniverse,
                            useEASE = useEASE)
               new("FisherResult",
-                  gsCategory=gsCategory,
+                  gsNamespace=gsNamespace,
                   gsName=gsName,
                   gsEffSize=coreRes$gsEffSize,
                   hits=coreRes$hits,
@@ -201,7 +201,7 @@ setMethod("fisherTest", c("character", "character", "character"),
 #' Perform Fisher's exact test on a GeneSet object
 #'
 #' @param genes a collection of genes of which over-representation of the gene set is tested
-#' @param geneSetGenes A GeneSet object
+#' @param GmtList A \code{GmtList} object
 #' @param universe universe of genes
 #' @param makeUniqueNonNA Logical, whether genes and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.
 #' @param checkUniverse Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}
@@ -211,12 +211,12 @@ setMethod("fisherTest", c("character", "character", "character"),
 #'
 #' @examples
 #' myGenes <- LETTERS[1:3]
-#' myS4GeneSet1 <- new("GeneSet", category="My category 1", name="GeneSet1", genes=LETTERS[1:6])
-#' myS4GeneSet2 <- new("GeneSet", category="My category 2", name="GeneSet1", genes=LETTERS[2:7])
+#' myS4GeneSet1 <- list(name="GeneSet1", desc="GeneSet", genes=LETTERS[1:6], namespace="My namespace 1")
+#' myS4GeneSet2 <- list(name="GeneSet1", desc="GeneSet", genes=LETTERS[2:7], namespace="My namespace 2")
 #' myUniverse <- LETTERS
 #' fisherTest(myGenes, myS4GeneSet1, myUniverse)
 #' fisherTest(myGenes, myS4GeneSet2, myUniverse)
-setMethod("fisherTest", c("character", "GeneSet", "character"),
+setMethod("fisherTest", c("character", "list", "character"),
           function(genes, genesets, universe,
                    makeUniqueNonNA=TRUE, 
                    checkUniverse=TRUE,
@@ -227,10 +227,10 @@ setMethod("fisherTest", c("character", "GeneSet", "character"),
             }
             ## gsGenes(genesets) are garanteed to be unique and non-NA
             ## therefore fisherTest now takes makeUniqueNonNA=FALSE
-            fisherTest(genes=genes, genesets=gsGenes(genesets),
+            fisherTest(genes=genes, genesets=genesets$genes,
                        universe=universe,
-                       gsName=gsName(genesets), 
-                       gsCategory=gsCategory(genesets),
+                       gsName=genesets$name, 
+                       gsNamespace=genesets$namespace,
                        makeUniqueNonNA=FALSE,
                        checkUniverse=checkUniverse,
                        useEASE=useEASE)
@@ -248,89 +248,6 @@ fisherTestResultNewHitsProp <- function(fisherTestResults) {
   return(fisherTestResults)
 }
 
-## TODO: repeating codes of Fisher's method using either GmtList or GeneSets! To be simplified
-
-#' Perform Fisher's exact test on a GeneSets object
-#' 
-#' @param genes character strings of gene list to be tested
-#' @param genesets An GeneSets object
-#' @param universe Universe (background) gene list
-#' @param makeUniqueNonNA Logical, whether genes and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.
-#' @param checkUniverse Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}
-#' @param useEASE Logical, whether to use the EASE method to report the p-value. 
-#'
-#'#' @return A \code{data.table} containing Fisher's exact test results of all gene-sets, in the same order as the input gene-sets, with following columns:
-#' \enumerate{
-#'   \item GeneSetCategory
-#'   \item GeneSetName
-#'   \item GeneSetEffectiveSize, the count of genes in the gene-set that are found in the universe
-#'   \item HitCount, the count of genes in the \code{genes} input that are in the gene-set
-#'   \item Hits, a vector of character string, representing hits
-#'   \item PValue
-#'   \item FDR, PValue adjusted by the Benjamini-Hochberg method. If more than one gene-set categories are provided, the FDR correction is performed per category
-#' }
-#' 
-#' @examples
-#' gs1 <- new("GeneSet", category="A", name="GeneSet1", genes=LETTERS[1:4])
-#' gs2 <- new("GeneSet", category="A", name="GeneSet2", genes=LETTERS[5:8])
-#' gs3 <- new("GeneSet", category="A", name="GeneSet3", genes=LETTERS[seq(2,8,2)])
-#' gs4 <- new("GeneSet", category="B", name="GeneSet4", genes=LETTERS[seq(1,7,2)])
-#' gss <- GeneSets(list(gs1, gs2, gs3, gs4))
-#' myInput <- LETTERS[2:6]
-#' myUniverse <- LETTERS
-#' myFisherRes <- fisherTest(myInput, gss, myUniverse)
-#' 
-#' ## Note that the multiple adjustment is done by categories
-#' gs5 <- new("GeneSet", name="GeneSet5", genes=LETTERS[1:4])
-#' gs6 <- new("GeneSet", name="GeneSet6", genes=LETTERS[5:8])
-#' gs7 <- new("GeneSet", name="GeneSet7", genes=LETTERS[seq(2,8,2)])
-#' gs8 <- new("GeneSet",  name="GeneSet8", genes=LETTERS[seq(1,7,2)])
-#' gss2 <- GeneSets(list(gs5, gs6, gs7, gs8))
-#' myFisherRes2 <- fisherTest(myInput, gss2, myUniverse)
-#' 
-#' stopifnot(identical(myFisherRes$PValue, myFisherRes2$PValue))
-#' stopifnot(!identical(p.adjust(myFisherRes$PValue, "fdr"), myFisherRes$FDR))
-#' stopifnot(identical(p.adjust(myFisherRes2$PValue, "fdr"), myFisherRes2$FDR))
-setMethod("fisherTest", 
-          c("character", "GeneSets", "character"),
-          function(genes, genesets, universe,
-                   makeUniqueNonNA = TRUE,
-                   checkUniverse = TRUE, 
-                   useEASE = FALSE) {
-            if(makeUniqueNonNA) {
-              genes <- uniqueNonNA(genes)
-              universe <- uniqueNonNA(universe)
-            }
-            if(checkUniverse) {
-              geneNotInUniverse <- !genes %in% universe
-              if(any(geneNotInUniverse)) {
-                universe <- union(universe, geneNotInUniverse)
-              }
-            }
-            res <- lapply(genesets, function(x) {
-              gsFisherTestCore(genes = genes, 
-                                          geneSetGenes = gsGenes(x),
-                                          universe = universe,
-                                          makeUniqueNonNA = makeUniqueNonNA,
-                                          checkUniverse = checkUniverse,
-                                          useEASE = useEASE)
-            })
-            res <- data.table::data.table(GeneSetCategory=gsCategory(genesets),
-                              GeneSetName=gsName(genesets),
-                              GeneSetEffectiveSize=sapply(res, function(x) x$gsEffSize),
-                              HitCount=sapply(res, function(x) length(x$hits)),
-                              Hits=sapply(res, function(x) x$hits),
-                              PValue=sapply(res, function(x) x$p))
-            if(all(is.na(res$GeneSetCategory))) {
-              res$FDR <- p.adjust(res$PValue, method="fdr")
-            } else {
-              res$FDR <- ave(res$PValue, res$GeneSetCategory, 
-                           FUN=function(x) p.adjust(x, "fdr"))
-            }
-            return(res)
-          })
-
-
 #' Perform Fisher's exact test on a GmtList object
 #' @param genes character strings of gene list to be tested
 #' @param genesets An GmtList object
@@ -341,18 +258,27 @@ setMethod("fisherTest",
 #' 
 #' @return A \code{data.table} containing Fisher's exact test results of all gene-sets, in the same order as the input gene-sets, with following columns:
 #' \enumerate{
-#'   \item GeneSetCategory
+#'   \item GeneSetNamespace
 #'   \item GeneSetName
 #'   \item GeneSetEffectiveSize, the count of genes in the gene-set that are found in the universe
 #'   \item HitCount, the count of genes in the \code{genes} input that are in the gene-set
 #'   \item Hits, a vector of character string, representing hits
 #'   \item PValue
-#'   \item FDR, PValue adjusted by the Benjamini-Hochberg method. If more than one gene-set categories are provided, the FDR correction is performed per category
+#'   \item FDR, PValue adjusted by the Benjamini-Hochberg method. If more than one gene-set categories are provided, the FDR correction is performed per namespace
 #' }
+#' @examples
+#' gs1 <- list(name="GeneSet1", desc="desc", genes=LETTERS[1:4], namespace="A")
+#' gs2 <- list(name="GeneSet2", desc="desc", genes=LETTERS[5:8], namespace="A")
+#' gs3 <- list(name="GeneSet3", desc="desc", genes=LETTERS[seq(2,8,2)], namespace="A")
+#' gs4 <- list(name="GeneSet3", desc="desc", genes=LETTERS[seq(1,7,2)], namespace="B")
+#' gmtList <- BioQC::GmtList(list(gs1, gs2, gs3, gs4))
+#' myInput <- LETTERS[2:6]
+#' myUniverse <- LETTERS
+#' myFisherRes <- fisherTest(myInput, gmtList, myUniverse)
 setMethod("fisherTest", 
           c("character", "GmtList", "character"),
           function(genes, genesets, universe,
-                   gsCategory,
+                   gsNamespace,
                    makeUniqueNonNA = TRUE,
                    checkUniverse = TRUE, useEASE = FALSE) {
             if(makeUniqueNonNA) {
@@ -365,14 +291,14 @@ setMethod("fisherTest",
                 universe <- union(universe, geneNotInUniverse)
               }
             }
-            if(missing(gsCategory) || is.null(gsCategory)) {
-              gsCategory <- unlist(sapply(genesets, function(x) x$category))
-              if(is.null(gsCategory))
-                gsCategory <- NA
+            if(missing(gsNamespace) || is.null(gsNamespace)) {
+              gsNamespace <- unlist(sapply(genesets, function(x) x$namespace))
+              if(is.null(gsNamespace))
+                gsNamespace <- NA
             } else {
-              haltifnot(length(gsCategory) == length(genesets),
-                        msg=sprintf("Length of category (%d) does not match length of the gene-sets (%d)", 
-                                   length(gsCategory), length(genesets)))
+              haltifnot(length(gsNamespace) == length(genesets),
+                        msg=sprintf("Length of namespace (%d) does not match length of the gene-sets (%d)", 
+                                   length(gsNamespace), length(genesets)))
             }
             res <- lapply(genesets, function(x) {
               gsFisherTestCore(genes = genes, 
@@ -383,17 +309,17 @@ setMethod("fisherTest",
                                useEASE = useEASE)
             })
 
-            res <- data.table::data.table(GeneSetCategory=gsCategory,
+            res <- data.table::data.table(GeneSetNamespace=gsNamespace,
                               GeneSetName=sapply(genesets, function(x) x$name),
                               GeneSetEffectiveSize=sapply(res, function(x) x$gsEffSize),
                               HitCount=sapply(res, function(x) length(x$hits)),
                               Hits=sapply(res, function(x) x$hits),
                               PValue=sapply(res, function(x) x$p))
 
-            if(all(is.na(gsCategory))) {
+            if(all(is.na(gsNamespace))) {
               res$FDR <- p.adjust(res$PValue, method="fdr")
             } else {
-              res$FDR <- ave(res$PValue, gsCategory, 
+              res$FDR <- ave(res$PValue, gsNamespace, 
                              FUN=function(x) p.adjust(x, "fdr"))
             }
             return(res)

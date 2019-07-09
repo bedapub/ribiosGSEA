@@ -81,16 +81,6 @@ setMethod("gsGenes", "annoGseaRes", function(object) {
   names(res) <- gsName(object)
   return(res)
 })
-setMethod("gsGenes", "GeneSets", function(object, i) {
-  res <- lapply(object@.Data, function(x) x@genes)
-  names(res) <- gsNames(object)
-  if(!missing(i)) {
-    res <- res[i]
-    if(length(i)==1)
-      res <- res[[1]]
-  }
-  return(res)
-})
 
 setMethod("gsGeneValues", "annoGseaResItem", function(object) return(object@gsGeneValues))
 setMethod("gsGeneValues", "annoGseaRes", function(object) {
@@ -263,12 +253,12 @@ setMethod("gsEffSize", "FisherResultList", function(object) {
 })
 setMethod("hits", "FisherResult", function(object) return(object@hits))
 
-setMethod("gsCategory", "FisherResult", function(object) return(object@gsCategory))
-setMethod("gsCategory", "FisherResultList", function(object) sapply(object@.Data, gsCategory))
+setMethod("gsNamespace", "FisherResult", function(object) return(object@gsNamespace))
+setMethod("gsNamespace", "FisherResultList", function(object) sapply(object@.Data, gsNamespace))
 
 
 setMethod("as.data.frame", "FisherResultList", function(x, row.names) {
-              categories <- sapply(x, gsCategory)
+              categories <- sapply(x, gsNamespace)
               genesets <- sapply(x, gsName) ## TODO: gsName
               ps <- sapply(x, pValue)
               fdrs <- sapply(x, fdrValue)
@@ -278,7 +268,7 @@ setMethod("as.data.frame", "FisherResultList", function(x, row.names) {
               inputSize <- length(x@input)
               universeSize <- length(x@universe)
               hitPrint <- sapply(hits, paste, collapse=",")
-              data.frame(Category=categories,
+              data.frame(Namespace=categories,
                          GeneSet=genesets,
                          Pvalue=ps,
                          FDRvalue=fdrs,
@@ -305,15 +295,15 @@ setMethod("[", c("FisherResultList", "ANY", "missing", "missing"), function(x, i
           })
 setMethod("[", c("FisherResultList", "character", "character", "missing"),
           function(x, i,j, drop) {
-              isCategory <- gsCategory(x) %in% i
+              isNamespace <- gsNamespace(x) %in% i
               isName <- names(x) %in% j
-              isSel <- isCategory & isName
+              isSel <- isNamespace & isName
               if(sum(isSel)==1) {
                   return(x[[which(isSel)]])
               } else if (sum(isSel)>1) {
                   return(x[isSel])
               } else {
-                  stop(sprintf("No element found for category %s and gene set %s!\n",
+                  stop(sprintf("No element found for namespace %s and gene set %s!\n",
                                i, j))
               }
           })
@@ -384,8 +374,8 @@ setMethod("topOrSigGeneSetTable", c("FisherResultList", "missing", "missing"), f
           })
 
 setMethod("print", "FisherResult", function(x, ...) {
-              if(!is.na(gsCategory(x)))
-                  cat("Category:", gsCategory(x), "\n")
+              if(!is.na(gsNamespace(x)))
+                  cat("Namespace:", gsNamespace(x), "\n")
               if(!is.na(gsName(x)))
                   cat("Name:", gsName(x), "\n")
               cat("Gene set size:", gsEffSize(x), "\n")
@@ -410,35 +400,11 @@ setMethod("show", "FisherResultList", function(object) {
               print(object)
           })
 
-filterMinMax <- function(sizes, min, max) {
-    sel <- rep(TRUE, length(sizes))
-    if(!missing(min)) {
-        min <- as.numeric(min)
-        if(!is.na(min)) {
-            sel <- sel & sizes >= min
-        }
-    }
-    if(!missing(max)) {
-        max <- as.numeric(max)
-        if(!is.na(max)) {
-            sel <- sel & sizes <= max
-        }
-    }
-    return(sel)
-}
-setMethod("filterBySize",
-          c("GeneSets", "ANY", "ANY"),
-          function(object, min, max) {
-              sizes <- gsSize(object)
-              sel <- filterMinMax(sizes, min, max)
-              return(object[sel])
-          })
-
 ## eestimateFdr and fillBySize
 setMethod("estimateFdr", "FisherResultList", function(object) {
               system.time(ps <- sapply(object, pValue))
               fdrs <- rep(NA, length(ps))
-              categories <- gsCategory(object)
+              categories <- gsNamespace(object)
               categories[is.na(categories)] <- "NA"
               categories <- factor(categories)
               for(i in 1:nlevels(categories)) {
@@ -449,55 +415,4 @@ setMethod("estimateFdr", "FisherResultList", function(object) {
                   object@.Data[[i]]@fdr <- fdrs[[i]]
               }
               return(object)
-          })
-
-setMethod("filterBySize", c("FisherResultList", "ANY", "ANY"),
-          function(object, min, max) {
-              sizes <- gsEffSize(object)
-              sel <- filterMinMax(sizes, min, max)
-              object <- object[sel]
-              object <- estimateFdr(object)
-              return(object)
-          })
-geneSetList2GeneSets <- function(gsList, category) {
-    if(is.null(names(gsList))) {
-        gsNames <- sapply(gsList, gsName)
-        names(gsList) <- gsNames
-    }
-    if(!missing(category)) {
-        for(i in seq(along=gsList))
-            gsList[[i]]@gsCategory <- category
-    }
-    return(new("GeneSets", gsList))
-}
-setAs("GeneSets", "list", function(from) {
-          browser()
-          if(is.null(names(from))) {
-              gsNames <- sapply(from, gsName)
-              names(from) <- gsNames
-          }
-          browser()
-          return(new("GeneSets", from))
-      })
-setMethod("GeneSets", "list", function(object, ..., category) {
-              geneSetList2GeneSets(object, category)
-          })
-setMethod("GeneSets", "GeneSet", function(object, ..., category) {
-              gsList <- list(...)
-              gssList <- c(object, gsList)
-              geneSetList2GeneSets(gssList, category)
-          })
-
-setMethod("GeneSet", c("ANY", "character", "ANY", "character"),
-          function(category, name, desc, genes, verbose=FALSE) {
-              if(missing(category))
-                  category <- as.character(NA)
-              if(missing(desc))
-                  desc <- as.character(NA)
-              if(verbose & (any(duplicated(genes)) || any(is.na(genes)))) {
-                  warnMessage <- sprintf("Duplicated genes or NA found in Category %s, Name %s! They are removed\n", category, name)
-                  warning(warnMessage)
-                  genes <- wnUnique(genes)
-              }
-              new("GeneSet", category=category, name=name, desc=desc, genes=genes)
           })

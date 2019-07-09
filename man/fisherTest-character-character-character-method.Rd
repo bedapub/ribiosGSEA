@@ -6,7 +6,7 @@
 \title{Perform Fisher's exact test on a gene set}
 \usage{
 \S4method{fisherTest}{character,character,character}(genes, genesets,
-  universe, gsName, gsCategory, makeUniqueNonNA = TRUE,
+  universe, gsName, gsNamespace, makeUniqueNonNA = TRUE,
   checkUniverse = TRUE, useEASE = FALSE)
 }
 \arguments{
@@ -16,7 +16,7 @@
 
 \item{gsName}{gene set name, can be left missing}
 
-\item{gsCategory}{gene set category name, can be left missing}
+\item{gsNamespace}{gene set namespace name, can be left missing}
 
 \item{makeUniqueNonNA}{Logical, whether genes, geneSetGenes, and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.}
 
@@ -26,7 +26,7 @@
 
 This function performs one-sided Fisher's exact test to test the over-representation of gene set genes in the input gene list.
 
-If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that category. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.}
+If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that namespace. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.}
 
 \item{geneSetGenes}{genes belonging to a gene set}
 }
@@ -43,7 +43,7 @@ myGeneSet2 <- LETTERS[4:7]
 myUniverse <- LETTERS
 fisherTest(myGenes, myGeneSet1, myUniverse)
 fisherTest(myGenes, myGeneSet2, myUniverse)
-fisherTest(myGenes, myGeneSet1, myUniverse, gsName="My gene set1", gsCategory="Letters")
+fisherTest(myGenes, myGeneSet1, myUniverse, gsName="My gene set1", gsNamespace="Letters")
 
 ## note that duplicated items are removed by default
 resWoRp <- fisherTest(rep(myGenes,2), myGeneSet1, myUniverse)

@@ -2,16 +2,16 @@
 % Please edit documentation in R/utils.R
 \name{readRonetGmt}
 \alias{readRonetGmt}
-\title{Read RONET GMT files with category information}
+\title{Read RONET GMT files with namespace information}
 \usage{
 readRonetGmt(file)
 }
 \arguments{
-\item{file}{A GMT file in the RONET format, where in the 'desc' field a category is appended at the beginning, separated from the rest of the description with a pipe}
+\item{file}{A GMT file in the RONET format, where in the 'desc' field a namespace is appended at the beginning, separated from the rest of the description with a pipe}
 }
 \value{
-A \code{GmtList} object with an additional 'category' item in each list
+A \code{GmtList} object with an additional 'namespace' item in each list
 }
 \description{
-Read RONET GMT files with category information
+Read RONET GMT files with namespace information
 }

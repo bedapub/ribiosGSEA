@@ -1,3 +1,21 @@
+#' Write an GmtList object into a file
+#'
+#' @param gmtList A \code{GmtList} object
+#' @param file Character string, output file name
+#'
+#' @note 
+#' The function will be moved to BioQC once the ribiosIO is reposited in CRAn
+#' 
+#' @examples
+#' gmtFile <- system.file("extdata", "example.gmt", package="ribiosGSEA")
+#' mySet <- readGmt(gmtFile)[1:5]
+#' myTempFile <- tempfile()
+#' writeGmt(mySet, file=myTempFile)
+#' readLines(myTempFile)
+writeGmt <- function(gmtList, file) {
+  ribiosIO::write_gmt(gmtList, file=file)
+}
+
 #' Read molecular-phenotyping genesets
 #'
 #' @param file GMT file which stores default molecular-phenotyping genesets
@@ -6,7 +24,7 @@
 #' @return A \code{GmtList} object containing molecular-phenotypic screening (MPS) categories and genes
 readMPSGmt <- function(file) {
   gs <- BioQC::readGmt(file)
-  namespace <- sprintf("MPS %s", gsDesc(gs))
+  namespace <- sprintf("MPS %s", BioQC::gsDesc(gs))
   gsNamespace(gs) <- namespace
   return(gs)
 }

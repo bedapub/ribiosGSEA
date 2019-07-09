@@ -30,7 +30,7 @@
 #' 
 #' @export
 kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
-                          optK=pmin(25,nrow(enrichProfMatrix)),
+                          optK=pmin(25,floor(nrow(enrichProfMatrix)/2)),
                           iter.max=15, nstart=50, 
                           thrCumJaccardIndex=0.5) {
   stopifnot(nrow(enrichProfMatrix)==length(genesetGenes) &&

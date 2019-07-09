@@ -1,4 +1,4 @@
-setGeneric("gsCategory", function(object, ...) standardGeneric("gsCategory"))
+setGeneric("gsNamespace", function(object, ...) standardGeneric("gsNamespace"))
 setGeneric("gsName", function(object, ...) standardGeneric("gsName"))
 setGeneric("gsDesc", function(object, ...) standardGeneric("gsDesc"))
 setGeneric("gsGenes", function(object,...) standardGeneric("gsGenes"))
@@ -21,8 +21,6 @@ setGeneric("annoGseaResItem", function(object, ...) standardGeneric("annoGseaRes
 ##setGeneric("gseaRes", function(object) standardGeneric("gseaRes"))
 setGeneric("annoGseaRes", function(object) standardGeneric("annoGseaRes"))
 
-setGeneric("GeneSet", function(category, name, desc, genes, ...) standardGeneric("GeneSet"))
-
 ## Fisher's exact test
 setGeneric("hits", function(object, ...) standardGeneric("hits"))
 setGeneric("pValue", function(object, ...) standardGeneric("pValue"))
@@ -38,7 +36,7 @@ setGeneric("topGeneSetTable", function(object, N,...) standardGeneric("topGeneSe
 setGeneric("topOrSigGeneSetTable", function(object, N, fdr, ...) standardGeneric("topOrSigGeneSetTable"))
 setGeneric("fisherTest", function(genes, genesets, universe,  ...) standardGeneric("fisherTest"))
 
-setGeneric("GeneSets", function(object, ..., category) standardGeneric("GeneSets"))
+setGeneric("GeneSets", function(object, ..., namespace) standardGeneric("GeneSets"))
 setGeneric("filterBySize", function(object,min,max) standardGeneric("filterBySize"))
 
 ## internal

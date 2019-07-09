@@ -19,7 +19,7 @@ setClass("annoGseaResList", contains="list") #3 a list of annoGseaRes objects
 
 setClass("GeneSetResult",
          representation=list(
-             gsCategory="character",
+             gsNamespace="character",
              gsName="character",
              gsEffSize="integer",
              p="numeric",

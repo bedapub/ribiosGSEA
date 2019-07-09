@@ -6,7 +6,7 @@
 \title{Perform Fisher's exact test on a GmtList object}
 \usage{
 \S4method{fisherTest}{character,GmtList,character}(genes, genesets,
-  universe, gsCategory, makeUniqueNonNA = TRUE, checkUniverse = TRUE,
+  universe, gsNamespace, makeUniqueNonNA = TRUE, checkUniverse = TRUE,
   useEASE = FALSE)
 }
 \arguments{
@@ -25,15 +25,25 @@
 \value{
 A \code{data.table} containing Fisher's exact test results of all gene-sets, in the same order as the input gene-sets, with following columns:
 \enumerate{
-  \item GeneSetCategory
+  \item GeneSetNamespace
   \item GeneSetName
   \item GeneSetEffectiveSize, the count of genes in the gene-set that are found in the universe
   \item HitCount, the count of genes in the \code{genes} input that are in the gene-set
   \item Hits, a vector of character string, representing hits
   \item PValue
-  \item FDR, PValue adjusted by the Benjamini-Hochberg method. If more than one gene-set categories are provided, the FDR correction is performed per category
+  \item FDR, PValue adjusted by the Benjamini-Hochberg method. If more than one gene-set categories are provided, the FDR correction is performed per namespace
 }
 }
 \description{
 Perform Fisher's exact test on a GmtList object
+}
+\examples{
+gs1 <- list(name="GeneSet1", desc="desc", genes=LETTERS[1:4], namespace="A")
+gs2 <- list(name="GeneSet2", desc="desc", genes=LETTERS[5:8], namespace="A")
+gs3 <- list(name="GeneSet3", desc="desc", genes=LETTERS[seq(2,8,2)], namespace="A")
+gs4 <- list(name="GeneSet3", desc="desc", genes=LETTERS[seq(1,7,2)], namespace="B")
+gmtList <- BioQC::GmtList(list(gs1, gs2, gs3, gs4))
+myInput <- LETTERS[2:6]
+myUniverse <- LETTERS
+myFisherRes <- fisherTest(myInput, gmtList, myUniverse)
 }

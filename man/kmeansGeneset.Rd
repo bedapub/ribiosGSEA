@@ -5,7 +5,7 @@
 \title{Cluster gene-sets by enrichment profiles with k-means clustering, and select representative gene-sets by gene-set composition}
 \usage{
 kmeansGeneset(enrichProfMatrix, genesetGenes, optK = pmin(25,
-  nrow(enrichProfMatrix)), iter.max = 15, nstart = 50,
+  floor(nrow(enrichProfMatrix)/2)), iter.max = 15, nstart = 50,
   thrCumJaccardIndex = 0.5)
 }
 \arguments{
