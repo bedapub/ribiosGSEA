@@ -97,7 +97,7 @@ export(ntp)
 export(parseDTG, parseGSEAdir, parseGSEAedb, parseGSEAres)
 
 ## camera methods
-export(biosCamera, gscCamera)
+export(biosCamera, gmtListCamera)
 
 ## simulation
 export(nGenes, nSamples,

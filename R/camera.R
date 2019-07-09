@@ -282,42 +282,65 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design), weight
     return(tab)
 }
 
-## gscCamera: Camera applied to gene set collection
-gscCamera <- function(matrix, geneSymbols, gsc, design, contrasts) {
-    genes <- gsGenes(gsc)
-    genes.inds <- lapply(genes, function(x) {
-                             ind <- match(x, geneSymbols)
-                             return(ind[!is.na(ind)])
-                         })
-    names(genes.inds) <- gsNames(gsc)
-    cameraRes <- mclapply(1:ncol(contrasts),
+#' CAMERA applied to GmtList
+#' @param matrix Expression matrix, features (genes) in rows and samples in columns
+#' @param geneSymbols Gene-symbols corresponding to the rows of matrix
+#' @param gmtList A \code{\link[BioQC]{GmtList}} object 
+#' @param design Design matrix
+#' @param contrasts Contrast matrix
+#' 
+#' @return A \code{data.frame} containing CAMERA results
+#' 
+#' @examples 
+#' mat <- matrix(c(10,3,5,9,3,5,
+#'                 2,4,8,12,9,9,
+#'                 3,5,7,5,4,4,
+#'                 3,3,12,12,0,1), ncol=6, byrow=TRUE)
+#' rownames(mat) <- sprintf("gene%d", 1:nrow(mat))
+#' designMatrix <- matrix(c(rep(1,6), c(0,0,1,1,0,0), c(0,0,0,0,1,1)),
+#'                        byrow=FALSE, ncol=3)
+#' contrastMatrix <- matrix(c(0,1,0,0,0,1), ncol=2, byrow=FALSE)
+#' gs1 <- list(name="GeneSet1", desc="", genes=c("gene1", "gene3"), namespace="default")
+#' gs2 <- list(name="GeneSet2", desc="", genes=c("gene2", "gene4"), namespace="default")
+#' gs3 <- list(name="GeneSet3", desc="", genes=c("gene1", "gene4"), namespace="default")
+#' gmtlist <- GmtList(list(gs1, gs2, gs3))
+#' cameraOut <- gmtListCamera(mat, rownames(mat), gmtlist, designMatrix, contrastMatrix)
+#' cameraOut
+gmtListCamera <- function(matrix, geneSymbols, gmtList, design, contrasts) {
+  genes <- BioQC::gsGenes(gmtList)
+  genes.inds <- lapply(genes, function(x) {
+    ind <- match(x, geneSymbols)
+    return(ind[!is.na(ind)])
+  })
+  names(genes.inds) <- BioQC::gsName(gmtList)
+  cameraRes <- mclapply(1:ncol(contrasts),
                         function(x) {
-                            tbl <- biosCamera(matrix,
-                                              design=design,
-                                              index=genes.inds,
-                                              contrast=contrasts[,x],
-                                              geneLabels=geneSymbols,
-                                              sort=FALSE)
-                            if(!"FDR" %in% colnames(tbl)) {
-                                ## TRUE if there is only one gene set
-                                tbl$FDR <- tbl$PValue
-                            }
-                            tbl <- tbl[,c("GeneSet", "NGenes", "Correlation", "Direction", "EffectSize", 
-                                          "PValue", "FDR", "ContributingGenes")]
-                            tbl <- sortByCol(tbl, "PValue",decreasing=FALSE)
-                            return(tbl)
+                          tbl <- biosCamera(matrix,
+                                            design=design,
+                                            index=genes.inds,
+                                            contrast=contrasts[,x],
+                                            geneLabels=geneSymbols,
+                                            sort=FALSE)
+                          if(!"FDR" %in% colnames(tbl)) {
+                            ## TRUE if there is only one gene set
+                            tbl$FDR <- tbl$PValue
+                          }
+                          tbl <- tbl[,c("GeneSet", "NGenes", "Correlation", "Direction", "EffectSize", 
+                                        "PValue", "FDR", "ContributingGenes")]
+                          tbl <- sortByCol(tbl, "PValue",decreasing=FALSE)
+                          return(tbl)
                         })
-
-    cRes <- do.call(rbind, cameraRes)
-
-    if(is.null(colnames(contrasts)))
-        colnames(contrasts) <- sprintf("Contrast%d", 1:ncol(contrasts))
-    
-    bg <- data.frame(Contrast=rep(colnames(contrasts), sapply(cameraRes, nrow)))
-    res <- cbind(bg, cRes)
-    rownames(res) <- NULL
-    res <- subset(res, NGenes>=1 & !is.na(PValue) & !is.nan(PValue))
-    return(res)
+  
+  cRes <- do.call(rbind, cameraRes)
+  
+  if(is.null(colnames(contrasts)))
+    colnames(contrasts) <- sprintf("Contrast%d", 1:ncol(contrasts))
+  
+  bg <- data.frame(Contrast=rep(colnames(contrasts), sapply(cameraRes, nrow)))
+  res <- cbind(bg, cRes)
+  rownames(res) <- NULL
+  res <- subset(res, NGenes>=1 & !is.na(PValue) & !is.nan(PValue))
+  return(res)
 }
 
 
