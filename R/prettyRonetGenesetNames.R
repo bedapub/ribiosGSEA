@@ -20,6 +20,7 @@ prettyRonetGenesetNames <- function(x, nchar=50) {
   res <- gsub("allTargets", "targets", res)
   res <- gsub("positiveTargets", "positive targets", res)
   res <- gsub("negativeTargets", "negative targets", res)
+  res <- gsub("\\(.*\\)$", "", res)
   res <- gsub("_", " ", res)
   res <- gsub(" Downstream$", "", res)
   res <- gsub("\\s+", " ", res)
