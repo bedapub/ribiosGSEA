@@ -4,8 +4,14 @@
 \alias{gsListFisherTestCore}
 \title{Core algorithm to perform Fisher's exact test on a list of gene set}
 \usage{
-gsListFisherTestCore(genes, geneSetGenesList, universe,
-  makeUniqueNonNA = TRUE, checkUniverse = TRUE, useEASE = FALSE)
+gsListFisherTestCore(
+  genes,
+  geneSetGenesList,
+  universe,
+  makeUniqueNonNA = TRUE,
+  checkUniverse = TRUE,
+  useEASE = FALSE
+)
 }
 \arguments{
 \item{genes}{Character vector, a collection of genes of which over-representation of the gene set is tested}

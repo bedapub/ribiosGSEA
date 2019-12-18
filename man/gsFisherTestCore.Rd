@@ -4,8 +4,14 @@
 \alias{gsFisherTestCore}
 \title{Core algorithm to perform Fisher's exact test on a gene set}
 \usage{
-gsFisherTestCore(genes, geneSetGenes, universe, makeUniqueNonNA = TRUE,
-  checkUniverse = TRUE, useEASE = FALSE)
+gsFisherTestCore(
+  genes,
+  geneSetGenes,
+  universe,
+  makeUniqueNonNA = TRUE,
+  checkUniverse = TRUE,
+  useEASE = FALSE
+)
 }
 \arguments{
 \item{genes}{Character vector, a collection of genes of which over-representation of the gene set is tested}
@@ -47,7 +53,7 @@ gsFisherTestCore(myGenes, myGeneSet2, myUniverse)
 gsFisherTestCore(myGenes, myGeneSet1, myUniverse, useEASE=FALSE)
 gsFisherTestCore(myGenes, myGeneSet1, myUniverse, useEASE=TRUE)
 
-## checkUniverse will make sure that \\code{univese} contains all element in \\code{genes}
+## checkUniverse will make sure that \code{univese} contains all element in \code{genes}
 gsFisherTestCore(c("OutOfUniverse", myGenes), myGeneSet1, myUniverse, checkUniverse=FALSE)
 gsFisherTestCore(c("OutOfUniverse", myGenes), myGeneSet1, myUniverse, checkUniverse=TRUE)
 }

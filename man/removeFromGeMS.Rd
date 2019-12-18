@@ -4,8 +4,12 @@
 \alias{removeFromGeMS}
 \title{Rmove one or gene sets of the same source and user from GeMS}
 \usage{
-removeFromGeMS(setName = "", source = "",
-  user = ribiosUtils::whoami(), subtype = "")
+removeFromGeMS(
+  setName = "",
+  source = "",
+  user = ribiosUtils::whoami(),
+  subtype = ""
+)
 }
 \arguments{
 \item{setName}{A vector of character strings, defining set names to be renamed. They must all have the same \code{source}, \code{user}, and \code{subtype}}

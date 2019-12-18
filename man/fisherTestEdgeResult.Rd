@@ -4,9 +4,16 @@
 \alias{fisherTestEdgeResult}
 \title{Run Fisher's exact test on an EdgeResult object}
 \usage{
-fisherTestEdgeResult(edgeResult, gmtList, contrast, thr.abs.logFC = 1,
-  thr.FDR = 0.05, minGeneSetEffectiveSize = 5,
-  maxGeneSetEffectiveSize = 500, ...)
+fisherTestEdgeResult(
+  edgeResult,
+  gmtList,
+  contrast,
+  thr.abs.logFC = 1,
+  thr.FDR = 0.05,
+  minGeneSetEffectiveSize = 5,
+  maxGeneSetEffectiveSize = 500,
+  ...
+)
 }
 \arguments{
 \item{edgeResult}{An \code{EdgeResult} object}

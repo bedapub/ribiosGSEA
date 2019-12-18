@@ -4,9 +4,16 @@
 \alias{insertGmtListToGeMS}
 \title{Insert a GmtList object to GeMS}
 \usage{
-insertGmtListToGeMS(gmtList, geneFormat = 0, source = "PubMed",
-  xref = "", taxID = 9606, user = ribiosUtils::whoami(),
-  subtype = "", domain = "")
+insertGmtListToGeMS(
+  gmtList,
+  geneFormat = 0,
+  source = "PubMed",
+  xref = "",
+  taxID = 9606,
+  user = ribiosUtils::whoami(),
+  subtype = "",
+  domain = ""
+)
 }
 \arguments{
 \item{gmtList}{A \code{GmtList} object defined in the \code{BioQC} package}

@@ -4,9 +4,14 @@
 \alias{kmeansGeneset}
 \title{Cluster gene-sets by enrichment profiles with k-means clustering, and select representative gene-sets by gene-set composition}
 \usage{
-kmeansGeneset(enrichProfMatrix, genesetGenes, optK = pmin(25,
-  floor(nrow(enrichProfMatrix)/2)), iter.max = 15, nstart = 50,
-  thrCumJaccardIndex = 0.5)
+kmeansGeneset(
+  enrichProfMatrix,
+  genesetGenes,
+  optK = pmin(25, floor(nrow(enrichProfMatrix)/2)),
+  iter.max = 15,
+  nstart = 50,
+  thrCumJaccardIndex = 0.5
+)
 }
 \arguments{
 \item{enrichProfMatrix}{A numeric matrix representing gene-set enrichment profile. Each row represent one gene-set and each column represent one enrichment profile, for instance a contrast in differential gene expression analysis. The values of the matrix represent enrichment of gene-sets, for instance enrichment score or absolute log10-transform p-values can be used. The row names are gene-set names.}

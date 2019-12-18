@@ -4,10 +4,20 @@
 \alias{biosCamera}
 \title{An adapted and enhanced version of limma::camera}
 \usage{
-biosCamera(y, index, design = NULL, contrast = ncol(design),
-  weights = NULL, geneLabels = NULL, use.ranks = FALSE,
-  allow.neg.cor = FALSE, trend.var = FALSE, sort = FALSE,
-  .fixed.inter.gene.cor = NULL, .approx.zscoreT = FALSE)
+biosCamera(
+  y,
+  index,
+  design = NULL,
+  contrast = ncol(design),
+  weights = NULL,
+  geneLabels = NULL,
+  use.ranks = FALSE,
+  allow.neg.cor = FALSE,
+  trend.var = FALSE,
+  sort = FALSE,
+  .fixed.inter.gene.cor = NULL,
+  .approx.zscoreT = FALSE
+)
 }
 \arguments{
 \item{y}{a numeric matrix of log-expression values or log-ratios of expression values, or any data object containing such a matrix. Rows correspond to probes and columns to samples. Any type of object that can be processed by getEAWP is acceptable.}
@@ -71,15 +81,15 @@ index2 <- 21:40
 biosCamera(y, index1, design)
 biosCamera(y, index2, design)
 biosCamera(y, list(index1, index2), design)
-# compare with the output of camera: columns 'GeneSet', 'Score', 'ContributingGenes' are missing, and in case \\code{inter.gene.cor} is (as default) set to a numeric value, the column 'Correlation' is also missing
+# compare with the output of camera: columns 'GeneSet', 'Score', 'ContributingGenes' are missing, and in case \code{inter.gene.cor} is (as default) set to a numeric value, the column 'Correlation' is also missing
 (limmaDefOut <- limma::camera(y, index1, design) )
 (limmaCorDefOut <- limma::camera(y, index1, design, inter.gene.cor=NA))
 
 \dontrun{
-# when \\code{.approx.zscoreT=TRUE},  PValue reported by \\code{limma::camera(inter.gene.cor=NA)} and \\code{ribiosGSEA::biosCamera} should equal
+# when \code{.approx.zscoreT=TRUE},  PValue reported by \code{limma::camera(inter.gene.cor=NA)} and \code{ribiosGSEA::biosCamera} should equal
 (biosCorOut <- biosCamera(y, index1, design, .approx.zscoreT=TRUE))
 
-# when \\code{.fixed.inter.gene.cor=0.01} and \\code{.approx.zscoreT=TRUE},  PValue reported by \\code{limma::camera} and \\code{ribiosGSEA::biosCamera} should equal
+# when \code{.fixed.inter.gene.cor=0.01} and \code{.approx.zscoreT=TRUE},  PValue reported by \code{limma::camera} and \code{ribiosGSEA::biosCamera} should equal
 (biosFixCorOut <- biosCamera(y, index1, design, .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE))
 stopifnot(all(biosFixCorOut$PValue==limmaDefOut$PValue))
 }
