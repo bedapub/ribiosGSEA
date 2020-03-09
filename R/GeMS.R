@@ -1,9 +1,12 @@
-GeMS_BASE_URL <- "http://bioinfo.bas.roche.com:1234/api"
-
+GeMS_BASE_URL <- "http://biocomp:1234/api"
 
 GeMS_INSERT_URL <- paste(GeMS_BASE_URL, "/insert", sep="")
 GeMS_REMOVE_URL <- paste(GeMS_BASE_URL, "/remove", sep="")
 GeMS_GENESETS_URL <- paste(GeMS_BASE_URL, "/genesets", sep="")
+
+## test URLs, GeMS API running as pod container on the biocomp server
+GeMS_TEST_URL <- "http://rkalvbiocomp.kau.roche.com:1234/api/genesets"
+GeMS_TEST_GENESETS_URL <- paste(GeMS_TEST_URL, "/genesets", sep="")
 
 
 #' Test whether GeMS is reachable
