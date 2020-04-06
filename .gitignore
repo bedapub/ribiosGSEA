@@ -1,3 +1,9 @@
-Meta
-doc
+symbols.rds
 *~
+*.swp
+
+*.so
+*.o
+*.dll
+.Rhistory
+.Rproj.user
