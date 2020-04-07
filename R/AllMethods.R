@@ -212,6 +212,36 @@ setMethod("show", "annoGseaRes", function(object) {
 })
 
 ## extending functions
+
+
+#' Extract scores from GSEA results
+#' 
+#' One way to score GSEA results is to multiple the absolute value of log10
+#' transformed p-values (nominal p-value, FDR, or FWER) with the sign of the
+#' enrichment scores. This score is intuitive since it combines statistical
+#' significance and the sign of regulation.
+#' 
+#' \code{gseaScores} takes care of the situation where some gene sets are
+#' missing in one or more conditions.
+#' 
+#' @aliases gseaScore gseaScores
+#' @param x An \code{annoGseaRes} object
+#' @param type Character string, the type of p-value used to calculate the
+#' score.
+#' @param ... Objects of \code{annoGseaRes} to be compared
+#' @param names Character strings, names given to the result score sets. See
+#' examples below.
+#' @return \code{gseaScore} returns a double vector of scores with gene set
+#' names.
+#' 
+#' \code{gseaScores} returns a data frame of scores, with gene set names as row
+#' names.
+#' @author Jitao David Zhang <jitao_david.zhang@@roche.com>
+#' @seealso \code{\link{gseaNP}}, \code{\link{gseaFDR}}, \code{\link{gseaFWER}}
+#' to get p-values.
+#' 
+#' \code{\link{parseGSEAdir}}.
+#' @export gseaScore
 gseaScore <- function(x, type=c("fdr", "p", "fwer")) {
   type <- match.arg(type)
   if(type=="fdr") {

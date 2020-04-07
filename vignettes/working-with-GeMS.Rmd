@@ -35,7 +35,7 @@ vignette: >
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 library(ribiosGSEA)
 library(BioQC)
-doEval <- ribiosGSEA::isGeMSReachable()
+doEval <- FALSE ## ribiosGSEA::isGeMSReachable()
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
                       eval = doEval,
                       fig.height=6, fig.width=6)
