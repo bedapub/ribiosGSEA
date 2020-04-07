@@ -303,7 +303,7 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design), weight
 #' gs1 <- list(name="GeneSet1", desc="", genes=c("gene1", "gene3"), namespace="default")
 #' gs2 <- list(name="GeneSet2", desc="", genes=c("gene2", "gene4"), namespace="default")
 #' gs3 <- list(name="GeneSet3", desc="", genes=c("gene1", "gene4"), namespace="default")
-#' gmtlist <- GmtList(list(gs1, gs2, gs3))
+#' gmtlist <- BioQC::GmtList(list(gs1, gs2, gs3))
 #' cameraOut <- gmtListCamera(mat, rownames(mat), gmtlist, designMatrix, contrastMatrix)
 #' cameraOut
 gmtListCamera <- function(matrix, geneSymbols, gmtList, design, contrasts) {

@@ -6,9 +6,11 @@
 #' @note 
 #' The function will be moved to BioQC once the ribiosIO is reposited in CRAn
 #' 
+#' @importFrom ribiosIO write_gmt
+#' @importFrom BioQC readGmt
 #' @examples
 #' gmtFile <- system.file("extdata", "example.gmt", package="ribiosGSEA")
-#' mySet <- readGmt(gmtFile)[1:5]
+#' mySet <- BioQC::readGmt(gmtFile)[1:5]
 #' myTempFile <- tempfile()
 #' writeGmt(mySet, file=myTempFile)
 #' readLines(myTempFile)
@@ -20,7 +22,7 @@ writeGmt <- function(gmtList, file) {
 #'
 #' @param file GMT file which stores default molecular-phenotyping genesets
 #'
-### @importFrom BioQC readGmt
+#' @importFrom BioQC readGmt
 #' @return A \code{GmtList} object containing molecular-phenotypic screening (MPS) categories and genes
 readMPSGmt <- function(file) {
   gs <- BioQC::readGmt(file)
@@ -47,6 +49,8 @@ readMPSGmt <- function(file) {
 #'  \item{RONET: which is a collection of publicly available pathway databases including REACTOME and NCI-Nature}
 #'  \item{goslim}
 #' }
+#' @importFrom BioQC appendGmtList readGmt
+#' @importFrom ribiosUtils assertFile
 #' @examples 
 #' \dontrun{
 #'   readDefaultGenesets("/tmp/defaultGmts")
@@ -75,14 +79,14 @@ readDefaultGenesets <- function(path,
   
   if(mps) {
     mpsGSCs <- readMPSGmt(mps.pathway)
-    gscs <- readGmt(msigdbC2=msigdb.c2.file,
+    gscs <- BioQC::readGmt(msigdbC2=msigdb.c2.file,
                     msigdbC7=msigdb.c7.file,
                     msigdbHallmark = msigdb.hallmark.file,
                     immunomics = immunomics.file,
                     immunespace = immunespace.file)
     gscs <- appendGmtList(mpsGSCs, gscs)
   } else {
-    gscs <- readGmt(MolecularPhenotyping=mps.pathway,
+    gscs <- BioQC::readGmt(MolecularPhenotyping=mps.pathway,
                     upstream=upstream.file,
                     ronet=ronet.file,
                     goslim=goslim.file,

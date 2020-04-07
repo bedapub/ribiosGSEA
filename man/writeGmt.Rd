@@ -19,7 +19,7 @@ The function will be moved to BioQC once the ribiosIO is reposited in CRAn
 }
 \examples{
 gmtFile <- system.file("extdata", "example.gmt", package="ribiosGSEA")
-mySet <- readGmt(gmtFile)[1:5]
+mySet <- BioQC::readGmt(gmtFile)[1:5]
 myTempFile <- tempfile()
 writeGmt(mySet, file=myTempFile)
 readLines(myTempFile)
