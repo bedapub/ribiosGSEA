@@ -33,7 +33,7 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-License: LGPL-2
+License: GPL-3
 Collate:
     utils.R
     AllClasses.R
