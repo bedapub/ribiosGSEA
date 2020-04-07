@@ -2,6 +2,7 @@
 library(testthat)
 library(ribiosUtils)
 library(ribiosGSEA)
+library(BioQC)
 
 ##----------------------------------------##
 ## test fisherTest, the underlying function
@@ -97,7 +98,7 @@ gs1 <- list(name="GeneSet1", desc="", genes=geneSet1, namespace="A")
 gs2 <- list(name="GeneSet2", desc="", genes=geneSet2, namespace="A")
 gs3 <- list(name="GeneSet3", desc="", genes=geneSet3, namespace="A")
 gs4 <- list(name="GeneSet4", desc="", genes=geneSet4, namespace="B")
-gss <- GmtList(list(gs1, gs2, gs3, gs4))
+gss <- BioQC::GmtList(list(gs1, gs2, gs3, gs4))
 myFisherRes <- fisherTest(inputGenes, gss, universe)
 
 myFisherRes.expP <- c(pValue(gsEnrich1),pValue(gsEnrich2),pValue(gsEnrich3),pValue(gsEnrich4))
