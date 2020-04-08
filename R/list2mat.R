@@ -26,5 +26,5 @@
 #' @export list2mat
 list2mat <- function(list) {
   listStr <- lapply(list, as.character)
-  t(.Call("list2mat", listStr))
+  return(t(.Call(C_list2mat, listStr)))
 }

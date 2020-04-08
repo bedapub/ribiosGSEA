@@ -1,6 +1,6 @@
 /* Common definitions of ribiosGSEA */
-#ifndef RIBIOSGSEA_H
-#define RIBIOSGSEA_H
+#ifndef RIBIOS_GSEA_H
+#define RIBIOS_GSEA_H
 
 #ifdef __cplusplus
 extern "C" {

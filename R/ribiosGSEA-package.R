@@ -1,3 +1,13 @@
+#' @include namespace.R
+NULL
+
+#' ribiosGSEA
+#'
+#' ribiosGSEA supports gene-set analysis of various kinds
+#' @docType package
+#' @useDynLib ribiosGSEA, .registration=TRUE, .fixes="C_"
+#' @name ribiosUtils
+NULL
 
 
 #' Parsing GMT file for downstream analysis
@@ -25,9 +35,6 @@
 #' (sample.gmtId <- parseGmt(sample.gmt.file, sample.genes, min=1, max=20))
 #' 
 NULL
-
-
-
 
 
 #' Variables useful for GSEA analysis in Roche bioinformatics environment.
