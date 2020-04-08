@@ -18,8 +18,7 @@
 #' geneSetPerm(stats, gsList2, Nsim=9999)
 #' gsList3 <- sample(1:1000, 200)
 #' geneSetPerm(stats, gsList3, Nsim=9999)
-
-
+#' @export
 geneSetPerm <- function(stats,
                         indList,
                         Nsim=9999) {

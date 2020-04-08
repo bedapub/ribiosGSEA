@@ -1,6 +1,6 @@
 #' @importFrom grDevices colorRampPalette
 #' @importFrom graphics plot
-#' @impoftFrom stats ave cor filter fisher.test kmeans median p.adjust pchisq phyper pnorm pt qt rnorm runif sd t.test update var
+#' @importFrom stats ave cor filter fisher.test kmeans median p.adjust pchisq phyper pnorm pt qt rnorm runif sd t.test update var
 #' @importFrom utils read.table
 #' @importFrom methods setClass setGeneric setMethod as is new callGeneric
 #' @importFrom XML xmlAttrs xmlTreeParse xmlRoot xmlChildren xmlName

@@ -1,12 +1,12 @@
 #' @include namespace.R
 NULL
 
-#' ribiosGSEA
+#' The ribiosGSEA package
 #'
 #' ribiosGSEA supports gene-set analysis of various kinds
 #' @docType package
 #' @useDynLib ribiosGSEA, .registration=TRUE, .fixes="C_"
-#' @name ribiosUtils
+#' @name ribiosGSEA
 NULL
 
 
@@ -14,7 +14,6 @@ NULL
 #' 
 #' The function reads in a GMT file, map identifiers to the given character
 #' vector, and filter by size.
-#' 
 #' 
 #' @param file A GMT file
 #' @param vec A character vector of gene identifiers in the same order as in
@@ -42,12 +41,8 @@ NULL
 #' These variables ar useful for performing GSEA analysis in Roche
 #' bioinformatics environment.
 #' 
-#' 
 #' @name GSEA_DATA_DIR
 #' @aliases GSEA_DATA_DIR GSEA_ANNOTATION_DIR GSEA_GENESET_DIR JAVA_BIN
 #' GSEA_JAR DEFAULT_GMT DEFAULT_CHIP
 #' @docType data
 NULL
-
-
-

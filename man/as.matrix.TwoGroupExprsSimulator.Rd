@@ -6,6 +6,9 @@
 \usage{
 \method{as.matrix}{TwoGroupExprsSimulator}(x, ...)
 }
+\arguments{
+\item{x}{A TwoGroupExprsSimulator object}
+}
 \value{
 A matrix
 }

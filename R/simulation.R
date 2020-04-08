@@ -289,7 +289,7 @@ setMethod("benchmark", "Benchmarker", function(object) {
 ## functions
 
 #' Return matrix from TwoGroupExprsSimulator
-#' @param x
+#' @param x A TwoGroupExprsSimulator object
 #' @return A matrix
 as.matrix.TwoGroupExprsSimulator <- function(x, ...) return(x@matrix)
 

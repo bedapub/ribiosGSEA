@@ -171,4 +171,4 @@ export(readRonetGmt)
 export(prettyRonetGenesetNames)
 
 ## Use Dynamic Lib
-useDynLib(ribiosGSEA)
+useDynLib(ribiosGSEA, .registration=TRUE, .fixes="C_")
