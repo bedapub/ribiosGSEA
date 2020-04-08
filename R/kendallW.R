@@ -1,10 +1,31 @@
+#' Interface to the function kendallWmat
+#' 
+#' The S4 method acts as interface between advanced data structures (such as
+#' \code{ExpressionSet}) and the \code{kendallWmat} function. The function
+#' combines Kendall's W statistic with an iterative graph theory approach to
+#' detect sub-groups resembling strong correlations.
+#' 
+#' 
+#' @name kendallW-methods
+#' @aliases kendallW kendallW-methods kendallW,ExpressionSet-method
+#' kendallW,matrix-method
+#' @docType methods
+#' @section Methods: \describe{ \item{list("signature(object =
+#' \"matrix\")")}{The method for \code{matrix} is just a wrapper for
+#' \code{kendallWmat}} \item{list("signature(object =
+#' \"ExpressionSet\")")}{This method accepts an \code{ExpressionSet} object,
+#' performs Kendall'W feature reduction, and store the sub-group information in
+#' the resulting object. } }
+#' @keywords methods
+NULL
+
 ## getRcrit and getSubGraphs were copied and adapted from the scorem package
 getRcrit <- function (a, n) {
   t <- 0 - qt(a, n - 2)
   sqrt(t^2/(t^2 + n - 2))
 }
 
-#' @importFrom RGBL connComp
+#' @importFrom graph connComp
 getSubGraphs <- function (object, alpha, nc, w.crit) {
   r.crit <- getRcrit(alpha, nc)
   cc <- connComp(as(new("graphAM", object > r.crit), "graphNEL"))
