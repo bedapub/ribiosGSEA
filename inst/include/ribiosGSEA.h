@@ -2,17 +2,9 @@
 #ifndef RIBIOS_GSEA_H
 #define RIBIOS_GSEA_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "Rcpp.h"
 
-#include <R.h>
-#include <Rinternals.h>
-
-#define CALLMETHOD_DEF(fun, numArgs) {#fun, (DL_FUNC) &fun, numArgs}
-
-#ifdef __cplusplus
-}
-#endif
+RcppExport SEXP cpp_geneSetPerm(SEXP, SEXP, SEXP);
+RcppExport SEXP list2mat(SEXP);
 
 #endif

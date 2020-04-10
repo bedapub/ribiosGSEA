@@ -1,6 +1,9 @@
 #include <Rcpp.h>
 
+// [[Rcpp::export]]
 RcppExport SEXP list2mat(SEXP data) {
+BEGIN_RCPP
+
   using namespace std;
 
   Rcpp::List input(data);
@@ -32,4 +35,6 @@ RcppExport SEXP list2mat(SEXP data) {
   Rcpp::List dimms = Rcpp::List::create(input.names(), rownames);
   M.attr("dimnames")=dimms;
   return M;
+ 
+END_RCPP
 }

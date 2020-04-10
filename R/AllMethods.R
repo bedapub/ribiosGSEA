@@ -453,7 +453,7 @@ setMethod("estimateFdr", "FisherResultList", function(object) {
 
 #' Extract contrast names from an EdgeGSE object
 #' @param object An \code{EdgeGSE} object
-#' @importFrom Biobase contrastNames
+#' @importFrom ribiosExpression contrastNames
 #' @export
 setMethod("contrastNames",
           "EdgeGSE",

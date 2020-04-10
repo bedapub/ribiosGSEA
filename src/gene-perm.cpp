@@ -1,6 +1,8 @@
 #include "algorithm"
 #include <Rcpp.h>
 
+using namespace Rcpp;
+
 typedef std::vector<int> IndexList;
 typedef std::vector< std::vector<int> > IndexListSet;
 
@@ -16,17 +18,13 @@ double subsetSum(const Rcpp::NumericVector &x,
   return(stat);
 }
 
+// [[Rcpp::export]]
 RcppExport SEXP cpp_geneSetPerm(SEXP stats,
 				SEXP rinds, // list
 				SEXP Nsim) {
+BEGIN_RCPP
 
-#ifdef DEBUG
-  // srand(1887);
-#else
-  // srand(time(NULL));
-#endif
-
-  int i,j,k,ng;
+  int i,j,ng;
   double psum;
   
   Rcpp::NumericVector xx(stats);
@@ -82,4 +80,5 @@ RcppExport SEXP cpp_geneSetPerm(SEXP stats,
   
   
   return(ret);
+END_RCPP
 }
