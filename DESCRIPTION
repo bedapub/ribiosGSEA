@@ -1,17 +1,17 @@
 Package: ribiosGSEA
 Type: Package
-Title: RIBIOS functions for Gene Set Enrichment Analysis
-Version: 1.4-8
-Date: 2020-04-08
+Title: Gene-set enrichment analysis tools in ribios
+Version: 1.4-9
+Date: 2020-04-10
 Authors@R: 
-  person(given = "Jitao David",
+  c(person(given = "Jitao David",
          family = "Zhang",
          role = c("aut", "cre", "ctb"),
          email = "jitao_david.zhang@roche.com",
-         comment = c(ORCID="0000-0002-3085-0909"))
-Description: Gene-set enrichment analysis is part of the Roche Bioinformatics
-    pipeline. The ribiosGSEA package provides functions and command-line scripts to
-    trigger an analysis, and to perform integrative analysis of GSEA results.
+         comment = c(ORCID="0000-0002-3085-0909")),
+    person("F.Hoffmann-La Roche AG", role="cph"))
+Description: Provides data structure and functions for gene-set analysis and 
+    post-processing of analysis results.
 Depends:
     R (>= 2.1.0)
 Imports:
@@ -21,6 +21,7 @@ Imports:
     ribiosMath,
     ribiosUtils(>= 1.1-9),
     ribiosExpression,
+    ribiosNGS,
     XML,parallel,limma,
     Biobase,
     MASS,
@@ -45,6 +46,8 @@ Collate:
     'GeMS.R'
     'buildGSEAcomm.R'
     'camera.R'
+    'gse.R'
+    'edgeR-funcs.R'
     'execute.R'
     'fingerprint.R'
     'fisher.R'
@@ -55,10 +58,12 @@ Collate:
     'kendallW.R'
     'kmeansGenesets.R'
     'list2mat.R'
+    'mps-funcs.R'
     'namespace.R'
     'ntp.R'
     'parseGSEA.R'
     'parseTopTable.R'
+    'post-processing.R'
     'prettyRonetGenesetNames.R'
     'ribiosGSEA-package.R'
     'simulation.R'

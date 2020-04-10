@@ -16,7 +16,8 @@ importFrom("BioQC", "wmwTest", "readGmt", "GmtList",
 importFrom("globaltest", "gt")
 importFrom("Biobase", "exprs", "exprs<-")
 importFrom("ribiosExpression",
-           "designMatrix", "contrastMatrix", "truncateDgeTable", "limmaTopTable2dgeTable")
+           "designMatrix", "contrastMatrix", "truncateDgeTable", "limmaTopTable2dgeTable", 
+           "contrastNames")
 importFrom("ribiosUtils", "haltifnot", "uniqueNonNA", "whoami")
 importFrom("data.table", "data.table")
 importFrom("dplyr", "%>%", "group_by", "ungroup", "arrange", "select")
