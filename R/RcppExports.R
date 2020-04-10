@@ -5,7 +5,7 @@ cpp_geneSetPerm <- function(stats, rinds, Nsim) {
     .Call(`_ribiosGSEA_cpp_geneSetPerm`, stats, rinds, Nsim)
 }
 
-list2mat <- function(data) {
-    .Call(`_ribiosGSEA_list2mat`, data)
+cpp_list2mat <- function(data) {
+    .Call(`_ribiosGSEA_cpp_list2mat`, data)
 }
 
