@@ -24,9 +24,9 @@ Get gene sets of a user from GeMS
 }
 \examples{
 \dontrun{
-## my gene-sets
-getUserSetsFromGeMS()
-## from another user
-getUserSetsFromGeMS("kanga6")
+#### my gene-sets
+## getUserSetsFromGeMS()
+#### from another user
+## getUserSetsFromGeMS("kanga6")
 }
 }

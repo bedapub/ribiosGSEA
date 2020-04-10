@@ -14,6 +14,6 @@ Test whether GeMS is reachable
 }
 \examples{
 \dontrun{
-isGeMSReachble()
+  ## isGeMSReachble()
 }
 }

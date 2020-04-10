@@ -26,6 +26,7 @@ Publicly available genesets include
 }
 \examples{
 \dontrun{
-  readDefaultGenesets("/tmp/defaultGmts")
+  ## this cannot be run because the files are not located there
+  ## readDefaultGenesets("/tmp/defaultGmts")
 }
 }

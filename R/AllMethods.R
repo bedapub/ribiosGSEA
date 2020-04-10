@@ -1,8 +1,8 @@
 setMethod("gsName", "gseaResItem", function(object) return(object@geneset))
 setMethod("gsName", "annoGseaRes", function(object) sapply(object, gsName))
-
 setMethod("gsName", "FisherResult", function(object) object@gsName)
 setMethod("gsName", "FisherResultList", function(object) names(object@.Data))
+setMethod("gsName", "GmtList", function(object) sapply(object, function(x) x$name))
 
 setMethod("gseaES", "gseaResItem", function(object) return(object@es))
 setMethod("gseaES", "annoGseaRes", function(object) {
@@ -81,6 +81,19 @@ setMethod("gsGenes", "annoGseaRes", function(object) {
   names(res) <- gsName(object)
   return(res)
 })
+setMethod("gsGenes", "GmtList", function(object) 
+	  return(lapply(object, function(x) x$genes)))
+
+#' @importFrom ribiosUtils ulen
+setMethod("gsSize", "GmtList", function(object)
+	  return(sapply(object, function(x) ribiosUtils::ulen(x$genes))))
+
+#' @export
+setMethod("gsNamespace", "GmtList", function(object)
+	  return(sapply(object, function(x) x$namespace)))
+
+setMethod("gsDesc", "GmtList", function(object)
+	  return(lapply(object, function(x) x$desc)))
 
 setMethod("gsGeneValues", "annoGseaResItem", function(object) return(object@gsGeneValues))
 setMethod("gsGeneValues", "annoGseaRes", function(object) {

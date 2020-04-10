@@ -71,7 +71,7 @@ setClass("EdgeGSE",
 #' @param edgeObj An \code{EdgeObject}
 #' @param gmtList A \code{GmtList} object
 #' @returns An EdgeGSE object, with enrichTables as \code{NULL}
-#' @importClassFrom BioQC GmtList
+#' @importClassesFrom BioQC GmtList
 #' @export
 EdgeGSE <- function(edgeObj, gmtList) {
   haltifnot(all(c("GeneID", "GeneSymbol") %in% colnames(dgeList(edgeObj)$genes)),

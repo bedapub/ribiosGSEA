@@ -43,9 +43,11 @@ myGage <- function(logFC, gmtList, ...) {
 }
 
 
+#' @importFrom ribiosNGS dgeTables
+#' @export
 logFCgage <- function(edgeResult, gmtList) {
     geneSymbols <- fData(edgeResult)$GeneSymbol
-    logFCs <- lapply(dgeTables(edgeResult), function(x) {
+    logFCs <- lapply(ribiosNGS::dgeTables(edgeResult), function(x) {
                          res <- x$logFC
                          names(res) <- x$GeneSymbol
                          return(res)
@@ -67,41 +69,6 @@ logFCgage <- function(edgeResult, gmtList) {
 ##----------------------------------------##
 ## camera
 ##----------------------------------------##
-## voomCamera is outdated: use camera.EdgeResult instead
-voomCamera <- function(edgeObj, gmtList) {
-  ## TODO: deprecate this after the script is fixed
-  ## .Deprecated(new="camera.EdgeResult")
-  design <- designMatrix(edgeObj)
-  dgelist <- calcNormFactorsIfNot(dgeList(edgeObj))
-  obj.voom <- voom(dgelist, design=design)
-  ctnames<- contrastNames(edgeObj)
-  
-  ct <- contrastMatrix(edgeObj)
-  geneSymbols <- as.character(fData(edgeObj)$GeneSymbol)
-  
-  namespaces <- gsNamespace(gmtList)
-  erTables <- tapply(gmtList, namespaces, function(gsc) {
-    tt <- ribiosGSEA::gmtListCamera(obj.voom,
-                                    geneSymbols,
-                                    gmtList=GmtList(gsc), design=design, contrasts=ct)
-    return(tt)
-  })
-  
-  erTable <- do.call(rbind, erTables)
-  erTable$Namespace <- rep(names(erTables), sapply(erTables, nrow))
-  erTable <- putColsFirst(erTable, "Namespace")
-  rownames(erTable) <- NULL
-  
-  
-  edgeGse <-   as(edgeObj,"EdgeGSE")
-  edgeGse@geneSets <- gmtList
-  edgeGse@method <- "voom+camera"
-  edgeGse@enrichTables <- erTable
-  return(edgeGse)
-}
-
-
-
 #' Calculate mid-p quantile residuals
 #' 
 #' @param y An DGEList object
@@ -119,7 +86,7 @@ voomCamera <- function(edgeObj, gmtList) {
 #' dgeZscore <- zscoreDGE(dgeList, dgeDesign, contrast=c(0,1))
 #' head(dgeZscore)
 #' 
-#' @importFrom edgeR getDispersion zscoreNBinom
+#' @importFrom edgeR getDispersion zscoreNBinom glmFit
 #' @importFrom limma contrastAsCoef
 #' @export zscoreDGE
 zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
@@ -155,7 +122,7 @@ zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
                              first = FALSE)$design
     design0 <- design[, -nbeta, drop = FALSE]
   }
-  fit.null <- glmFit(y, design0, prior.count = 0)
+  fit.null <- edgeR::glmFit(y, design0, prior.count = 0)
   y <- zscoreNBinom(y$counts, 
                     mu = pmax(fit.null$fitted.values, 1e-17),
                     size = 1/dispersion)
@@ -173,9 +140,10 @@ zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
 #' 
 #' @importFrom parallel mclapply
 #' @importFrom limma camera
+#' @importFrom ribiosNGS humanGeneSymbols
 #' @export
 dgeListCamera <- function(dgeList, index, design, contrasts) {
-  geneSymbols <- humanGeneSymbols(dgeList)
+  geneSymbols <- ribiosNGS::humanGeneSymbols(dgeList)
   if(is.null(geneSymbols))
     stop("EdgeResult must have 'GeneSymbol' in its fData to perform camera!")
   cameraRes <- mclapply(1:ncol(contrasts),
@@ -277,6 +245,10 @@ camera.EdgeResult <- function(y, gmtList) {
   return(edgeGse)
 }
 
+#' Extract the full enrichment table
+#' @param edgeGse An \code{EdgeGSE} object
+#' @return A \code{data.frame} 
+#' @export
 fullEnrichTable <- function(edgeGse) {
   return(edgeGse@enrichTables)
 }

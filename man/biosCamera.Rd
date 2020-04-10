@@ -91,6 +91,6 @@ biosCamera(y, list(index1, index2), design)
 
 # when \code{.fixed.inter.gene.cor=0.01} and \code{.approx.zscoreT=TRUE},  PValue reported by \code{limma::camera} and \code{ribiosGSEA::biosCamera} should equal
 (biosFixCorOut <- biosCamera(y, index1, design, .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE))
-stopifnot(all(biosFixCorOut$PValue==limmaDefOut$PValue))
+testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue)
 }
 }

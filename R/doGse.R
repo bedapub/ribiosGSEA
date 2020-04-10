@@ -1,4 +1,20 @@
 #' @include gse.R
+NULL
+
+
+#' @describeIn doGse Gene-set enrichment with logFC gage
+#' @export
+gseWithLogFCgage <- function(edgeResult, gmtList) {
+  gseRes <- logFCgage(edgeResult, gmtList)
+  return(gseRes)
+}
+
+#' @describeIn doGse Gene-set enrichment with camera
+#' @export
+gseWithCamera <- function(edgeResult, gmtList) {
+  gseRes <- camera.EdgeResult(edgeResult, gmtList)
+  return(gseRes)
+}
 
 #' Perform gene-set enrichment (GSE) analysis
 #' 
@@ -30,7 +46,7 @@
 #'                      Group=exGroups)
 #' exObj <- EdgeObject(exMat, exDescon, 
 #'                      fData=exFdata, pData=exPdata)
-#' exDgeRes <- dgeWithEdgeR(exObj)
+#' exDgeRes <- ribiosNGS::dgeWithEdgeR(exObj)
 #' 
 #' exGeneSets <- BioQC::GmtList(list(
 #'     list(name="Set1", desc="set 1", genes=c("Gene1", "Gene2", "Gene3"), namespace="default"),
@@ -45,6 +61,7 @@
 #' exGseWithCamera <- gseWithCamera(exDgeRes, exGeneSets)
 #' fullEnrichTable(exGseWithCamera)
 #' @importClassesFrom ribiosNGS EdgeResult
+#' @importFrom ribiosNGS dgeWithEdgeR
 #' @export doGse
 doGse <- function(edgeResult, gmtList) {
   res <- try(gseWithCamera(edgeResult, gmtList))
@@ -53,17 +70,3 @@ doGse <- function(edgeResult, gmtList) {
   }
   return(res)
 }
-
-#' @describeIn doGse Gene-set enrichment with logFC gage
-#' @export
-gseWithLogFCgage <- function(edgeResult, gmtList) {
-  gseRes <- logFCgage(edgeResult, gmtList)
-  return(gseRes)
-}
-
-#' @describeIn doGse Gene-set enrichment with camera
-gseWithCamera <- function(edgeResult, gmtList) {
-  gseRes <- camera.EdgeResult(edgeResult, gmtList)
-  return(gseRes)
-}
-

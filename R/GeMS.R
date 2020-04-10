@@ -1,11 +1,24 @@
+#' @note TODO GeMS examples are suspended because the host cannot be reached outside of Roche network
+NULL
+
+#' @export
 GeMS_BASE_URL <- "http://biocomp:1234/api"
 
+#' @export
 GeMS_INSERT_URL <- paste(GeMS_BASE_URL, "/insert", sep="")
+
+#' @export
 GeMS_REMOVE_URL <- paste(GeMS_BASE_URL, "/remove", sep="")
+
+#' @export
 GeMS_GENESETS_URL <- paste(GeMS_BASE_URL, "/genesets", sep="")
 
 ## test URLs, GeMS API running as pod container on the biocomp server
+
+#' @export
 GeMS_TEST_URL <- "http://rkalvbiocomp.kau.roche.com:1234/api"
+
+#' @export
 GeMS_TEST_GENESETS_URL <- paste(GeMS_TEST_URL, "/genesets", sep="")
 
 
@@ -13,7 +26,7 @@ GeMS_TEST_GENESETS_URL <- paste(GeMS_TEST_URL, "/genesets", sep="")
 #' @return Logical value
 #' @examples 
 #' \dontrun{
-#' isGeMSReachble()
+#'   ## isGeMSReachble()
 #' }
 isGeMSReachable <- function() {
    !httr::http_error(httr::GET(GeMS_GENESETS_URL)) 
@@ -28,7 +41,7 @@ isGeMSReachable <- function() {
 #' 
 #' @examples 
 #' \dontrun{
-#'    getJsonResponse(GeMS_GENESETS_URL, list(user=ribiosUtils::whoami()))
+#'    ## getJsonResponse(GeMS_GENESETS_URL, list(user=ribiosUtils::whoami()))
 #' }
 getJsonResponse <- function(url, body) {
   response <- httr::POST(url, body=body, encode='json')
@@ -93,8 +106,8 @@ insertGmtListToGeMSBody <- function(gmtList,
 #'     list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
 #'     list(name="GS_C", desc="gene set C", genes=NULL))
 #'   testGmt <- BioQC::GmtList(testList)
-#'   insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
-#'   removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
+#'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+#'   ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 #' }
 insertGmtListToGeMS <- function(gmtList,
                                 geneFormat=0,
@@ -155,8 +168,8 @@ removeFromGeMSBody <- function(setName="",
 #'     list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
 #'     list(name="GS_C", desc="gene set C", genes=NULL))
 #'   testGmt <- BioQC::GmtList(testList)
-#'   insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
-#'   removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
+#'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+#'   ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 #' }
 #' 
 removeFromGeMS <- function(setName="", 
@@ -180,10 +193,10 @@ removeFromGeMS <- function(setName="",
 #' 
 #' @examples 
 #' \dontrun{
-#' ## my gene-sets
-#' getUserSetsFromGeMS()
-#' ## from another user
-#' getUserSetsFromGeMS("kanga6")
+#' #### my gene-sets
+#' ## getUserSetsFromGeMS()
+#' #### from another user
+#' ## getUserSetsFromGeMS("kanga6")
 #' }
 getUserSetsFromGeMS <- function(user=ribiosUtils::whoami()) {
   fieldsOfInterest <- c("setName", "desc", "domain",

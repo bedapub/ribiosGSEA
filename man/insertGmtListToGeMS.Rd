@@ -44,8 +44,8 @@ Insert a GmtList object to GeMS
     list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
     list(name="GS_C", desc="gene set C", genes=NULL))
   testGmt <- BioQC::GmtList(testList)
-  insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
-  removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
+  ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+  ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 }
 }
 \seealso{

@@ -19,6 +19,6 @@ Send a list as JSON query to an URL and fetch the response
 }
 \examples{
 \dontrun{
-   getJsonResponse(GeMS_GENESETS_URL, list(user=ribiosUtils::whoami()))
+   ## getJsonResponse(GeMS_GENESETS_URL, list(user=ribiosUtils::whoami()))
 }
 }

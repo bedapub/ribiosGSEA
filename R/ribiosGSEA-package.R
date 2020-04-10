@@ -1,14 +1,14 @@
 #' @include namespace.R
 NULL
 
-#' The ribiosGSEA package
-#'
-#' ribiosGSEA supports gene-set analysis of various kinds
 #' @docType package
 #' @useDynLib ribiosGSEA, .registration=TRUE, .fixes="C_"
-#' @name ribiosGSEA
+#' @name ribiosGSEA-package
+#' @title The ribiosGSEA package supports gene-set analysis
 NULL
 
+#' @importFrom Rcpp sourceCpp
+NULL
 
 #' Parsing GMT file for downstream analysis
 #' 
@@ -46,3 +46,17 @@ NULL
 #' GSEA_JAR DEFAULT_GMT DEFAULT_CHIP
 #' @docType data
 NULL
+
+#' @importFrom ribiosExpression DesignContrast
+#' @importFrom ribiosNGS EdgeObject
+#' @importFrom edgeR DGEList
+NULL
+
+#' @export
+ribiosExpression::DesignContrast
+
+#' @export
+ribiosNGS::EdgeObject
+
+#' @export
+edgeR::DGEList

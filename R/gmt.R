@@ -53,7 +53,8 @@ readMPSGmt <- function(file) {
 #' @importFrom ribiosUtils assertFile
 #' @examples 
 #' \dontrun{
-#'   readDefaultGenesets("/tmp/defaultGmts")
+#'   ## this cannot be run because the files are not located there
+#'   ## readDefaultGenesets("/tmp/defaultGmts")
 #' }
 readDefaultGenesets <- function(path,
                                 mps=FALSE) {
