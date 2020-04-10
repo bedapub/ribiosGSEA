@@ -446,3 +446,15 @@ setMethod("estimateFdr", "FisherResultList", function(object) {
               }
               return(object)
           })
+
+##----------------------------------------##
+## migrated from ribiosNGS
+##----------------------------------------##
+
+#' Extract contrast names from an EdgeGSE object
+#' @param object An \code{EdgeGSE} object
+#' @importFrom Biobase contrastNames
+#' @export
+setMethod("contrastNames",
+          "EdgeGSE",
+          function(object) contrastNames(as(object, "EdgeObject")))
