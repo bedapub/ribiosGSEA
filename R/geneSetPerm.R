@@ -39,7 +39,6 @@ geneSetPerm <- function(stats,
             msg=paste("Following gene sets has NAs",
               paste(which(hasNAind), collapse=",")))
             
-  .Call(C_cpp_geneSetPerm, stats, int.indList, Nsim,
-        PACKAGE="ribiosGSEA")
+  .Call(`_ribiosGSEA_cpp_geneSetPerm`, stats, int.indList, Nsim)
         
 }

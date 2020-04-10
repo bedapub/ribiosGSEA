@@ -26,5 +26,7 @@
 #' @export list2mat
 list2mat <- function(list) {
   listStr <- lapply(list, as.character)
-  return(t(.Call(C_list2mat, listStr)))
+  rt <- .Call(`_ribiosGSEA_cpp_list2mat`, listStr, PACKAGE="ribiosGSEA")
+  res <- t(rt)
+  return(res)
 }

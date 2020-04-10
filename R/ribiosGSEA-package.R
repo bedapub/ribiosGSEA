@@ -2,7 +2,7 @@
 NULL
 
 #' @docType package
-#' @useDynLib ribiosGSEA, .registration=TRUE, .fixes="C_"
+#' @useDynLib ribiosGSEA, .registration=TRUE, .fixes=`_ribiosGSEA_`
 #' @name ribiosGSEA-package
 #' @title The ribiosGSEA package supports gene-set analysis
 NULL

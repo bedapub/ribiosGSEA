@@ -33,7 +33,8 @@ Imports:
     dplyr,
     data.table,
     httr,
-    jsonlite
+    jsonlite,
+    graph
 Suggests:
     testthat,
     knitr,
@@ -44,10 +45,11 @@ Collate:
     'AllGenerics.R'
     'AllMethods.R'
     'GeMS.R'
+    'RcppExports.R'
     'buildGSEAcomm.R'
     'camera.R'
     'gse.R'
-    'edgeR-funcs.R'
+    'doGse.R'
     'execute.R'
     'fingerprint.R'
     'fisher.R'

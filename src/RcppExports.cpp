@@ -19,26 +19,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// list2mat
-RcppExport SEXP list2mat(SEXP data);
-RcppExport SEXP _ribiosGSEA_list2mat(SEXP dataSEXP) {
+// cpp_list2mat
+RcppExport SEXP cpp_list2mat(SEXP data);
+RcppExport SEXP _ribiosGSEA_cpp_list2mat(SEXP dataSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type data(dataSEXP);
-    rcpp_result_gen = Rcpp::wrap(list2mat(data));
+    rcpp_result_gen = Rcpp::wrap(cpp_list2mat(data));
     return rcpp_result_gen;
 END_RCPP
 }
 
 RcppExport SEXP cpp_geneSetPerm(SEXP, SEXP, SEXP);
-RcppExport SEXP list2mat(SEXP);
+RcppExport SEXP cpp_list2mat(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ribiosGSEA_cpp_geneSetPerm", (DL_FUNC) &_ribiosGSEA_cpp_geneSetPerm, 3},
-    {"_ribiosGSEA_list2mat", (DL_FUNC) &_ribiosGSEA_list2mat, 1},
+    {"_ribiosGSEA_cpp_list2mat", (DL_FUNC) &_ribiosGSEA_cpp_list2mat, 1},
     {"cpp_geneSetPerm", (DL_FUNC) &cpp_geneSetPerm, 3},
-    {"list2mat",        (DL_FUNC) &list2mat,        1},
+    {"cpp_list2mat",    (DL_FUNC) &cpp_list2mat,    1},
     {NULL, NULL, 0}
 };
 

@@ -43,7 +43,7 @@ myGage <- function(logFC, gmtList, ...) {
 }
 
 
-#' @importFrom ribiosNGS dgeTables
+#' @importFrom ribiosNGS dgeTables fData
 #' @export
 logFCgage <- function(edgeResult, gmtList) {
     geneSymbols <- fData(edgeResult)$GeneSymbol

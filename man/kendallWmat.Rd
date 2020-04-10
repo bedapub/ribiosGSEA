@@ -121,7 +121,7 @@ kendallWmat(emat, efac, summary="max.var.sig", na.rm=TRUE)
 kendallW(emat, efac, summary="none")
 
 ## kendallW acts as an interface to ExpressionSet
-data(ribios.ExpressionSet)
+data(ribios.ExpressionSet, package="ribiosExpression")
 kendallW(ribios.ExpressionSet, 
   Biobase::fData(ribios.ExpressionSet)$GeneID,
   summary="none")

@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 
 // [[Rcpp::export]]
-RcppExport SEXP list2mat(SEXP data) {
+RcppExport SEXP cpp_list2mat(SEXP data) {
 BEGIN_RCPP
 
   using namespace std;
