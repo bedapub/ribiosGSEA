@@ -291,6 +291,7 @@ setMethod("benchmark", "Benchmarker", function(object) {
 #' Return matrix from TwoGroupExprsSimulator
 #' @param x A TwoGroupExprsSimulator object
 #' @return A matrix
+#' @export
 as.matrix.TwoGroupExprsSimulator <- function(x, ...) return(x@matrix)
 
 setAs(from="TwoGroupExprsSimulator", to="matrix", function(from) return(from@matrix))
