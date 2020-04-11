@@ -1,4 +1,5 @@
 #include "algorithm"
+#include <omp.h>
 #include <Rcpp.h>
 
 using namespace Rcpp;
@@ -10,7 +11,7 @@ int op_decrease (int i) { return --i;}
 
 double subsetSum(const Rcpp::NumericVector &x,
 		 const IndexList &index) {
-  int i;
+  unsigned int i;
   double stat=0.0;
   for(i=0; i<index.size(); i++) {
     stat += x[ index[i] ]; 
@@ -18,6 +19,7 @@ double subsetSum(const Rcpp::NumericVector &x,
   return(stat);
 }
 
+// [[Rcpp::plugins(openmp)]]
 // [[Rcpp::export]]
 RcppExport SEXP cpp_geneSetPerm(SEXP stats,
 				SEXP rinds, // list
