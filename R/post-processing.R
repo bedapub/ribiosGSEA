@@ -68,6 +68,7 @@ parseCameraContributingGenes <- function(cameraResTbl, genesets) {
 #' @param file CAMERA results file
 #' @param minNGenes NULL or integer, genesets with fewer genes are filtered out
 #' @param maxNGenes NULL or integer, genesets with more genes are filtered out
+#' @importFrom readr read_tsv
 #' @export readCameraResults
 readCameraResults <- function(file, minNGenes=3, maxNGenes=1000) {
   res <- readr::read_tsv(file, col_types = "cccicddddddddc")
@@ -141,7 +142,7 @@ cameraTable2network <- function(df, jacThr=0.25, plot=TRUE, ...) {
     graphVscores <- matchColumn(V(graph)$name, df, "label")$Score
     
     absMaxScore <- max(abs(graphVscores))
-    score2range <- as.integer(ribiosPlot::boundNorm(graphVscores)*100,
+    score2range <- as.integer(ribiosUtils::boundNorm(graphVscores)*100,
                               low=-absMaxScore, high=absMaxScore)
     scoreColor <- royalbluegrayred(101)[score2range+1]
 

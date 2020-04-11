@@ -3,4 +3,7 @@
 \docType{package}
 \name{ribiosGSEA-package}
 \alias{ribiosGSEA-package}
-\title{The ribiosGSEA package supports gene-set analysis}
+\title{ribiosGSEA package}
+\description{
+The ribiosGSEA package supports gene-set analysis
+}

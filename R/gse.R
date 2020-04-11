@@ -1,12 +1,10 @@
-
-## TODO: replace data.frame with Objects
-
 #' Wrap the gage::gage method to report consistent results as the CAMERA method
 #' 
 #' @param logFC A named vector of logFC values of genes
 #' @param gmtList A \code{\link[BioQC]{GmtList}} object containing gene-sets
 #' @param ... Other parameters passed to \code{\link[gage]{gage}}
 #' 
+#' @importFrom gage gage
 #' @export
 myGage <- function(logFC, gmtList, ...) {
   gsnames <- gsName(gmtList)
