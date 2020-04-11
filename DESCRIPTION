@@ -34,7 +34,9 @@ Imports:
     data.table,
     httr,
     jsonlite,
-    graph
+    graph,
+    gage,
+    readr
 Suggests:
     testthat,
     knitr,
