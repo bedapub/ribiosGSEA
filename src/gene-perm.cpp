@@ -19,6 +19,11 @@ double subsetSum(const Rcpp::NumericVector &x,
   return(stat);
 }
 
+// wrapper around R's RNG such that we get a uniform distribution over
+// [0,n) as required by the STL algorithm
+// see https://gallery.rcpp.org/articles/stl-random-shuffle/index.html
+inline int randWrapper(const int n) { return floor(unif_rand()*n); }
+
 // [[Rcpp::plugins(openmp)]]
 // [[Rcpp::export]]
 RcppExport SEXP cpp_geneSetPerm(SEXP stats,
@@ -55,7 +60,7 @@ BEGIN_RCPP
 
 
   for(i=0;i<nsim;i++) {
-    std::random_shuffle(xp.begin(), xp.end());
+    std::random_shuffle(xp.begin(), xp.end(), randWrapper);
     #pragma omp parallel for
     for(j=0; j<ng; j++) {
       psum=subsetSum(xp,indset[j]);
