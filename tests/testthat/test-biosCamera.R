@@ -199,12 +199,15 @@ y[index1,4:6] <- y[index1,4:6]+1
 index2 <- 21:40
 
 gs <- list(GeneSet1=index1, GeneSet2=index2)
-
-(cameraRes <- camera.limma3.34.9(y, gs, design, inter.gene.cor=NA, allow.neg.cor=FALSE))
-(cameraModRes <- biosCamera(y, gs, design, .approx.zscoreT = TRUE))
 addCols <- c("GeneSet", "Score", "ContributingGenes")
 idCols <- c("NGenes", "Correlation", "Direction", "PValue", "FDR")
+
+cameraRes <- camera.limma3.34.9(y, gs, design, inter.gene.cor=NA, allow.neg.cor=FALSE)
+## in biosCamera, row.names are set to NULL
 rownames(cameraRes) <- NULL
+
+cameraModRes <- biosCamera(y, gs, design, .approx.zscoreT = TRUE)
+
 test_that("biosCamera performs correctly when inter.gene.cor is estimated", {
   expect_true(all(c(addCols, idCols) %in% colnames(cameraModRes)))
   expect_equal(cameraRes[,idCols], cameraModRes[,idCols])
@@ -212,43 +215,43 @@ test_that("biosCamera performs correctly when inter.gene.cor is estimated", {
 
 
 ## test no row names
-yNoRowNames <- y
-rownames(yNoRowNames) <- NULL
-(cameraModRes.noRowNames <- biosCamera(yNoRowNames, gs, design))
-test_that("biosCamera performs correctly when no row.names are provided", {
+test_that("biosCamera performs correctly when no row.names are provided (barring from row.names)", {
+  yNoRowNames <- y
+  rownames(yNoRowNames) <- NULL
+  cameraModRes.noRowNames <- biosCamera(yNoRowNames, gs, design)
   expect_equal(cameraRes[,idCols], cameraModRes.noRowNames[,idCols])
 })
 
 ## test rankSum test
-(cameraRsRes <- camera.limma3.34.9(y, gs, design, use.ranks=TRUE, inter.gene.cor=NA, allow.neg.cor=FALSE))
-(cameraRsModRes <- biosCamera(y, gs, design, use.ranks=TRUE))
-rownames(cameraRsRes) <- NULL
 test_that("biosCamera performs correctly when use.ranks=TRUE", {
+  cameraRsRes <- camera.limma3.34.9(y, gs, design, use.ranks=TRUE, inter.gene.cor=NA, allow.neg.cor=FALSE)
+  cameraRsModRes <- biosCamera(y, gs, design, use.ranks=TRUE)
+  rownames(cameraRsRes) <- NULL
   expect_equal(cameraRsRes[,idCols], cameraRsModRes[,idCols])
 })
 
 ## test fixed correlation
-fixIGC <- 0.12
-(cameraFixCorRes <- camera.limma3.34.9(y, gs, design, inter.gene.cor=fixIGC))
-(biosCameraFixCorRes <- biosCamera(y, gs, design, .fixed.inter.gene.cor = fixIGC, .approx.zscoreT = TRUE))
-fixCols <- c("NGenes", "Direction", "PValue", "FDR")
 test_that("biosCamera performs correctly when inter-gene correlation is fixed", {
+  fixIGC <- 0.12
+  cameraFixCorRes <- camera.limma3.34.9(y, gs, design, inter.gene.cor=fixIGC)
+  biosCameraFixCorRes <- biosCamera(y, gs, design, .fixed.inter.gene.cor = fixIGC, .approx.zscoreT = TRUE)
+  fixCols <- c("NGenes", "Direction", "PValue", "FDR")
   expect_equivalent(cameraFixCorRes[,fixCols], biosCameraFixCorRes[,fixCols])
 })
 
 ## test that biosCamera can work with individually defined correlations
-biosCameraIndFixCorRes <- biosCamera(y, list(GeneSet1LowCor=gs[[1]],
-                                             GeneSet2HighCor=gs[[1]]),
-                                     design, 
-                                     .fixed.inter.gene.cor=c(0.01, 0.10), 
-                                     .approx.zscoreT = TRUE)
-cameraLowCorRes <- camera.limma3.34.9(y, gs[[1]],
-                            design, inter.gene.cor = 0.01)
-cameraHighCorRes <- camera.limma3.34.9(y, gs[[1]],
-                                     design, inter.gene.cor = 0.10)
-cameraIndFixCorRes <- rbind(cameraLowCorRes, cameraHighCorRes)
-indFixCorCols <- c("NGenes", "Direction", "PValue")
 test_that("biosCamera performs correctly when inter-gene correlations are specified for each gene set", {
+  biosCameraIndFixCorRes <- biosCamera(y, list(GeneSet1LowCor=gs[[1]],
+                                               GeneSet2HighCor=gs[[1]]),
+                                       design, 
+                                       .fixed.inter.gene.cor=c(0.01, 0.10), 
+                                       .approx.zscoreT = TRUE)
+  cameraLowCorRes <- camera.limma3.34.9(y, gs[[1]],
+                              design, inter.gene.cor = 0.01)
+  cameraHighCorRes <- camera.limma3.34.9(y, gs[[1]],
+                                     design, inter.gene.cor = 0.10)
+  cameraIndFixCorRes <- rbind(cameraLowCorRes, cameraHighCorRes)
+  indFixCorCols <- c("NGenes", "Direction", "PValue")
   expect_equivalent(biosCameraIndFixCorRes[,indFixCorCols],
                     cameraIndFixCorRes[, indFixCorCols])
 })

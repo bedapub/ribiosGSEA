@@ -104,7 +104,7 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design), weight
     df.residual <- n - p
     if (df.residual < 1)
       stop("No residual df: cannot compute t-tests")
-    fixed.cor <- !(is.null(.fixed.inter.gene.cor) || is.na(.fixed.inter.gene.cor))
+    fixed.cor <- length(.fixed.inter.gene.cor)>1 || !(is.null(.fixed.inter.gene.cor) || is.na(.fixed.inter.gene.cor))
     if(fixed.cor) {
       df.camera <- ifelse(use.ranks, Inf, G-2)
       .fixed.inter.gene.cor <- rep_len(.fixed.inter.gene.cor, nsets)
