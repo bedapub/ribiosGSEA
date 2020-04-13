@@ -7,7 +7,8 @@
 gmtListCamera(matrix, geneSymbols, gmtList, design, contrasts)
 }
 \arguments{
-\item{matrix}{Expression matrix, features (genes) in rows and samples in columns}
+\item{matrix}{Expression matrix, features (genes) in rows and 
+samples in columns}
 
 \item{geneSymbols}{Gene-symbols corresponding to the rows of matrix}
 

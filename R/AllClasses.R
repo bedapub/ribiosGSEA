@@ -70,7 +70,8 @@ setClass("EdgeGSE",
 #' Build an EdgeGSE object
 #' @param edgeObj An \code{EdgeObject}
 #' @param gmtList A \code{GmtList} object
-#' @returns An EdgeGSE object, with enrichTables as \code{NULL}
+#' @return An EdgeGSE object, with enrichTables as \code{NULL}
+#' @importFrom ribiosNGS dgeList
 #' @importClassesFrom BioQC GmtList
 #' @export
 EdgeGSE <- function(edgeObj, gmtList) {

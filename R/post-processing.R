@@ -26,7 +26,6 @@ parseContributingGenes <- function(str) {
 
 #' Parse contributing genes by genesets
 #' 
-#' 
 #' @param str Character strings, containing contributing genes
 #' @param genesets Character strings, geneset labels. Its length must match the
 #' length of \code{str}
@@ -107,9 +106,19 @@ expandSigCameraResults <- function(cameraTable,
     return(expSigCameraTable)
 }
 
+#' Convert a CAMERA table into a graph
+#'
+#' @param df Data.frame, CAMERA results
+#' @param jacThr Numeric, between 0 and 1, Jaccard Index threshold
+#' @param plot Logical, whether plotting the results
+#'
+#' @importFrom igraph make_empty_graph graph_from_adjacency_matrix 
+#'     layout_in_circle V
+#' @importFrom ribiosUtils pairwiseJaccardIndex matchColumn boundNorm
+#' @importFrom ribiosPlot royalbluegrayred
 #' @export
-cameraTable2network <- function(df, jacThr=0.25, plot=TRUE, ...) {
-    retObj <- list(graph=make_empty_graph(),
+cameraTable2graph <- function(df, jacThr=0.25, plot=TRUE, ...) {
+    retObj <- list(graph=igraph::make_empty_graph(),
                    resTbl=data.frame(Namespace=character(0),
                         GeneSet=character(0),
                        score=numeric(0)))
@@ -121,11 +130,14 @@ cameraTable2network <- function(df, jacThr=0.25, plot=TRUE, ...) {
     labels <- df$label <- with(df, paste(Namespace,":",GeneSet,sep=""))
                                
     geneLists <- with(df, split(as.character(Gene), labels))
-    gJacSim <- pairwiseJaccardIndex(geneLists)
-    gJacBin <- gJacSim;  gJacBin[gJacBin>=jacThr] <- 1L; gJacBin[gJacBin<jacThr] <- 0L
+    gJacSim <- ribiosUtils::pairwiseJaccardIndex(geneLists)
+
+    gJacBin <- gJacSim
+    gJacBin[gJacBin>=jacThr] <- 1L
+    gJacBin[gJacBin<jacThr] <- 0L
+
     gLabels <- names(geneLists)
     rownames(gJacBin) <- colnames(gJacBin) <- gLabels
-
 
     gNamespace <- sapply(strsplit(rownames(gJacBin), ":"), "[[", 1L)
     gGeneSet <- sapply(strsplit(rownames(gJacBin), ":"), function(x) paste(x[2:length(x)], collapse=" "))
@@ -137,9 +149,9 @@ cameraTable2network <- function(df, jacThr=0.25, plot=TRUE, ...) {
         }
     }
         
-    graph <- graph_from_adjacency_matrix(gJacBin, mode="undirected", diag=FALSE)
+    graph <- igraph::graph_from_adjacency_matrix(gJacBin, mode="undirected", diag=FALSE)
     
-    graphVscores <- matchColumn(V(graph)$name, df, "label")$Score
+    graphVscores <- matchColumn(igraph::V(graph)$name, df, "label")$Score
     
     absMaxScore <- max(abs(graphVscores))
     score2range <- as.integer(ribiosUtils::boundNorm(graphVscores)*100,
@@ -164,11 +176,11 @@ cameraTable2network <- function(df, jacThr=0.25, plot=TRUE, ...) {
 }
 
 #' @export
-visualizeCameraNetworksByContrast <- function(expCameraTable, ...) {
+visualizeCameraGraphsByContrast <- function(expCameraTable, ...) {
     contrasts <- sort(unique(expCameraTable$Contrast))
     nres <- lapply(as.character(contrasts), function(x) {
                        subexpCameraTable <- subset(expCameraTable, Contrast==x)
-                       cameraTable2network(subexpCameraTable, plot=TRUE, main=x, ...)
+                       cameraTable2graph(subexpCameraTable, plot=TRUE, main=x, ...)
                   })
     tbls <- lapply(nres, function(x) x$resTbl)
     res <- cbind(Contrast=rep(contrasts, sapply(tbls, nrow)),

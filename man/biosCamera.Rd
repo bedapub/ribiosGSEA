@@ -20,77 +20,122 @@ biosCamera(
 )
 }
 \arguments{
-\item{y}{a numeric matrix of log-expression values or log-ratios of expression values, or any data object containing such a matrix. Rows correspond to probes and columns to samples. Any type of object that can be processed by getEAWP is acceptable.}
+\item{y}{a numeric matrix of log-expression values or log-ratios of
+expression values, or any data object containing such a matrix. Rows
+correspond to probes and columns to samples. Any type of object that can be
+processed by getEAWP is acceptable.}
 
-\item{index}{an index vector or a list of index vectors. Can be any vector such that y[index,] of statistic[index] selects the rows corresponding to the test set. The list can be made using \code{ids2indices}.}
+\item{index}{an index vector or a list
+of index vectors. Can be any vector such that y[index,] of statistic[index]
+selects the rows corresponding to the test set. The list can be made using
+\code{ids2indices}.}
 
 \item{design}{Design matrix}
 
-\item{contrast}{contrast of the linear model coefficients for which the test is required. Can be an integer specifying a column of design, or else a numeric vector of same length as the number of columns of design.}
+\item{contrast}{contrast of
+the linear model coefficients for which the test is required. Can be an
+integer specifying a column of design, or else a numeric vector of same
+length as the number of columns of design.}
 
-\item{weights}{numeric matrix of observation weights of same size as \code{y}, or a numeric vector of array weights with length equal to \code{ncol(y)}, or a numeric vector of gene weights with length equal to \code{nrow(y)}.}
+\item{weights}{numeric matrix of
+observation weights of same size as \code{y}, or a numeric vector of array
+weights with length equal to \code{ncol(y)}, or a numeric vector of gene
+weights with length equal to \code{nrow(y)}.}
 
-\item{geneLabels}{Labels of the features in the input matrix}
+\item{geneLabels}{Labels of the features in the input matrix.}
 
-\item{use.ranks}{do a rank-based test (TRUE) or a parametric test (FALSE)?}
+\item{use.ranks}{do a rank-based test (TRUE) or
+a parametric test (FALSE)?}
 
-\item{allow.neg.cor}{should reduced variance inflation factors be allowed for negative correlations?}
+\item{allow.neg.cor}{should reduced variance
+inflation factors be allowed for negative correlations?}
 
-\item{trend.var}{logical, should an empirical Bayes trend be estimated? See \code{eBayes} for details.}
+\item{trend.var}{logical, should an empirical Bayes trend be estimated? See \code{eBayes} for
+details.}
 
 \item{sort}{logical, should the results be sorted by p-value?}
 
-\item{.fixed.inter.gene.cor}{Numeric value, vector, or \code{NULL}/\code{NA}, advanced parameter corresponding to \code{inter.gene.cor} in the original implementation in limma. If set, gene-sets are set to have the fixed inter-gene correlation; the vector will be recycled to meet the correct length. If set as \code{NULL}/\code{NA}, correlations are estimated from each gene-set.}
+\item{.fixed.inter.gene.cor}{Numeric value, vector, or \code{NULL}/\code{NA},
+advanced parameter corresponding to \code{inter.gene.cor} in the original
+implementation in limma. If set, gene-sets are set to have the fixed
+inter-gene correlation; the vector will be recycled to meet the correct
+length. If set as \code{NULL}/\code{NA}, correlations are estimated from each
+gene-set.}
 
-\item{.approx.zscoreT}{logical, advanced parameter only used for debugging purposes. If \code{TRUE}, the code is expected to return the exact same results as edgeR::camera (version 3.20.9), and maybe faster in execution.
+\item{.approx.zscoreT}{logical, advanced parameter only used for
+debugging purposes. If \code{TRUE}, the code is expected to return the exact
+same results as edgeR::camera (version 3.20.9), and maybe faster in
+execution.
 
-The function was adapted from \code{\link[limma]{camera}}, with following improvments
-\enumerate{
-  \item The output data.frame is more user-friendly
-  \item The column 'FDR' is always present, even when only one gene-set was tested
-  \item Scores are calculated, defined as \code{log10(pValue)*I(directionality)}, where \code{I(directionality)} equals \code{1} if the directionality is \code{Up} and \code{-1} if the directionality is \code{Down}
-  \item Contributing genes and statistics are printed
-}}
+The function was adapted from \code{\link[limma]{camera}}, with following
+improvments \enumerate{ \item The output data.frame is more user-friendly
+\item The column 'FDR' is always present, even when only one gene-set was
+tested \item Scores are calculated, defined as
+\code{log10(pValue)*I(directionality)}, where \code{I(directionality)} equals
+\code{1} if the directionality is \code{Up} and \code{-1} if the
+directionality is \code{Down} \item Contributing genes and statistics are
+printed }}
 }
 \value{
 A \code{data.frame} with one row per set and the following columns:
-\describe{
-  \item{GeneSet}{Gene set name}
-  \item{NGenes}{Number of genes in the set}
-  \item{Correlation}{Estimated correlation}
-  \item{EffectSize}{Estimated difference between the mean values of genes in the geneset and the background genes}
-  \item{Direction}{Direction of set-wise regulation, \code{Up} or \code{Down}}
-  \item{Score}{Gene-set enrichment score, defined as \code{log10(pValue)*I(directionality)}, where \code{I(directionality)} equals \code{1} if the directionality is \code{Up} and \code{-1} if the directionality is \code{Down}}
-  \item{ContribuingGenes}{A character string, containing all genes labels of genes that are in the set and regulated in the same direction as the set-wise direction, and the respective statistic}
-}
+\describe{ 
+\item{GeneSet}{Gene set name} 
+\item{NGenes}{Number of genes in the set}
+\item{Correlation}{Estimated correlation} 
+\item{EffectSize}{Estimated
+difference between the mean values of genes in the geneset and the background
+genes} 
+\item{Direction}{Direction of set-wise regulation, \code{Up} or
+\code{Down}}
+\item{Score}{Gene-set enrichment score, defined as
+\code{log10(pValue)*I(directionality)}, where \code{I(directionality)} equals
+\code{1} if the directionality is \code{Up} and \code{-1} if the
+directionality is \code{Down}}
+\item{ContribuingGenes}{A character string,
+containing all genes labels of genes that are in the set and regulated in the
+same direction as the set-wise direction, and the respective statistic} }
 }
 \description{
 An adapted and enhanced version of limma::camera
 }
 \note{
-Since limma 3.29.6, the default setting of allow.neg.cor changes from TRUE to FALSE, and a new parameter, inter.gene.cor, is added with the default value of 0.01, namely a prior inter-gene correlation is set for all gene sets. Currently, \code{biosCamera} does not have  the parameter \code{inter.gene.cor}, but \code{allow.neg.cor} is set by default to \code{FALSE} to be consistent with the latest camera function.
+Since limma 3.29.6, the default setting of allow.neg.cor changes from
+TRUE to FALSE, and a new parameter, inter.gene.cor, is added with the default
+value of 0.01, namely a prior inter-gene correlation is set for all gene
+sets. Currently, \code{biosCamera} does not have the parameter
+\code{inter.gene.cor}, but \code{allow.neg.cor} is set by default to
+\code{FALSE} to be consistent with the latest camera function.
 }
 \examples{
 y <- matrix(rnorm(1000*6),1000,6)
 design <- cbind(Intercept=1,Group=c(0,0,0,1,1,1))
-# First set of 20 genes are genuinely differentially expressed
+# First set of 20 genes are genuinely differentially expressed 
 index1 <- 1:20
 y[index1,4:6] <- y[index1,4:6]+1
-# Second set of 20 genes are not DE
+# The second set of 20 genes are not
 index2 <- 21:40
-biosCamera(y, index1, design)
+biosCamera(y, index1, design) 
 biosCamera(y, index2, design)
 biosCamera(y, list(index1, index2), design)
-# compare with the output of camera: columns 'GeneSet', 'Score', 'ContributingGenes' are missing, and in case \code{inter.gene.cor} is (as default) set to a numeric value, the column 'Correlation' is also missing
-(limmaDefOut <- limma::camera(y, index1, design) )
-(limmaCorDefOut <- limma::camera(y, index1, design, inter.gene.cor=NA))
 
-\dontrun{
-# when \code{.approx.zscoreT=TRUE},  PValue reported by \code{limma::camera(inter.gene.cor=NA)} and \code{ribiosGSEA::biosCamera} should equal
-(biosCorOut <- biosCamera(y, index1, design, .approx.zscoreT=TRUE))
+# compare with the output of camera: columns 'GeneSet', 'Score',
+# 'ContributingGenes' are missing, and in case \code{inter.gene.cor} is (as
+# default) set to a numeric value, the column 'Correlation' is also missing
 
-# when \code{.fixed.inter.gene.cor=0.01} and \code{.approx.zscoreT=TRUE},  PValue reported by \code{limma::camera} and \code{ribiosGSEA::biosCamera} should equal
-(biosFixCorOut <- biosCamera(y, index1, design, .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE))
-testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue)
-}
+limmaDefOut <- limma::camera(y, index1, design)
+limmaCorDefOut <-
+    limma::camera(y, index1, design, inter.gene.cor=NA)
+
+\dontrun{ 
+# when \code{.approx.zscoreT=TRUE},  PValue reported by
+# \code{limma::camera(inter.gene.cor=NA)} and \code{ribiosGSEA::biosCamera}
+# should equal 
+biosCorOut <- biosCamera(y, index1, design, .approx.zscoreT=TRUE)
+
+# when \code{.fixed.inter.gene.cor=0.01} and \code{.approx.zscoreT=TRUE},
+# PValue reported by \code{limma::camera} and \code{ribiosGSEA::biosCamera}
+# should equal 
+biosFixCorOut <- biosCamera(y, index1, design,
+    .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE))
+testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue) }
 }
