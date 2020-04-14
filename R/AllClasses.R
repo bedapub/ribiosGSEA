@@ -1,3 +1,6 @@
+#' @include ribiosGSEA-package.R
+NULL
+
 ##----------------------------------------------## 
 ## Classes for generic gene-set analysis results
 ##---------------------------------------------## 

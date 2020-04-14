@@ -443,22 +443,21 @@ setMethod("show", "FisherResultList", function(object) {
               print(object)
           })
 
-## eestimateFdr and fillBySize
-setMethod("estimateFdr", "FisherResultList", function(object) {
-              system.time(ps <- sapply(object, pValue))
-              fdrs <- rep(NA, length(ps))
-              categories <- gsNamespace(object)
-              categories[is.na(categories)] <- "NA"
-              categories <- factor(categories)
-              for(i in 1:nlevels(categories)) {
-                  isCurr <- as.integer(categories)==i
-                  fdrs[isCurr] <- p.adjust(ps[isCurr], "fdr")
-              }
-              for(i in seq(along=object)) {
-                  object@.Data[[i]]@fdr <- fdrs[[i]]
-              }
-              return(object)
-          })
+estimateFdr <- function(object) {
+      system.time(ps <- sapply(object, pValue))
+      fdrs <- rep(NA, length(ps))
+      categories <- gsNamespace(object)
+      categories[is.na(categories)] <- "NA"
+      categories <- factor(categories)
+      for(i in 1:nlevels(categories)) {
+	  isCurr <- as.integer(categories)==i
+	  fdrs[isCurr] <- p.adjust(ps[isCurr], "fdr")
+      }
+      for(i in seq(along=object)) {
+	  object@.Data[[i]]@fdr <- fdrs[[i]]
+      }
+      return(object)
+}
 
 ##----------------------------------------##
 ## migrated from ribiosNGS
