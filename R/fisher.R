@@ -1,3 +1,6 @@
+#' @include AllGenerics.R AllMethods.R ribiosGSEA-package.R
+NULL
+
 #' The core algorithm to perform Fisher's exact test on a gene set
 #'
 #' @param genes Character vector, a collection of genes of which over-representation of the gene set is tested
@@ -36,7 +39,8 @@
 #' ## checkUniverse will make sure that \code{univese} contains all element in \code{genes}
 #' gsFisherTestCore(c("OutOfUniverse", myGenes), myGeneSet1, myUniverse, checkUniverse=FALSE)
 #' gsFisherTestCore(c("OutOfUniverse", myGenes), myGeneSet1, myUniverse, checkUniverse=TRUE)
-#' #export
+#' @importFrom ribiosUtils uniqueNonNA
+#' @export
 gsFisherTestCore <- function(genes, geneSetGenes, universe, 
                              makeUniqueNonNA=TRUE,
                              checkUniverse=TRUE,
@@ -212,6 +216,7 @@ setMethod("fisherTest", c("character", "character", "character"),
 #'
 #' This function performs one-sided Fisher's exact test to test the over-representation of gene set genes in the input gene list.
 #'
+#' @importClassesFrom BioQC GmtList
 #' @examples
 #' myGenes <- LETTERS[1:3]
 #' myS4GeneSet1 <- list(name="GeneSet1", desc="GeneSet", genes=LETTERS[1:6], namespace="My namespace 1")

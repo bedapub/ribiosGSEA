@@ -2,7 +2,7 @@
 % Please edit documentation in R/fisher.R
 \name{gsFisherTestCore}
 \alias{gsFisherTestCore}
-\title{Core algorithm to perform Fisher's exact test on a gene set}
+\title{The core algorithm to perform Fisher's exact test on a gene set}
 \usage{
 gsFisherTestCore(
   genes,
@@ -39,7 +39,7 @@ A list of three elements
 }
 }
 \description{
-Core algorithm to perform Fisher's exact test on a gene set
+The core algorithm to perform Fisher's exact test on a gene set
 }
 \examples{
 myGenes <- LETTERS[1:3]

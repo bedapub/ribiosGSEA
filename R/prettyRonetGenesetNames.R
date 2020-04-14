@@ -12,7 +12,7 @@
 #'   "IL4_GeneID3565_negativeTargets",
 #'   "Apoptosis_REACTOME")
 #' prettyRonetGenesetNames(strs)
-#'   
+#' @export
 prettyRonetGenesetNames <- function(x, nchar=50) {
   res <- gsub("_REACTOME", "", x)
   res <- gsub("MB_[A-Za-z]*_", "", res)

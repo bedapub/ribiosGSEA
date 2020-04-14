@@ -46,6 +46,7 @@ parseDTG <- function(xmlNode) {
              geneIndices=geneIndices, esProfile=esprofile, coreEnrichThr=coreEnrichThr)
   return(obj)
 }
+
 ## parse results.edb, .gmt file, and the rank file to get leading genes
 parseGSEAedb <- function(edbfile) {
   doc <- xmlTreeParse(edbfile, getDTD=FALSE)
@@ -58,6 +59,7 @@ parseGSEAedb <- function(edbfile) {
   names(gsList) <- sapply(gsList, gsName)
   return(gsList)
 }
+
 parseGSEAres <- function(edbFile, rnkFile) {
   assertFile(edbFile); assertFile(rnkFile)
 
@@ -73,6 +75,11 @@ parseGSEAres <- function(edbFile, rnkFile) {
   })
   return(annoBroadGseaRes(agsList))
 }
+
+#' Parse an output directory of the Broad GSEA tool
+#' @param dir Character string, path to output directory
+#' @return An \code{annoBroadGseaRes} object
+#' @export
 parseGSEAdir <- function(dir) {
   rnkfile <- dir(file.path(dir, "edb"), pattern="*.rnk", full.name=TRUE)
   edbfile <- dir(file.path(dir, "edb"), pattern="*.edb", full.name=TRUE)

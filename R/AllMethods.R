@@ -1,11 +1,11 @@
-#' @inlucde AllClasses.R AllGenerics.R
+#' @include AllClasses.R AllGenerics.R
 NULL
 
 setMethod("gsName", "broadGseaResItem", function(object) return(object@geneset))
 setMethod("gsName", "annoBroadGseaRes", function(object) sapply(object, gsName))
 setMethod("gsName", "FisherResult", function(object) object@gsName)
 setMethod("gsName", "FisherResultList", function(object) names(object@.Data))
-setMethod("gsName", "GmtList", function(object) sapply(object, function(x) x$name))
+setMethod("gsName", "GmtList", function(object) BioQC::gsName(object))
 
 setMethod("gseaES", "broadGseaResItem", function(object) return(object@es))
 setMethod("gseaES", "annoBroadGseaRes", function(object) {
@@ -84,19 +84,17 @@ setMethod("gsGenes", "annoBroadGseaRes", function(object) {
   names(res) <- gsName(object)
   return(res)
 })
-setMethod("gsGenes", "GmtList", function(object) 
-	  return(lapply(object, function(x) x$genes)))
+setMethod("gsGenes", "GmtList", function(object) return(BioQC::gsGenes(object)))
+
 
 #' @importFrom ribiosUtils ulen
-setMethod("gsSize", "GmtList", function(object)
-	  return(sapply(object, function(x) ribiosUtils::ulen(x$genes))))
+setMethod("gsSize", "GmtList", function(object) BioQC::gsSize(object))
 
 #' @export
-setMethod("gsNamespace", "GmtList", function(object)
-	  return(sapply(object, function(x) x$namespace)))
+setMethod("gsNamespace", "GmtList", function(object) BioQC::gsNamespace(object))
 
-setMethod("gsDesc", "GmtList", function(object)
-	  return(lapply(object, function(x) x$desc)))
+#' @export
+setMethod("gsDesc", "GmtList", function(object) BioQC::gsDesc(object))
 
 setMethod("gsGeneValues", "annoBroadGseaResItem", function(object) return(object@gsGeneValues))
 setMethod("gsGeneValues", "annoBroadGseaRes", function(object) {
@@ -468,7 +466,7 @@ estimateFdr <- function(object) {
 
 #' Extract contrast names from an EdgeGSE object
 #' @param object An \code{EdgeGSE} object
-#' @importFrom ribiosExpression contrastNames
+#' @importMethodsFrom ribiosExpression contrastNames
 #' @export
 setMethod("contrastNames",
           "EdgeGSE",

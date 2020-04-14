@@ -27,5 +27,5 @@ A list of genesets to be removed, to be sent as message body
 Message body to remove one or gene sets of the same source and user from GeMS
 }
 \examples{
-ribiosGSEA:::removeFromGeMSBody(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
+removeFromGeMSBody(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 }

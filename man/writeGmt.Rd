@@ -15,7 +15,7 @@ writeGmt(gmtList, file)
 Write an GmtList object into a file
 }
 \note{
-The function will be moved to BioQC once the ribiosIO is reposited in CRAn
+The function will be moved to BioQC once the ribiosIO is reposited in CRAN
 }
 \examples{
 gmtFile <- system.file("extdata", "example.gmt", package="ribiosGSEA")

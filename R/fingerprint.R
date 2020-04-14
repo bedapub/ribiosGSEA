@@ -1,4 +1,14 @@
 ## read and transform Q-values from GSEA output files
+
+#' Extract Q-values from GSEA result file
+#' @param file GSEA result file
+#' @param threshold Numeric, threshold
+#' @param log Logical, whether the Q-value should be reported as
+#' log10-transformed value.
+#' @param posLog Logical, whether the Q-value should be reported as absolute of
+#' the log10-transformed value.
+#'
+#' @export
 gseaResQvalue <- function(file, threshold=1E-4, log=FALSE, posLog=FALSE) {
   tbl <- read.table(file, sep="\t", header=TRUE)
   name <- tbl[,"NAME"]

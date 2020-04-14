@@ -28,6 +28,7 @@ GeMS_TEST_GENESETS_URL <- paste(GeMS_TEST_URL, "/genesets", sep="")
 #' \dontrun{
 #'   ## isGeMSReachble()
 #' }
+#' @export
 isGeMSReachable <- function() {
    !httr::http_error(httr::GET(GeMS_GENESETS_URL)) 
 }
@@ -43,6 +44,7 @@ isGeMSReachable <- function() {
 #' \dontrun{
 #'    ## getJsonResponse(GeMS_GENESETS_URL, list(user=ribiosUtils::whoami()))
 #' }
+#' @export
 getJsonResponse <- function(url, body) {
   response <- httr::POST(url, body=body, encode='json')
   returnJSON <- jsonlite::fromJSON(httr::content(response, 'text', encoding='UTF-8'))
@@ -66,7 +68,8 @@ getJsonResponse <- function(url, body) {
 #'   list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
 #'   list(name="GS_C", desc="gene set C", genes=NULL))
 #' testGmt <- BioQC::GmtList(testList)
-#' ribiosGSEA:::insertGmtListToGeMSBody(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+#' insertGmtListToGeMSBody(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+#' @export
 insertGmtListToGeMSBody <- function(gmtList,
                                     geneFormat=0,
                                     source="PubMed",
@@ -109,6 +112,7 @@ insertGmtListToGeMSBody <- function(gmtList,
 #'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
 #'   ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 #' }
+#' @export
 insertGmtListToGeMS <- function(gmtList,
                                 geneFormat=0,
                                 source="PubMed",
@@ -138,7 +142,8 @@ insertGmtListToGeMS <- function(gmtList,
 #' @return A list of genesets to be removed, to be sent as message body
 #' 
 #' @examples 
-#' ribiosGSEA:::removeFromGeMSBody(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
+#' removeFromGeMSBody(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
+#' @export
 removeFromGeMSBody <- function(setName="",
                                source="", 
                                user=ribiosUtils::whoami(), 
@@ -171,7 +176,7 @@ removeFromGeMSBody <- function(setName="",
 #'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
 #'   ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 #' }
-#' 
+#' @export
 removeFromGeMS <- function(setName="", 
                            source="", 
                            user=ribiosUtils::whoami(), 
@@ -198,6 +203,7 @@ removeFromGeMS <- function(setName="",
 #' #### from another user
 #' ## getUserSetsFromGeMS("kanga6")
 #' }
+#' @export
 getUserSetsFromGeMS <- function(user=ribiosUtils::whoami()) {
   fieldsOfInterest <- c("setName", "desc", "domain",
                          "source", "subtype")

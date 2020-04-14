@@ -26,6 +26,7 @@ print.FishersMethodResult <- function(x, ...) {
 #' ps <- c(0.05, 0.75)
 #' fishersMethod(ps)
 #' fishersMethod(ps, returnValidp=TRUE)
+#' @export
 fishersMethod <- function(p, returnValidp=FALSE) {
   keep <- !is.na(p) & p>0 & p<=1
   if(!all(keep)) {

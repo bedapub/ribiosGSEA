@@ -4,7 +4,7 @@
 #' @param file Character string, output file name
 #'
 #' @note 
-#' The function will be moved to BioQC once the ribiosIO is reposited in CRAn
+#' The function will be moved to BioQC once the ribiosIO is reposited in CRAN
 #' 
 #' @importFrom ribiosIO write_gmt
 #' @importFrom BioQC readGmt
@@ -14,6 +14,7 @@
 #' myTempFile <- tempfile()
 #' writeGmt(mySet, file=myTempFile)
 #' readLines(myTempFile)
+#' @export
 writeGmt <- function(gmtList, file) {
   ribiosIO::write_gmt(gmtList, file=file)
 }
@@ -24,6 +25,7 @@ writeGmt <- function(gmtList, file) {
 #'
 #' @importFrom BioQC readGmt
 #' @return A \code{GmtList} object containing molecular-phenotypic screening (MPS) categories and genes
+#' @export
 readMPSGmt <- function(file) {
   gs <- BioQC::readGmt(file)
   namespace <- sprintf("MPS %s", BioQC::gsDesc(gs))
@@ -56,6 +58,7 @@ readMPSGmt <- function(file) {
 #'   ## this cannot be run because the files are not located there
 #'   ## readDefaultGenesets("/tmp/defaultGmts")
 #' }
+#' @export
 readDefaultGenesets <- function(path,
                                 mps=FALSE) {
   assertFile(msigdb.c2.file <- file.path(path, "msigdb.c2.all.symbols.gmt"))

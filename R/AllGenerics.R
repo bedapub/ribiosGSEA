@@ -44,7 +44,7 @@ setGeneric("gsGenes<-", function(object,value) standardGeneric("gsGenes<-"))
 setGeneric("gsGeneValues<-", function(object,value) standardGeneric("gsGeneValues<-"))
 
 #' Returns a logical value whether the enrichment belongs to the core
-#' @param object
+#' @param object An object
 #' @export
 setGeneric("isGseaCoreEnrich", function(object) standardGeneric("isGseaCoreEnrich"))
 

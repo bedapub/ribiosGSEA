@@ -24,5 +24,4 @@ strs <- c("ARNT_GeneID405_negativeTargets",
   "IL4_GeneID3565_negativeTargets",
   "Apoptosis_REACTOME")
 prettyRonetGenesetNames(strs)
-  
 }

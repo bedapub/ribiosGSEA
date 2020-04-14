@@ -2,21 +2,18 @@
 % Please edit documentation in R/list2mat.R
 \name{list2mat}
 \alias{list2mat}
-\title{Convert a first-level list into adjacency matrix}
+\title{Convert a one-level list into an adjacency matrix}
 \usage{
 list2mat(list)
 }
 \arguments{
-\item{list}{A first-level list. See details}
+\item{list}{A one-level list. See details}
 }
 \value{
 An adjacency matrix. Row and column names are defined by unique
 elements and list names, respectively.
 }
 \description{
-Convert a first-level list into adjacency matrix
-}
-\details{
 First-level list must have vectors of basic data types defined by R such as
 \code{characater}, \code{integer}, \code{number}, and \code{logical}.The
 function transforms such a list into adjacency matrix, rows of which are

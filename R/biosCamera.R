@@ -72,6 +72,7 @@
 #' \code{FALSE} to be consistent with the latest camera function.
 #' 
 #' @importFrom ribiosUtils haltifnot
+#' @importFrom limma squeezeVar zscoreT
 #'
 #' @examples 
 #' y <- matrix(rnorm(1000*6),1000,6)
@@ -94,17 +95,18 @@
 #'     limma::camera(y, index1, design, inter.gene.cor=NA)
 #'
 #' \dontrun{ 
-#' # when \code{.approx.zscoreT=TRUE},  PValue reported by
-#' # \code{limma::camera(inter.gene.cor=NA)} and \code{ribiosGSEA::biosCamera}
-#' # should equal 
-#' biosCorOut <- biosCamera(y, index1, design, .approx.zscoreT=TRUE)
+#'   # when \code{.approx.zscoreT=TRUE},  PValue reported by
+#'   # \code{limma::camera(inter.gene.cor=NA)} and \code{ribiosGSEA::biosCamera}
+#'   # should equal 
+#'   biosCorOut <- biosCamera(y, index1, design, .approx.zscoreT=TRUE)
 #'
-#' # when \code{.fixed.inter.gene.cor=0.01} and \code{.approx.zscoreT=TRUE},
-#' # PValue reported by \code{limma::camera} and \code{ribiosGSEA::biosCamera}
-#' # should equal 
-#' biosFixCorOut <- biosCamera(y, index1, design,
-#'     .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE))
-#' testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue) }
+#'   # when \code{.fixed.inter.gene.cor=0.01} and \code{.approx.zscoreT=TRUE},
+#'   # PValue reported by \code{limma::camera} and \code{ribiosGSEA::biosCamera}
+#'   # should equal 
+#'   biosFixCorOut <- biosCamera(y, index1, design,
+#'       .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE)
+#'   testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue)
+#' }
 #'
 #' @export
 biosCamera <- function (y, index, design = NULL, contrast = ncol(design), 

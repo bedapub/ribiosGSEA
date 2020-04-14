@@ -35,7 +35,6 @@ Rmove one or gene sets of the same source and user from GeMS
   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
   ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 }
-
 }
 \seealso{
 \code{\link{insertGmtListToGeMS}}
