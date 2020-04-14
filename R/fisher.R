@@ -1,4 +1,4 @@
-#' Core algorithm to perform Fisher's exact test on a gene set
+#' The core algorithm to perform Fisher's exact test on a gene set
 #'
 #' @param genes Character vector, a collection of genes of which over-representation of the gene set is tested
 #' @param geneSetGenes Character vector, genes belonging to a gene set
@@ -36,6 +36,7 @@
 #' ## checkUniverse will make sure that \code{univese} contains all element in \code{genes}
 #' gsFisherTestCore(c("OutOfUniverse", myGenes), myGeneSet1, myUniverse, checkUniverse=FALSE)
 #' gsFisherTestCore(c("OutOfUniverse", myGenes), myGeneSet1, myUniverse, checkUniverse=TRUE)
+#' #export
 gsFisherTestCore <- function(genes, geneSetGenes, universe, 
                              makeUniqueNonNA=TRUE,
                              checkUniverse=TRUE,
@@ -107,6 +108,7 @@ gsFisherTestCore <- function(genes, geneSetGenes, universe,
 #' myGeneSet2 <- LETTERS[4:7]
 #' myUniverse <- LETTERS
 #' gsListFisherTestCore(myGenes, list(myGeneSet1, myGeneSet2), myUniverse)
+#' @export
 gsListFisherTestCore <- function(genes, geneSetGenesList, universe, 
                              makeUniqueNonNA=TRUE,
                              checkUniverse=TRUE,
@@ -174,6 +176,7 @@ gsListFisherTestCore <- function(genes, geneSetGenesList, universe,
 #' 
 #' resWithRpNoUnique <- fisherTest(rep(myGenes,2), myGeneSet1, rep(myUniverse,2), makeUniqueNonNA=FALSE)
 #' identical(resWoRp, resWithRpNoUnique)
+#' @export
 setMethod("fisherTest", c("character", "character", "character"),
           function(genes, genesets, universe, gsName, gsNamespace,
                    makeUniqueNonNA=TRUE, 
@@ -216,6 +219,7 @@ setMethod("fisherTest", c("character", "character", "character"),
 #' myUniverse <- LETTERS
 #' fisherTest(myGenes, myS4GeneSet1, myUniverse)
 #' fisherTest(myGenes, myS4GeneSet2, myUniverse)
+#' @export
 setMethod("fisherTest", c("character", "list", "character"),
           function(genes, genesets, universe,
                    makeUniqueNonNA=TRUE, 
@@ -275,6 +279,7 @@ fisherTestResultNewHitsProp <- function(fisherTestResults) {
 #' myInput <- LETTERS[2:6]
 #' myUniverse <- LETTERS
 #' myFisherRes <- fisherTest(myInput, gmtList, myUniverse)
+#' @export
 setMethod("fisherTest", 
           c("character", "GmtList", "character"),
           function(genes, genesets, universe,
