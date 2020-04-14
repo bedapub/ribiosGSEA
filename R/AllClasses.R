@@ -22,6 +22,22 @@ setClass("FisherResult",
          representation=list(hits="character"),
          contains="GeneSetResult")
 
+#' Print a FisherResult object
+#' @param x A FisherResult object
+#' @param ... Not used
+#' @export
+print.FisherResult <- function(x, ...) {
+  if(!is.na(gsNamespace(x)))
+      cat("Namespace:", gsNamespace(x), "\n")
+  if(!is.na(gsName(x)))
+      cat("Name:", gsName(x), "\n")
+  cat("Gene set size:", gsEffSize(x), "\n")
+  cat(sprintf("Hits (%d):", length(hits(x))),
+      paste(hits(x), collapse=","), "\n")
+  cat("Fisher's exact p value:", pValue(x), "\n")
+  cat("BH FDR value:", fdrValue(x), "\n")
+}
+
 #' A list of results of Fisher's exact test
 #' @export
 setClass("FisherResultList",
@@ -31,6 +47,20 @@ setClass("FisherResultList",
              universe="character"),
          contain="list")
 
+
+#' Print a FisherResultList object
+#'
+#' @param x A \code{FisherResultList} object
+#' @param ... Not used
+#' @export
+print.FisherResultList <- function(x, ...) {
+   cat("--- One-sided Fisher's exact tests for gene sets ---\n")
+   cat(sprintf("Total input genes: %d\n", length(x@input)))
+   cat(sprintf("Gene universe: %d\n", length(x@universe)))
+   cat(sprintf("Total gene sets: %d\n", length(x)))
+   cat(sprintf("Minimal P-value: %e\n", minPValue(x)))
+   cat(sprintf("Minimal FDR-value: %e\n", minFdrValue(x)))
+}
 
 ## ## not used so far, to be deleted
 ## ## TODO: delete
@@ -50,12 +80,12 @@ setClass("FisherResultList",
 ##---------------------------------------## 
 
 #' A S4 class representing the atom structure of results of the BROAD GSEA tool
-#' @slot geneSet Character, gene-set name
+#' @slot geneset Character, gene-set name
 #' @slot es Numeric, enrichment score
 #' @slot nes Numeric, normalised enrichment score
 #' @slot np Numeric
 #' @slot fdr Numeric, false discovery rate
-#' @slot FWER Numeric, family-wise error rate
+#' @slot fwer Numeric, family-wise error rate
 #' @slot geneIndices Integer vector, gene indices
 #' @slot esProfile Numeric, enrichment score profile
 #' @slot coreEnrichThr Numeric

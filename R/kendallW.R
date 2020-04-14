@@ -297,27 +297,33 @@ kendallWinfo.matrix <- function(object) return(attr(object, "info"))
 
 #' Compute Kendall's W for a matrix
 #' @param object A numeric matrix
-#' @param object row.factor Factor vector of the same length as the row counts
+#' @param row.factor A factor indicating groups of rows. In expression
+#' analysis, for instance, this can be GeneIDs indicating which probesets in
+#' rows belong to the same gene.
 #' @param summary Summary type, passed to \code{kendallWmat}
 #' @param na.rm Logical, whether \code{NA} values should be removed
 #' @param alpha Numeric, passed to \code{kendallWmat}
+#' @param ... Not used
 #' @seealso \code{\link{kendallWmat}}
 #' @export 
 kendallW.matrix <- function(object,
 			    row.factor,
 			    summary=c("none", "mean", "median",
 			      "max.mean.sig", "max.var.sig"),
-			    na.rm=TRUE, alpha=0.01) {
+			    na.rm=TRUE, alpha=0.01, ...) {
   kendallWmat(mat=object, row.factor=row.factor,
               summary=summary, na.rm=na.rm, alpha=alpha)
 }
 
 #' Compute Kendall's W for an eSet object
 #' @param object An \code{eSet} object
-#' @param object row.factor Factor vector of the same length as the row counts
+#' @param row.factor A factor indicating groups of rows. In expression
+#' analysis, for instance, this can be GeneIDs indicating which probesets in
+#' rows belong to the same gene.
 #' @param summary Summary type, passed to \code{kendallWmat}
 #' @param na.rm Logical, whether \code{NA} values should be removed
 #' @param alpha Numeric, passed to \code{kendallWmat}
+#' @param ... Not used
 #' @seealso \code{\link{kendallWmat}}
 #' @importFrom Biobase exprs
 #' @importClassesFrom Biobase eSet
@@ -327,7 +333,7 @@ kendallW.eSet <- function(object,
 		          row.factor,
 			  summary=c("none", "mean", "median",
 			    "max.mean.sig", "max.var.sig"),
-			  na.rm=TRUE, alpha=0.01) {
+			  na.rm=TRUE, alpha=0.01, ...) {
   exp <- exprs(object)
   new.exp <- kendallWmat(mat=exp, row.factor=row.factor,
                          summary=summary, na.rm=na.rm, alpha=alpha)

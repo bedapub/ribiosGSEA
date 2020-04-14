@@ -10,7 +10,7 @@ A S4 class representing the atom structure of results of the BROAD GSEA tool
 \section{Slots}{
 
 \describe{
-\item{\code{geneSet}}{Character, gene-set name}
+\item{\code{geneset}}{Character, gene-set name}
 
 \item{\code{es}}{Numeric, enrichment score}
 
@@ -20,7 +20,7 @@ A S4 class representing the atom structure of results of the BROAD GSEA tool
 
 \item{\code{fdr}}{Numeric, false discovery rate}
 
-\item{\code{FWER}}{Numeric, family-wise error rate}
+\item{\code{fwer}}{Numeric, family-wise error rate}
 
 \item{\code{geneIndices}}{Integer vector, gene indices}
 

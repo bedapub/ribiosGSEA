@@ -101,6 +101,7 @@ expandCameraTableGenes <- function(tbl) {
 #' @param df Data.frame, CAMERA results
 #' @param jacThr Numeric, between 0 and 1, Jaccard Index threshold
 #' @param plot Logical, whether plotting the results
+#' @param ... Passed to \code{plot}
 #'
 #' @importFrom igraph make_empty_graph graph_from_adjacency_matrix 
 #'     layout_in_circle V

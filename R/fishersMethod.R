@@ -1,4 +1,7 @@
 #' Print S3 object FishersMethodResult
+#' @param x An object of the \code{FisherMethodResult} (S3) class
+#' @param ... Not used
+#' @export
 print.FishersMethodResult <- function(x, ...) {
   cat("Combined P by Fisher's Method:\n")
   cat(sprintf("p=%g\n", x$p))
@@ -10,8 +13,10 @@ print.FishersMethodResult <- function(x, ...) {
 }
 
 #' Fisher's method to combine multiple p-values
+#'
 #' @param p Numeric vector, p values to be combined
-#' @param returnValidP Logical, whether the valid p-values used should be returned as part of the list
+#' @param returnValiePvalues Logical, whether the valid p-values used should be returned as part of the list
+#'
 #' @return A \code{FisherMethodResult} S3 object, a list of following elements
 #' \enumerate{
 #' \item chisq: Chi-square statistic
@@ -25,9 +30,9 @@ print.FishersMethodResult <- function(x, ...) {
 #' @examples
 #' ps <- c(0.05, 0.75)
 #' fishersMethod(ps)
-#' fishersMethod(ps, returnValidp=TRUE)
+#' fishersMethod(ps, returnValiePvalues=TRUE)
 #' @export
-fishersMethod <- function(p, returnValidp=FALSE) {
+fishersMethod <- function(p, returnValiePvalues=FALSE) {
   keep <- !is.na(p) & p>0 & p<=1
   if(!all(keep)) {
     warning("P-values outside (0,1] omitted")
@@ -45,7 +50,7 @@ fishersMethod <- function(p, returnValidp=FALSE) {
     res <- list(chisq = chisq, df = df, 
                 p = pchisq(chisq, df, lower.tail = FALSE))
   }
-  if(returnValidp)
+  if(returnValiePvalues)
     res$validp <- p[keep]
   class(res) <- "FishersMethodResult"
   return(res)

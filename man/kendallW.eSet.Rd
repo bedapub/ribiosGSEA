@@ -9,17 +9,24 @@
   row.factor,
   summary = c("none", "mean", "median", "max.mean.sig", "max.var.sig"),
   na.rm = TRUE,
-  alpha = 0.01
+  alpha = 0.01,
+  ...
 )
 }
 \arguments{
-\item{object}{row.factor Factor vector of the same length as the row counts}
+\item{object}{An \code{eSet} object}
+
+\item{row.factor}{A factor indicating groups of rows. In expression
+analysis, for instance, this can be GeneIDs indicating which probesets in
+rows belong to the same gene.}
 
 \item{summary}{Summary type, passed to \code{kendallWmat}}
 
 \item{na.rm}{Logical, whether \code{NA} values should be removed}
 
 \item{alpha}{Numeric, passed to \code{kendallWmat}}
+
+\item{...}{Not used}
 }
 \description{
 Compute Kendall's W for an eSet object

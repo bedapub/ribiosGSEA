@@ -18,6 +18,9 @@
 \arguments{
 \item{genes}{a collection of genes of which over-representation of the gene set is tested}
 
+\item{genesets}{A vector of character strings, genes belonging to one gene
+set.}
+
 \item{universe}{universe of genes}
 
 \item{gsName}{gene set name, can be left missing}
@@ -33,8 +36,6 @@
 This function performs one-sided Fisher's exact test to test the over-representation of gene set genes in the input gene list.
 
 If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that namespace. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.}
-
-\item{geneSetGenes}{genes belonging to a gene set}
 }
 \description{
 Perform Fisher's exact test on a gene set

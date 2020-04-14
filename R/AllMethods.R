@@ -242,9 +242,6 @@ setMethod("show", "annoBroadGseaRes", function(object) {
 #' @param x An \code{annoBroadGseaRes} object
 #' @param type Character string, the type of p-value used to calculate the
 #' score.
-#' @param ... Objects of \code{annoBroadGseaRes} to be compared
-#' @param names Character strings, names given to the result score sets. See
-#' examples below.
 #' @return \code{gseaScore} returns a double vector of scores with gene set
 #' names.
 #' 
@@ -270,6 +267,11 @@ gseaScore <- function(x, type=c("fdr", "p", "fwer")) {
   return(res)
 }
 
+#' @describeIn gseaScore gseaScore applied to multiple objects
+#' @param ... Objects of \code{annoBroadGseaRes} to be compared
+#' @param names Character strings, names given to the result score sets. See
+#' examples below.
+#' @export
 gseaScores <- function(..., names=NULL, type=c("fdr", "p", "fwer")) {
   ll <- list(...)
   scores <- lapply(ll, gseaScore, type=type)
@@ -417,27 +419,8 @@ setMethod("topOrSigGeneSetTable", c("FisherResultList", "missing", "missing"), f
               topOrSigGeneSetTable(object, 10, 0.05)
           })
 
-setMethod("print", "FisherResult", function(x, ...) {
-              if(!is.na(gsNamespace(x)))
-                  cat("Namespace:", gsNamespace(x), "\n")
-              if(!is.na(gsName(x)))
-                  cat("Name:", gsName(x), "\n")
-              cat("Gene set size:", gsEffSize(x), "\n")
-              cat(sprintf("Hits (%d):", length(hits(x))),
-                  paste(hits(x), collapse=","), "\n")
-              cat("Fisher's exact p value:", pValue(x), "\n")
-              cat("BH FDR value:", fdrValue(x), "\n")
-          })
 setMethod("show", "FisherResult", function(object) {
               print(object)
-          })
-setMethod("print", "FisherResultList", function(x,...) {
-              cat("--- One-sided Fisher's exact tests for gene sets ---\n")
-              cat(sprintf("Total input genes: %d\n", length(x@input)))
-              cat(sprintf("Gene universe: %d\n", length(x@universe)))
-              cat(sprintf("Total gene sets: %d\n", length(x)))
-              cat(sprintf("Minimal P-value: %e\n", minPValue(x)))
-              cat(sprintf("Minimal FDR-value: %e\n", minFdrValue(x)))
           })
 
 setMethod("show", "FisherResultList", function(object) {

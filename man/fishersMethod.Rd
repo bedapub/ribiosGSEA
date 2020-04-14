@@ -4,12 +4,12 @@
 \alias{fishersMethod}
 \title{Fisher's method to combine multiple p-values}
 \usage{
-fishersMethod(p, returnValidp = FALSE)
+fishersMethod(p, returnValiePvalues = FALSE)
 }
 \arguments{
 \item{p}{Numeric vector, p values to be combined}
 
-\item{returnValidP}{Logical, whether the valid p-values used should be returned as part of the list}
+\item{returnValiePvalues}{Logical, whether the valid p-values used should be returned as part of the list}
 }
 \value{
 A \code{FisherMethodResult} S3 object, a list of following elements
@@ -30,5 +30,5 @@ The function was adapted from metap::sumlog
 \examples{
 ps <- c(0.05, 0.75)
 fishersMethod(ps)
-fishersMethod(ps, returnValidp=TRUE)
+fishersMethod(ps, returnValiePvalues=TRUE)
 }

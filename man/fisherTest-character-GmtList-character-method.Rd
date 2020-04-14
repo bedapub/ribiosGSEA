@@ -21,6 +21,8 @@
 
 \item{universe}{Universe (background) gene list}
 
+\item{gsNamespace}{Character string, gene-set namespace(s)}
+
 \item{makeUniqueNonNA}{Logical, whether genes and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.}
 
 \item{checkUniverse}{Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}}

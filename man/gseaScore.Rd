@@ -6,6 +6,8 @@
 \title{Extract scores from GSEA results}
 \usage{
 gseaScore(x, type = c("fdr", "p", "fwer"))
+
+gseaScores(..., names = NULL, type = c("fdr", "p", "fwer"))
 }
 \arguments{
 \item{x}{An \code{annoBroadGseaRes} object}
@@ -35,6 +37,11 @@ significance and the sign of regulation.
 \code{gseaScores} takes care of the situation where some gene sets are
 missing in one or more conditions.
 }
+\section{Functions}{
+\itemize{
+\item \code{gseaScores}: gseaScore applied to multiple objects
+}}
+
 \seealso{
 \code{\link{gseaNP}}, \code{\link{gseaFDR}}, \code{\link{gseaFWER}}
 to get p-values.

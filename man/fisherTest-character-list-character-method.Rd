@@ -16,6 +16,8 @@
 \arguments{
 \item{genes}{a collection of genes of which over-representation of the gene set is tested}
 
+\item{genesets}{A \code{GmtList} object.}
+
 \item{universe}{universe of genes}
 
 \item{makeUniqueNonNA}{Logical, whether genes and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.}
@@ -25,8 +27,6 @@
 \item{useEASE}{Logical, whether to use the EASE method to report the p-value. 
 
 This function performs one-sided Fisher's exact test to test the over-representation of gene set genes in the input gene list.}
-
-\item{GmtList}{A \code{GmtList} object}
 }
 \description{
 Perform Fisher's exact test on a GeneSet object

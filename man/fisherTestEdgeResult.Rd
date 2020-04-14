@@ -32,6 +32,9 @@ geneset that are quantified}
 
 \item{maxGeneSetEffectiveSize}{Integer, maximal number of genes of a 
 geneset that are quantified}
+
+\item{...}{Passed to \code{filter} to further filter the differential gene
+expression table (\code{dgeTbl}).}
 }
 \value{
 ## TODO: example

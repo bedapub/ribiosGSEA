@@ -4,7 +4,12 @@
 \alias{print.FishersMethodResult}
 \title{Print S3 object FishersMethodResult}
 \usage{
-print.FishersMethodResult(x, ...)
+\method{print}{FishersMethodResult}(x, ...)
+}
+\arguments{
+\item{x}{An object of the \code{FisherMethodResult} (S3) class}
+
+\item{...}{Not used}
 }
 \description{
 Print S3 object FishersMethodResult

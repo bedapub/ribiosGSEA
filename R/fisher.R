@@ -145,7 +145,8 @@ gsListFisherTestCore <- function(genes, geneSetGenesList, universe,
 #' Perform Fisher's exact test on a gene set
 #'
 #' @param genes a collection of genes of which over-representation of the gene set is tested
-#' @param geneSetGenes genes belonging to a gene set
+#' @param genesets A vector of character strings, genes belonging to one gene
+#' set.
 #' @param universe universe of genes
 #' @param gsName gene set name, can be left missing
 #' @param gsNamespace gene set namespace name, can be left missing
@@ -212,7 +213,7 @@ setMethod("fisherTest", c("character", "character", "character"),
 #' Perform Fisher's exact test on a GeneSet object
 #'
 #' @param genes a collection of genes of which over-representation of the gene set is tested
-#' @param GmtList A \code{GmtList} object
+#' @param genesets A \code{GmtList} object.
 #' @param universe universe of genes
 #' @param makeUniqueNonNA Logical, whether genes and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.
 #' @param checkUniverse Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}
@@ -268,6 +269,7 @@ fisherTestResultNewHitsProp <- function(fisherTestResults) {
 #' @param genes character strings of gene list to be tested
 #' @param genesets An GmtList object
 #' @param universe Universe (background) gene list
+#' @param gsNamespace Character string, gene-set namespace(s)
 #' @param makeUniqueNonNA Logical, whether genes and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.
 #' @param checkUniverse Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}
 #' @param useEASE Logical, whether to use the EASE method to report the p-value. 
@@ -359,6 +361,8 @@ utils::globalVariables(c("logFC", "Contrast", "FDR",
 #'   geneset that are quantified
 #' @param maxGeneSetEffectiveSize Integer, maximal number of genes of a 
 #'    geneset that are quantified
+#' @param ... Passed to \code{filter} to further filter the differential gene
+#' expression table (\code{dgeTbl}).
 #' 
 #' @importFrom ribiosNGS dgeTable
 #' @importFrom dplyr filter pull `%>%` ungroup arrange group_by

@@ -1,9 +1,10 @@
 #' Extract gene-set namespace from RONET GMT files
-#' @param GmtList A GmtList object read from a RONET GMT file
-#' @return Character vector of the same length, indicating categories
+#' @param gmtList A \code{GmtList} object read from a RONET GMT file
+#' @return Character vector of the same length, indicating categorie
+#' @importFrom BioQC gsDesc
 #' @export
 ronetGeneSetNamespace <- function(gmtList) {
-  sapply(strsplit(sapply(gmtList, function(x) x$desc), "\\|"), "[[", 1L)
+  sapply(strsplit(BioQC::gsDesc(gmtList), "\\|"), "[[", 1L)
 }
 
 #' Read RONET GMT files with namespace information

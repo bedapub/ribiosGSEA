@@ -7,10 +7,10 @@
 ronetGeneSetNamespace(gmtList)
 }
 \arguments{
-\item{GmtList}{A GmtList object read from a RONET GMT file}
+\item{gmtList}{A \code{GmtList} object read from a RONET GMT file}
 }
 \value{
-Character vector of the same length, indicating categories
+Character vector of the same length, indicating categorie
 }
 \description{
 Extract gene-set namespace from RONET GMT files

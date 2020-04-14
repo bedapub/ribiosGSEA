@@ -12,6 +12,8 @@ cameraTable2graph(df, jacThr = 0.25, plot = TRUE, ...)
 \item{jacThr}{Numeric, between 0 and 1, Jaccard Index threshold}
 
 \item{plot}{Logical, whether plotting the results}
+
+\item{...}{Passed to \code{plot}}
 }
 \description{
 Convert a CAMERA table into a graph
