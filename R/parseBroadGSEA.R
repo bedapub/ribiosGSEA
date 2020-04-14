@@ -20,6 +20,7 @@ vec2mat <- function(named.list,
   return(res)
 }
 
+#' @importFrom XML xmlAttrs
 parseDTG <- function(xmlNode) {
   gsAttrs <- xmlAttrs(xmlNode)
 
@@ -48,6 +49,8 @@ parseDTG <- function(xmlNode) {
 }
 
 ## parse results.edb, .gmt file, and the rank file to get leading genes
+
+#' @importFrom XML xmlChildren xmlRoot xmlName xmlTreeParse
 parseGSEAedb <- function(edbfile) {
   doc <- xmlTreeParse(edbfile, getDTD=FALSE)
   root <- xmlRoot(doc)

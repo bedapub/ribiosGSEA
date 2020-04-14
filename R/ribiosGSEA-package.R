@@ -11,7 +11,10 @@ NULL
 #' @importFrom ribiosNGS EdgeObject
 #' @importFrom edgeR DGEList
 #' @importFrom stats model.matrix
-#' @importFrom utils write.table
+#' @importFrom utils read.table write.table
+#' @importFrom methods as callGeneric is new
+#' @importFrom stats ave cor filter fisher.test kmeans median p.adjust
+#'             pchisq pt qt sd var
 NULL
 
 #' @export
