@@ -105,6 +105,8 @@
 #' biosFixCorOut <- biosCamera(y, index1, design,
 #'     .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE))
 #' testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue) }
+#'
+#' @export
 biosCamera <- function (y, index, design = NULL, contrast = ncol(design), 
 			weights = NULL,
                         geneLabels=NULL,
@@ -335,7 +337,8 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
     return(tab)
 }
 
-#' CAMERA applied to GmtList
+#' Apply biosCamera to an expression matrix and GmtList
+#'
 #' @param matrix Expression matrix, features (genes) in rows and 
 #'    samples in columns
 #' @param geneSymbols Gene-symbols corresponding to the rows of matrix
@@ -360,6 +363,9 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
 #' gmtlist <- BioQC::GmtList(list(gs1, gs2, gs3))
 #' cameraOut <- gmtListCamera(mat, rownames(mat), gmtlist, designMatrix, contrastMatrix)
 #' cameraOut
+#' @importFrom parallel mclapply
+#' @importFrom BioQC gsGenes gsName 
+#' @importFrom ribiosUtils sortByCol 
 #' @export
 gmtListCamera <- function(matrix, geneSymbols, gmtList, design, contrasts) {
   genes <- BioQC::gsGenes(gmtList)
@@ -368,7 +374,7 @@ gmtListCamera <- function(matrix, geneSymbols, gmtList, design, contrasts) {
     return(ind[!is.na(ind)])
   })
   names(genes.inds) <- BioQC::gsName(gmtList)
-  cameraRes <- mclapply(1:ncol(contrasts),
+  cameraRes <- parallel::mclapply(1:ncol(contrasts),
                         function(x) {
                           tbl <- biosCamera(matrix,
                                             design=design,
