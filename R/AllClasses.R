@@ -1,4 +1,20 @@
-setClass("gseaResItem",
+##---------------------------------------## 
+## Classes for BROAD GSEA tools
+##---------------------------------------## 
+
+#' A S4 class representing the atom structure of results of the BROAD GSEA tool
+#' @slot geneSet Character, gene-set name
+#' @slot es Numeric, enrichment score
+#' @slot nes Numeric, normalised enrichment score
+#' @slot np Numeric
+#' @slot fdr Numeric, false discovery rate
+#' @slot FWER Numeric, family-wise error rate
+#' @slot geneIndices Integer vector, gene indices
+#' @slot esProfile Numeric, enrichment score profile
+#' @slot coreEnrichThr Numeric
+#'
+#' @export
+setClass("broadGseaResItem",
          representation=list(geneset="character",
            "es"="numeric",
            "nes"="numeric",
@@ -9,13 +25,24 @@ setClass("gseaResItem",
            "esProfile"="numeric",
            "coreEnrichThr"="numeric"))
 
-setClass("annoGseaResItem",
+#' Annotated BROAD GSEA result item
+#'
+#' @slot gsGenes Vector of character strings, gene-set genes
+#' @slot gsGeneValues Vector of numeric values, statistics of gene-set genes
+#'
+#' @export
+setClass("annoBroadGseaResItem",
          representation=list("gsGenes"="character",
            "gsGeneValues"="numeric"),
-         contains="gseaResItem")
+         contains="broadGseaResItem")
 
-setClass("annoGseaRes", contains="list")
-setClass("annoGseaResList", contains="list") #3 a list of annoGseaRes objects
+#' Annotated BROAD GSEA Results for one contrast
+#' @export
+setClass("annoBroadGseaRes", contains="list")
+
+#' A list of annoBroadGseaRes objects
+#' @export
+setClass("annoBroadGseaResList", contains="list") #3 a list of annoBroadGseaRes objects
 
 setClass("GeneSetResult",
          representation=list(

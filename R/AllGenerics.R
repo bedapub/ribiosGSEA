@@ -17,9 +17,9 @@ setGeneric("gsGeneIndices", function(object) standardGeneric("gsGeneIndices"))
 setGeneric("gseaESprofile", function(object) standardGeneric("gseaESprofile"))
 setGeneric("gseaCoreEnrichThr", function(object) standardGeneric("gseaCoreEnrichThr"))
 setGeneric("gseaCoreEnrichGenes", function(object) standardGeneric("gseaCoreEnrichGenes"))
-setGeneric("annoGseaResItem", function(object, ...) standardGeneric("annoGseaResItem"))
+setGeneric("annoBroadGseaResItem", function(object, ...) standardGeneric("annoBroadGseaResItem"))
 ##setGeneric("gseaRes", function(object) standardGeneric("gseaRes"))
-setGeneric("annoGseaRes", function(object) standardGeneric("annoGseaRes"))
+setGeneric("annoBroadGseaRes", function(object) standardGeneric("annoBroadGseaRes"))
 
 ## Fisher's exact test
 setGeneric("hits", function(object, ...) standardGeneric("hits"))

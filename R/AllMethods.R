@@ -1,82 +1,82 @@
-setMethod("gsName", "gseaResItem", function(object) return(object@geneset))
-setMethod("gsName", "annoGseaRes", function(object) sapply(object, gsName))
+setMethod("gsName", "broadGseaResItem", function(object) return(object@geneset))
+setMethod("gsName", "annoBroadGseaRes", function(object) sapply(object, gsName))
 setMethod("gsName", "FisherResult", function(object) object@gsName)
 setMethod("gsName", "FisherResultList", function(object) names(object@.Data))
 setMethod("gsName", "GmtList", function(object) sapply(object, function(x) x$name))
 
-setMethod("gseaES", "gseaResItem", function(object) return(object@es))
-setMethod("gseaES", "annoGseaRes", function(object) {
+setMethod("gseaES", "broadGseaResItem", function(object) return(object@es))
+setMethod("gseaES", "annoBroadGseaRes", function(object) {
   res <- sapply(object, gseaES)
   names(res) <- gsName(object)
   return(res)
 })
-setMethod("gseaES", "annoGseaResList", function(object) {
+setMethod("gseaES", "annoBroadGseaResList", function(object) {
   es <- lapply(object, gseaES)
   res <- vec2mat(es, sort.by="mean", decreasing=FALSE)
   return(res)
 })
 
-setMethod("gseaNES", "gseaResItem", function(object) return(object@nes))
-setMethod("gseaNES", "annoGseaRes", function(object) {
+setMethod("gseaNES", "broadGseaResItem", function(object) return(object@nes))
+setMethod("gseaNES", "annoBroadGseaRes", function(object) {
   res <- sapply(object, gseaNES)
   names(res) <- gsName(object)
   return(res)
 })
-setMethod("gseaNES", "annoGseaResList", function(object) {
+setMethod("gseaNES", "annoBroadGseaResList", function(object) {
   nes <- lapply(object, gseaNES)
   res <- vec2mat(nes, sort.by="mean", decreasing=FALSE)
   return(res)
 })
 
-setMethod("gseaNP", "gseaResItem", function(object) return(object@np))
-setMethod("gseaNP", "annoGseaRes", function(object) {
+setMethod("gseaNP", "broadGseaResItem", function(object) return(object@np))
+setMethod("gseaNP", "annoBroadGseaRes", function(object) {
   res <- sapply(object, gseaNP)
   names(res) <- gsName(object)
   return(res)
 })
-setMethod("gseaNP", "annoGseaResList", function(object) {
+setMethod("gseaNP", "annoBroadGseaResList", function(object) {
   nps <- lapply(object, gseaNP)
   res <- vec2mat(nps, sort.by="mean", decreasing=FALSE)
   return(res)
 })
 
-setMethod("gseaFDR", "gseaResItem", function(object) return(object@fdr))
-setMethod("gseaFDR", "annoGseaRes", function(object) {
+setMethod("gseaFDR", "broadGseaResItem", function(object) return(object@fdr))
+setMethod("gseaFDR", "annoBroadGseaRes", function(object) {
   res <- sapply(object, gseaFDR)
   names(res) <- gsName(object)
   return(res)
 })
-setMethod("gseaFDR", "annoGseaResList", function(object) {
+setMethod("gseaFDR", "annoBroadGseaResList", function(object) {
   fdrs <- lapply(object, gseaFDR)
   res <- vec2mat(fdrs, sort.by="mean", decreasing=FALSE)
   return(res)
 })
 
-setMethod("gseaFWER", "gseaResItem", function(object) {return(object@fwer)})
-setMethod("gseaFWER", "annoGseaRes", function(object) {
+setMethod("gseaFWER", "broadGseaResItem", function(object) {return(object@fwer)})
+setMethod("gseaFWER", "annoBroadGseaRes", function(object) {
   res <- sapply(object, gseaFWER)
   names(res) <- gsName(object)
   return(res)
 })
-setMethod("gseaFWER", "annoGseaResList", function(object) {
+setMethod("gseaFWER", "annoBroadGseaResList", function(object) {
   fwers <- lapply(object, gseaFWER)
   res <- vec2mat(fwers, sort.by="mean", decreasing=FALSE)
   return(res)
 })
 
 
-setMethod("gsGeneIndices", "gseaResItem", function(object) return(object@geneIndices))
-setMethod("gseaESprofile", "gseaResItem", function(object) return(object@esProfile))
+setMethod("gsGeneIndices", "broadGseaResItem", function(object) return(object@geneIndices))
+setMethod("gseaESprofile", "broadGseaResItem", function(object) return(object@esProfile))
 
-setMethod("gseaCoreEnrichThr", "gseaResItem", function(object) return(object@coreEnrichThr))
-setMethod("gseaCoreEnrichThr", "annoGseaRes", function(object) {
+setMethod("gseaCoreEnrichThr", "broadGseaResItem", function(object) return(object@coreEnrichThr))
+setMethod("gseaCoreEnrichThr", "annoBroadGseaRes", function(object) {
   res <- sapply(object, gseaCoreEnrichThr)
   names(res) <- gsName(object)
   return(res)
 })
 
-setMethod("gsGenes", "annoGseaResItem", function(object) return(object@gsGenes))
-setMethod("gsGenes", "annoGseaRes", function(object) {
+setMethod("gsGenes", "annoBroadGseaResItem", function(object) return(object@gsGenes))
+setMethod("gsGenes", "annoBroadGseaRes", function(object) {
   res <- lapply(object@.Data, gsGenes)
   names(res) <- gsName(object)
   return(res)
@@ -95,32 +95,32 @@ setMethod("gsNamespace", "GmtList", function(object)
 setMethod("gsDesc", "GmtList", function(object)
 	  return(lapply(object, function(x) x$desc)))
 
-setMethod("gsGeneValues", "annoGseaResItem", function(object) return(object@gsGeneValues))
-setMethod("gsGeneValues", "annoGseaRes", function(object) {
+setMethod("gsGeneValues", "annoBroadGseaResItem", function(object) return(object@gsGeneValues))
+setMethod("gsGeneValues", "annoBroadGseaRes", function(object) {
   res <- lapply(object, gsGeneValues)
   names(res) <- gsName(object)
   return(res)
 })
 
-setMethod("gseaCoreEnrichGenes", "annoGseaResItem", function(object) {
+setMethod("gseaCoreEnrichGenes", "annoBroadGseaResItem", function(object) {
   gsGenes(object)[isGseaCoreEnrich(object)]
 })
-setMethod("gseaCoreEnrichGenes", "annoGseaRes", function(object) {
+setMethod("gseaCoreEnrichGenes", "annoBroadGseaRes", function(object) {
   res <- lapply(object, gseaCoreEnrichGenes)
   names(res) <- gsName(object)
   return(res)
 })
 gseaLeadingEdgeGenes <- gseaCoreEnrichGenes
 
-setMethod("gsGenes<-", c("annoGseaResItem", "character"), function(object,value) {
+setMethod("gsGenes<-", c("annoBroadGseaResItem", "character"), function(object,value) {
   object@gsGenes <- value
   return(object)
 })
-setMethod("gsGeneValues<-", c("annoGseaResItem", "numeric"), function(object, value) {
+setMethod("gsGeneValues<-", c("annoBroadGseaResItem", "numeric"), function(object, value) {
   object@gsGeneValues <- value
   return(object)
 })
-setMethod("isGseaCoreEnrich", "annoGseaResItem", function(object) {
+setMethod("isGseaCoreEnrich", "annoBroadGseaResItem", function(object) {
   nes <- gseaNES(object)
   thr <- gseaCoreEnrichThr(object)
   value <- gsGeneValues(object)
@@ -132,21 +132,21 @@ setMethod("isGseaCoreEnrich", "annoGseaResItem", function(object) {
 })
 
 ##setAs(from="list", to="gseaRes", def=function(from,to) {
-##  haltifnot(all(sapply(from, function(x) is(x, "gseaResItem"))),
-##            msg="Input list must be of gseaResItem objects")
+##  haltifnot(all(sapply(from, function(x) is(x, "broadGseaResItem"))),
+##            msg="Input list must be of broadGseaResItem objects")
 ##  res <- new("gseaRes", from)
 ##  return(res)
 ##})
-setAs(from="list", to="annoGseaRes", def=function(from,to) {
-  haltifnot(all(sapply(from, function(x) is(x, "annoGseaResItem"))),
-            msg="Input list must be of annoGseaResItem objects")
-  res <- new("annoGseaRes", from)
+setAs(from="list", to="annoBroadGseaRes", def=function(from,to) {
+  haltifnot(all(sapply(from, function(x) is(x, "annoBroadGseaResItem"))),
+            msg="Input list must be of annoBroadGseaResItem objects")
+  res <- new("annoBroadGseaRes", from)
   return(res)
 })
-setAs(from="list", to="annoGseaResList", def=function(from,to) {
-  haltifnot(all(sapply(from, function(x) is(x, "annoGseaRes"))),
-            msg="Input list must be of annoGseaRes objects")
-  res <- new("annoGseaResList", from)
+setAs(from="list", to="annoBroadGseaResList", def=function(from,to) {
+  haltifnot(all(sapply(from, function(x) is(x, "annoBroadGseaRes"))),
+            msg="Input list must be of annoBroadGseaRes objects")
+  res <- new("annoBroadGseaResList", from)
 
   return(res)
 })
@@ -155,21 +155,21 @@ setAs(from="list", to="annoGseaResList", def=function(from,to) {
 ##  as(object, "gseaRes")
 ##})
 
-setMethod("annoGseaRes", "list", function(object) {
-  return(as(object, "annoGseaRes"))
+setMethod("annoBroadGseaRes", "list", function(object) {
+  return(as(object, "annoBroadGseaRes"))
 })
 ##setMethod("[", "gseaRes", function(x, i) {
 ##  res <- callGeneric(x@.Data, i)
 ##  return(as(res, "gseaRes"))
 ##})
-setMethod("[", "annoGseaRes", function(x, i,...) {
+setMethod("[", "annoBroadGseaRes", function(x, i,...) {
   if(all(is.character(i)))
     i <- match(i, gsName(x))
   res <- callGeneric(x@.Data, i)
-  return(as(res, "annoGseaRes"))
+  return(as(res, "annoBroadGseaRes"))
 })
 
-setMethod("show", "gseaResItem", function(object) {
+setMethod("show", "broadGseaResItem", function(object) {
   gInd <- gsGeneIndices(object)
   fmt <- "GeneSet \"%s\" [%d genes]\nES=%1.3f; NES=%1.3f; \
 Nominal P-value(NP)=%1.3f; FDR=%1.3f; FWER=%1.3f\
@@ -187,7 +187,7 @@ Indices:%s\nEnrichment Score (ES) profile:%s\nCore enrichment threshold of input
                  gseaCoreEnrichThr(object))
   cat(str)
 })
-setMethod("show", "annoGseaResItem", function(object) {
+setMethod("show", "annoBroadGseaResItem", function(object) {
   gInd <- gsGeneIndices(object)
   fmt <- "AnnotatedGeneSet \"%s\" [%d genes]\nES=%1.3f; NES=%1.3f; \
 Nominal P-value(NP)=%1.3f; FDR=%1.3f; FWER=%1.3f\
@@ -208,8 +208,8 @@ GeneNames:%s\nGene input values:%s\n"
   cat(str)
 })
 
-setMethod("annoGseaResItem", "gseaResItem", function(object, genes, genevalues) {
-  res <- as(object, "annoGseaResItem")
+setMethod("annoBroadGseaResItem", "broadGseaResItem", function(object, genes, genevalues) {
+  res <- as(object, "annoBroadGseaResItem")
   if(!(length(genes)==length(genevalues) && length(genes)==length(gsGeneIndices(object))))
     stop(sprintf("genes (#=%d) and genevalues (#=%d) must be of the same length as the gsGeneIndices (#=%d)",
                  length(genes), length(genevalues), length(gsGeneIndices(object))))
@@ -218,7 +218,7 @@ setMethod("annoGseaResItem", "gseaResItem", function(object, genes, genevalues) 
   return(res)
 })
 
-setMethod("show", "annoGseaRes", function(object) {
+setMethod("show", "annoBroadGseaRes", function(object) {
   str <- sprintf("Annotated GSEA Results with %d gene sets\n",
                  length(object))
   cat(str)
@@ -238,10 +238,10 @@ setMethod("show", "annoGseaRes", function(object) {
 #' missing in one or more conditions.
 #' 
 #' @aliases gseaScore gseaScores
-#' @param x An \code{annoGseaRes} object
+#' @param x An \code{annoBroadGseaRes} object
 #' @param type Character string, the type of p-value used to calculate the
 #' score.
-#' @param ... Objects of \code{annoGseaRes} to be compared
+#' @param ... Objects of \code{annoBroadGseaRes} to be compared
 #' @param names Character strings, names given to the result score sets. See
 #' examples below.
 #' @return \code{gseaScore} returns a double vector of scores with gene set
