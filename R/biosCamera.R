@@ -72,7 +72,7 @@
 #' \code{FALSE} to be consistent with the latest camera function.
 #' 
 #' @importFrom ribiosUtils haltifnot
-#' @importFrom limma squeezeVar zscoreT
+#' @importFrom limma squeezeVar zscoreT rankSumTestWithCorrelation
 #'
 #' @examples 
 #' y <- matrix(rnorm(1000*6),1000,6)
@@ -283,7 +283,8 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
         if (use.ranks) {
             if (!allow.neg.cor) 
                 correlation <- max(0, correlation)
-            tab[i, 3:4] <- rankSumTestWithCorrelation(iset, statistics = Stat, 
+            tab[i, 3:4] <- limma::rankSumTestWithCorrelation(iset, 
+		statistics = Stat, 
                 correlation = correlation, df = df.camera)
         } else {
             if (!allow.neg.cor) 

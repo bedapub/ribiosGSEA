@@ -33,8 +33,10 @@ Perform Fisher's exact test on a GeneSet object
 }
 \examples{
 myGenes <- LETTERS[1:3]
-myS4GeneSet1 <- list(name="GeneSet1", desc="GeneSet", genes=LETTERS[1:6], namespace="My namespace 1")
-myS4GeneSet2 <- list(name="GeneSet1", desc="GeneSet", genes=LETTERS[2:7], namespace="My namespace 2")
+myS4GeneSet1 <- list(name="GeneSet1", desc="GeneSet", 
+    genes=LETTERS[1:6], namespace="My namespace 1")
+myS4GeneSet2 <- list(name="GeneSet1", desc="GeneSet", 
+    genes=LETTERS[2:7], namespace="My namespace 2")
 myUniverse <- LETTERS
 fisherTest(myGenes, myS4GeneSet1, myUniverse)
 fisherTest(myGenes, myS4GeneSet2, myUniverse)

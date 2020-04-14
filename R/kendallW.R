@@ -1,24 +1,3 @@
-#' Interface to the function kendallWmat
-#' 
-#' The S4 method acts as interface between advanced data structures (such as
-#' \code{ExpressionSet}) and the \code{kendallWmat} function. The function
-#' combines Kendall's W statistic with an iterative graph theory approach to
-#' detect sub-groups resembling strong correlations.
-#' 
-#' 
-#' @name kendallW-methods
-#' @aliases kendallW kendallW-methods kendallW,ExpressionSet-method
-#' kendallW,matrix-method
-#' @docType methods
-#' @section Methods: \describe{ \item{list("signature(object =
-#' \"matrix\")")}{The method for \code{matrix} is just a wrapper for
-#' \code{kendallWmat}} \item{list("signature(object =
-#' \"ExpressionSet\")")}{This method accepts an \code{ExpressionSet} object,
-#' performs Kendall'W feature reduction, and store the sub-group information in
-#' the resulting object. } }
-#' @keywords methods
-NULL
-
 ## getRcrit and getSubGraphs were copied and adapted from the scorem package
 getRcrit <- function (a, n) {
   t <- 0 - qt(a, n - 2)
@@ -297,41 +276,58 @@ kendallWmat <- function(mat,
   return(res.mat)
 }
 
-#' @exportMethod kendallW
-setGeneric("kendallW",
-           function(object,...) standardGeneric("kendallW"))
+#' S3 method for kendallW
+#' @param object An object
+#' @param ... Other parameters
+#' @export kendallW
+kendallW <- function(object, ...) UseMethod("kendallW")
 
-#' @exportMethod kendallWinfo
-setGeneric("kendallWinfo",
-           function(object) standardGeneric("kendallWinfo"))
-#' @exportMethod `kendallWinfo<-`
-setGeneric("kendallWinfo<-",
-           function(object, value) standardGeneric("kendallWinfo<-"))
-
-#' @export 
-setMethod("kendallWinfo", "matrix", function(object) {attr(object, "info")})
+#' S3 method for kendallW information
+#' @param object An object
+# @export
+kendallWinfo <- function(object) UseMethod("kendallWinfo")
+`kendallWinfo<-` <- function(object, value) UseMethod("kendallWinfo<-")
 
 #' @export 
-setReplaceMethod("kendallWinfo", c("matrix","ANY"), function(object, value) {attr(object, "info") <- value; return(object)})
+kendallWinfo.matrix <- function(object) return(attr(object, "info"))
+`kendallWinfo<-.matrix` <- function(object, value) {
+	attr(object, "info") <- value
+	return(object)
+}
 
+#' Compute Kendall's W for a matrix
+#' @param object A numeric matrix
+#' @param object row.factor Factor vector of the same length as the row counts
+#' @param summary Summary type, passed to \code{kendallWmat}
+#' @param na.rm Logical, whether \code{NA} values should be removed
+#' @param alpha Numeric, passed to \code{kendallWmat}
+#' @seealso \code{\link{kendallWmat}}
 #' @export 
-setMethod("kendallW", "matrix", function(object,
-                                         row.factor,
-                                         summary=c("none", "mean", "median",
-                                           "max.mean.sig", "max.var.sig"),
-                                         na.rm=TRUE, alpha=0.01) {
+kendallW.matrix <- function(object,
+			    row.factor,
+			    summary=c("none", "mean", "median",
+			      "max.mean.sig", "max.var.sig"),
+			    na.rm=TRUE, alpha=0.01) {
   kendallWmat(mat=object, row.factor=row.factor,
               summary=summary, na.rm=na.rm, alpha=alpha)
-})
+}
 
+#' Compute Kendall's W for an eSet object
+#' @param object An \code{eSet} object
+#' @param object row.factor Factor vector of the same length as the row counts
+#' @param summary Summary type, passed to \code{kendallWmat}
+#' @param na.rm Logical, whether \code{NA} values should be removed
+#' @param alpha Numeric, passed to \code{kendallWmat}
+#' @seealso \code{\link{kendallWmat}}
 #' @importFrom Biobase exprs
+#' @importClassesFrom Biobase eSet
 #' @importFrom ribiosExpression featureNames phenoData
 #' @export 
-setMethod("kendallW", "ExpressionSet", function(object,
-                                                row.factor,
-                                                summary=c("none", "mean", "median",
-                                                  "max.mean.sig", "max.var.sig"),
-                                                na.rm=TRUE, alpha=0.01) {
+kendallW.eSet <- function(object,
+		          row.factor,
+			  summary=c("none", "mean", "median",
+			    "max.mean.sig", "max.var.sig"),
+			  na.rm=TRUE, alpha=0.01) {
   exp <- exprs(object)
   new.exp <- kendallWmat(mat=exp, row.factor=row.factor,
                          summary=summary, na.rm=na.rm, alpha=alpha)
@@ -345,5 +341,5 @@ setMethod("kendallW", "ExpressionSet", function(object,
              phenoData=phenoData(object),
              featureData=new("AnnotatedDataFrame", new.fData))
   return(res)
-})
+}
 

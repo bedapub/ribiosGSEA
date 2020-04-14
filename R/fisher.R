@@ -169,16 +169,20 @@ gsListFisherTestCore <- function(genes, geneSetGenesList, universe,
 #' myGeneSet1 <- LETTERS[1:6]
 #' myGeneSet2 <- LETTERS[4:7]
 #' myUniverse <- LETTERS
-#' fisherTest(myGenes, myGeneSet1, myUniverse)
-#' fisherTest(myGenes, myGeneSet2, myUniverse)
-#' fisherTest(myGenes, myGeneSet1, myUniverse, gsName="My gene set1", gsNamespace="Letters")
+#' fisherTest(genes=myGenes, genesets=myGeneSet1, universe=myUniverse)
+#' fisherTest(genes=myGenes, genesets=myGeneSet2, universe=myUniverse)
+#' fisherTest(genes=myGenes, genesets=myGeneSet1, universe=myUniverse, 
+#'            gsName="My gene set1", gsNamespace="Letters")
 #'
 #' ## note that duplicated items are removed by default
-#' resWoRp <- fisherTest(rep(myGenes,2), myGeneSet1, myUniverse)
-#' resWithRp <- fisherTest(rep(myGenes,2), myGeneSet1, rep(myUniverse,2))
+#' resWoRp <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
+#'                       universe=myUniverse)
+#' resWithRp <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
+#'                       universe=rep(myUniverse,2))
 #' identical(resWoRp, resWithRp)
 #' 
-#' resWithRpNoUnique <- fisherTest(rep(myGenes,2), myGeneSet1, rep(myUniverse,2), makeUniqueNonNA=FALSE)
+#' resWithRpNoUnique <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
+#'            universe=rep(myUniverse,2), makeUniqueNonNA=FALSE)
 #' identical(resWoRp, resWithRpNoUnique)
 #' @export
 setMethod("fisherTest", c("character", "character", "character"),
@@ -219,8 +223,10 @@ setMethod("fisherTest", c("character", "character", "character"),
 #' @importClassesFrom BioQC GmtList
 #' @examples
 #' myGenes <- LETTERS[1:3]
-#' myS4GeneSet1 <- list(name="GeneSet1", desc="GeneSet", genes=LETTERS[1:6], namespace="My namespace 1")
-#' myS4GeneSet2 <- list(name="GeneSet1", desc="GeneSet", genes=LETTERS[2:7], namespace="My namespace 2")
+#' myS4GeneSet1 <- list(name="GeneSet1", desc="GeneSet", 
+#'     genes=LETTERS[1:6], namespace="My namespace 1")
+#' myS4GeneSet2 <- list(name="GeneSet1", desc="GeneSet", 
+#'     genes=LETTERS[2:7], namespace="My namespace 2")
 #' myUniverse <- LETTERS
 #' fisherTest(myGenes, myS4GeneSet1, myUniverse)
 #' fisherTest(myGenes, myS4GeneSet2, myUniverse)
@@ -249,6 +255,7 @@ setMethod("fisherTest", c("character", "list", "character"),
 #' Append NewHitsProp to the result \code{data.table} returned by \code{fisherTest}
 #' @param fisherTestResults \code{data.table} returned by \code{fisherTest}
 #' @return A new \code{data.table} containing all columns of the input and \code{NewHitsProp}, a new column including the proportion of new hits in the gene-set
+#' @importFrom dplyr `%>%` arrange
 fisherTestResultNewHitsProp <- function(fisherTestResults) {
   fisherTestResults <- fisherTestResults %>% arrange(FDR)
   hits <- strsplit(as.character(fisherTestResults$Hits), ",")
@@ -335,18 +342,26 @@ setMethod("fisherTest",
             return(res)
           })
 
-
+utils::globalVariables(c("logFC", "Contrast", "FDR", 
+			 "GeneSymbol", "GeneSetEffectiveSize",
+			 "NGenes", "PValue", "GeneID", "GeneSymbol", 
+			 "GeneSet", "Regulation"))
 
 #' Run Fisher's exact test on an EdgeResult object
 #' 
 #' @param edgeResult An \code{EdgeResult} object
 #' @param gmtList A \code{GmtList} or \code{GeneSets} object
 #' @param contrast Character, the contrast of interest
-#' @param thr.abs.logFC Numeric, threshold of absolute log2 fold-change to define positively and negatively regulated genes
+#' @param thr.abs.logFC Numeric, threshold of absolute log2 fold-change to 
+#'     define positively and negatively regulated genes
 #' @param thr.FDR Numeric, threshold of FDR values 
-#' @param minGeneSetEffectiveSize Integer, minimal number of genes of a geneset that are quantified
-#' @param maxGeneSetEffectiveSize Integer, maximal number of genes of a geneset that are quantified
+#' @param minGeneSetEffectiveSize Integer, minimal number of genes of a 
+#'   geneset that are quantified
+#' @param maxGeneSetEffectiveSize Integer, maximal number of genes of a 
+#'    geneset that are quantified
 #' 
+#' @importFrom ribiosNGS dgeTable
+#' @importFrom dplyr filter pull `%>%` ungroup arrange group_by
 #' @return 
 #' ## TODO: example
 fisherTestEdgeResult <- function(edgeResult,
@@ -355,7 +370,7 @@ fisherTestEdgeResult <- function(edgeResult,
                              thr.abs.logFC=1, thr.FDR=0.05, 
                              minGeneSetEffectiveSize=5,
                              maxGeneSetEffectiveSize=500, ...) {
-  dgeTbl <- dgeTable(edgeResult) %>% filter(Contrast %in% contrast)
+  dgeTbl <- ribiosNGS::dgeTable(edgeResult) %>% filter(Contrast %in% contrast)
   dgeBg <- unique(as.character(dgeTbl$GeneSymbol))
   posDgeTbl <- dgeTbl %>% filter(logFC>=thr.abs.logFC, FDR<thr.FDR, ...)
   negDgeTbl <- dgeTbl %>% filter(logFC<=(-thr.abs.logFC), FDR<thr.FDR, ...)

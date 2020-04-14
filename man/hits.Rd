@@ -8,6 +8,8 @@ hits(object, ...)
 }
 \arguments{
 \item{object}{An object}
+
+\item{...}{Other parameters}
 }
 \description{
 Return hits

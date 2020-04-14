@@ -10,6 +10,8 @@ sigGeneSet(object, fdr, ...)
 \item{object}{An object}
 
 \item{fdr}{Numeric, FDR threshold}
+
+\item{...}{Other parameters}
 }
 \description{
 Return a character vector indicating significantly enriched gene-sets

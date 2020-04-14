@@ -3,26 +3,31 @@ NULL
 
 #' Return gene-set namespace
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("gsNamespace", function(object, ...) standardGeneric("gsNamespace"))
 
 #' Return gene-set name
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("gsName", function(object, ...) standardGeneric("gsName"))
 
 #' Return gene-set description
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("gsDesc", function(object, ...) standardGeneric("gsDesc"))
 
 #' Return gene-set genes
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("gsGenes", function(object,...) standardGeneric("gsGenes"))
 
 #' Return gene-set gene count
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("gsGeneCount", function(object,...) standardGeneric("gsGeneCount"))
 
@@ -95,6 +100,7 @@ setGeneric("gseaCoreEnrichGenes", function(object) standardGeneric("gseaCoreEnri
 
 #' Return annotated BROAD GSEA result item
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("annoBroadGseaResItem", function(object, ...) standardGeneric("annoBroadGseaResItem"))
 
@@ -109,36 +115,43 @@ setGeneric("annoBroadGseaRes", function(object) standardGeneric("annoBroadGseaRe
 
 #' Return hits
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("hits", function(object, ...) standardGeneric("hits"))
 
 #' Return P-values
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("pValue", function(object, ...) standardGeneric("pValue"))
 
 #' Return FDR values
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("fdrValue", function(object, ...) standardGeneric("fdrValue"))
 
 #' Return gene-set size
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("gsSize", function(object, ...) standardGeneric("gsSize"))
 
 #' Return gene-set effect size
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("gsEffSize", function(object, ...) standardGeneric("gsEffSize"))
 
 #' Return the minimum FDR value
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("minFdrValue", function(object, ...) standardGeneric("minFdrValue"))
 
 #' Return the minimum P value
 #' @param object An object
+#' @param ... Other parameters
 #' @export
 setGeneric("minPValue", function(object, ...) standardGeneric("minPValue"))
 
@@ -146,24 +159,28 @@ setGeneric("minPValue", function(object, ...) standardGeneric("minPValue"))
 #' enriched
 #' @param object An object
 #' @param fdr Numeric, FDR threshold
+#' @param ... Other parameters
 #' @export
 setGeneric("isSigGeneSet", function(object, fdr,...) standardGeneric("isSigGeneSet"))
 
 #' Return a character vector indicating significantly enriched gene-sets
 #' @param object An object
 #' @param fdr Numeric, FDR threshold
+#' @param ... Other parameters
 #' @export
 setGeneric("sigGeneSet", function(object, fdr,...) standardGeneric("sigGeneSet"))
 
 #' Return a table of significantly enriched gene-ests
 #' @param object An object
 #' @param fdr Numeric, FDR threshold
+#' @param ... Other parameters
 #' @export
 setGeneric("sigGeneSetTable", function(object, fdr,...) standardGeneric("sigGeneSetTable"))
 
 #' Return top enriched gene-sets
 #' @param object An object
 #' @param N integer, number of top gene-sets to be returned
+#' @param ... Other parameters
 #' @export
 setGeneric("topGeneSetTable", function(object, N,...) standardGeneric("topGeneSetTable"))
 
@@ -171,6 +188,7 @@ setGeneric("topGeneSetTable", function(object, N,...) standardGeneric("topGeneSe
 #' @param object An object
 #' @param N integer, number of top gene-sets to be returned
 #' @param fdr Numeric, FDR threshold
+#' @param ... Other parameters
 #' @export
 setGeneric("topOrSigGeneSetTable", function(object, N, fdr, ...) standardGeneric("topOrSigGeneSetTable"))
 
@@ -178,6 +196,7 @@ setGeneric("topOrSigGeneSetTable", function(object, N, fdr, ...) standardGeneric
 #' @param genes Genes
 #' @param genesets Gene-sets
 #' @param universe The universe of genes
+#' @param ... Other parameters
 #' @export
 setGeneric("fisherTest", function(genes, genesets, universe,  ...) standardGeneric("fisherTest"))
 

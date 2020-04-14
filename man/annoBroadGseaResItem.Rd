@@ -8,6 +8,8 @@ annoBroadGseaResItem(object, ...)
 }
 \arguments{
 \item{object}{An object}
+
+\item{...}{Other parameters}
 }
 \description{
 Return annotated BROAD GSEA result item

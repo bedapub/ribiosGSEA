@@ -22,13 +22,16 @@ fisherTestEdgeResult(
 
 \item{contrast}{Character, the contrast of interest}
 
-\item{thr.abs.logFC}{Numeric, threshold of absolute log2 fold-change to define positively and negatively regulated genes}
+\item{thr.abs.logFC}{Numeric, threshold of absolute log2 fold-change to 
+define positively and negatively regulated genes}
 
 \item{thr.FDR}{Numeric, threshold of FDR values}
 
-\item{minGeneSetEffectiveSize}{Integer, minimal number of genes of a geneset that are quantified}
+\item{minGeneSetEffectiveSize}{Integer, minimal number of genes of a 
+geneset that are quantified}
 
-\item{maxGeneSetEffectiveSize}{Integer, maximal number of genes of a geneset that are quantified}
+\item{maxGeneSetEffectiveSize}{Integer, maximal number of genes of a 
+geneset that are quantified}
 }
 \value{
 ## TODO: example

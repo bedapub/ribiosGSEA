@@ -360,7 +360,7 @@ setMethod("hits", "FisherResultList", function(object, geneset) {
               if(missing(geneset)) {
                   res <- lapply(object, function(x) x@hits)
               } else {
-                  res <- genes(object[[geneset]])
+                  res <- gsGenes(object[[geneset]])
               }
               return(res)
           })
@@ -396,7 +396,7 @@ setMethod("sigGeneSet", c("FisherResultList", "numeric"),function(object,fdr) {
               gsName(object)[isSigGeneSet(object, fdr)]
           })
 setMethod("sigGeneSetTable", c("FisherResultList", "numeric"),function(object,fdr,...) {
-              as.data.frame(obj[isSigGeneSet(object, fdr)])
+              as.data.frame(object[isSigGeneSet(object, fdr)])
           })
 setMethod("topGeneSetTable", c("FisherResultList", "numeric"),function(object,N,...) {
               ps <- pValue(object)

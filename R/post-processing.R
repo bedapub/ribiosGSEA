@@ -80,6 +80,9 @@ readCameraResults <- function(file, minNGenes=3, maxNGenes=1000) {
   return(res)
 }
 
+#' Expand genes in the CAMERA result table 
+#' @param tbl A \code{data.frame}
+#' @return A longer \code{data.frame}, with each row one gene.
 #' @export
 expandCameraTableGenes <- function(tbl) {
     genes <- tbl$ContributingGenes
@@ -91,19 +94,6 @@ expandCameraTableGenes <- function(tbl) {
     res <- cbind(pathTbl, geneTbl)
     rownames(res) <- NULL
     return(res)
-}
-
-#' @export
-expandSigCameraResults <- function(cameraTable,
-                                   pVal=0.01, minNGenes=3, includeAllFromSigGenesets=FALSE) {
-    if(includeAllFromSigGenesets) {
-        sigGeneSets <- subset(cameraTable, PValue<=pVal)$GeneSet
-        sigCameraTable <- subset(cameraTable, GeneSet %in% sigGeneSets & NGenes >= minNGenes)
-    } else {
-        sigCameraTable <- subset(cameraTable, PValue<=pVal & NGenes >= minNGenes)
-    }
-    expSigCameraTable <- expandCameraTableGenes(sigCameraTable)
-    return(expSigCameraTable)
 }
 
 #' Convert a CAMERA table into a graph
@@ -175,16 +165,29 @@ cameraTable2graph <- function(df, jacThr=0.25, plot=TRUE, ...) {
     return(retObj)
 }
 
-#' @export
-visualizeCameraGraphsByContrast <- function(expCameraTable, ...) {
-    contrasts <- sort(unique(expCameraTable$Contrast))
-    nres <- lapply(as.character(contrasts), function(x) {
-                       subexpCameraTable <- subset(expCameraTable, Contrast==x)
-                       cameraTable2graph(subexpCameraTable, plot=TRUE, main=x, ...)
-                  })
-    tbls <- lapply(nres, function(x) x$resTbl)
-    res <- cbind(Contrast=rep(contrasts, sapply(tbls, nrow)),
-                 do.call(rbind, tbls))
-                      
-    return(res)
-}
+## #' @export
+## expandSigCameraResults <- function(cameraTable,
+##                                    pVal=0.01, minNGenes=3, includeAllFromSigGenesets=FALSE) {
+##     if(includeAllFromSigGenesets) {
+##         sigGeneSets <- subset(cameraTable, PValue<=pVal)$GeneSet
+##         sigCameraTable <- subset(cameraTable, GeneSet %in% sigGeneSets & NGenes >= minNGenes)
+##     } else {
+##         sigCameraTable <- subset(cameraTable, PValue<=pVal & NGenes >= minNGenes)
+##     }
+##     expSigCameraTable <- expandCameraTableGenes(sigCameraTable)
+##     return(expSigCameraTable)
+## }
+## 
+## #' @export
+## visualizeCameraGraphsByContrast <- function(expCameraTable, ...) {
+##     contrasts <- sort(unique(expCameraTable$Contrast))
+##     nres <- lapply(as.character(contrasts), function(x) {
+##                        subexpCameraTable <- subset(expCameraTable, Contrast==x)
+##                        cameraTable2graph(subexpCameraTable, plot=TRUE, main=x, ...)
+##                   })
+##     tbls <- lapply(nres, function(x) x$resTbl)
+##     res <- cbind(Contrast=rep(contrasts, sapply(tbls, nrow)),
+##                  do.call(rbind, tbls))
+##                       
+##     return(res)
+## }

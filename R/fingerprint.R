@@ -1,5 +1,5 @@
-## read and transform Q-values from GSEA output files
-
+#' @describeIn gseaResES The function to extract the Q-value
+#'
 #' Extract Q-values from GSEA result file
 #' @param file GSEA result file
 #' @param threshold Numeric, threshold
@@ -21,8 +21,6 @@ gseaResQvalue <- function(file, threshold=1E-4, log=FALSE, posLog=FALSE) {
     q <- (-q)
   return(data.frame(name=name, value=q))
 }
-## read enrichment scores from GSEA output files
-
 
 #' Read GSEA statistic for pathway fingerprinting
 #' 
@@ -75,17 +73,20 @@ gseaResQvalue <- function(file, threshold=1E-4, log=FALSE, posLog=FALSE) {
 #' \url{http://www.broadinstitute.org/gsea/doc/GSEAUserGuideFrame.html}
 #' @examples
 #' 
-#' gsea.dir <- system.file(package="ribiosGSEA",
-#' "extdata/gseaDirs/VitaminA_24h_High")
-#' gsea.file <- file.path(gsea.dir,
-#' "gsea_report_for_na_neg_1336489010730.xls")
+#' gseaDirZip <- system.file(package="ribiosGSEA","extdata/gseaDirs.zip")
+#' tmpDir <- tempdir()
+#' utils::unzip(gseaDirZip, exdir=tmpDir)
+#' gseaDir <- file.path(tmpDir, "gseaDirs")
+#' gseaFile <- file.path(gseaDir,
+#'    "VitaminA_24h_High",
+#'    "gsea_report_for_na_neg_1336489010730.xls")
 #' 
-#' gsea.q <- gseaResQvalue(gsea.file)
-#' gsea.logq <- gseaResQvalue(gsea.file, log=TRUE)
-#' gsea.logq.pos <- gseaResQvalue(gsea.file, log=TRUE, posLog=TRUE)
+#' gseaQ <- gseaResQvalue(gseaFile)
+#' gseaLogQ <- gseaResQvalue(gseaFile, log=TRUE)
+#' gseaQscore <- gseaResQvalue(gseaFile, log=TRUE, posLog=TRUE)
 #' 
-#' gsea.es <- gseaResES(gsea.file)
-#' gsea.nes <- gseaResES(gsea.file, normalized=TRUE)
+#' gseaEs <- gseaResES(gseaFile)
+#' gseaNes <- gseaResES(gseaFile, normalized=TRUE)
 #' 
 #' @export gseaResES
 gseaResES <- function(file, normalized=FALSE) {
@@ -137,10 +138,13 @@ gseaResES <- function(file, normalized=FALSE) {
 #' statistic to produce pathway signatures.
 #' @examples
 #' 
-#' gsea.dir <- system.file(package="ribiosGSEA","extdata/gseaDirs/")
-#' gsea.dirs <- dir(gsea.dir, full.names=TRUE)
-#' gsea.fp <- gseaFingerprint(gsea.dirs[1], value="q")
-#' gsea.fps <- gseaFingerprintMatrix(gsea.dirs, value="q")
+#' gseaDirZip <- system.file(package="ribiosGSEA","extdata/gseaDirs.zip")
+#' tmpDir <- tempdir()
+#' utils::unzip(gseaDirZip, exdir=tmpDir)
+#' gseaDir <- file.path(tmpDir, "gseaDirs")
+#' gseaDirs <- dir(gseaDir, full.names=TRUE)
+#' gseaFp <- gseaFingerprint(gseaDirs[1], value="q")
+#' gseaFps <- gseaFingerprintMatrix(gseaDirs, value="q")
 #' 
 #' @export gseaFingerprint
 gseaFingerprint <- function(gseaDir, value=c("q", "es", "nes"), threshold=1E-4, sortByName=TRUE) {
@@ -183,14 +187,7 @@ gseaFingerprint <- function(gseaDir, value=c("q", "es", "nes"), threshold=1E-4, 
   return(paths)
 }
 
-#' Return a fingerprint matrix of a vector of GSEA output directories
-#'
-#' @param gseaDirs A vector of character strings, paths to GSEA output
-#' directories
-#' @param value Type of value to build the matrix, passed to
-#' \code{gseaFingerPrint}
-#'
-#' @return A matrix
+#' @rdname gseaFingerprint
 #' @export
 gseaFingerprintMatrix <- function(gseaDirs, 
 				  value=c("q", "es", "nes"),

@@ -23,7 +23,7 @@ writeGmt <- function(gmtList, file) {
 #'
 #' @param file GMT file which stores default molecular-phenotyping genesets
 #'
-#' @importFrom BioQC readGmt
+#' @importFrom BioQC readGmt `gsNamespace<-`
 #' @return A \code{GmtList} object containing molecular-phenotypic screening (MPS) categories and genes
 #' @export
 readMPSGmt <- function(file) {

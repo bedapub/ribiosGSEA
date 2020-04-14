@@ -8,6 +8,8 @@ minPValue(object, ...)
 }
 \arguments{
 \item{object}{An object}
+
+\item{...}{Other parameters}
 }
 \description{
 Return the minimum P value

@@ -12,6 +12,8 @@ topOrSigGeneSetTable(object, N, fdr, ...)
 \item{N}{integer, number of top gene-sets to be returned}
 
 \item{fdr}{Numeric, FDR threshold}
+
+\item{...}{Other parameters}
 }
 \description{
 Return top or significantly enriched gene-sets

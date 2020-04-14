@@ -10,6 +10,8 @@ topGeneSetTable(object, N, ...)
 \item{object}{An object}
 
 \item{N}{integer, number of top gene-sets to be returned}
+
+\item{...}{Other parameters}
 }
 \description{
 Return top enriched gene-sets

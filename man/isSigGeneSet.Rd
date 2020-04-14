@@ -11,6 +11,8 @@ isSigGeneSet(object, fdr, ...)
 \item{object}{An object}
 
 \item{fdr}{Numeric, FDR threshold}
+
+\item{...}{Other parameters}
 }
 \description{
 Return a logical vector indicating whether a gene-set is significantly

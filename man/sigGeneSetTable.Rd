@@ -10,6 +10,8 @@ sigGeneSetTable(object, fdr, ...)
 \item{object}{An object}
 
 \item{fdr}{Numeric, FDR threshold}
+
+\item{...}{Other parameters}
 }
 \description{
 Return a table of significantly enriched gene-ests

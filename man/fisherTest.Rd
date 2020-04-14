@@ -12,6 +12,8 @@ fisherTest(genes, genesets, universe, ...)
 \item{genesets}{Gene-sets}
 
 \item{universe}{The universe of genes}
+
+\item{...}{Other parameters}
 }
 \description{
 Perform Fisher's exact test

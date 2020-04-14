@@ -11,6 +11,8 @@ gseaFingerprint(
   threshold = 1e-04,
   sortByName = TRUE
 )
+
+gseaFingerprintMatrix(gseaDirs, value = c("q", "es", "nes"), ...)
 }
 \arguments{
 \item{gseaDir}{Character, a GSEA output directory. Notice the directory must
@@ -55,10 +57,13 @@ different GSEA result sets.
 }
 \examples{
 
-gsea.dir <- system.file(package="ribiosGSEA","extdata/gseaDirs/")
-gsea.dirs <- dir(gsea.dir, full.names=TRUE)
-gsea.fp <- gseaFingerprint(gsea.dirs[1], value="q")
-gsea.fps <- gseaFingerprintMatrix(gsea.dirs, value="q")
+gseaDirZip <- system.file(package="ribiosGSEA","extdata/gseaDirs.zip")
+tmpDir <- tempdir()
+utils::unzip(gseaDirZip, exdir=tmpDir)
+gseaDir <- file.path(tmpDir, "gseaDirs")
+gseaDirs <- dir(gseaDir, full.names=TRUE)
+gseaFp <- gseaFingerprint(gseaDirs[1], value="q")
+gseaFps <- gseaFingerprintMatrix(gseaDirs, value="q")
 
 }
 \seealso{

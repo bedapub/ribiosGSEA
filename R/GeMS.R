@@ -1,23 +1,29 @@
 #' @note TODO GeMS examples are suspended because the host cannot be reached outside of Roche network
 NULL
 
+#' GeMS base URL
 #' @export
 GeMS_BASE_URL <- "http://biocomp:1234/api"
 
+#' GeMS insert URL
 #' @export
 GeMS_INSERT_URL <- paste(GeMS_BASE_URL, "/insert", sep="")
 
+#' GeMS remove URL
 #' @export
 GeMS_REMOVE_URL <- paste(GeMS_BASE_URL, "/remove", sep="")
 
+#' GeMS genesets retrieval URL
 #' @export
 GeMS_GENESETS_URL <- paste(GeMS_BASE_URL, "/genesets", sep="")
 
 ## test URLs, GeMS API running as pod container on the biocomp server
 
+#' GeMS URL for testing
 #' @export
 GeMS_TEST_URL <- "http://rkalvbiocomp.kau.roche.com:1234/api"
 
+#' GeMS geneset retrieval URL for testing
 #' @export
 GeMS_TEST_GENESETS_URL <- paste(GeMS_TEST_URL, "/genesets", sep="")
 

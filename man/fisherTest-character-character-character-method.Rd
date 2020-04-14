@@ -47,16 +47,20 @@ myGenes <- LETTERS[1:3]
 myGeneSet1 <- LETTERS[1:6]
 myGeneSet2 <- LETTERS[4:7]
 myUniverse <- LETTERS
-fisherTest(myGenes, myGeneSet1, myUniverse)
-fisherTest(myGenes, myGeneSet2, myUniverse)
-fisherTest(myGenes, myGeneSet1, myUniverse, gsName="My gene set1", gsNamespace="Letters")
+fisherTest(genes=myGenes, genesets=myGeneSet1, universe=myUniverse)
+fisherTest(genes=myGenes, genesets=myGeneSet2, universe=myUniverse)
+fisherTest(genes=myGenes, genesets=myGeneSet1, universe=myUniverse, 
+           gsName="My gene set1", gsNamespace="Letters")
 
 ## note that duplicated items are removed by default
-resWoRp <- fisherTest(rep(myGenes,2), myGeneSet1, myUniverse)
-resWithRp <- fisherTest(rep(myGenes,2), myGeneSet1, rep(myUniverse,2))
+resWoRp <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
+                      universe=myUniverse)
+resWithRp <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
+                      universe=rep(myUniverse,2))
 identical(resWoRp, resWithRp)
 
-resWithRpNoUnique <- fisherTest(rep(myGenes,2), myGeneSet1, rep(myUniverse,2), makeUniqueNonNA=FALSE)
+resWithRpNoUnique <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
+           universe=rep(myUniverse,2), makeUniqueNonNA=FALSE)
 identical(resWoRp, resWithRpNoUnique)
 }
 \references{
