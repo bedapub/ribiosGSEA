@@ -1,3 +1,6 @@
+#' @inlucde AllClasses.R AllGenerics.R
+NULL
+
 setMethod("gsName", "broadGseaResItem", function(object) return(object@geneset))
 setMethod("gsName", "annoBroadGseaRes", function(object) sapply(object, gsName))
 setMethod("gsName", "FisherResult", function(object) object@gsName)
