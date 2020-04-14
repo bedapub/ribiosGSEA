@@ -1,3 +1,47 @@
+##----------------------------------------------## 
+## Classes for generic gene-set analysis results
+##---------------------------------------------## 
+
+#' A generic, virtual S4 class for gene-set analysis result
+#' @export
+setClass("GeneSetResult",
+         representation=list(
+             gsNamespace="character",
+             gsName="character",
+             gsEffSize="integer",
+             p="numeric",
+             fdr="numeric"),
+         contains="VIRTUAL")
+
+#' Result of Fisher's exact test
+#' @export
+setClass("FisherResult",
+         representation=list(hits="character"),
+         contains="GeneSetResult")
+
+#' A list of results of Fisher's exact test
+#' @export
+setClass("FisherResultList",
+         representation=list(
+             inputName="character",
+             input="character",
+             universe="character"),
+         contain="list")
+
+
+## ## not used so far, to be deleted
+## ## TODO: delete
+## ## Camera result
+## setClass("CameraResult",
+##          representation=list(
+##              correlation="numeric",
+##              hits="character",
+##              score="numeric"),
+##          contains="GeneSetResult")
+## setClass("CameraResultList",
+##          representation=list(inputName="character"),
+##          contain="list")
+
 ##---------------------------------------## 
 ## Classes for BROAD GSEA tools
 ##---------------------------------------## 
@@ -43,39 +87,6 @@ setClass("annoBroadGseaRes", contains="list")
 #' A list of annoBroadGseaRes objects
 #' @export
 setClass("annoBroadGseaResList", contains="list") #3 a list of annoBroadGseaRes objects
-
-setClass("GeneSetResult",
-         representation=list(
-             gsNamespace="character",
-             gsName="character",
-             gsEffSize="integer",
-             p="numeric",
-             fdr="numeric"),
-         contains="VIRTUAL")
-            
-## Fisher's exact test
-setClass("FisherResult",
-         representation=list(hits="character"),
-         contains="GeneSetResult")
-
-setClass("FisherResultList",
-         representation=list(
-             inputName="character",
-             input="character",
-             universe="character"),
-         contain="list")
-
-
-## Camera result
-setClass("CameraResult",
-         representation=list(
-             correlation="numeric",
-             hits="character",
-             score="numeric"),
-         contains="GeneSetResult")
-setClass("CameraResultList",
-         representation=list(inputName="character"),
-         contain="list")
             
 ##----------------------------------------##
 ## migrated from ribiosNGS
