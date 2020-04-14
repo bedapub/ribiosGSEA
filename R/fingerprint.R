@@ -173,12 +173,24 @@ gseaFingerprint <- function(gseaDir, value=c("q", "es", "nes"), threshold=1E-4, 
   return(paths)
 }
 
-gseaFingerprintMatrix <- function(gseaDirs, value="es",...) {
-  hs.fps <- lapply(gseaDirs,gseaFingerprint, value=value,...)
+#' Return a fingerprint matrix of a vector of GSEA output directories
+#'
+#' @param gseaDirs A vector of character strings, paths to GSEA output
+#' directories
+#' @param value Type of value to build the matrix, passed to
+#' \code{gseaFingerPrint}
+#'
+#' @return A matrix
+#' @export
+gseaFingerprintMatrix <- function(gseaDirs, 
+				  value=c("q", "es", "nes"),
+				  ...) {
+  hs.fps <- lapply(gseaDirs, gseaFingerprint, value=value,...)
   isNull <- sapply(hs.fps, is.null)
   if(all(isNull))
     stop("No valid GSEA output directories were detected.\n",
-         "Please make sure that input directories are GSEA result folders (not their parent folders)\n")
+         "Please make sure that input directories are GSEA result folders",
+	" (not their parent folders)\n")
   fps <- hs.fps[!isNull]
   fps.names <- unique(unlist(lapply(fps, function(x) x[,1L])))
   
