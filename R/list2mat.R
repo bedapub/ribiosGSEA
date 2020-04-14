@@ -1,13 +1,11 @@
-#' Convert a first-level list into adjacency matrix
-#' 
-#' Convert a first-level list into adjacency matrix
+#' Convert a one-level list into an adjacency matrix
 #' 
 #' First-level list must have vectors of basic data types defined by R such as
 #' \code{characater}, \code{integer}, \code{number}, and \code{logical}.The
 #' function transforms such a list into adjacency matrix, rows of which are
 #' vector elements and columns of which are names of the list.
 #' 
-#' @param list A first-level list. See details
+#' @param list A one-level list. See details
 #' @return An adjacency matrix. Row and column names are defined by unique
 #' elements and list names, respectively.
 #' @author Jitao David Zhang <jitao_david.zhang@@roche.com>
