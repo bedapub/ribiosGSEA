@@ -1,3 +1,6 @@
+#' @include biosCamera.R
+NULL
+
 #' Wrap the gage::gage method to report consistent results as the CAMERA method
 #' 
 #' @param logFC A named vector of logFC values of genes
@@ -40,7 +43,13 @@ myGage <- function(logFC, gmtList, ...) {
     return(res)
 }
 
-
+#' Perform the GAGE analysis for EdgeResult and GmtList
+#'
+#' @param edgeResult An \code{EdgeResult} object
+#' @param gmtList A \code{GmtList} object
+#' @return A \code{EdgeGSE} object
+#'
+#' @importFrom ribiosUtils putColsFirst
 #' @importFrom ribiosNGS dgeTables fData
 #' @export
 logFCgage <- function(edgeResult, gmtList) {
@@ -128,7 +137,7 @@ zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
 }
 
 
-#' Perform camera using DGEList
+#' Apply the CAMERA method to a DGEList object
 #' 
 #' @param dgeList A DGEList object, with GeneSymbol available
 #' @param index List of integer indices of genesets, names are namese of gene
@@ -140,7 +149,7 @@ zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
 #' @importFrom limma camera
 #' @importFrom ribiosNGS humanGeneSymbols
 #' @export
-dgeListCamera <- function(dgeList, index, design, contrasts) {
+camera.dgeList <- function(dgeList, index, design, contrasts) {
   geneSymbols <- ribiosNGS::humanGeneSymbols(dgeList)
   if(is.null(geneSymbols))
     stop("EdgeResult must have 'GeneSymbol' in its fData to perform camera!")
@@ -200,7 +209,6 @@ dgeListCamera <- function(dgeList, index, design, contrasts) {
 }
 
 
-
 #' Run CAMERA method using EdgeResult 
 #' 
 #' @param y A EdgeResult object
@@ -224,7 +232,7 @@ camera.EdgeResult <- function(y, gmtList) {
   
   erTables <- tapply(seq(along=gsIndex), namespaces, function(i) {
     currInd <- gsIndex[i]
-    tt <- dgeListCamera(y@dgeList,
+    tt <- camera.dgeList(y@dgeList,
                         index=currInd,
                         design=design, contrasts=ct)
     return(tt)

@@ -1,7 +1,6 @@
 #' @include gse.R
 NULL
 
-
 #' @describeIn doGse Gene-set enrichment with logFC gage
 #' @export
 gseWithLogFCgage <- function(edgeResult, gmtList) {
