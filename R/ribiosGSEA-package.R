@@ -18,6 +18,9 @@ NULL
 ribiosExpression::DesignContrast
 
 #' @export
+ribiosExpression::designMatrix
+
+#' @export
 ribiosNGS::EdgeObject
 
 #' @export

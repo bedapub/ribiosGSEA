@@ -4,6 +4,7 @@
 \name{reexports}
 \alias{reexports}
 \alias{DesignContrast}
+\alias{designMatrix}
 \alias{EdgeObject}
 \alias{DGEList}
 \title{Objects exported from other packages}
@@ -15,7 +16,7 @@ below to see their documentation.
 \describe{
   \item{edgeR}{\code{\link[edgeR]{DGEList}}}
 
-  \item{ribiosExpression}{\code{\link[ribiosExpression]{DesignContrast}}}
+  \item{ribiosExpression}{\code{\link[ribiosExpression]{DesignContrast}}, \code{\link[ribiosExpression]{designMatrix}}}
 
   \item{ribiosNGS}{\code{\link[ribiosNGS]{EdgeObject}}}
 }}

@@ -350,6 +350,7 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
 #' 
 #' @return A \code{data.frame} containing CAMERA results
 #' 
+#' @importFrom ribiosExpression designMatrix
 #' @examples 
 #' mat <- matrix(c(10,3,5,9,3,5,
 #'                 2,4,8,12,9,9,

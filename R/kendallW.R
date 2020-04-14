@@ -324,6 +324,7 @@ setMethod("kendallW", "matrix", function(object,
               summary=summary, na.rm=na.rm, alpha=alpha)
 })
 
+#' @importFrom Biobase exprs
 #' @importFrom ribiosExpression featureNames phenoData
 #' @export 
 setMethod("kendallW", "ExpressionSet", function(object,

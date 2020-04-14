@@ -42,6 +42,11 @@ check: roxygenise
 	@echo '====== Checking finished ======'
 	@echo ' '
 
+run_examples:
+	@echo '====== Run examples ======'
+	@(${R} -q -e "devtools::run_examples()")
+	@echo ' '
+
 clean:
 	@echo '====== Cleaning Package ======'
 	@(rm -f src/*.o src/*.so src/*.dll src/*.rds)

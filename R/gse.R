@@ -217,6 +217,9 @@ camera.dgeList <- function(dgeList, index, design, contrasts) {
 #' 
 #' Note that the EdgeResult object must have a column 'GeneSymbol' in its
 #' \code{fData}.
+#' @importFrom ribiosNGS contrastNames designMatrix contrastMatrix
+#'     humanGeneSymbols
+#' @importFrom ribiosUtils putColsFirst
 #' @export camera.EdgeResult
 camera.EdgeResult <- function(y, gmtList) {
   ctnames<- contrastNames(y)
