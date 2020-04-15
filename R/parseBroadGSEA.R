@@ -74,7 +74,7 @@ parseGSEAres <- function(edbFile, rnkFile) {
     indices <- gsGeneIndices(x)
     annoBroadGseaResItem(x,
                     genes=rnk[indices,1L],
-                    genevalues=rnk[indices,2L])
+                    geneValues=rnk[indices,2L])
   })
   return(annoBroadGseaRes(agsList))
 }

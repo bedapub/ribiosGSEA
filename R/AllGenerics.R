@@ -13,12 +13,6 @@ setGeneric("gsNamespace", function(object, ...) standardGeneric("gsNamespace"))
 #' @export
 setGeneric("gsName", function(object, ...) standardGeneric("gsName"))
 
-#' Return gene-set description
-#' @param object An object
-#' @param ... Other parameters
-#' @export
-setGeneric("gsDesc", function(object, ...) standardGeneric("gsDesc"))
-
 #' Return gene-set genes
 #' @param object An object
 #' @param ... Other parameters
@@ -37,21 +31,18 @@ setGeneric("gsGeneCount", function(object,...) standardGeneric("gsGeneCount"))
 setGeneric("gsGeneValues", function(object) standardGeneric("gsGeneValues"))
 
 #' Set gene-set genes
+#' @title gsGenes-set
 #' @param object An object
 #' @param value Value
 #' @export
 setGeneric("gsGenes<-", function(object,value) standardGeneric("gsGenes<-"))
 
 #' Set gene-set gene statistics (values)
+#' @title gsGeneValues-set
 #' @param object An object
 #' @param value Value
 #' @export
 setGeneric("gsGeneValues<-", function(object,value) standardGeneric("gsGeneValues<-"))
-
-#' Returns a logical value whether the enrichment belongs to the core
-#' @param object An object
-#' @export
-setGeneric("isGseaCoreEnrich", function(object) standardGeneric("isGseaCoreEnrich"))
 
 #' Return GSEA enrichment scores
 #' @param object An object
@@ -93,16 +84,12 @@ setGeneric("gseaESprofile", function(object) standardGeneric("gseaESprofile"))
 #' @export
 setGeneric("gseaCoreEnrichThr", function(object) standardGeneric("gseaCoreEnrichThr"))
 
-#' Return GSEA core enrichment genes
+#' Return GSEA core enrichment genes (also known as leading-edge genes)
+#' @aliases gseaLeadingEdgeGenes
 #' @param object An object
 #' @export
 setGeneric("gseaCoreEnrichGenes", function(object) standardGeneric("gseaCoreEnrichGenes"))
 
-#' Return annotated BROAD GSEA result item
-#' @param object An object
-#' @param ... Other parameters
-#' @export
-setGeneric("annoBroadGseaResItem", function(object, ...) standardGeneric("annoBroadGseaResItem"))
 
 #' Return annotated BROAD GSEA result
 #' @param object An object
@@ -131,66 +118,11 @@ setGeneric("pValue", function(object, ...) standardGeneric("pValue"))
 #' @export
 setGeneric("fdrValue", function(object, ...) standardGeneric("fdrValue"))
 
-#' Return gene-set size
-#' @param object An object
-#' @param ... Other parameters
-#' @export
-setGeneric("gsSize", function(object, ...) standardGeneric("gsSize"))
-
 #' Return gene-set effect size
 #' @param object An object
 #' @param ... Other parameters
 #' @export
 setGeneric("gsEffSize", function(object, ...) standardGeneric("gsEffSize"))
-
-#' Return the minimum FDR value
-#' @param object An object
-#' @param ... Other parameters
-#' @export
-setGeneric("minFdrValue", function(object, ...) standardGeneric("minFdrValue"))
-
-#' Return the minimum P value
-#' @param object An object
-#' @param ... Other parameters
-#' @export
-setGeneric("minPValue", function(object, ...) standardGeneric("minPValue"))
-
-#' Return a logical vector indicating whether a gene-set is significantly
-#' enriched
-#' @param object An object
-#' @param fdr Numeric, FDR threshold
-#' @param ... Other parameters
-#' @export
-setGeneric("isSigGeneSet", function(object, fdr,...) standardGeneric("isSigGeneSet"))
-
-#' Return a character vector indicating significantly enriched gene-sets
-#' @param object An object
-#' @param fdr Numeric, FDR threshold
-#' @param ... Other parameters
-#' @export
-setGeneric("sigGeneSet", function(object, fdr,...) standardGeneric("sigGeneSet"))
-
-#' Return a table of significantly enriched gene-ests
-#' @param object An object
-#' @param fdr Numeric, FDR threshold
-#' @param ... Other parameters
-#' @export
-setGeneric("sigGeneSetTable", function(object, fdr,...) standardGeneric("sigGeneSetTable"))
-
-#' Return top enriched gene-sets
-#' @param object An object
-#' @param N integer, number of top gene-sets to be returned
-#' @param ... Other parameters
-#' @export
-setGeneric("topGeneSetTable", function(object, N,...) standardGeneric("topGeneSetTable"))
-
-#' Return top or significantly enriched gene-sets
-#' @param object An object
-#' @param N integer, number of top gene-sets to be returned
-#' @param fdr Numeric, FDR threshold
-#' @param ... Other parameters
-#' @export
-setGeneric("topOrSigGeneSetTable", function(object, N, fdr, ...) standardGeneric("topOrSigGeneSetTable"))
 
 #' Perform Fisher's exact test
 #' @param genes Genes

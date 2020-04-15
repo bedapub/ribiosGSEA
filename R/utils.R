@@ -23,3 +23,12 @@ readRonetGmt <- function(file) {
   names(res) <- names(resRaw)
   return(res)
 }
+
+#' Return the size (unique length) of gene-sets
+#' @param gmtList a \code{GmtList} object
+#' @return An integer vector
+#' @export
+gsSize <- function(gmtList) {
+   sapply(gsGenes(gmtList), ribiosUtils::ulen)
+}
+

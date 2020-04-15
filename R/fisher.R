@@ -1,6 +1,109 @@
 #' @include AllGenerics.R AllMethods.R ribiosGSEA-package.R
 NULL
 
+
+#' Return a logical vector indicating whether a gene-set is significantly
+#' enriched or not, given the FDR threshold
+#' @param object A FisherResultList object
+#' @param fdr Numeric, FDR value threshold
+#' @return A logical vector
+#' @export
+isSigGeneSet <- function(object, fdr=0.05) { 
+	return(fdrValue(object)<=fdr) 
+}
+
+#' Return names of gene-sets that are significantly enriched given the 
+#' FDR threshold
+#' @param object A FisherResultList object
+#' @param fdr Numeric, FDR value threshold
+#' @return A character vector
+#' @export
+sigGeneSet <- function(object,fdr) {
+    gsName(object)[isSigGeneSet(object, fdr)]
+}
+
+#' Return a data.frame of significantly enriched gene-sets
+#' @param object A FisherResultList object
+#' @param fdr Numeric, FDR value threshold
+#' @return A \code{data.frame}
+#' @export
+sigGeneSetTable <- function(object, fdr) {
+  as.data.frame(object[isSigGeneSet(object, fdr)])
+}
+
+#' Return the minimal p-value from a FisherResultList
+#' @param object A FisherResultList object
+#' @return A numeric value
+#' @export
+minPvalue <- function(object) {
+	min(pValue(object))
+}
+
+#' Return the minimal FDR value from a FisherResultList
+#' @param object A FisherResultList object
+#' @return A numeric value
+#' @export
+minFDRvalue <- function(object) {
+              min(fdrValue(object))
+}
+
+#' Return a data.frame of top gene-sets with the lowest p-values
+#' @param object An FisherResultList object
+#' @param N Integer, the number of returned gene-sets
+# '@return A data.frame
+#' @export
+topGeneSetTable <- function(object, N) {
+      ps <- pValue(object)
+      pOrd <- order(ps, decreasing=FALSE)[1:pmin(N, length(ps))]
+      sub <- object[pOrd]
+      return(as.data.frame(sub))
+}
+
+#' Return a data.frame of significantly enriched gene-sets with a minimum number
+#' @param object An FisherResultList object
+#' @param fdr Numeric, the treshold of FDR value
+#' @param N Integer, the number of returned gene-sets
+#' The total number of returned gene-sets are determined by the maximum of
+#' \code{N} and the counts of gene-sets that have \code{FDR} lower than
+#' \code{fdr}.
+#' @return A \code{data.frame}.
+#' @export
+topOrSigGeneSetTable <- function(object, fdr=0.05, N=10) {
+      fdrV <- fdrValue(object)
+      N <- pmax(N, sum(fdrV<=fdr))
+      return(topGeneSetTable(object, N))
+}
+
+#' Print a FisherResult object
+#' @param x A FisherResult object
+#' @param ... Not used
+#' @export
+print.FisherResult <- function(x, ...) {
+  if(!is.na(gsNamespace(x)))
+      cat("Namespace:", gsNamespace(x), "\n")
+  if(!is.na(gsName(x)))
+      cat("Name:", gsName(x), "\n")
+  cat("Gene set size:", gsEffSize(x), "\n")
+  cat(sprintf("Hits (%d):", length(hits(x))),
+      paste(hits(x), collapse=","), "\n")
+  cat("Fisher's exact p value:", pValue(x), "\n")
+  cat("BH FDR value:", fdrValue(x), "\n")
+}
+
+#' Print a FisherResultList object
+#'
+#' @param x A \code{FisherResultList} object
+#' @param ... Not used
+#' @export
+print.FisherResultList <- function(x, ...) {
+   cat("--- One-sided Fisher's exact tests for gene sets ---\n")
+   cat(sprintf("Total input genes: %d\n", length(x@input)))
+   cat(sprintf("Gene universe: %d\n", length(x@universe)))
+   cat(sprintf("Total gene sets: %d\n", length(x)))
+   cat(sprintf("Minimal P-value: %e\n", minPValue(x)))
+   cat(sprintf("Minimal FDR-value: %e\n", minFdrValue(x)))
+}
+
 #' The core algorithm to perform Fisher's exact test on a gene set
 #'
 #' @param genes Character vector, a collection of genes of which over-representation of the gene set is tested
@@ -140,118 +243,6 @@ gsListFisherTestCore <- function(genes, geneSetGenesList, universe,
   names(res) <- names(geneSetGenesList)
   return(res)
 }
-
-
-#' Perform Fisher's exact test on a gene set
-#'
-#' @param genes a collection of genes of which over-representation of the gene set is tested
-#' @param genesets A vector of character strings, genes belonging to one gene
-#' set.
-#' @param universe universe of genes
-#' @param gsName gene set name, can be left missing
-#' @param gsNamespace gene set namespace name, can be left missing
-#' @param makeUniqueNonNA Logical, whether genes, geneSetGenes, and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.
-#' @param checkUniverse Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}
-#' @param useEASE Logical, whether to use the EASE method to report the p-value. 
-#'
-#' This function performs one-sided Fisher's exact test to test the over-representation of gene set genes in the input gene list.
-#' 
-#' If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{geneSetGenes} that are in \code{genes} and calculating the resulting Fisher exact probability for that namespace. The theoretical basis of the EASE score lies in the concept of jackknifing a probability. See Hosack \emph{et al.} for details.
-#'
-#' @references 
-#' \describe{
-#'   \item{Hosack \emph{et al.}}{Hosack, Douglas A., Glynn Dennis, Brad T. Sherman, H. Clifford Lane, and Richard A. Lempicki. Identifying Biological Themes within Lists of Genes with EASE. Genome Biology 4 (2003): R70. \url{https://doi.org/10.1186/gb-2003-4-10-r70}}
-#' }
-#' 
-#' @note Duplicated items in genes, genesets' genes, and the universe are per default removed
-#' 
-#' @examples
-#' myGenes <- LETTERS[1:3]
-#' myGeneSet1 <- LETTERS[1:6]
-#' myGeneSet2 <- LETTERS[4:7]
-#' myUniverse <- LETTERS
-#' fisherTest(genes=myGenes, genesets=myGeneSet1, universe=myUniverse)
-#' fisherTest(genes=myGenes, genesets=myGeneSet2, universe=myUniverse)
-#' fisherTest(genes=myGenes, genesets=myGeneSet1, universe=myUniverse, 
-#'            gsName="My gene set1", gsNamespace="Letters")
-#'
-#' ## note that duplicated items are removed by default
-#' resWoRp <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
-#'                       universe=myUniverse)
-#' resWithRp <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
-#'                       universe=rep(myUniverse,2))
-#' identical(resWoRp, resWithRp)
-#' 
-#' resWithRpNoUnique <- fisherTest(genes=rep(myGenes,2), genesets=myGeneSet1, 
-#'            universe=rep(myUniverse,2), makeUniqueNonNA=FALSE)
-#' identical(resWoRp, resWithRpNoUnique)
-#' @export
-setMethod("fisherTest", c("character", "character", "character"),
-          function(genes, genesets, universe, gsName, gsNamespace,
-                   makeUniqueNonNA=TRUE, 
-                   checkUniverse=TRUE,
-                   useEASE=FALSE) {
-              if(missing(gsName))
-                  gsName <- as.character(NA)
-              if(missing(gsNamespace))
-                  gsNamespace <- as.character(NA)
-              coreRes <- gsFisherTestCore(genes = genes, 
-                           geneSetGenes = genesets,
-                           universe = universe,
-                           makeUniqueNonNA = makeUniqueNonNA,
-                           checkUniverse = checkUniverse,
-                           useEASE = useEASE)
-              new("FisherResult",
-                  gsNamespace=gsNamespace,
-                  gsName=gsName,
-                  gsEffSize=coreRes$gsEffSize,
-                  hits=coreRes$hits,
-                  p=coreRes$p,
-                  fdr=coreRes$p)
-          })
-
-#' Perform Fisher's exact test on a GeneSet object
-#'
-#' @param genes a collection of genes of which over-representation of the gene set is tested
-#' @param genesets A \code{GmtList} object.
-#' @param universe universe of genes
-#' @param makeUniqueNonNA Logical, whether genes and universe should be filtered to remove NA and made unique. The default is set to \code{TRUE}. When the uniqueness and absence of NA is ensured, this flag can be set to \code{FALSE} to accelerate the operation.
-#' @param checkUniverse Logical, if \code{TRUE}, then genes that are in \code{genes} but are not in \code{universe} are appended to \code{universe}
-#' @param useEASE Logical, whether to use the EASE method to report the p-value. 
-#'
-#' This function performs one-sided Fisher's exact test to test the over-representation of gene set genes in the input gene list.
-#'
-#' @importClassesFrom BioQC GmtList
-#' @examples
-#' myGenes <- LETTERS[1:3]
-#' myS4GeneSet1 <- list(name="GeneSet1", desc="GeneSet", 
-#'     genes=LETTERS[1:6], namespace="My namespace 1")
-#' myS4GeneSet2 <- list(name="GeneSet1", desc="GeneSet", 
-#'     genes=LETTERS[2:7], namespace="My namespace 2")
-#' myUniverse <- LETTERS
-#' fisherTest(myGenes, myS4GeneSet1, myUniverse)
-#' fisherTest(myGenes, myS4GeneSet2, myUniverse)
-#' @export
-setMethod("fisherTest", c("character", "list", "character"),
-          function(genes, genesets, universe,
-                   makeUniqueNonNA=TRUE, 
-                   checkUniverse=TRUE,
-                   useEASE=FALSE) {
-            if(makeUniqueNonNA) {
-              genes <- uniqueNonNA(genes)
-              universe <- uniqueNonNA(universe)
-            }
-            ## gsGenes(genesets) are garanteed to be unique and non-NA
-            ## therefore fisherTest now takes makeUniqueNonNA=FALSE
-            fisherTest(genes=genes, genesets=genesets$genes,
-                       universe=universe,
-                       gsName=genesets$name, 
-                       gsNamespace=genesets$namespace,
-                       makeUniqueNonNA=FALSE,
-                       checkUniverse=checkUniverse,
-                       useEASE=useEASE)
-          })
-
 
 #' Append NewHitsProp to the result \code{data.table} returned by \code{fisherTest}
 #' @param fisherTestResults \code{data.table} returned by \code{fisherTest}
