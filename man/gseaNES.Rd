@@ -2,18 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gseaNES}
 \alias{gseaNES}
-\alias{gseaNES,broadGseaResItem-method}
-\alias{gseaNES,annoBroadGseaRes-method}
-\alias{gseaNES,annoBroadGseaResList-method}
+\alias{gseaNES,BroadGseaResItem-method}
+\alias{gseaNES,AnnoBroadGseaRes-method}
+\alias{gseaNES,AnnoBroadGseaResList-method}
 \title{Return GSEA normalized enrichment scores}
 \usage{
 gseaNES(object)
 
-\S4method{gseaNES}{broadGseaResItem}(object)
+\S4method{gseaNES}{BroadGseaResItem}(object)
 
-\S4method{gseaNES}{annoBroadGseaRes}(object)
+\S4method{gseaNES}{AnnoBroadGseaRes}(object)
 
-\S4method{gseaNES}{annoBroadGseaResList}(object)
+\S4method{gseaNES}{AnnoBroadGseaResList}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -23,13 +23,13 @@ Return GSEA normalized enrichment scores
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get GSEA normalized enrichment score 
-from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get GSEA normalized enrichment score 
+from a BroadGseaResItem object
 
-\item \code{annoBroadGseaRes}: Get GSEA normalized enrichment score 
-from an annoBroadGseaRes object
+\item \code{AnnoBroadGseaRes}: Get GSEA normalized enrichment score 
+from an AnnoBroadGseaRes object
 
-\item \code{annoBroadGseaResList}: Get GSEA normalized enrichment score 
-from an annoBroadGseaResList object
+\item \code{AnnoBroadGseaResList}: Get GSEA normalized enrichment score 
+from an AnnoBroadGseaResList object
 }}
 

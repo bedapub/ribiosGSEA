@@ -10,7 +10,7 @@ parseGSEAdir(dir)
 \item{dir}{Character string, path to output directory}
 }
 \value{
-An \code{annoBroadGseaRes} object
+An \code{AnnoBroadGseaRes} object
 }
 \description{
 Parse an output directory of the Broad GSEA tool

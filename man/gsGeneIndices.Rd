@@ -2,12 +2,12 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gsGeneIndices}
 \alias{gsGeneIndices}
-\alias{gsGeneIndices,broadGseaResItem-method}
+\alias{gsGeneIndices,BroadGseaResItem-method}
 \title{Return gene-set gene indices}
 \usage{
 gsGeneIndices(object)
 
-\S4method{gsGeneIndices}{broadGseaResItem}(object)
+\S4method{gsGeneIndices}{BroadGseaResItem}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -17,7 +17,7 @@ Return gene-set gene indices
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get gene-set gene indices
-from a broadGseaResItem object, returning a vector of integers.
+\item \code{BroadGseaResItem}: Get gene-set gene indices
+from a BroadGseaResItem object, returning a vector of integers.
 }}
 

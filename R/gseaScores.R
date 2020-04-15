@@ -12,7 +12,7 @@ NULL
 #' missing in one or more conditions.
 #' 
 #' @aliases gseaScore gseaScores
-#' @param x An \code{annoBroadGseaRes} object
+#' @param x An \code{AnnoBroadGseaRes} object
 #' @param type Character string, the type of p-value used to calculate the
 #' score.
 #' @return \code{gseaScore} returns a double vector of scores with gene set
@@ -41,7 +41,7 @@ gseaScore <- function(x, type=c("fdr", "p", "fwer")) {
 }
 
 #' @describeIn gseaScore gseaScore applied to multiple objects
-#' @param ... Objects of \code{annoBroadGseaRes} to be compared
+#' @param ... Objects of \code{AnnoBroadGseaRes} to be compared
 #' @param names Character strings, names given to the result score sets. See
 #' examples below.
 #' @export

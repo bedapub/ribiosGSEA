@@ -2,12 +2,12 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gsGenes<-}
 \alias{gsGenes<-}
-\alias{gsGenes<-,annoBroadGseaResItem,character-method}
+\alias{gsGenes<-,AnnoBroadGseaResItem,character-method}
 \title{gsGenes-set}
 \usage{
 gsGenes(object) <- value
 
-\S4method{gsGenes}{annoBroadGseaResItem,character}(object) <- value
+\S4method{gsGenes}{AnnoBroadGseaResItem,character}(object) <- value
 }
 \arguments{
 \item{object}{An object}
@@ -19,6 +19,6 @@ Set gene-set genes
 }
 \section{Functions}{
 \itemize{
-\item \code{gsGenes<-,annoBroadGseaResItem,character-method}: Assign gene-set genes to annoBroadGseaResItem
+\item \code{gsGenes<-,AnnoBroadGseaResItem,character-method}: Assign gene-set genes to AnnoBroadGseaResItem
 }}
 

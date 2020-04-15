@@ -5,13 +5,13 @@ NULL
 ## gsName
 ##----------------------------------------##
 
-#' @describeIn gsName Get gene-set name from a broadGseaResItem object
+#' @describeIn gsName Get gene-set name from a BroadGseaResItem object
 #' @export
-setMethod("gsName", "broadGseaResItem", function(object) return(object@geneset))
+setMethod("gsName", "BroadGseaResItem", function(object) return(object@geneset))
 
-#' @describeIn gsName Get gene-set name from an annoBroadGseaRes object
+#' @describeIn gsName Get gene-set name from an AnnoBroadGseaRes object
 #' @export
-setMethod("gsName", "annoBroadGseaRes", function(object) sapply(object, gsName))
+setMethod("gsName", "AnnoBroadGseaRes", function(object) sapply(object, gsName))
 
 #' @describeIn gsName Get gene-set name from a FisherResult object
 #' @export
@@ -35,21 +35,21 @@ setMethod("gsName", "FisherResultList", function(object,...) {
 ## gseaES
 ##----------------------------------------##
 
-#' @describeIn gseaES Get GSEA enrichment score from a broadGseaResItem object
+#' @describeIn gseaES Get GSEA enrichment score from a BroadGseaResItem object
 #' @export
-setMethod("gseaES", "broadGseaResItem", function(object) return(object@es))
+setMethod("gseaES", "BroadGseaResItem", function(object) return(object@es))
 
-#' @describeIn gseaES Get GSEA enrichment score from an annoBroadGseaRes object
+#' @describeIn gseaES Get GSEA enrichment score from an AnnoBroadGseaRes object
 #' @export
-setMethod("gseaES", "annoBroadGseaRes", function(object) {
+setMethod("gseaES", "AnnoBroadGseaRes", function(object) {
   res <- sapply(object, gseaES)
   names(res) <- gsName(object)
   return(res)
 })
 
-#' @describeIn gseaES Get GSEA enrichment score from an annoBroadGseaResList object
+#' @describeIn gseaES Get GSEA enrichment score from an AnnoBroadGseaResList object
 #' @export
-setMethod("gseaES", "annoBroadGseaResList", function(object) {
+setMethod("gseaES", "AnnoBroadGseaResList", function(object) {
   es <- lapply(object, gseaES)
   res <- vec2mat(es, sort.by="mean", decreasing=FALSE)
   return(res)
@@ -60,23 +60,23 @@ setMethod("gseaES", "annoBroadGseaResList", function(object) {
 ##----------------------------------------##
 
 #' @describeIn gseaNES Get GSEA normalized enrichment score 
-#'     from a broadGseaResItem object
+#'     from a BroadGseaResItem object
 #' @export
-setMethod("gseaNES", "broadGseaResItem", function(object) return(object@nes))
+setMethod("gseaNES", "BroadGseaResItem", function(object) return(object@nes))
 
 #' @describeIn gseaNES Get GSEA normalized enrichment score 
-#'     from an annoBroadGseaRes object
+#'     from an AnnoBroadGseaRes object
 #' @export
-setMethod("gseaNES", "annoBroadGseaRes", function(object) {
+setMethod("gseaNES", "AnnoBroadGseaRes", function(object) {
   res <- sapply(object, gseaNES)
   names(res) <- gsName(object)
   return(res)
 })
 
 #' @describeIn gseaNES Get GSEA normalized enrichment score 
-#'     from an annoBroadGseaResList object
+#'     from an AnnoBroadGseaResList object
 #' @export
-setMethod("gseaNES", "annoBroadGseaResList", function(object) {
+setMethod("gseaNES", "AnnoBroadGseaResList", function(object) {
   nes <- lapply(object, gseaNES)
   res <- vec2mat(nes, sort.by="mean", decreasing=FALSE)
   return(res)
@@ -87,23 +87,23 @@ setMethod("gseaNES", "annoBroadGseaResList", function(object) {
 ##----------------------------------------##
 
 #' @describeIn gseaNP Get GSEA number of permutations
-#'     from a broadGseaResItem object
+#'     from a BroadGseaResItem object
 #' @export
-setMethod("gseaNP", "broadGseaResItem", function(object) return(object@np))
+setMethod("gseaNP", "BroadGseaResItem", function(object) return(object@np))
 
 #' @describeIn gseaNP Get GSEA number of permutations
-#'     from an annoBroadGseaRes object
+#'     from an AnnoBroadGseaRes object
 #' @export
-setMethod("gseaNP", "annoBroadGseaRes", function(object) {
+setMethod("gseaNP", "AnnoBroadGseaRes", function(object) {
   res <- sapply(object, gseaNP)
   names(res) <- gsName(object)
   return(res)
 })
 
 #' @describeIn gseaNP Get GSEA number of permutations
-#'     from an annoBroadGseaResList object
+#'     from an AnnoBroadGseaResList object
 #' @export
-setMethod("gseaNP", "annoBroadGseaResList", function(object) {
+setMethod("gseaNP", "AnnoBroadGseaResList", function(object) {
   nps <- lapply(object, gseaNP)
   res <- vec2mat(nps, sort.by="mean", decreasing=FALSE)
   return(res)
@@ -114,23 +114,23 @@ setMethod("gseaNP", "annoBroadGseaResList", function(object) {
 ##----------------------------------------##
 
 #' @describeIn gseaFDR Get GSEA FDR values
-#'     from a broadGseaResItem object
+#'     from a BroadGseaResItem object
 #' @export
-setMethod("gseaFDR", "broadGseaResItem", function(object) return(object@fdr))
+setMethod("gseaFDR", "BroadGseaResItem", function(object) return(object@fdr))
 
 #' @describeIn gseaFDR Get GSEA FDR values
-#'     from an annoBroadGseaRes object
+#'     from an AnnoBroadGseaRes object
 #' @export
-setMethod("gseaFDR", "annoBroadGseaRes", function(object) {
+setMethod("gseaFDR", "AnnoBroadGseaRes", function(object) {
   res <- sapply(object, gseaFDR)
   names(res) <- gsName(object)
   return(res)
 })
 
 #' @describeIn gseaFDR Get GSEA FDR values
-#'     from an annoBroadGseaResList object
+#'     from an AnnoBroadGseaResList object
 #' @export
-setMethod("gseaFDR", "annoBroadGseaResList", function(object) {
+setMethod("gseaFDR", "AnnoBroadGseaResList", function(object) {
   fdrs <- lapply(object, gseaFDR)
   res <- vec2mat(fdrs, sort.by="mean", decreasing=FALSE)
   return(res)
@@ -141,23 +141,23 @@ setMethod("gseaFDR", "annoBroadGseaResList", function(object) {
 ##----------------------------------------##
 
 #' @describeIn gseaFWER Get GSEA FWER values
-#'     from a broadGseaResItem object
+#'     from a BroadGseaResItem object
 #' @export
-setMethod("gseaFWER", "broadGseaResItem", function(object) {return(object@fwer)})
+setMethod("gseaFWER", "BroadGseaResItem", function(object) {return(object@fwer)})
 
 #' @describeIn gseaFWER Get GSEA FWER values
-#'     from an annoBroadGseaRes object
+#'     from an AnnoBroadGseaRes object
 #' @export
-setMethod("gseaFWER", "annoBroadGseaRes", function(object) {
+setMethod("gseaFWER", "AnnoBroadGseaRes", function(object) {
   res <- sapply(object, gseaFWER)
   names(res) <- gsName(object)
   return(res)
 })
 
 #' @describeIn gseaFWER Get GSEA FWER values
-#'     from an annoBroadGseaResList object
+#'     from an AnnoBroadGseaResList object
 #' @export
-setMethod("gseaFWER", "annoBroadGseaResList", function(object) {
+setMethod("gseaFWER", "AnnoBroadGseaResList", function(object) {
   fwers <- lapply(object, gseaFWER)
   res <- vec2mat(fwers, sort.by="mean", decreasing=FALSE)
   return(res)
@@ -169,32 +169,32 @@ setMethod("gseaFWER", "annoBroadGseaResList", function(object) {
 ##----------------------------------------##
 
 #' @describeIn gsGeneIndices Get gene-set gene indices
-#'     from a broadGseaResItem object, returning a vector of integers.
+#'     from a BroadGseaResItem object, returning a vector of integers.
 #' @export
-setMethod("gsGeneIndices", "broadGseaResItem", function(object) return(object@geneIndices))
+setMethod("gsGeneIndices", "BroadGseaResItem", function(object) return(object@geneIndices))
 
 ##----------------------------------------##
 ## gseaESprofile
 ##----------------------------------------##
 
 #' @describeIn gseaESprofile Get GSEA enrichment profile
-#'     from a broadGseaResItem object
+#'     from a BroadGseaResItem object
 #' @export
-setMethod("gseaESprofile", "broadGseaResItem", function(object) return(object@esProfile))
+setMethod("gseaESprofile", "BroadGseaResItem", function(object) return(object@esProfile))
 
 ##----------------------------------------##
 ## gseaCoreEnrichThr
 ##----------------------------------------##
 
 #' @describeIn gseaCoreEnrichThr Get the threshold value of GSEA core enrichment
-#'     from a broadGseaResItem object
+#'     from a BroadGseaResItem object
 #' @export
-setMethod("gseaCoreEnrichThr", "broadGseaResItem", function(object) return(object@coreEnrichThr))
+setMethod("gseaCoreEnrichThr", "BroadGseaResItem", function(object) return(object@coreEnrichThr))
 
 #' @describeIn gseaCoreEnrichThr Get the threshold value of GSEA core enrichment
-#'     from an annoBroadGseaRes object
+#'     from an AnnoBroadGseaRes object
 #' @export
-setMethod("gseaCoreEnrichThr", "annoBroadGseaRes", function(object) {
+setMethod("gseaCoreEnrichThr", "AnnoBroadGseaRes", function(object) {
   res <- sapply(object, gseaCoreEnrichThr)
   names(res) <- gsName(object)
   return(res)
@@ -205,14 +205,14 @@ setMethod("gseaCoreEnrichThr", "annoBroadGseaRes", function(object) {
 ##----------------------------------------##
 
 #' @describeIn gsGenes Get gene-set genes
-#'     from a broadGseaResItem object, returning a character string vector.
+#'     from a BroadGseaResItem object, returning a character string vector.
 #' @export
-setMethod("gsGenes", "annoBroadGseaResItem", function(object) return(object@gsGenes))
+setMethod("gsGenes", "AnnoBroadGseaResItem", function(object) return(object@gsGenes))
 
-#' @describeIn gsGenes Get gene-set genes from an annoBroadGseaRes object,
+#' @describeIn gsGenes Get gene-set genes from an AnnoBroadGseaRes object,
 #' returning a list of character string vectors.
 #' @export
-setMethod("gsGenes", "annoBroadGseaRes", function(object) {
+setMethod("gsGenes", "AnnoBroadGseaRes", function(object) {
   res <- lapply(object@.Data, gsGenes)
   names(res) <- gsName(object)
   return(res)
@@ -223,9 +223,9 @@ setMethod("gsGenes", "annoBroadGseaRes", function(object) {
 # '@export
 setMethod("gsGenes", "GmtList", function(object) return(BioQC::gsGenes(object)))
 
-#' @describeIn gsGenes-set Assign gene-set genes to annoBroadGseaResItem
+#' @describeIn gsGenes-set Assign gene-set genes to AnnoBroadGseaResItem
 #' @export
-setMethod("gsGenes<-", c("annoBroadGseaResItem", "character"), function(object,value) {
+setMethod("gsGenes<-", c("AnnoBroadGseaResItem", "character"), function(object,value) {
   object@gsGenes <- value
   return(object)
 })
@@ -253,14 +253,14 @@ setMethod("gsNamespace", "FisherResultList", function(object) sapply(object@.Dat
 ##----------------------------------------##
 
 #' @describeIn gsGeneValues Return values associated with the genes in a
-#' gene-set in an annoBroadGseaResItem object in a numeric vector.
+#' gene-set in an AnnoBroadGseaResItem object in a numeric vector.
 #' @export
-setMethod("gsGeneValues", "annoBroadGseaResItem", function(object) return(object@gsGeneValues))
+setMethod("gsGeneValues", "AnnoBroadGseaResItem", function(object) return(object@gsGeneValues))
 
 #' @describeIn gsGeneValues Return values associated with the genes in a
-#' gene-set in an annoBroadGseaRes object in a list of numeric vectors.
+#' gene-set in an AnnoBroadGseaRes object in a list of numeric vectors.
 #' @export
-setMethod("gsGeneValues", "annoBroadGseaRes", function(object) {
+setMethod("gsGeneValues", "AnnoBroadGseaRes", function(object) {
   res <- lapply(object, gsGeneValues)
   names(res) <- gsName(object)
   return(res)
@@ -269,7 +269,7 @@ setMethod("gsGeneValues", "annoBroadGseaRes", function(object) {
 #' @describeIn gsGeneValues-set Assign values associated with gene-set genes to
 #' an annoBraoadGseaResItem object
 #' @export
-setMethod("gsGeneValues<-", c("annoBroadGseaResItem", "numeric"),
+setMethod("gsGeneValues<-", c("AnnoBroadGseaResItem", "numeric"),
 	  function(object, value) { 
 		  object@gsGeneValues <- value 
 		  return(object)
@@ -281,7 +281,7 @@ setMethod("gsGeneValues<-", c("annoBroadGseaResItem", "numeric"),
 
 #' Return a vector of logical values, indicating whether genes belong to core
 #' enrichment or not
-#' @param object An \code{annoBroadGseaResItem} object
+#' @param object An \code{AnnoBroadGseaResItem} object
 #' @return A logical vector
 isGseaCoreEnrich <- function(object) {
   nes <- gseaNES(object)
@@ -295,18 +295,18 @@ isGseaCoreEnrich <- function(object) {
 }
 
 #' @describeIn gseaCoreEnrichGenes Return core enriched genes (also known as
-#' leading-edge genes) in an annoBroadGseaResItem object as a character string
+#' leading-edge genes) in an AnnoBroadGseaResItem object as a character string
 #' vector.
 #' @export
-setMethod("gseaCoreEnrichGenes", "annoBroadGseaResItem", function(object) {
+setMethod("gseaCoreEnrichGenes", "AnnoBroadGseaResItem", function(object) {
   gsGenes(object)[isGseaCoreEnrich(object)]
 })
 
 #' @describeIn gseaCoreEnrichGenes Return core enriched genes (also known as
-#' leading-edge genes) in an annoBroadGseaRes object as a list of character 
+#' leading-edge genes) in an AnnoBroadGseaRes object as a list of character 
 #' string vectors.
 #' @export
-setMethod("gseaCoreEnrichGenes", "annoBroadGseaRes", function(object) {
+setMethod("gseaCoreEnrichGenes", "AnnoBroadGseaRes", function(object) {
   res <- lapply(object, gseaCoreEnrichGenes)
   names(res) <- gsName(object)
   return(res)
@@ -321,35 +321,35 @@ setMethod("gseaCoreEnrichGenes", "annoBroadGseaRes", function(object) {
 ## setAs
 ##----------------------------------------##
 
-#' Convert a list of annoBroadGseaResItem objects to an annoBroadGseaRes object
-#' @param from A list of annoBroadGseaResItem objects
-#' @param to An annoBroadGseaRes objecct
+#' Convert a list of AnnoBroadGseaResItem objects to an AnnoBroadGseaRes object
+#' @param from A list of AnnoBroadGseaResItem objects
+#' @param to An AnnoBroadGseaRes objecct
 #' @export
-setAs(from="list", to="annoBroadGseaRes", def=function(from,to) {
-  haltifnot(all(sapply(from, function(x) is(x, "annoBroadGseaResItem"))),
-            msg="Input list must be of annoBroadGseaResItem objects")
-  res <- new("annoBroadGseaRes", from)
+setAs(from="list", to="AnnoBroadGseaRes", def=function(from,to) {
+  haltifnot(all(sapply(from, function(x) is(x, "AnnoBroadGseaResItem"))),
+            msg="Input list must be of AnnoBroadGseaResItem objects")
+  res <- new("AnnoBroadGseaRes", from)
   return(res)
 })
 
-#' Convert a list of annoBroadGseaRes to an annoBroadGseaResList object
-#' @param from A list of annoBroadGseaRes objects
-#' @param to An annoBroadGseaResList objecct
+#' Convert a list of AnnoBroadGseaRes to an AnnoBroadGseaResList object
+#' @param from A list of AnnoBroadGseaRes objects
+#' @param to An AnnoBroadGseaResList objecct
 #' @export
-setAs(from="list", to="annoBroadGseaResList", def=function(from,to) {
-  haltifnot(all(sapply(from, function(x) is(x, "annoBroadGseaRes"))),
-            msg="Input list must be of annoBroadGseaRes objects")
-  res <- new("annoBroadGseaResList", from)
+setAs(from="list", to="AnnoBroadGseaResList", def=function(from,to) {
+  haltifnot(all(sapply(from, function(x) is(x, "AnnoBroadGseaRes"))),
+            msg="Input list must be of AnnoBroadGseaRes objects")
+  res <- new("AnnoBroadGseaResList", from)
 
   return(res)
 })
 
-#' Convert a list of annoBroadGseaResItem objects to a list
-#' @param object A list of annoBroadGseaResItem
-#' @return An \code{annoBroadGseaRes} object
+#' Convert a list of AnnoBroadGseaResItem objects to a list
+#' @param object A list of AnnoBroadGseaResItem
+#' @return An \code{AnnoBroadGseaRes} object
 #' @export
-annoBroadGseaRes <- function(object) {
-  return(as(object, "annoBroadGseaRes"))
+AnnoBroadGseaRes <- function(object) {
+  return(as(object, "AnnoBroadGseaRes"))
 }
 
 
@@ -357,21 +357,21 @@ annoBroadGseaRes <- function(object) {
 ## [
 ##----------------------------------------##
 
-#' Subset an annoBroadGseaRes object
+#' Subset an AnnoBroadGseaRes object
 #'
-#' @param x An annoBroadGseaRes object
+#' @param x An AnnoBroadGseaRes object
 #' @param i An integer or logical subsetting index
 #' @param j Not used
 #' @param ... Not used
 #' @param drop Not used
-#' @return A subset of the original data as an annoBroadGseaRes object
+#' @return A subset of the original data as an AnnoBroadGseaRes object
 #'
 #' @export
-setMethod("[", "annoBroadGseaRes", function(x, i, j, ..., drop=FALSE) {
+setMethod("[", "AnnoBroadGseaRes", function(x, i, j, ..., drop=FALSE) {
   if(all(is.character(i)))
     i <- match(i, gsName(x))
   res <- callGeneric(x@.Data, i)
-  return(as(res, "annoBroadGseaRes"))
+  return(as(res, "AnnoBroadGseaRes"))
 })
 
 
@@ -422,10 +422,10 @@ setMethod("[", c("FisherResultList", "character", "character", "missing"),
 ## show
 ##----------------------------------------##
 
-#' Show a broadGseaResItem object
-#' @param object A broadGseaResItem object 
+#' Show a BroadGseaResItem object
+#' @param object A BroadGseaResItem object 
 #' export
-setMethod("show", "broadGseaResItem", function(object) {
+setMethod("show", "BroadGseaResItem", function(object) {
   gInd <- gsGeneIndices(object)
   fmt <- "GeneSet \"%s\" [%d genes]\nES=%1.3f; NES=%1.3f; \
 Nominal P-value(NP)=%1.3f; FDR=%1.3f; FWER=%1.3f\
@@ -445,10 +445,10 @@ Core enrichment threshold of input value:%1.3f\n"
   cat(str)
 })
 
-#' Show an annoBroadGseaResItem object
-#' @param object An annobroadGseaResItem object 
+#' Show an AnnoBroadGseaResItem object
+#' @param object An annoBroadGseaResItem object 
 #' export
-setMethod("show", "annoBroadGseaResItem", function(object) {
+setMethod("show", "AnnoBroadGseaResItem", function(object) {
   gInd <- gsGeneIndices(object)
   fmt <- "AnnotatedGeneSet \"%s\" [%d genes]\nES=%1.3f; NES=%1.3f; \
 Nominal P-value(NP)=%1.3f; FDR=%1.3f; FWER=%1.3f\
@@ -471,9 +471,9 @@ GeneNames:%s\nGene input values:%s\n"
 })
 
 #' Show a anonBroadGseaRes object
-#' @param object A annoBroadGseaRes object 
+#' @param object A AnnoBroadGseaRes object 
 #' export
-setMethod("show", "annoBroadGseaRes", function(object) {
+setMethod("show", "AnnoBroadGseaRes", function(object) {
   str <- sprintf("Annotated GSEA Results with %d gene sets\n",
                  length(object))
   cat(str)

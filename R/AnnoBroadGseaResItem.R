@@ -1,11 +1,11 @@
-#' Convert a broadGseaResItem object to an annoBroadGseaResItem object
-#' @param object A broadGseaResItem object
+#' Convert a BroadGseaResItem object to an AnnoBroadGseaResItem object
+#' @param object A BroadGseaResItem object
 #' @param genes A character string vector
 #' @param geneValues A numeric vector
-#' @return An annobroadGseaResItem object
+#' @return An annoBroadGseaResItem object
 #' @export
-annoBroadGseaResItem <- function(object, genes, geneValues) {
-  res <- as(object, "annoBroadGseaResItem")
+AnnoBroadGseaResItem <- function(object, genes, geneValues) {
+  res <- as(object, "AnnoBroadGseaResItem")
   if(!(length(genes)==length(geneValues) && length(genes)==length(gsGeneIndices(object))))
     stop(sprintf("genes (#=%d) and geneValues (#=%d) must be of the same length as the gsGeneIndices (#=%d)",
                  length(genes), length(geneValues), length(gsGeneIndices(object))))

@@ -2,18 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gseaFDR}
 \alias{gseaFDR}
-\alias{gseaFDR,broadGseaResItem-method}
-\alias{gseaFDR,annoBroadGseaRes-method}
-\alias{gseaFDR,annoBroadGseaResList-method}
+\alias{gseaFDR,BroadGseaResItem-method}
+\alias{gseaFDR,AnnoBroadGseaRes-method}
+\alias{gseaFDR,AnnoBroadGseaResList-method}
 \title{Return GSEA FDR}
 \usage{
 gseaFDR(object)
 
-\S4method{gseaFDR}{broadGseaResItem}(object)
+\S4method{gseaFDR}{BroadGseaResItem}(object)
 
-\S4method{gseaFDR}{annoBroadGseaRes}(object)
+\S4method{gseaFDR}{AnnoBroadGseaRes}(object)
 
-\S4method{gseaFDR}{annoBroadGseaResList}(object)
+\S4method{gseaFDR}{AnnoBroadGseaResList}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -23,13 +23,13 @@ Return GSEA FDR
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get GSEA FDR values
-from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get GSEA FDR values
+from a BroadGseaResItem object
 
-\item \code{annoBroadGseaRes}: Get GSEA FDR values
-from an annoBroadGseaRes object
+\item \code{AnnoBroadGseaRes}: Get GSEA FDR values
+from an AnnoBroadGseaRes object
 
-\item \code{annoBroadGseaResList}: Get GSEA FDR values
-from an annoBroadGseaResList object
+\item \code{AnnoBroadGseaResList}: Get GSEA FDR values
+from an AnnoBroadGseaResList object
 }}
 

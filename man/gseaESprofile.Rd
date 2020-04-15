@@ -2,12 +2,12 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gseaESprofile}
 \alias{gseaESprofile}
-\alias{gseaESprofile,broadGseaResItem-method}
+\alias{gseaESprofile,BroadGseaResItem-method}
 \title{Return GSEA enrichment score profile}
 \usage{
 gseaESprofile(object)
 
-\S4method{gseaESprofile}{broadGseaResItem}(object)
+\S4method{gseaESprofile}{BroadGseaResItem}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -17,7 +17,7 @@ Return GSEA enrichment score profile
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get GSEA enrichment profile
-from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get GSEA enrichment profile
+from a BroadGseaResItem object
 }}
 

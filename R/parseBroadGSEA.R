@@ -41,7 +41,7 @@ parseDTG <- function(xmlNode) {
   geneIndices <- as.integer(strsplit(gsAttrs[["HIT_INDICES"]], " ")[[1]])+1L ## +1 because the original indices are zero based, instead of one based.
   esprofile <- as.numeric(strsplit(gsAttrs[["ES_PROFILE"]], " ")[[1]])
   coreEnrichThr <- as.numeric(gsAttrs[["RANK_SCORE_AT_ES"]])
-  obj <- new("broadGseaResItem",
+  obj <- new("BroadGseaResItem",
              geneset=geneset,
              es=es,nes=nes, np=np, fdr=fdr, fwer=fwer,
              geneIndices=geneIndices, esProfile=esprofile, coreEnrichThr=coreEnrichThr)
@@ -72,16 +72,16 @@ parseGSEAres <- function(edbFile, rnkFile) {
             msg="rnkFile must contain two columns: the first with gene identifiers and the second with ranking values")
   agsList <- lapply(gsList, function(x) {
     indices <- gsGeneIndices(x)
-    annoBroadGseaResItem(x,
+    AnnoBroadGseaResItem(x,
                     genes=rnk[indices,1L],
                     geneValues=rnk[indices,2L])
   })
-  return(annoBroadGseaRes(agsList))
+  return(AnnoBroadGseaRes(agsList))
 }
 
 #' Parse an output directory of the Broad GSEA tool
 #' @param dir Character string, path to output directory
-#' @return An \code{annoBroadGseaRes} object
+#' @return An \code{AnnoBroadGseaRes} object
 #' @export
 parseGSEAdir <- function(dir) {
   rnkfile <- dir(file.path(dir, "edb"), pattern="*.rnk", full.name=TRUE)

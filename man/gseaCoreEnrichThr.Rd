@@ -2,15 +2,15 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gseaCoreEnrichThr}
 \alias{gseaCoreEnrichThr}
-\alias{gseaCoreEnrichThr,broadGseaResItem-method}
-\alias{gseaCoreEnrichThr,annoBroadGseaRes-method}
+\alias{gseaCoreEnrichThr,BroadGseaResItem-method}
+\alias{gseaCoreEnrichThr,AnnoBroadGseaRes-method}
 \title{Return GSEA core enrichment score threshold}
 \usage{
 gseaCoreEnrichThr(object)
 
-\S4method{gseaCoreEnrichThr}{broadGseaResItem}(object)
+\S4method{gseaCoreEnrichThr}{BroadGseaResItem}(object)
 
-\S4method{gseaCoreEnrichThr}{annoBroadGseaRes}(object)
+\S4method{gseaCoreEnrichThr}{AnnoBroadGseaRes}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -20,10 +20,10 @@ Return GSEA core enrichment score threshold
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get the threshold value of GSEA core enrichment
-from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get the threshold value of GSEA core enrichment
+from a BroadGseaResItem object
 
-\item \code{annoBroadGseaRes}: Get the threshold value of GSEA core enrichment
-from an annoBroadGseaRes object
+\item \code{AnnoBroadGseaRes}: Get the threshold value of GSEA core enrichment
+from an AnnoBroadGseaRes object
 }}
 

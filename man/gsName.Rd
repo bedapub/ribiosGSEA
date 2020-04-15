@@ -2,8 +2,8 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gsName}
 \alias{gsName}
-\alias{gsName,broadGseaResItem-method}
-\alias{gsName,annoBroadGseaRes-method}
+\alias{gsName,BroadGseaResItem-method}
+\alias{gsName,AnnoBroadGseaRes-method}
 \alias{gsName,FisherResult-method}
 \alias{gsName,FisherResultList-method}
 \alias{gsName,GmtList-method}
@@ -11,9 +11,9 @@
 \usage{
 gsName(object, ...)
 
-\S4method{gsName}{broadGseaResItem}(object)
+\S4method{gsName}{BroadGseaResItem}(object)
 
-\S4method{gsName}{annoBroadGseaRes}(object)
+\S4method{gsName}{AnnoBroadGseaRes}(object)
 
 \S4method{gsName}{FisherResult}(object)
 
@@ -33,9 +33,9 @@ Return gene-set name
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get gene-set name from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get gene-set name from a BroadGseaResItem object
 
-\item \code{annoBroadGseaRes}: Get gene-set name from an annoBroadGseaRes object
+\item \code{AnnoBroadGseaRes}: Get gene-set name from an AnnoBroadGseaRes object
 
 \item \code{FisherResult}: Get gene-set name from a FisherResult object
 

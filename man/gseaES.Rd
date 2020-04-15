@@ -2,18 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gseaES}
 \alias{gseaES}
-\alias{gseaES,broadGseaResItem-method}
-\alias{gseaES,annoBroadGseaRes-method}
-\alias{gseaES,annoBroadGseaResList-method}
+\alias{gseaES,BroadGseaResItem-method}
+\alias{gseaES,AnnoBroadGseaRes-method}
+\alias{gseaES,AnnoBroadGseaResList-method}
 \title{Return GSEA enrichment scores}
 \usage{
 gseaES(object)
 
-\S4method{gseaES}{broadGseaResItem}(object)
+\S4method{gseaES}{BroadGseaResItem}(object)
 
-\S4method{gseaES}{annoBroadGseaRes}(object)
+\S4method{gseaES}{AnnoBroadGseaRes}(object)
 
-\S4method{gseaES}{annoBroadGseaResList}(object)
+\S4method{gseaES}{AnnoBroadGseaResList}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -23,10 +23,10 @@ Return GSEA enrichment scores
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get GSEA enrichment score from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get GSEA enrichment score from a BroadGseaResItem object
 
-\item \code{annoBroadGseaRes}: Get GSEA enrichment score from an annoBroadGseaRes object
+\item \code{AnnoBroadGseaRes}: Get GSEA enrichment score from an AnnoBroadGseaRes object
 
-\item \code{annoBroadGseaResList}: Get GSEA enrichment score from an annoBroadGseaResList object
+\item \code{AnnoBroadGseaResList}: Get GSEA enrichment score from an AnnoBroadGseaResList object
 }}
 

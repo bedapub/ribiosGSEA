@@ -49,7 +49,7 @@ setClass("FisherResultList",
 #' @slot coreEnrichThr Numeric
 #'
 #' @export
-setClass("broadGseaResItem",
+setClass("BroadGseaResItem",
          representation=list(geneset="character",
            "es"="numeric",
            "nes"="numeric",
@@ -66,18 +66,18 @@ setClass("broadGseaResItem",
 #' @slot gsGeneValues Vector of numeric values, statistics of gene-set genes
 #'
 #' @export
-setClass("annoBroadGseaResItem",
+setClass("AnnoBroadGseaResItem",
          representation=list("gsGenes"="character",
            "gsGeneValues"="numeric"),
-         contains="broadGseaResItem")
+         contains="BroadGseaResItem")
 
 #' Annotated BROAD GSEA Results for one contrast
 #' @export
-setClass("annoBroadGseaRes", contains="list")
+setClass("AnnoBroadGseaRes", contains="list")
 
-#' A list of annoBroadGseaRes objects
+#' A list of AnnoBroadGseaRes objects
 #' @export
-setClass("annoBroadGseaResList", contains="list") #3 a list of annoBroadGseaRes objects
+setClass("AnnoBroadGseaResList", contains="list") #3 a list of AnnoBroadGseaRes objects
             
 ##----------------------------------------##
 ## migrated from ribiosNGS

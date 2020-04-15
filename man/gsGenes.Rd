@@ -2,16 +2,16 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gsGenes}
 \alias{gsGenes}
-\alias{gsGenes,annoBroadGseaResItem-method}
-\alias{gsGenes,annoBroadGseaRes-method}
+\alias{gsGenes,AnnoBroadGseaResItem-method}
+\alias{gsGenes,AnnoBroadGseaRes-method}
 \alias{gsGenes,GmtList-method}
 \title{Return gene-set genes}
 \usage{
 gsGenes(object, ...)
 
-\S4method{gsGenes}{annoBroadGseaResItem}(object)
+\S4method{gsGenes}{AnnoBroadGseaResItem}(object)
 
-\S4method{gsGenes}{annoBroadGseaRes}(object)
+\S4method{gsGenes}{AnnoBroadGseaRes}(object)
 
 \S4method{gsGenes}{GmtList}(object)
 }
@@ -25,10 +25,10 @@ Return gene-set genes
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{annoBroadGseaResItem}: Get gene-set genes
-from a broadGseaResItem object, returning a character string vector.
+\item \code{AnnoBroadGseaResItem}: Get gene-set genes
+from a BroadGseaResItem object, returning a character string vector.
 
-\item \code{annoBroadGseaRes}: Get gene-set genes from an annoBroadGseaRes object,
+\item \code{AnnoBroadGseaRes}: Get gene-set genes from an AnnoBroadGseaRes object,
 returning a list of character string vectors.
 
 \item \code{GmtList}: Get gene-set genes from a GmtList object, returning a

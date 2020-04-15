@@ -2,18 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gseaNP}
 \alias{gseaNP}
-\alias{gseaNP,broadGseaResItem-method}
-\alias{gseaNP,annoBroadGseaRes-method}
-\alias{gseaNP,annoBroadGseaResList-method}
+\alias{gseaNP,BroadGseaResItem-method}
+\alias{gseaNP,AnnoBroadGseaRes-method}
+\alias{gseaNP,AnnoBroadGseaResList-method}
 \title{Return GSEA number of permutation}
 \usage{
 gseaNP(object)
 
-\S4method{gseaNP}{broadGseaResItem}(object)
+\S4method{gseaNP}{BroadGseaResItem}(object)
 
-\S4method{gseaNP}{annoBroadGseaRes}(object)
+\S4method{gseaNP}{AnnoBroadGseaRes}(object)
 
-\S4method{gseaNP}{annoBroadGseaResList}(object)
+\S4method{gseaNP}{AnnoBroadGseaResList}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -23,13 +23,13 @@ Return GSEA number of permutation
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get GSEA number of permutations
-from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get GSEA number of permutations
+from a BroadGseaResItem object
 
-\item \code{annoBroadGseaRes}: Get GSEA number of permutations
-from an annoBroadGseaRes object
+\item \code{AnnoBroadGseaRes}: Get GSEA number of permutations
+from an AnnoBroadGseaRes object
 
-\item \code{annoBroadGseaResList}: Get GSEA number of permutations
-from an annoBroadGseaResList object
+\item \code{AnnoBroadGseaResList}: Get GSEA number of permutations
+from an AnnoBroadGseaResList object
 }}
 

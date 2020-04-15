@@ -10,12 +10,12 @@ gseaScore(x, type = c("fdr", "p", "fwer"))
 gseaScores(..., names = NULL, type = c("fdr", "p", "fwer"))
 }
 \arguments{
-\item{x}{An \code{annoBroadGseaRes} object}
+\item{x}{An \code{AnnoBroadGseaRes} object}
 
 \item{type}{Character string, the type of p-value used to calculate the
 score.}
 
-\item{...}{Objects of \code{annoBroadGseaRes} to be compared}
+\item{...}{Objects of \code{AnnoBroadGseaRes} to be compared}
 
 \item{names}{Character strings, names given to the result score sets. See
 examples below.}

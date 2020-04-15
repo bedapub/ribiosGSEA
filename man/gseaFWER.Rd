@@ -2,18 +2,18 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gseaFWER}
 \alias{gseaFWER}
-\alias{gseaFWER,broadGseaResItem-method}
-\alias{gseaFWER,annoBroadGseaRes-method}
-\alias{gseaFWER,annoBroadGseaResList-method}
+\alias{gseaFWER,BroadGseaResItem-method}
+\alias{gseaFWER,AnnoBroadGseaRes-method}
+\alias{gseaFWER,AnnoBroadGseaResList-method}
 \title{Return GSEA FWER values}
 \usage{
 gseaFWER(object)
 
-\S4method{gseaFWER}{broadGseaResItem}(object)
+\S4method{gseaFWER}{BroadGseaResItem}(object)
 
-\S4method{gseaFWER}{annoBroadGseaRes}(object)
+\S4method{gseaFWER}{AnnoBroadGseaRes}(object)
 
-\S4method{gseaFWER}{annoBroadGseaResList}(object)
+\S4method{gseaFWER}{AnnoBroadGseaResList}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -23,13 +23,13 @@ Return GSEA FWER values
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{broadGseaResItem}: Get GSEA FWER values
-from a broadGseaResItem object
+\item \code{BroadGseaResItem}: Get GSEA FWER values
+from a BroadGseaResItem object
 
-\item \code{annoBroadGseaRes}: Get GSEA FWER values
-from an annoBroadGseaRes object
+\item \code{AnnoBroadGseaRes}: Get GSEA FWER values
+from an AnnoBroadGseaRes object
 
-\item \code{annoBroadGseaResList}: Get GSEA FWER values
-from an annoBroadGseaResList object
+\item \code{AnnoBroadGseaResList}: Get GSEA FWER values
+from an AnnoBroadGseaResList object
 }}
 

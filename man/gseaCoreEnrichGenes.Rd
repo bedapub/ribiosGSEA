@@ -3,15 +3,15 @@
 \name{gseaCoreEnrichGenes}
 \alias{gseaCoreEnrichGenes}
 \alias{gseaLeadingEdgeGenes}
-\alias{gseaCoreEnrichGenes,annoBroadGseaResItem-method}
-\alias{gseaCoreEnrichGenes,annoBroadGseaRes-method}
+\alias{gseaCoreEnrichGenes,AnnoBroadGseaResItem-method}
+\alias{gseaCoreEnrichGenes,AnnoBroadGseaRes-method}
 \title{Return GSEA core enrichment genes (also known as leading-edge genes)}
 \usage{
 gseaCoreEnrichGenes(object)
 
-\S4method{gseaCoreEnrichGenes}{annoBroadGseaResItem}(object)
+\S4method{gseaCoreEnrichGenes}{AnnoBroadGseaResItem}(object)
 
-\S4method{gseaCoreEnrichGenes}{annoBroadGseaRes}(object)
+\S4method{gseaCoreEnrichGenes}{AnnoBroadGseaRes}(object)
 }
 \arguments{
 \item{object}{An object}
@@ -21,12 +21,12 @@ Return GSEA core enrichment genes (also known as leading-edge genes)
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{annoBroadGseaResItem}: Return core enriched genes (also known as
-leading-edge genes) in an annoBroadGseaResItem object as a character string
+\item \code{AnnoBroadGseaResItem}: Return core enriched genes (also known as
+leading-edge genes) in an AnnoBroadGseaResItem object as a character string
 vector.
 
-\item \code{annoBroadGseaRes}: Return core enriched genes (also known as
-leading-edge genes) in an annoBroadGseaRes object as a list of character 
+\item \code{AnnoBroadGseaRes}: Return core enriched genes (also known as
+leading-edge genes) in an AnnoBroadGseaRes object as a list of character 
 string vectors.
 }}
 

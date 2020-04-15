@@ -2,12 +2,12 @@
 % Please edit documentation in R/AllGenerics.R, R/AllMethods.R
 \name{gsGeneValues<-}
 \alias{gsGeneValues<-}
-\alias{gsGeneValues<-,annoBroadGseaResItem,numeric-method}
+\alias{gsGeneValues<-,AnnoBroadGseaResItem,numeric-method}
 \title{gsGeneValues-set}
 \usage{
 gsGeneValues(object) <- value
 
-\S4method{gsGeneValues}{annoBroadGseaResItem,numeric}(object) <- value
+\S4method{gsGeneValues}{AnnoBroadGseaResItem,numeric}(object) <- value
 }
 \arguments{
 \item{object}{An object}
@@ -19,7 +19,7 @@ Set gene-set gene statistics (values)
 }
 \section{Functions}{
 \itemize{
-\item \code{gsGeneValues<-,annoBroadGseaResItem,numeric-method}: Assign values associated with gene-set genes to
+\item \code{gsGeneValues<-,AnnoBroadGseaResItem,numeric-method}: Assign values associated with gene-set genes to
 an annoBraoadGseaResItem object
 }}
 

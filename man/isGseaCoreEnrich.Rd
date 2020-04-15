@@ -8,7 +8,7 @@ enrichment or not}
 isGseaCoreEnrich(object)
 }
 \arguments{
-\item{object}{An \code{annoBroadGseaResItem} object}
+\item{object}{An \code{AnnoBroadGseaResItem} object}
 }
 \value{
 A logical vector
