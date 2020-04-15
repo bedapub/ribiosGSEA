@@ -112,11 +112,11 @@ setGeneric("pValue", function(object, ...) standardGeneric("pValue"))
 #' @export
 setGeneric("fdrValue", function(object, ...) standardGeneric("fdrValue"))
 
-#' Return the effective size of gene-set(s)
+#' Return the effective size of gene-set
 #' @param object An object
 #' @param ... Other parameters
 #' @export
-setGeneric("gsEffSize", function(object, ...) standardGeneric("gsEffSize"))
+setGeneric("gsEffectiveSize", function(object, ...) standardGeneric("gsEffectiveSize"))
 
 #' Perform Fisher's exact test
 #' @param genes Genes

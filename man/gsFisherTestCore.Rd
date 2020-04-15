@@ -34,7 +34,7 @@ If \code{useEASE} is \code{TRUE}, one gene is penalized (removed) within \code{g
 A list of three elements
 \enumerate{
   \item p The p-value of one-sided (over-representation of the Fisher's test)
-  \item gsEffSize Gene-set's effective size, namely number of genes that are in the universe
+  \item gsEffectiveSize Gene-set's effective size, namely number of genes that are in the universe
   \item hits Character vector, genes that are found in the gene sets
 }
 }

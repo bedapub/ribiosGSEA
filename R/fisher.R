@@ -83,7 +83,7 @@ print.FisherResult <- function(x, ...) {
       cat("Namespace:", gsNamespace(x), "\n")
   if(!is.na(gsName(x)))
       cat("Name:", gsName(x), "\n")
-  cat("Gene set size:", gsEffSize(x), "\n")
+  cat("Gene set size:", gsEffectiveSize(x), "\n")
   cat(sprintf("Hits (%d):", length(hits(x))),
       paste(hits(x), collapse=","), "\n")
   cat("Fisher's exact p value:", pValue(x), "\n")
@@ -120,7 +120,7 @@ print.FisherResultList <- function(x, ...) {
 #' @return A list of three elements
 #' \enumerate{
 #'   \item p The p-value of one-sided (over-representation of the Fisher's test)
-#'   \item gsEffSize Gene-set's effective size, namely number of genes that are in the universe
+#'   \item gsEffectiveSize Gene-set's effective size, namely number of genes that are in the universe
 #'   \item hits Character vector, genes that are found in the gene sets
 #' }
 #' @references 
@@ -179,7 +179,7 @@ gsFisherTestCore <- function(genes, geneSetGenes, universe,
   hits <- genes[is.pos.geneset]
   
   res <- list(p=fisher.p,
-             gsEffSize=length(geneSetGenes),
+             gsEffectiveSize=length(geneSetGenes),
              hits=hits)
   return(res)
 }
@@ -200,7 +200,7 @@ gsFisherTestCore <- function(genes, geneSetGenes, universe,
 #' @return A list of lists, of the same length as the input geneSetGenesList, each list consisting of three elements
 #' \enumerate{
 #'   \item p The p-value of one-sided (over-representation of the Fisher's test)
-#'   \item gsEffSize Gene-set's effective size, namely number of genes that are in the universe
+#'   \item gsEffectiveSize Gene-set's effective size, namely number of genes that are in the universe
 #'   \item hits Character vector, genes that are found in the gene sets
 #' }
 #' @references 
@@ -321,7 +321,7 @@ setMethod("fisherTest",
 
             res <- data.table::data.table(GeneSetNamespace=gsNamespace,
                               GeneSetName=sapply(genesets, function(x) x$name),
-                              GeneSetEffectiveSize=sapply(res, function(x) x$gsEffSize),
+                              GeneSetEffectiveSize=sapply(res, function(x) x$gsEffectiveSize),
                               HitCount=sapply(res, function(x) length(x$hits)),
                               Hits=sapply(res, function(x) x$hits),
                               PValue=sapply(res, function(x) x$p))

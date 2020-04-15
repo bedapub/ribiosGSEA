@@ -29,7 +29,7 @@ badGenes <- function(vector, dup=2, naCount=3, sample=FALSE) {
 gsEnrich1 <- ribiosGSEA::fisherTest(inputGenes, geneSet1, universe, "testName", "testNamespace")
 gsManual1 <- fisher.test(matrix(c(3,3,0,20), nrow=2, byrow=TRUE), alternative="greater")
 expect_equal(gsManual1$p.value, ribiosGSEA::pValue(gsEnrich1))
-expect_equal(length(geneSet1), ribiosGSEA::gsEffSize(gsEnrich1))
+expect_equal(length(geneSet1), ribiosGSEA::gsEffectiveSize(gsEnrich1))
 expect_that(inputGenes, equals(ribiosGSEA::hits(gsEnrich1)))
 expect_that(gsNamespace(gsEnrich1), equals("testNamespace"))
 expect_that(gsName(gsEnrich1), equals("testName"))
@@ -37,20 +37,20 @@ expect_that(gsName(gsEnrich1), equals("testName"))
 gsEnrich2 <- ribiosGSEA::fisherTest(inputGenes, geneSet2, universe)
 gsManual2 <- fisher.test(matrix(c(0,4,3,19), nrow=2, byrow=TRUE), alternative="greater")
 expect_that(gsManual2$p.value, equals(pValue(gsEnrich2)))
-expect_that(length(geneSet2), equals(ribiosGSEA::gsEffSize(gsEnrich2)))
+expect_that(length(geneSet2), equals(ribiosGSEA::gsEffectiveSize(gsEnrich2)))
 expect_that(character(), equals(ribiosGSEA::hits(gsEnrich2)))
 
 gsEnrich3 <- ribiosGSEA::fisherTest(inputGenes, geneSet3, universe)
 gsManual3 <- fisher.test(matrix(c(2,2,1,21), nrow=2, byrow=TRUE), alternative="greater")
 expect_that(gsManual3$p.value, equals(pValue(gsEnrich3)))
-expect_that(length(geneSet3), equals(ribiosGSEA::gsEffSize(gsEnrich3)))
+expect_that(length(geneSet3), equals(ribiosGSEA::gsEffectiveSize(gsEnrich3)))
 expect_that(c("B", "C"), equals(ribiosGSEA::hits(gsEnrich3)))
 
 
 gsEnrich4 <- ribiosGSEA::fisherTest(inputGenes, geneSet4, universe)
 gsManual4 <- fisher.test(matrix(c(2,2,1,21), nrow=2, byrow=TRUE), alternative="greater")
 expect_that(gsManual4$p.value, equals(pValue(gsEnrich4)))
-expect_that(4L, equals(ribiosGSEA::gsEffSize(gsEnrich4)))
+expect_that(4L, equals(ribiosGSEA::gsEffectiveSize(gsEnrich4)))
 expect_that(c("B", "C"), equals(ribiosGSEA::hits(gsEnrich4)))
 
 

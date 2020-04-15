@@ -491,14 +491,14 @@ setMethod("show", "FisherResultList", function(object) {
 ## gene-set effect size
 ##----------------------------------------##
 
-#' @describeIn gsEffSize Effective sizes of gene-set, returning an integer value.
-#' @return
-setMethod("gsEffSize", "FisherResult", function(object) return(object@gsEffSize))
+#' @describeIn gsEffectiveSize Effective sizes of gene-set, returning an integer.
+#' @export
+setMethod("gsEffectiveSize", "FisherResult", function(object) return(object@gsEffectiveSize))
 
-#' @describeIn gsEffSize Effective sizes of Gene-sets, returning an integer vector.
-#' @return
-setMethod("gsEffSize", "FisherResultList", function(object) {
-    return(sapply(object@.Data, gsEffSize))
+#' @describeIn gsEffectiveSize Effective sizes of Gene-sets, returning an integer vector.
+#' @export
+setMethod("gsEffectiveSize", "FisherResultList", function(object) {
+    return(sapply(object@.Data, gsEffectiveSize))
 })
 
 
@@ -518,7 +518,7 @@ setMethod("as.data.frame", "FisherResultList", function(x, row.names=NULL) {
               fdrs <- sapply(x, fdrValue)
               hits <- lapply(x, hits)
               hitCounts <- sapply(hits, length)
-              gsEffSize <- sapply(x, gsEffSize)
+              gsEffectiveSize <- sapply(x, gsEffectiveSize)
               inputSize <- length(x@input)
               universeSize <- length(x@universe)
               hitPrint <- sapply(hits, paste, collapse=",")
@@ -528,7 +528,7 @@ setMethod("as.data.frame", "FisherResultList", function(x, row.names=NULL) {
                          FDRvalue=fdrs,
                          HitCount=hitCounts,
                          InputSize=inputSize,
-                         GeneSetEffectiveSize=gsEffSize,
+                         GeneSetEffectiveSize=gsEffectiveSize,
                          UniverseSize=universeSize,
                          Hits=hitPrint,
                          row.names=row.names)
@@ -676,7 +676,7 @@ setMethod("fisherTest", c("character", "character", "character"),
               new("FisherResult",
                   gsNamespace=gsNamespace,
                   gsName=gsName,
-                  gsEffSize=coreRes$gsEffSize,
+                  gsEffectiveSize=coreRes$gsEffectiveSize,
                   hits=coreRes$hits,
                   p=coreRes$p,
                   fdr=coreRes$p)
