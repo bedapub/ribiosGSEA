@@ -13,11 +13,11 @@
 #' set.seed(1887)
 #' stats <- rnorm(1000)
 #' gsList <- list(gs1=c(3,4,5), gs2=c(7,8,9))
-#' geneSetPerm(stats, gsList, Nsim=9999)
+#' geneSetPerm(stats, gsList, Nsim=99)
 #' gsList2 <- list(gs1=c(3,4,5), gs2=c(7,8,9), gs3=integer())
-#' geneSetPerm(stats, gsList2, Nsim=9999)
+#' geneSetPerm(stats, gsList2, Nsim=99)
 #' gsList3 <- sample(1:1000, 200)
-#' geneSetPerm(stats, gsList3, Nsim=9999)
+#' geneSetPerm(stats, gsList3, Nsim=99)
 #' @export
 geneSetPerm <- function(stats,
                         indList,

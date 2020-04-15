@@ -344,9 +344,13 @@ setAs(from="list", to="annoBroadGseaResList", def=function(from,to) {
   return(res)
 })
 
-setMethod("annoBroadGseaRes", "list", function(object) {
+#' Convert a list of annoBroadGseaResItem objects to a list
+#' @param object A list of annoBroadGseaResItem
+#' @return An \code{annoBroadGseaRes} object
+#' @export
+annoBroadGseaRes <- function(object) {
   return(as(object, "annoBroadGseaRes"))
-})
+}
 
 
 ##----------------------------------------##
@@ -487,11 +491,11 @@ setMethod("show", "FisherResultList", function(object) {
 ## gene-set effect size
 ##----------------------------------------##
 
-#' @describeIn gsEffSize Gene-set effect size, returning a numeric value.
+#' @describeIn gsEffSize Effective sizes of gene-set, returning an integer value.
 #' @return
 setMethod("gsEffSize", "FisherResult", function(object) return(object@gsEffSize))
 
-#' @describeIn gsEffSize Gene-set effect size, returning a numeric vector.
+#' @describeIn gsEffSize Effective sizes of Gene-sets, returning an integer vector.
 #' @return
 setMethod("gsEffSize", "FisherResultList", function(object) {
     return(sapply(object@.Data, gsEffSize))

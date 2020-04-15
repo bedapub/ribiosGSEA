@@ -90,12 +90,6 @@ setGeneric("gseaCoreEnrichThr", function(object) standardGeneric("gseaCoreEnrich
 #' @export
 setGeneric("gseaCoreEnrichGenes", function(object) standardGeneric("gseaCoreEnrichGenes"))
 
-
-#' Return annotated BROAD GSEA result
-#' @param object An object
-#' @export
-setGeneric("annoBroadGseaRes", function(object) standardGeneric("annoBroadGseaRes"))
-
 ##----------------------------------------##
 ## Fisher's exact test
 ##----------------------------------------##
@@ -118,7 +112,7 @@ setGeneric("pValue", function(object, ...) standardGeneric("pValue"))
 #' @export
 setGeneric("fdrValue", function(object, ...) standardGeneric("fdrValue"))
 
-#' Return gene-set effect size
+#' Return the effective size of gene-set(s)
 #' @param object An object
 #' @param ... Other parameters
 #' @export

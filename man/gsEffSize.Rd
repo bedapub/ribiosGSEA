@@ -4,7 +4,7 @@
 \alias{gsEffSize}
 \alias{gsEffSize,FisherResult-method}
 \alias{gsEffSize,FisherResultList-method}
-\title{Return gene-set effect size}
+\title{Return the effective size of gene-set(s)}
 \usage{
 gsEffSize(object, ...)
 
@@ -23,12 +23,12 @@ gsEffSize(object, ...)
 
 }
 \description{
-Return gene-set effect size
+Return the effective size of gene-set(s)
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{FisherResult}: Gene-set effect size, returning a numeric value.
+\item \code{FisherResult}: Effective sizes of gene-set, returning an integer value.
 
-\item \code{FisherResultList}: Gene-set effect size, returning a numeric vector.
+\item \code{FisherResultList}: Effective sizes of Gene-sets, returning an integer vector.
 }}
 

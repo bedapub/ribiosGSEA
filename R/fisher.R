@@ -100,8 +100,8 @@ print.FisherResultList <- function(x, ...) {
    cat(sprintf("Total input genes: %d\n", length(x@input)))
    cat(sprintf("Gene universe: %d\n", length(x@universe)))
    cat(sprintf("Total gene sets: %d\n", length(x)))
-   cat(sprintf("Minimal P-value: %e\n", minPValue(x)))
-   cat(sprintf("Minimal FDR-value: %e\n", minFdrValue(x)))
+   cat(sprintf("Minimal P-value: %e\n", minPvalue(x)))
+   cat(sprintf("Minimal FDR-value: %e\n", minFDRvalue(x)))
 }
 
 #' The core algorithm to perform Fisher's exact test on a gene set
