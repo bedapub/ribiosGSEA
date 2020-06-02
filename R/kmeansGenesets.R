@@ -6,8 +6,12 @@
 #' @param iter.max Integer, the maximum numbers of iterations allowed. This parameter is passed to \code{\link[stats]{kmeans}}.
 #' @param nstart Integer, how many random sets should be chosen to initialize cluster centers. This parameter is passed to \code{\link[stats]{kmeans}}.
 #' @param thrCumJaccardIndex Numeric, between 0 and 1, the threshold of cumulative Jaccard Index. The larger the value is, the more gene-sets will be selected from each cluster
+#' @param maxRepPerCluster Integer, maximum number of representative genesets per cluster. If NULL or NA, no limit is set.
+#' @param metaClusterColumns Columns used to cluster the clusters by their average enrichment profile. By default, all columns are used.
 #' 
 #' This function performs \code{k-means} clustering of enrichment profiles of gene-sets. Within each cluster, we first identify the union set of unique genes covered any gene-set in the cluster, and then calculate Jaccard Index between genes in each gene-set and the union set. Gene-sets are sorted descendingly by the Jaccard Index, and the cumulative Jaccard Index is calculated. Among the sorted gene-sets, the gene-sets up to the position when the cumulative Jaccard Index exceeds \code{thrCumJaccardIndex} are selected (excluding redundant gene-sets).
+#' 
+#' The geneset clusters are ordered by their average profiles - similar clusters are near to each other.
 #' 
 #' @return A list:
 #' \itemize{
@@ -18,6 +22,7 @@
 #' }
 #' 
 #' @importFrom ribiosUtils munion jaccardIndex
+#' @importFrom stats hclust dist
 #' 
 #' @examples
 #' set.seed(1887)
@@ -32,7 +37,9 @@
 kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
                           optK=pmin(25,floor(nrow(enrichProfMatrix)/2)),
                           iter.max=15, nstart=50, 
-                          thrCumJaccardIndex=0.5) {
+                          thrCumJaccardIndex=0.5,
+                          maxRepPerCluster=10,
+                          metaClusterColumns=1:ncol(enrichProfMatrix)) {
   stopifnot(nrow(enrichProfMatrix)==length(genesetGenes) &&
               identical(rownames(enrichProfMatrix),
                         names(genesetGenes)))
@@ -62,6 +69,8 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
     hasDiff <- c(TRUE, diff(res$CumJaccardIndex)!=0) ## ignore redudant genesets
     indFirstOverThr <- min(which(res$CumJaccardIndex>thrCumJaccardIndex &
                                    hasDiff))
+    if(!is.null(maxRepPerCluster) && !is.na(maxRepPerCluster))
+      indFirstOverThr <- pmin(indFirstOverThr, as.integer(maxRepPerCluster))
     sel <- c(rep(TRUE, indFirstOverThr),
              rep(FALSE, nrow(res)-indFirstOverThr))
     res$IsRepresentative <- sel
@@ -73,10 +82,31 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
                             as.character(GenesetName[IsRepresentative]))
   gsCompOverlapSelInd <- with(gsCompDf,
                               GenesetCluster[IsRepresentative])
+  ## re arrange the levels of the clusters so clusters with similar profiles
+  ## cluster together
+  repRows <- which(gsCompDf$IsRepresentative)
+  gsCompOverlapSelIndAvgProf <- do.call(rbind,
+                                        tapply(repRows,
+                                               gsCompOverlapSelInd,
+                                               function(i) colMeans(enrichProfMatrix[i,
+                                                                                     metaClusterColumns,
+                                                                                     drop=FALSE],
+                                                                    na.rm=TRUE)))
+  clusterOrder <- stats::hclust(stats::dist(gsCompOverlapSelIndAvgProf), 
+                                "ward.D2")$order
+  
+  gsClusters <- factor(gsCompOverlapSelInd,
+                       levels=levels(gsCompOverlapSelInd)[clusterOrder])
+  levels(gsClusters) <- sprintf("GenesetCluster%s", 1:nlevels(gsClusters))
+  gsClusterOrder <- order(gsClusters)
+  
+  orderedRepGenesets <- gsCompOverlapSels[gsClusterOrder]
+  orderedRepGenesetClusters <- gsClusters[gsClusterOrder]
+  
   res <- list(kmeans=kmeansObj,
               genesetClusterData=gsCompDf,
-              repGenesets=gsCompOverlapSels,
-              repGenesetClusters=gsCompOverlapSelInd)
+              repGenesets=orderedRepGenesets,
+              repGenesetClusters=orderedRepGenesetClusters)
   return(res)
 }
 

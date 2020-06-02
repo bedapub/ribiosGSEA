@@ -10,7 +10,9 @@ kmeansGeneset(
   optK = pmin(25, floor(nrow(enrichProfMatrix)/2)),
   iter.max = 15,
   nstart = 50,
-  thrCumJaccardIndex = 0.5
+  thrCumJaccardIndex = 0.5,
+  maxRepPerCluster = 10,
+  metaClusterColumns = 1:ncol(enrichProfMatrix)
 )
 }
 \arguments{
@@ -24,9 +26,15 @@ kmeansGeneset(
 
 \item{nstart}{Integer, how many random sets should be chosen to initialize cluster centers. This parameter is passed to \code{\link[stats]{kmeans}}.}
 
-\item{thrCumJaccardIndex}{Numeric, between 0 and 1, the threshold of cumulative Jaccard Index. The larger the value is, the more gene-sets will be selected from each cluster
+\item{thrCumJaccardIndex}{Numeric, between 0 and 1, the threshold of cumulative Jaccard Index. The larger the value is, the more gene-sets will be selected from each cluster}
 
-This function performs \code{k-means} clustering of enrichment profiles of gene-sets. Within each cluster, we first identify the union set of unique genes covered any gene-set in the cluster, and then calculate Jaccard Index between genes in each gene-set and the union set. Gene-sets are sorted descendingly by the Jaccard Index, and the cumulative Jaccard Index is calculated. Among the sorted gene-sets, the gene-sets up to the position when the cumulative Jaccard Index exceeds \code{thrCumJaccardIndex} are selected (excluding redundant gene-sets).}
+\item{maxRepPerCluster}{Integer, maximum number of representative genesets per cluster. If NULL or NA, no limit is set.}
+
+\item{metaClusterColumns}{Columns used to cluster the clusters by their average enrichment profile. By default, all columns are used.
+
+This function performs \code{k-means} clustering of enrichment profiles of gene-sets. Within each cluster, we first identify the union set of unique genes covered any gene-set in the cluster, and then calculate Jaccard Index between genes in each gene-set and the union set. Gene-sets are sorted descendingly by the Jaccard Index, and the cumulative Jaccard Index is calculated. Among the sorted gene-sets, the gene-sets up to the position when the cumulative Jaccard Index exceeds \code{thrCumJaccardIndex} are selected (excluding redundant gene-sets).
+
+The geneset clusters are ordered by their average profiles - similar clusters are near to each other.}
 }
 \value{
 A list:
