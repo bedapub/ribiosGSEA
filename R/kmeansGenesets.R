@@ -82,21 +82,25 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
                             as.character(GenesetName[IsRepresentative]))
   gsCompOverlapSelInd <- with(gsCompDf,
                               GenesetCluster[IsRepresentative])
-  ## re arrange the levels of the clusters so clusters with similar profiles
+  ## re-arrange the levels of the clusters so clusters with similar profiles
   ## cluster together
   repRows <- which(gsCompDf$IsRepresentative)
-  gsCompOverlapSelIndAvgProf <- do.call(rbind,
-                                        tapply(repRows,
-                                               gsCompOverlapSelInd,
-                                               function(i) colMeans(enrichProfMatrix[i,
-                                                                                     metaClusterColumns,
-                                                                                     drop=FALSE],
-                                                                    na.rm=TRUE)))
-  clusterOrder <- stats::hclust(stats::dist(gsCompOverlapSelIndAvgProf), 
-                                "ward.D2")$order
+  clusterAvgProf <- do.call(rbind,
+                            tapply(repRows,
+                                   gsCompOverlapSelInd,
+                                   function(i) {
+                                    gsInd <- gsCompDf$GenesetInd[i]
+                                    res <- colMeans(enrichProfMatrix[gsInd,
+                                                                     metaClusterColumns,
+                                                                     drop=FALSE],
+                                                    na.rm=TRUE)
+                                   }))
+  clusterHclust <- stats::hclust(stats::dist(clusterAvgProf), 
+                                 "ward.D2")
+  clusterOrder <- clusterHclust$label[clusterHclust$order]
   
   gsClusters <- factor(gsCompOverlapSelInd,
-                       levels=levels(gsCompOverlapSelInd)[clusterOrder])
+                       levels=clusterOrder)
   levels(gsClusters) <- sprintf("GenesetCluster%s", 1:nlevels(gsClusters))
   gsClusterOrder <- order(gsClusters)
   
