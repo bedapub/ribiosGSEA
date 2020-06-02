@@ -160,12 +160,12 @@ getSubGraphs <- function (object, alpha, nc, w.crit) {
 #' kendallW(emat, efac, summary="none")
 #' 
 #' ## kendallW acts as an interface to ExpressionSet
-#' data(ribiosExpressionSet, package="ribiosExpression")
-#' kendallW(ribiosExpressionSet, 
-#'   Biobase::fData(ribiosExpressionSet)$GeneID,
+#' data(ribios.ExpressionSet, package="ribiosExpression")
+#' kendallW(ribios.ExpressionSet, 
+#'   Biobase::fData(ribios.ExpressionSet)$GeneID,
 #'   summary="none")
-#' kendallW(ribiosExpressionSet, 
-#'   Biobase::fData(ribiosExpressionSet)$GeneID, 
+#' kendallW(ribios.ExpressionSet, 
+#'   Biobase::fData(ribios.ExpressionSet)$GeneID, 
 #'   summary="mean")
 #' 
 #' @export kendallWmat
