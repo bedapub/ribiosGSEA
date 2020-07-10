@@ -387,6 +387,7 @@ gmtListCamera <- function(matrix, geneSymbols, gmtList, design, contrasts) {
     # use all cores 
     cl <- parallel::detectCores()
   }
+  cl <- pmin(cl, ncol(contrasts))
   cameraRes <- parallel::mclapply(1:ncol(contrasts),
                         function(x) {
                           tbl <- biosCamera(matrix,
