@@ -4,7 +4,7 @@
 \alias{camera.dgeList}
 \title{Apply the CAMERA method to a DGEList object}
 \usage{
-\method{camera}{dgeList}(dgeList, index, design, contrasts)
+\method{camera}{dgeList}(dgeList, index, design, contrasts, doParallel = FALSE)
 }
 \arguments{
 \item{dgeList}{A DGEList object, with GeneSymbol available}
@@ -15,6 +15,8 @@ sets}
 \item{design}{Design matrix}
 
 \item{contrasts}{Contrast matrix}
+
+\item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.}
 }
 \description{
 Apply the CAMERA method to a DGEList object

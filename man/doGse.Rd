@@ -8,14 +8,16 @@
 \usage{
 gseWithLogFCgage(edgeResult, gmtList)
 
-gseWithCamera(edgeResult, gmtList)
+gseWithCamera(edgeResult, gmtList, doParallel = TRUE)
 
-doGse(edgeResult, gmtList)
+doGse(edgeResult, gmtList, doParallel = FALSE)
 }
 \arguments{
 \item{edgeResult}{An object of the class \code{EdgeObject}}
 
-\item{gmtList}{An object of the class \code{GmtList}
+\item{gmtList}{An object of the class \code{GmtList}}
+
+\item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
 
 The function performs gene-set enrichment analysis. By default,the CAMERA
 method is applied. In case this is not successful, for instance because of
@@ -63,6 +65,33 @@ fullEnrichTable(exGseWithGage)
 
 exGseWithCamera <- gseWithCamera(exDgeRes, exGeneSets)
 fullEnrichTable(exGseWithCamera)
+
+\dontrun{
+  exMat <- matrix(rpois(120000, 10), nrow=20000, ncol=12)
+  exGroups <- gl(4,3, labels=c("Group1", "Group2", "Group3", "Group4"))
+  exDesign <- model.matrix(~0+exGroups)
+  exContrast <- matrix(c(-1,1,0,0, 0,0,-1,1),
+     ncol=2, byrow=FALSE,
+     dimnames=list(c("Group1", "Group2", "Group3", "Group4"), 
+       c("Group2.vs.Group1", "Group4.vs.Group3")))
+  exDescon <- DesignContrast(exDesign, exContrast, groups=exGroups)
+  exFdata <- data.frame(GeneSymbol=sprintf("Gene\%d", 1:nrow(exMat)))
+  exPdata <- data.frame(Name=sprintf("Sample\%d", 1:ncol(exMat)),
+                       Group=exGroups)
+  exObj <- EdgeObject(exMat, exDescon, 
+                       fData=exFdata, pData=exPdata)
+  exDgeRes <- ribiosNGS::dgeWithEdgeR(exObj)
+  
+  ngeneset <- 1000
+  genesetSizes <- round(runif(ngeneset)*100)+1
+  exGeneSets <- BioQC::GmtList(lapply(seq(1:ngeneset), function(i) {
+    name <- paste0("GeneSet", i)
+    desc <- paste0("GeneSet", i)
+    genes <- sample(exFdata$GeneSymbol, genesetSizes[i])
+    res <- list(name=name, desc=desc, genes=genes, namespace="default")
+  }))
+  exGse <- doGse(exDgeRes, exGeneSets)
+}
 }
 \seealso{
 \code{gseWithLogFCgage} and \code{gseWithCamera} are wrapped by

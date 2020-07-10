@@ -22,6 +22,7 @@ setMethod("gsName", "FisherResult", function(object) object@gsName)
 setMethod("gsName", "FisherResultList", function(object) names(object@.Data))
 
 #' @describeIn gsName Get gene-set name from a GmtList object
+#' @importFrom BioQC gsName
 #' @export
 setMethod("gsName", "GmtList", function(object) BioQC::gsName(object))
 
@@ -220,6 +221,7 @@ setMethod("gsGenes", "AnnoBroadGseaRes", function(object) {
 
 #' @describeIn gsGenes Get gene-set genes from a GmtList object, returning a
 #' list of character string vector. It uses the implementation in BioQC.
+#' @importFrom BioQC gsGenes
 # '@export
 setMethod("gsGenes", "GmtList", function(object) return(BioQC::gsGenes(object)))
 

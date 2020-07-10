@@ -136,7 +136,8 @@ zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
   return(y)
 }
 
-getCores <- function(ncontrast) {
+#' @importFrom parallel detectCores
+getCores <- function(maxCores) {
   chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
   if (nzchar(chk) && chk == "TRUE") {
     # use 2 cores in CRAN/Travis/AppVeyor
@@ -145,7 +146,7 @@ getCores <- function(ncontrast) {
     # use all cores 
     cl <- parallel::detectCores()
   }
-  cl <- pmin(cl, ncontrast)
+  cl <- pmin(cl, maxCores)
   return(cl)
 }
 
@@ -156,22 +157,24 @@ getCores <- function(ncontrast) {
 #' sets
 #' @param design Design matrix
 #' @param contrasts Contrast matrix
+#' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
 #' 
 #' @importFrom parallel mclapply
 #' @importFrom limma camera
 #' @importFrom ribiosNGS humanGeneSymbols
 #' @importFrom ribiosUtils sortByCol
 #' @export
-camera.dgeList <- function(dgeList, index, design, contrasts, doParallel=TRUE) {
+camera.dgeList <- function(dgeList, index, design, contrasts, doParallel=FALSE) {
   geneSymbols <- ribiosNGS::humanGeneSymbols(dgeList)
   if(is.null(geneSymbols))
     stop("EdgeResult must have 'GeneSymbol' in its fData to perform camera!")
+  
   if(doParallel) {
     cl <- getCores(ncol(contrasts))
   } else {
     cl <- 1L
   }
-  cameraRes <- mclapply(1:ncol(contrasts),
+  cameraRes <- lapply(1:ncol(contrasts),
                       function(x) {
                         zscores <- zscoreDGE(y=dgeList,
                                              design=design,
@@ -212,7 +215,7 @@ camera.dgeList <- function(dgeList, index, design, contrasts, doParallel=TRUE) {
                                       "ContributingGenes")]
                         tbl <- ribiosUtils::sortByCol(tbl, "PValue",decreasing=FALSE)
                         return(tbl)
-                      }, mc.cores = cl)
+                      })
   
   cRes <- do.call(rbind, cameraRes)
   
@@ -232,14 +235,16 @@ camera.dgeList <- function(dgeList, index, design, contrasts, doParallel=TRUE) {
 #' @param y A EdgeResult object
 #' @param gmtList Gene set collections, for example read by
 #' \code{\link[BioQC]{readGmt}}
+#' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
 #' 
 #' Note that the EdgeResult object must have a column 'GeneSymbol' in its
 #' \code{fData}.
-#' @importFrom ribiosNGS contrastNames designMatrix contrastMatrix
-#'     humanGeneSymbols
+#' @importFrom ribiosExpression contrastNames designMatrix contrastMatrix
+#' @importFrom ribiosNGS    humanGeneSymbols
 #' @importFrom ribiosUtils putColsFirst
+#' @importFrom BioQC gsNamespace matchGenes
 #' @export camera.EdgeResult
-camera.EdgeResult <- function(y, gmtList, doParallel=TRUE) {
+camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
   ctnames<- contrastNames(y)
   design <- designMatrix(y)
   ct <- contrastMatrix(y)
@@ -250,6 +255,7 @@ camera.EdgeResult <- function(y, gmtList, doParallel=TRUE) {
   namespaces <- BioQC::gsNamespace(gmtList)
   gsIndex <- BioQC::matchGenes(gmtList, geneSymbols)
   names(gsIndex) <- make.unique(names(gsIndex))
+
   
   erTables <- tapply(seq(along=gsIndex), namespaces, function(i) {
     currInd <- gsIndex[i]

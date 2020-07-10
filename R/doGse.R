@@ -19,6 +19,7 @@ gseWithCamera <- function(edgeResult, gmtList, doParallel=TRUE) {
 #' 
 #' @param edgeResult An object of the class \code{EdgeObject}
 #' @param gmtList An object of the class \code{GmtList}
+#' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
 #' 
 #' The function performs gene-set enrichment analysis. By default,the CAMERA
 #' method is applied. In case this is not successful, for instance because of
