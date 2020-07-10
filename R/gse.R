@@ -160,6 +160,7 @@ getCores <- function(ncontrast) {
 #' @importFrom parallel mclapply
 #' @importFrom limma camera
 #' @importFrom ribiosNGS humanGeneSymbols
+#' @importFrom ribiosUtils sortByCol
 #' @export
 camera.dgeList <- function(dgeList, index, design, contrasts, doParallel=TRUE) {
   geneSymbols <- ribiosNGS::humanGeneSymbols(dgeList)
@@ -209,7 +210,7 @@ camera.dgeList <- function(dgeList, index, design, contrasts, doParallel=TRUE) {
                                       "Correlation", "EffectSize", "PValue", "FDR", "Score",
                                       "PValue.cor0.01", "FDR.cor0.01", "Score.cor0.01", 
                                       "ContributingGenes")]
-                        tbl <- sortByCol(tbl, "PValue",decreasing=FALSE)
+                        tbl <- ribiosUtils::sortByCol(tbl, "PValue",decreasing=FALSE)
                         return(tbl)
                       }, mc.cores = cl)
   
