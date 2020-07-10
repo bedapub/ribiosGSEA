@@ -136,6 +136,18 @@ zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
   return(y)
 }
 
+getCores <- function(ncontrast) {
+  chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+  if (nzchar(chk) && chk == "TRUE") {
+    # use 2 cores in CRAN/Travis/AppVeyor
+    cl <- 2L
+  } else {
+    # use all cores 
+    cl <- parallel::detectCores()
+  }
+  cl <- pmin(cl, ncontrast)
+  return(cl)
+}
 
 #' Apply the CAMERA method to a DGEList object
 #' 
@@ -149,10 +161,15 @@ zscoreDGE <- function(y, design=NULL, contrast=ncol(design)) {
 #' @importFrom limma camera
 #' @importFrom ribiosNGS humanGeneSymbols
 #' @export
-camera.dgeList <- function(dgeList, index, design, contrasts) {
+camera.dgeList <- function(dgeList, index, design, contrasts, doParallel=TRUE) {
   geneSymbols <- ribiosNGS::humanGeneSymbols(dgeList)
   if(is.null(geneSymbols))
     stop("EdgeResult must have 'GeneSymbol' in its fData to perform camera!")
+  if(doParallel) {
+    cl <- getCores(ncol(contrasts))
+  } else {
+    cl <- 1L
+  }
   cameraRes <- mclapply(1:ncol(contrasts),
                       function(x) {
                         zscores <- zscoreDGE(y=dgeList,
@@ -194,7 +211,7 @@ camera.dgeList <- function(dgeList, index, design, contrasts) {
                                       "ContributingGenes")]
                         tbl <- sortByCol(tbl, "PValue",decreasing=FALSE)
                         return(tbl)
-                      })
+                      }, mc.cores = cl)
   
   cRes <- do.call(rbind, cameraRes)
   
@@ -221,7 +238,7 @@ camera.dgeList <- function(dgeList, index, design, contrasts) {
 #'     humanGeneSymbols
 #' @importFrom ribiosUtils putColsFirst
 #' @export camera.EdgeResult
-camera.EdgeResult <- function(y, gmtList) {
+camera.EdgeResult <- function(y, gmtList, doParallel=TRUE) {
   ctnames<- contrastNames(y)
   design <- designMatrix(y)
   ct <- contrastMatrix(y)
@@ -237,7 +254,8 @@ camera.EdgeResult <- function(y, gmtList) {
     currInd <- gsIndex[i]
     tt <- camera.dgeList(y@dgeList,
                         index=currInd,
-                        design=design, contrasts=ct)
+                        design=design, contrasts=ct,
+                        doParallel=doParallel)
     return(tt)
   })
   
