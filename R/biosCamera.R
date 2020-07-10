@@ -367,7 +367,7 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
 #' gmtlist <- BioQC::GmtList(list(gs1, gs2, gs3))
 #' cameraOut <- gmtListCamera(mat, rownames(mat), gmtlist, designMatrix, contrastMatrix)
 #' cameraOut
-#' @importFrom parallel mclapply
+#' @importFrom parallel detectCores mclapply
 #' @importFrom BioQC gsGenes gsName 
 #' @importFrom ribiosUtils sortByCol 
 #' @export
@@ -378,6 +378,15 @@ gmtListCamera <- function(matrix, geneSymbols, gmtList, design, contrasts) {
     return(ind[!is.na(ind)])
   })
   names(genes.inds) <- BioQC::gsName(gmtList)
+
+  chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+  if (nzchar(chk) && chk == "TRUE") {
+    # use 2 cores in CRAN/Travis/AppVeyor
+    cl <- 2L
+  } else {
+    # use all cores 
+    cl <- parallel::detectCores()
+  }
   cameraRes <- parallel::mclapply(1:ncol(contrasts),
                         function(x) {
                           tbl <- biosCamera(matrix,
@@ -394,7 +403,7 @@ gmtListCamera <- function(matrix, geneSymbols, gmtList, design, contrasts) {
                                         "PValue", "FDR", "ContributingGenes")]
                           tbl <- sortByCol(tbl, "PValue",decreasing=FALSE)
                           return(tbl)
-                        })
+                        }, mc.cores=cl)
   
   cRes <- do.call(rbind, cameraRes)
   
