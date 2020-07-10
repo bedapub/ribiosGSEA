@@ -106,14 +106,15 @@
 #'   biosFixCorOut <- biosCamera(y, index1, design,
 #'       .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE)
 #'   testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue)
+#'   testthat::expect_equal(biosCorOut$PValue, limmaCorDefOut$PValue)
 #' }
 #'
 #' @export
 biosCamera <- function (y, index, design = NULL, contrast = ncol(design), 
-			weights = NULL,
+                        weights = NULL,
                         geneLabels=NULL,
                         use.ranks = FALSE, allow.neg.cor = FALSE, 
-			trend.var = FALSE, 
+                        trend.var = FALSE, 
                         sort = FALSE,
                         .fixed.inter.gene.cor = NULL,
                         .approx.zscoreT=FALSE) {
@@ -235,7 +236,7 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
     ## by sqrt(mean(u^2)).
     U <- effects[-(1:p), , drop = FALSE]
     sigma2 <- colMeans(U^2)
-    U <- t(U)/sqrt(sigma2)
+    U <- t(U)/sqrt(pmax(sigma2, 1e-08))
     if (trend.var) 
         A <- rowMeans(y)
     else A <- NULL
@@ -246,7 +247,7 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
     } else {
       ## moderated-t is further transformed into z-score
       df.total <- min(df.residual + sv$df.prior, G * df.residual)
-      Stat <- zscoreT(modt, df = df.total, approx=.approx.zscoreT)
+      Stat <- zscoreT(modt, df = df.total, approx=.approx.zscoreT, method="hill")
     }
     ## meanStat and varStat are mean and variance of z-score 
     ## of the moderated t statistic of all features in the matrix
