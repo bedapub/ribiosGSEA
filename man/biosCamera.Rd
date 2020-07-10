@@ -138,6 +138,7 @@ limmaCorDefOut <-
   biosFixCorOut <- biosCamera(y, index1, design,
       .fixed.inter.gene.cor=0.01, .approx.zscoreT=TRUE)
   testthat::expect_equal(biosFixCorOut$PValue, limmaDefOut$PValue)
+  testthat::expect_equal(biosCorOut$PValue, limmaCorDefOut$PValue)
 }
 
 }
