@@ -10,8 +10,8 @@ gseWithLogFCgage <- function(edgeResult, gmtList) {
 
 #' @describeIn doGse Gene-set enrichment with camera
 #' @export
-gseWithCamera <- function(edgeResult, gmtList) {
-  gseRes <- camera.EdgeResult(edgeResult, gmtList)
+gseWithCamera <- function(edgeResult, gmtList, doParallel=TRUE) {
+  gseRes <- camera.EdgeResult(edgeResult, gmtList, doParallel=doParallel)
   return(gseRes)
 }
 
@@ -59,11 +59,38 @@ gseWithCamera <- function(edgeResult, gmtList) {
 #' 
 #' exGseWithCamera <- gseWithCamera(exDgeRes, exGeneSets)
 #' fullEnrichTable(exGseWithCamera)
+#' 
+#' \dontrun{
+#'   exMat <- matrix(rpois(120000, 10), nrow=20000, ncol=12)
+#'   exGroups <- gl(4,3, labels=c("Group1", "Group2", "Group3", "Group4"))
+#'   exDesign <- model.matrix(~0+exGroups)
+#'   exContrast <- matrix(c(-1,1,0,0, 0,0,-1,1),
+#'      ncol=2, byrow=FALSE,
+#'      dimnames=list(c("Group1", "Group2", "Group3", "Group4"), 
+#'        c("Group2.vs.Group1", "Group4.vs.Group3")))
+#'   exDescon <- DesignContrast(exDesign, exContrast, groups=exGroups)
+#'   exFdata <- data.frame(GeneSymbol=sprintf("Gene%d", 1:nrow(exMat)))
+#'   exPdata <- data.frame(Name=sprintf("Sample%d", 1:ncol(exMat)),
+#'                        Group=exGroups)
+#'   exObj <- EdgeObject(exMat, exDescon, 
+#'                        fData=exFdata, pData=exPdata)
+#'   exDgeRes <- ribiosNGS::dgeWithEdgeR(exObj)
+#'   
+#'   ngeneset <- 1000
+#'   genesetSizes <- round(runif(ngeneset)*100)+1
+#'   exGeneSets <- BioQC::GmtList(lapply(seq(1:ngeneset), function(i) {
+#'     name <- paste0("GeneSet", i)
+#'     desc <- paste0("GeneSet", i)
+#'     genes <- sample(exFdata$GeneSymbol, genesetSizes[i])
+#'     res <- list(name=name, desc=desc, genes=genes, namespace="default")
+#'   }))
+#'   exGse <- doGse(exDgeRes, exGeneSets)
+#' }
 #' @importClassesFrom ribiosNGS EdgeResult
 #' @importFrom ribiosNGS dgeWithEdgeR
 #' @export doGse
-doGse <- function(edgeResult, gmtList) {
-  res <- try(gseWithCamera(edgeResult, gmtList))
+doGse <- function(edgeResult, gmtList, doParallel=FALSE) {
+  res <- try(gseWithCamera(edgeResult, gmtList, doParallel=doParallel))
   if(class(res)=="try-error") {
     res <- gseWithLogFCgage(edgeResult, gmtList)
   }
