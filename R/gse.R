@@ -317,6 +317,7 @@ cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParalle
 #' @importFrom ribiosUtils putColsFirst
 #' @importFrom BioQC gsNamespace matchGenes GmtList
 #' @importClassesFrom ribiosNGS EdgeResult
+#' @importFrom limma camera
 #' @examples 
 #' exMat <- matrix(rpois(120, 10), nrow=20, ncol=6)
 #' exGroups <- gl(2,3, labels=c("Group1", "Group2"))
@@ -337,6 +338,7 @@ cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParalle
 #'   
 #' exCameraRes <- camera(exEdgeRes, exGmt)
 #' 
+#' @export camera
 #' @export
 camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
   ctnames<- contrastNames(y)
