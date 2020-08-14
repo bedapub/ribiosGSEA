@@ -1,9 +1,9 @@
 Package: ribiosGSEA
 Type: Package
 Title: Gene-set enrichment analysis tools in ribios
-Version: 1.5-2
-Date: 2020-07-10
-Authors@R: 
+Version: 1.5-3
+Date: 2020-08-14
+Authors@R:
   c(person(given = "Jitao David",
          family = "Zhang",
          role = c("aut", "cre", "ctb"),
