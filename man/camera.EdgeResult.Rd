@@ -4,7 +4,7 @@
 \alias{camera.EdgeResult}
 \title{Run CAMERA method using EdgeResult}
 \usage{
-\method{camera}{EdgeResult}(y, gmtList, doParallel = FALSE)
+\method{camera}{EdgeResult}(y, gmtList, doParallel = FALSE, ...)
 }
 \arguments{
 \item{y}{A EdgeResult object}
@@ -12,7 +12,9 @@
 \item{gmtList}{Gene set collections, for example read by
 \code{\link[BioQC]{readGmt}}, with namespace.}
 
-\item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
+\item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.}
+
+\item{...}{Not used
 
 Note that the EdgeResult object must have a column 'GeneSymbol' in its
 \code{fData}.}

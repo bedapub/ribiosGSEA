@@ -4,7 +4,12 @@
 \alias{cameraLimmaVoomResultsByContrast}
 \title{Apply the CAMERA method to a DGEList object}
 \usage{
-cameraLimmaVoomResultsByContrast(limmaVoomResults, index, doParallel = FALSE)
+cameraLimmaVoomResultsByContrast(
+  limmaVoomResults,
+  index,
+  doParallel = FALSE,
+  ...
+)
 }
 \arguments{
 \item{limmaVoomResults}{A LimmaVoomResults object, with GeneSymbol available}
@@ -13,6 +18,8 @@ cameraLimmaVoomResultsByContrast(limmaVoomResults, index, doParallel = FALSE)
 sets}
 
 \item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.}
+
+\item{...}{Not used}
 }
 \value{
 A \code{data.frame} containing CAMERA results.

@@ -306,6 +306,7 @@ cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParalle
 #' @param gmtList Gene set collections, for example read by
 #' \code{\link[BioQC]{readGmt}}, with namespace.
 #' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
+#' @param ... Not used
 #' 
 #' Note that the EdgeResult object must have a column 'GeneSymbol' in its
 #' \code{fData}.
@@ -340,7 +341,7 @@ cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParalle
 #' 
 #' @export camera
 #' @export
-camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
+camera.EdgeResult <- function(y, gmtList, doParallel=FALSE, ...) {
   ctnames<- contrastNames(y)
   design <- designMatrix(y)
   ct <- contrastMatrix(y)
@@ -378,6 +379,7 @@ camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
 #' @param index List of integer indices of genesets, names are names of gene
 #' sets
 #' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
+#' @param ... Not used
 #' 
 #' @return A \code{data.frame} containing CAMERA results.
 #' 
@@ -405,7 +407,7 @@ camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
 #' cameraLimmaVoomResultsByContrast(limmaVoomRes, index=list(GS1=1:5, GS2=6:10))
 #' 
 #' @export
-cameraLimmaVoomResultsByContrast <- function(limmaVoomResults, index, doParallel=FALSE) {
+cameraLimmaVoomResultsByContrast <- function(limmaVoomResults, index, doParallel=FALSE, ...) {
   geneSymbols <- ribiosNGS::humanGeneSymbols(limmaVoomResults)
   if(is.null(geneSymbols))
     stop("LimmaVoomResults must have 'GeneSymbol' in its fData to perform camera!")

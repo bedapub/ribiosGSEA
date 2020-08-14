@@ -37,13 +37,6 @@ NULL
 #'     list(name="Set2", desc="set 2", genes=c("Gene18", "Gene6", "Gene4"), namespace="default")
 #' ))
 #' exGse <- doGse(exDgeRes, exGeneSets)
-#' fullEnrichTable(exGse)
-#' 
-#' exGseWithGage <- gseWithLogFCgage(exDgeRes, exGeneSets)
-#' fullEnrichTable(exGseWithGage)
-#' 
-#' exGseWithCamera <- gseWithCamera(exDgeRes, exGeneSets)
-#' fullEnrichTable(exGseWithCamera)
 #' 
 #' \dontrun{
 #'   exMat <- matrix(rpois(120000, 10), nrow=20000, ncol=12)
@@ -71,6 +64,7 @@ NULL
 #'   }))
 #'   exGse <- doGse(exDgeRes, exGeneSets)
 #' }
+#' 
 #' @importClassesFrom ribiosNGS EdgeResult
 #' @importFrom ribiosNGS dgeWithEdgeR
 #' @export doGse

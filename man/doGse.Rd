@@ -42,13 +42,6 @@ exGeneSets <- BioQC::GmtList(list(
     list(name="Set2", desc="set 2", genes=c("Gene18", "Gene6", "Gene4"), namespace="default")
 ))
 exGse <- doGse(exDgeRes, exGeneSets)
-fullEnrichTable(exGse)
-
-exGseWithGage <- gseWithLogFCgage(exDgeRes, exGeneSets)
-fullEnrichTable(exGseWithGage)
-
-exGseWithCamera <- gseWithCamera(exDgeRes, exGeneSets)
-fullEnrichTable(exGseWithCamera)
 
 \dontrun{
   exMat <- matrix(rpois(120000, 10), nrow=20000, ncol=12)
@@ -76,6 +69,7 @@ fullEnrichTable(exGseWithCamera)
   }))
   exGse <- doGse(exDgeRes, exGeneSets)
 }
+
 }
 \seealso{
 \code{gseWithLogFCgage} and \code{gseWithCamera} are wrapped by
