@@ -30,4 +30,3 @@ exGeneSets <- BioQC::GmtList(lapply(seq(1:ngeneset), function(i) {
 system.time(exGseSeq <- gseWithCamera(exDgeRes, exGeneSets, doParallel=FALSE)) # 1.7 inner loop
 ## profvis({exGse <- doGse(exDgeRes, exGeneSets, doParallel=TRUE)})
 ## profvis({exGse <- doGse(exDgeRes, exGeneSets)})
-  

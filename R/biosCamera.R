@@ -77,7 +77,7 @@
 #' @examples 
 #' y <- matrix(rnorm(1000*6),1000,6)
 #' design <- cbind(Intercept=1,Group=c(0,0,0,1,1,1))
-#' # First set of 20 genes are genuinely differentially expressed 
+#' # First set of 20 genes are genuinely deferentially expressed 
 #' index1 <- 1:20
 #' y[index1,4:6] <- y[index1,4:6]+1
 #' # The second set of 20 genes are not

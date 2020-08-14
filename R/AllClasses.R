@@ -79,35 +79,3 @@ setClass("AnnoBroadGseaRes", contains="list")
 #' @export
 setClass("AnnoBroadGseaResList", contains="list") #3 a list of AnnoBroadGseaRes objects
             
-##----------------------------------------##
-## migrated from ribiosNGS
-##----------------------------------------##
-
-#' An EdgeGSE object contains gene-sets, enrichment method, and 
-#' enrichment tables besides EdgeResult
-#' @slot geneSets A GmtList
-#' @slot method Gene-set enrichment method
-#' @slot enrichTables A data.frame
-#' @importClassesFrom ribiosNGS EdgeResult
-#' @export
-setClass("EdgeGSE",
-         representation=list(geneSets="GmtList",
-           method="character",
-           enrichTables="data.frame"),
-         contains="EdgeResult")
-
-#' Build an EdgeGSE object
-#' @param edgeObj An \code{EdgeObject}
-#' @param gmtList A \code{GmtList} object
-#' @return An EdgeGSE object, with enrichTables as \code{NULL}
-#' @importFrom ribiosNGS dgeList
-#' @importClassesFrom BioQC GmtList
-#' @export
-EdgeGSE <- function(edgeObj, gmtList) {
-  haltifnot(all(c("GeneID", "GeneSymbol") %in% colnames(dgeList(edgeObj)$genes)),
-            msg="Gene annotation of the edgeObj must contain columns 'GeneID' with EntrezGeneIDs and 'GeneSymbol' with official gene symbols")
-  egse <- as(edgeObj,"EdgeGSE")
-  egse@geneSets <- gmtList
-  return(egse)
-}
-

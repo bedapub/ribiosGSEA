@@ -601,18 +601,6 @@ setMethod("fdrValue", "FisherResultList", function(object, ind, ...) {
           })
 
 ##----------------------------------------##
-## Exported from ribiosExpression
-##----------------------------------------##
-
-#' Extract contrast names from an EdgeGSE object
-#' @param object An \code{EdgeGSE} object
-#' @importMethodsFrom ribiosExpression contrastNames
-#' @export
-setMethod("contrastNames",
-          "EdgeGSE",
-          function(object) contrastNames(as(object, "EdgeObject")))
-
-##----------------------------------------##
 ## Fisher's exact test
 ##----------------------------------------##
 

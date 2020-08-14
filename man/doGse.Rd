@@ -37,7 +37,7 @@ Perform gene-set enrichment (GSE) analysis
 \itemize{
 \item \code{gseWithLogFCgage}: Gene-set enrichment with logFC gage
 
-\item \code{gseWithCamera}: Gene-set enrichment with camera
+\item \code{gseWithCamera}: Gene-set enrichment with camera, depending on the S3 class of edgeResult: EdgeResult and LimmaVoomResult are currently supported.
 }}
 
 \examples{

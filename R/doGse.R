@@ -1,23 +1,9 @@
 #' @include gse.R
 NULL
 
-#' @describeIn doGse Gene-set enrichment with logFC gage
-#' @export
-gseWithLogFCgage <- function(edgeResult, gmtList) {
-  gseRes <- logFCgage(edgeResult, gmtList)
-  return(gseRes)
-}
-
-#' @describeIn doGse Gene-set enrichment with camera
-#' @export
-gseWithCamera <- function(edgeResult, gmtList, doParallel=TRUE) {
-  gseRes <- camera.EdgeResult(edgeResult, gmtList, doParallel=doParallel)
-  return(gseRes)
-}
-
 #' Perform gene-set enrichment (GSE) analysis
 #' 
-#' @param edgeResult An object of the class \code{EdgeObject}
+#' @param edgeResult An object of the class \code{EdgeResult} or \code{LimmaVoomResult}
 #' @param gmtList An object of the class \code{GmtList}
 #' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
 #' 
@@ -25,15 +11,13 @@ gseWithCamera <- function(edgeResult, gmtList, doParallel=TRUE) {
 #' method is applied. In case this is not successful, for instance because of
 #' lack of biological replicates, the GAGE method (Generally Applicable
 #' Gene-set Enrichment for pathway analysis) is applied.
-#' @return An \code{EdgeGSE} object containing all information required to
-#' reproduce the gene-set enrichment analysis results, as well as the
-#' enrichment table. Apply \code{fullEnrichTable} to the object to extract a
-#' \code{data.frame} containing results of the gene-set enrichment analysis.
+#'
+#' @return A \code{data.frame} containing results of the gene-set enrichment analysis.
+#' 
 #' @seealso \code{gseWithLogFCgage} and \code{gseWithCamera} are wrapped by
 #' this function to perform analysis with GAGE and CAMERA, respectively.
-#' \code{logFCgage} and \code{camera.EdgeResult} implements the logic, and
-#' returns an object of the \code{EdgeGSE} class, which contains all relevant
-#' information required to reproduce the analysis results.
+#' \code{logFCgage}, \code{camera.EdgeResult}, and \code{camera.LimmaVoomResult} implement the logic, and
+#' return the enrichment table.
 #'
 #' @examples
 #' exMat <- matrix(rpois(120, 10), nrow=20, ncol=6)
@@ -91,9 +75,9 @@ gseWithCamera <- function(edgeResult, gmtList, doParallel=TRUE) {
 #' @importFrom ribiosNGS dgeWithEdgeR
 #' @export doGse
 doGse <- function(edgeResult, gmtList, doParallel=FALSE) {
-  res <- try(gseWithCamera(edgeResult, gmtList, doParallel=doParallel))
+  res <- try(camera(edgeResult, gmtList, doParallel=doParallel))
   if(class(res)=="try-error") {
-    res <- gseWithLogFCgage(edgeResult, gmtList)
+    res <- logFCgage(edgeResult, gmtList)
   }
   return(res)
 }
