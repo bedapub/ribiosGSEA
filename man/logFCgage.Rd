@@ -7,12 +7,12 @@
 logFCgage(edgeResult, gmtList)
 }
 \arguments{
-\item{edgeResult}{An \code{EdgeResult} object}
+\item{edgeResult}{An \code{EdgeResult} object.}
 
-\item{gmtList}{A \code{GmtList} object}
+\item{gmtList}{A \code{GmtList} object.}
 }
 \value{
-A \code{EdgeGSE} object
+A \code{data.frame} containing enrichment analysis results.
 }
 \description{
 Perform the GAGE analysis for EdgeResult and GmtList
