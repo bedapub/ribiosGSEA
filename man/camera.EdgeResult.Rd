@@ -17,6 +17,9 @@
 Note that the EdgeResult object must have a column 'GeneSymbol' in its
 \code{fData}.}
 }
+\value{
+A \code{data.frame} containing CAMERA results.
+}
 \description{
 Run CAMERA method using EdgeResult
 }
@@ -34,10 +37,10 @@ exPdata <- data.frame(Name=sprintf("Sample\%d", 1:ncol(exMat)),
 exDgeList <- DGEList(exMat, genes=exFdata, samples=exPdata)
 exDgeList <- edgeR::estimateDisp(exDgeList, exDesign)
 exEdgeObject <- EdgeObject(exDgeList, exDescon)
-exEdgeRes <- dgeWithEdgeR(exEdgeObject)
-exGmt <- GmtList(list(GeneSet1=sprintf("GeneSymbol\%d", 1:5),
+exEdgeRes <- ribiosNGS::dgeWithEdgeR(exEdgeObject)
+exGmt <- BioQC::GmtList(list(GeneSet1=sprintf("GeneSymbol\%d", 1:5),
   GeneSet2=sprintf("GeneSymbol\%d", 6:10)))
   
 exCameraRes <- camera(exEdgeRes, exGmt)
-fullEnrichTable(exCameraRes)
+
 }

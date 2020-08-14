@@ -190,16 +190,16 @@ mergeCameraResults <- function(matrix,
   haltifnot(length(contrast)==ncol(designMatrix),
             msg="contrast must be a numeric vector of the same length as the column count of the design matrix")
   
-  tbl.priorCor <- camera(matrix,
-                         index=index,
-                         design=designMatrix,
-                         contrast=contrast,
-                         weights=weights,
-                         use.ranks = use.ranks, 
-                         allow.neg.cor=FALSE,
-                         inter.gene.cor=0.01,
-                         trend.var=FALSE,
-                         sort=FALSE)
+  tbl.priorCor <- limma::camera.default(matrix,
+                                        index=index,
+                                        design=designMatrix,
+                                        contrast=contrast,
+                                        weights=weights,
+                                        use.ranks = use.ranks, 
+                                        allow.neg.cor=FALSE,
+                                        inter.gene.cor=0.01,
+                                        trend.var=FALSE,
+                                        sort=FALSE)
   tbl.estCor <- ribiosGSEA::biosCamera(matrix, 
                                        index=index, 
                                        design = designMatrix, 
@@ -260,6 +260,7 @@ mergeCameraResults <- function(matrix,
 #' cameraDGEListByContrast(exDgeList, 
 #'   index=list(1:5, 6:10),
 #'   design=exDesign, contrasts=exContrast)
+#'   
 #' @export
 cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParallel=FALSE) {
   geneSymbols <- ribiosNGS::humanGeneSymbols(dgeList)
@@ -312,9 +313,10 @@ cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParalle
 #' @return A \code{data.frame} containing CAMERA results.
 #' 
 #' @importFrom ribiosExpression contrastNames designMatrix contrastMatrix
-#' @importFrom ribiosNGS    humanGeneSymbols
+#' @importFrom ribiosNGS humanGeneSymbols dgeWithEdgeR
 #' @importFrom ribiosUtils putColsFirst
-#' @importFrom BioQC gsNamespace matchGenes
+#' @importFrom BioQC gsNamespace matchGenes GmtList
+#' @importClassesFrom ribiosNGS EdgeResult
 #' @examples 
 #' exMat <- matrix(rpois(120, 10), nrow=20, ncol=6)
 #' exGroups <- gl(2,3, labels=c("Group1", "Group2"))
@@ -329,13 +331,13 @@ cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParalle
 #' exDgeList <- DGEList(exMat, genes=exFdata, samples=exPdata)
 #' exDgeList <- edgeR::estimateDisp(exDgeList, exDesign)
 #' exEdgeObject <- EdgeObject(exDgeList, exDescon)
-#' exEdgeRes <- dgeWithEdgeR(exEdgeObject)
-#' exGmt <- GmtList(list(GeneSet1=sprintf("GeneSymbol%d", 1:5),
+#' exEdgeRes <- ribiosNGS::dgeWithEdgeR(exEdgeObject)
+#' exGmt <- BioQC::GmtList(list(GeneSet1=sprintf("GeneSymbol%d", 1:5),
 #'   GeneSet2=sprintf("GeneSymbol%d", 6:10)))
 #'   
 #' exCameraRes <- camera(exEdgeRes, exGmt)
-#' fullEnrichTable(exCameraRes)
-#' @export camera.EdgeResult
+#' 
+#' @export
 camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
   ctnames<- contrastNames(y)
   design <- designMatrix(y)
@@ -373,13 +375,14 @@ camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
 #' @param limmaVoomResults A LimmaVoomResults object, with GeneSymbol available
 #' @param index List of integer indices of genesets, names are names of gene
 #' sets
+#' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
 #' 
 #' @return A \code{data.frame} containing CAMERA results.
 #' 
 #' @importFrom parallel mclapply
 #' @importFrom limma camera
 #' @importFrom edgeR estimateDisp
-#' @importFrom ribiosNGS humanGeneSymbols
+#' @importFrom ribiosNGS humanGeneSymbols dgeWithLimmaVoom
 #' @importFrom ribiosUtils sortByCol
 #' 
 #' @examples 
@@ -395,7 +398,7 @@ camera.EdgeResult <- function(y, gmtList, doParallel=FALSE) {
 #' exDgeList <- DGEList(exMat, genes=exFdata, samples=exPdata)
 #' exDgeList <- edgeR::estimateDisp(exDgeList, exDesign)
 #' edgeObj <- EdgeObject(exDgeList, exDescon)
-#' limmaVoomRes <- dgeWithLimmaVoom(edgeObj)
+#' limmaVoomRes <- ribiosNGS::dgeWithLimmaVoom(edgeObj)
 #' cameraLimmaVoomResultsByContrast(limmaVoomRes, index=c(1:5))
 #' cameraLimmaVoomResultsByContrast(limmaVoomRes, index=list(GS1=1:5, GS2=6:10))
 #' 
@@ -451,10 +454,10 @@ cameraLimmaVoomResultsByContrast <- function(limmaVoomResults, index, doParallel
 #' @return A \code{data.frame} containing CAMERA results.
 #' 
 #' @importFrom ribiosExpression contrastNames designMatrix contrastMatrix
-#' @importFrom ribiosNGS    humanGeneSymbols
+#' @importFrom ribiosNGS humanGeneSymbols
 #' @importFrom ribiosUtils putColsFirst
-#' @importFrom BioQC gsNamespace matchGenes
-#' 
+#' @importFrom BioQC gsNamespace matchGenes GmtList
+#' @importClassesFrom ribiosNGS LimmaVoomResult
 #' @examples 
 #' exMat <- matrix(rpois(120, 10), nrow=20, ncol=6)
 #' exGroups <- gl(2,3, labels=c("Group1", "Group2"))
@@ -468,11 +471,12 @@ cameraLimmaVoomResultsByContrast <- function(limmaVoomResults, index, doParallel
 #' exDgeList <- DGEList(exMat, genes=exFdata, samples=exPdata)
 #' exDgeList <- edgeR::estimateDisp(exDgeList, exDesign)
 #' edgeObj <- EdgeObject(exDgeList, exDescon)
-#' limmaVoomRes <- dgeWithLimmaVoom(edgeObj)
-#' exGmt <- GmtList(list(GeneSet1=sprintf("GeneSymbol%d", 1:5),
+#' limmaVoomRes <- ribiosNGS::dgeWithLimmaVoom(edgeObj)
+#' exGmt <- BioQC::GmtList(list(GeneSet1=sprintf("GeneSymbol%d", 1:5),
 #'   GeneSet2=sprintf("GeneSymbol%d", 6:10)))
 #'   
 #' camera(limmaVoomRes, exGmt)
+#' 
 #' @export
 camera.LimmaVoomResult <- function(y, gmtList, doParallel=FALSE) {
   ctnames<- contrastNames(y)

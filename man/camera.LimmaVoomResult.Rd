@@ -17,6 +17,9 @@
 Note that the LimmaVoomResult object must have a column 'GeneSymbol' in its
 \code{fData}.}
 }
+\value{
+A \code{data.frame} containing CAMERA results.
+}
 \description{
 Run the CAMERA method using LimmaVoomResult
 }
@@ -33,9 +36,10 @@ exPdata <- data.frame(Name=sprintf("Sample\%d", 1:ncol(exMat)),
 exDgeList <- DGEList(exMat, genes=exFdata, samples=exPdata)
 exDgeList <- edgeR::estimateDisp(exDgeList, exDesign)
 edgeObj <- EdgeObject(exDgeList, exDescon)
-limmaVoomRes <- dgeWithLimmaVoom(edgeObj)
-exGmt <- GmtList(list(GeneSet1=sprintf("GeneSymbol\%d", 1:5),
+limmaVoomRes <- ribiosNGS::dgeWithLimmaVoom(edgeObj)
+exGmt <- BioQC::GmtList(list(GeneSet1=sprintf("GeneSymbol\%d", 1:5),
   GeneSet2=sprintf("GeneSymbol\%d", 6:10)))
   
 camera(limmaVoomRes, exGmt)
+
 }

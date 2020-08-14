@@ -37,4 +37,5 @@ cameraDGEListByContrast(exDgeList, index=1:5, design=exDesign, contrasts=exContr
 cameraDGEListByContrast(exDgeList, 
   index=list(1:5, 6:10),
   design=exDesign, contrasts=exContrast)
+  
 }

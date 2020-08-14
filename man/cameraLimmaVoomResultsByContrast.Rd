@@ -11,6 +11,11 @@ cameraLimmaVoomResultsByContrast(limmaVoomResults, index, doParallel = FALSE)
 
 \item{index}{List of integer indices of genesets, names are names of gene
 sets}
+
+\item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.}
+}
+\value{
+A \code{data.frame} containing CAMERA results.
 }
 \description{
 Apply the CAMERA method to a DGEList object
@@ -28,7 +33,8 @@ exPdata <- data.frame(Name=sprintf("Sample\%d", 1:ncol(exMat)),
 exDgeList <- DGEList(exMat, genes=exFdata, samples=exPdata)
 exDgeList <- edgeR::estimateDisp(exDgeList, exDesign)
 edgeObj <- EdgeObject(exDgeList, exDescon)
-limmaVoomRes <- dgeWithLimmaVoom(edgeObj)
+limmaVoomRes <- ribiosNGS::dgeWithLimmaVoom(edgeObj)
 cameraLimmaVoomResultsByContrast(limmaVoomRes, index=c(1:5))
 cameraLimmaVoomResultsByContrast(limmaVoomRes, index=list(GS1=1:5, GS2=6:10))
+
 }
