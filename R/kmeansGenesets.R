@@ -44,6 +44,10 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
               identical(rownames(enrichProfMatrix),
                         names(genesetGenes)))
   gsNames <- as.character(rownames(enrichProfMatrix))
+  maxOptK <- floor(nrow(enrichProfMatrix)/2)
+  if(optK>maxOptK) {
+    optK <- maxOptK
+  }
   kmeansObj <- kmeans(enrichProfMatrix, optK, nstart=nstart, iter.max=iter.max)
   pathCluster <- kmeansObj$cluster
   pathClusterFac <- factor(pathCluster); levels(pathClusterFac) <- sprintf("GenesetCluster%s", levels(pathClusterFac))
