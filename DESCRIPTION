@@ -2,16 +2,18 @@ Package: ribiosGSEA
 Type: Package
 Title: Gene-set enrichment analysis tools in ribios
 Version: 1.5-3
-Date: 2020-08-14
+Date: 2021-04-07
 Authors@R:
   c(person(given = "Jitao David",
          family = "Zhang",
-         role = c("aut", "cre", "ctb"),
+         role = c("aut", "cre"),
          email = "jitao_david.zhang@roche.com",
          comment = c(ORCID="0000-0002-3085-0909")),
+    person(given = "Balasz",
+           family = "Banfai",
+           role = "ctb"),
     person("F.Hoffmann-La Roche AG", role="cph"))
-Description: Provides data structure and functions for gene-set analysis and 
-    post-processing of analysis results.
+Description: Provides data structure and functions for gene-set analysis and post-processing of analysis results.
 Depends:
     R (>= 2.1.0)
 Imports:
