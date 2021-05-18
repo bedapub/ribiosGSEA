@@ -7,10 +7,11 @@
 #' log10-transformed value.
 #' @param posLog Logical, whether the Q-value should be reported as absolute of
 #' the log10-transformed value.
-#'
 #' @export
 gseaResQvalue <- function(file, threshold=1E-4, log=FALSE, posLog=FALSE) {
-  tbl <- read.table(file, sep="\t", header=TRUE)
+  tbl <- read.table(file, row.names=NULL,  header = TRUE, sep = "\t", 
+                    quote = "", dec = ".", check.names = TRUE, 
+                    strip.white = TRUE, comment.char = "")
   name <- tbl[,"NAME"]
   q <- tbl[,"FDR.q.val"]
   if(!is.null(threshold) && !is.na(threshold))
