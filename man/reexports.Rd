@@ -7,6 +7,7 @@
 \alias{designMatrix}
 \alias{EdgeObject}
 \alias{DGEList}
+\alias{camera}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -15,6 +16,8 @@ below to see their documentation.
 
 \describe{
   \item{edgeR}{\code{\link[edgeR]{DGEList}}}
+
+  \item{limma}{\code{\link[limma]{camera}}}
 
   \item{ribiosExpression}{\code{\link[ribiosExpression]{DesignContrast}}, \code{\link[ribiosExpression]{designMatrix}}}
 
