@@ -20,7 +20,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          - {os: macOS-latest, r: 'devel'}
           - {os: macOS-latest, r: 'release'}
+          - {os: macOS-latest, r: 'oldrel'}
+          - {os: ubuntu-18.04,   r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
           - {os: ubuntu-18.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
           - {os: ubuntu-18.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"}
 
@@ -34,7 +37,6 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
 
       - uses: r-lib/actions/setup-pandoc@v1
 
@@ -61,10 +63,18 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
-      - name: Install Bioconductor
+      - name: Install Bioconductor release
+        if: ${{ matrix.config.r }} != "devel"
         run: |
           install.packages("BiocManager")
           BiocManager::install()
+        shell: Rscript {0}
+
+      - name: Install Bioconductor devel
+        if: ${{ matrix.config.r }} == "devel"
+        run: |
+          install.packages("BiocManager")
+          BiocManager::install(version="devel")
         shell: Rscript {0}
 
       - name: Install dependencies
