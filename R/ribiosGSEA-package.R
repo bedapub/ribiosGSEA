@@ -16,6 +16,9 @@ NULL
 #'             pchisq pt qt sd var model.matrix
 NULL
 
+## following lines make it not necessary to document 
+## re-exported functions
+
 #' @export
 ribiosExpression::DesignContrast
 
@@ -27,3 +30,6 @@ ribiosNGS::EdgeObject
 
 #' @export
 edgeR::DGEList
+
+#' @export
+limma::camera

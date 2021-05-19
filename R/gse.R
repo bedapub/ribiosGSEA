@@ -240,6 +240,7 @@ mergeCameraResults <- function(matrix,
 #' 
 #' @importFrom parallel mclapply
 #' @importFrom limma camera
+#' @export camera
 #' @importFrom edgeR estimateDisp
 #' @importFrom ribiosNGS humanGeneSymbols
 #' @importFrom ribiosUtils sortByCol
@@ -339,7 +340,6 @@ cameraDGEListByContrast <- function(dgeList, index, design, contrasts, doParalle
 #'   
 #' exCameraRes <- camera(exEdgeRes, exGmt)
 #' 
-#' @export camera
 #' @export
 camera.EdgeResult <- function(y, gmtList, doParallel=FALSE, ...) {
   ctnames<- contrastNames(y)
@@ -451,6 +451,7 @@ cameraLimmaVoomResultsByContrast <- function(limmaVoomResults, index, doParallel
 #' @param gmtList Gene set collections, for example read by
 #' \code{\link[BioQC]{readGmt}}
 #' @param doParallel Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
+#' @param ... Passed to \code{cameraLimmaVoomResultsByContrast}
 #' 
 #' Note that the LimmaVoomResult object must have a column 'GeneSymbol' in its
 #' \code{fData}.
@@ -482,7 +483,7 @@ cameraLimmaVoomResultsByContrast <- function(limmaVoomResults, index, doParallel
 #' camera(limmaVoomRes, exGmt)
 #' 
 #' @export
-camera.LimmaVoomResult <- function(y, gmtList, doParallel=FALSE) {
+camera.LimmaVoomResult <- function(y, gmtList, doParallel=FALSE, ...) {
   ctnames<- contrastNames(y)
   design <- designMatrix(y)
   ct <- contrastMatrix(y)
@@ -501,7 +502,8 @@ camera.LimmaVoomResult <- function(y, gmtList, doParallel=FALSE) {
     currInd <- gsIndex[i]
     tt <- cameraLimmaVoomResultsByContrast(y,
                                            index=currInd,
-                                           doParallel=doParallel)
+                                           doParallel=doParallel,
+                                           ...)
     return(tt)
   })
   

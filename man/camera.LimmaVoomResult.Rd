@@ -4,7 +4,7 @@
 \alias{camera.LimmaVoomResult}
 \title{Run the CAMERA method using LimmaVoomResult}
 \usage{
-\method{camera}{LimmaVoomResult}(y, gmtList, doParallel = FALSE)
+\method{camera}{LimmaVoomResult}(y, gmtList, doParallel = FALSE, ...)
 }
 \arguments{
 \item{y}{A LimmaVoomResult object}
@@ -12,7 +12,9 @@
 \item{gmtList}{Gene set collections, for example read by
 \code{\link[BioQC]{readGmt}}}
 
-\item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.
+\item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.}
+
+\item{...}{Passed to \code{cameraLimmaVoomResultsByContrast}
 
 Note that the LimmaVoomResult object must have a column 'GeneSymbol' in its
 \code{fData}.}
