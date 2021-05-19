@@ -1,6 +1,19 @@
 #include "algorithm"
-#include <omp.h>
 #include <Rcpp.h>
+
+#ifdef _OPENMP
+  #include <omp.h>  // This line won't add the library if you don't compile with -fopenmp option.
+  #ifdef _MSC_VER
+    // For Microsoft compiler
+    #define OMP_FOR(n) __pragma(omp parallel for if(n>10))
+  #else  // assuming "__GNUC__" is defined
+    // For GCC compiler
+    #define OMP_FOR(n) _Pragma("omp parallel for if(n>10)")
+  #endif
+#else
+  #define omp_get_thread_num() 0
+  #define OMP_FOR(n)
+#endif
 
 using namespace Rcpp;
 
