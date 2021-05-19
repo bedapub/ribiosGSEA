@@ -65,14 +65,14 @@ jobs:
           sudo -s eval "$sysreqs"
 
       - name: Install Bioconductor release
-        if: ${{ matrix.config.r != "devel" }}
+        if: matrix.config.r != 'devel'
         run: |
           install.packages("BiocManager")
           BiocManager::install()
         shell: Rscript {0}
 
       - name: Install Bioconductor devel
-        if: ${{ matrix.config.r == "devel" }}
+        if: matrix.config.r == 'devel'
         run: |
           install.packages("BiocManager")
           BiocManager::install(version="devel")
