@@ -1,6 +1,8 @@
 *ribiosGSEA*: Tools for gene-set analysis
 ===
 
+[![R-CMD-check](https://github.com/bedapub/ribiosGSEA/actions/workflows/standard-ci-workflow.yml/badge.svg)](https://github.com/bedapub/ribiosGSEA/actions/workflows/standard-ci-workflow.yml)
+
 ## What is *ribiosGSEA*?
 
 *ribiosGSEA* is a R package that assists gene-set analysis of various kinds.
