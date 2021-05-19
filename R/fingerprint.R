@@ -7,13 +7,12 @@
 #' log10-transformed value.
 #' @param posLog Logical, whether the Q-value should be reported as absolute of
 #' the log10-transformed value.
+#' @importFrom ribiosIO readTable
 #' @export
 gseaResQvalue <- function(file, threshold=1E-4, log=FALSE, posLog=FALSE) {
-  tbl <- read.table(file, row.names=NULL,  header = TRUE, sep = "\t", 
-                    quote = "", dec = ".", check.names = TRUE, 
-                    strip.white = TRUE, comment.char = "")
+  tbl <- ribiosIO::readTable(file, row.names=FALSE)
   name <- tbl[,"NAME"]
-  q <- tbl[,"FDR.q.val"]
+  q <- tbl[,"FDR q-val"]
   if(!is.null(threshold) && !is.na(threshold))
     q[q<threshold] <- threshold
   if(log)
@@ -89,9 +88,10 @@ gseaResQvalue <- function(file, threshold=1E-4, log=FALSE, posLog=FALSE) {
 #' gseaEs <- gseaResES(gseaFile)
 #' gseaNes <- gseaResES(gseaFile, normalized=TRUE)
 #' 
+#' @importFrom ribiosIO readTable
 #' @export gseaResES
 gseaResES <- function(file, normalized=FALSE) {
-  tbl <- read.table(file, sep="\t", header=TRUE)
+  tbl <-  ribiosIO::readTable(file, row.names=FALSE)
   name <- tbl[,1L]
   vc <- ifelse(normalized, "NES", "ES")
   v <- tbl[,vc]
