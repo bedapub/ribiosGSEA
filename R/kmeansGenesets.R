@@ -81,6 +81,7 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
     
     return(res)
   })
+
   gsCompDf <- do.call(rbind, gsCompOverlap)
   gsCompOverlapSels <- with(gsCompDf,
                             as.character(GenesetName[IsRepresentative]))
@@ -89,16 +90,21 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
   ## re-arrange the levels of the clusters so clusters with similar profiles
   ## cluster together
   repRows <- which(gsCompDf$IsRepresentative)
-  clusterAvgProf <- do.call(rbind,
-                            tapply(repRows,
-                                   gsCompOverlapSelInd,
-                                   function(i) {
-                                    gsInd <- gsCompDf$GenesetInd[i]
-                                    res <- colMeans(enrichProfMatrix[gsInd,
-                                                                     metaClusterColumns,
-                                                                     drop=FALSE],
-                                                    na.rm=TRUE)
-                                   }))
+  clusterAvgProfList <- tapply(repRows,
+                               gsCompOverlapSelInd,
+                               function(i) {
+                                 gsInd <- gsCompDf$GenesetInd[i]
+                                 res <- colMeans(enrichProfMatrix[gsInd,
+                                                                  metaClusterColumns,
+                                                                  drop=FALSE],
+                                                 na.rm=TRUE)
+                               })
+  if(is.list(clusterAvgProfList)) {
+    clusterAvgProf <- do.call(rbind, clusterAvgProfList)
+  } else {
+    clusterAvgProf <- matrix(clusterAvgProfList, ncol=1,
+                             dimnames = list(names(clusterAvgProfList), NULL))
+  }
   clusterHclust <- stats::hclust(stats::dist(clusterAvgProf), 
                                  "ward.D2")
   clusterOrder <- clusterHclust$label[clusterHclust$order]
@@ -118,3 +124,4 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
   return(res)
 }
 
+assignInNamespace("kmeansGeneset", kmeansGeneset, "ribiosGSEA")
