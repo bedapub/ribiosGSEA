@@ -1,3 +1,6 @@
+#' @include utils.R
+NULL
+
 #' An adapted and enhanced version of limma::camera
 #' 
 #' @param y 	a numeric matrix of log-expression values or log-ratios of
@@ -311,8 +314,7 @@ biosCamera <- function (y, index, design = NULL, contrast = ncol(design),
             contInds <- contInds[contOrd]
             contVals <- contVals[contOrd]
             
-            conts[i] <- paste(sprintf("%s(%1.2f)",
-                                      geneLabels[contInds], contVals), collapse=",")
+            conts[i] <- printContributingGenes(geneLabels[contInds], contVals)
         }
     }
     

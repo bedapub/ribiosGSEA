@@ -32,3 +32,12 @@ gsSize <- function(gmtList) {
    sapply(gsGenes(gmtList), ribiosUtils::ulen)
 }
 
+#' Print contributing genes
+#' @param geneLabels A vector of character strings
+#' @param geneValues A vector of numeric values
+#' @return A vector of character strings
+#' @export
+printContributingGenes <- function(geneLabels, geneValues) {
+  paste(sprintf("%s(%1.2f)",
+                geneLabels, geneValues), collapse=",")
+}
