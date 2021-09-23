@@ -8,39 +8,73 @@ NULL
 #' @param ... Other parameters passed to \code{\link[gage]{gage}}
 #' 
 #' @importFrom gage gage
+#' @importFrom BioQC hasNamespace
 #' @export
 myGage <- function(logFC, gmtList, ...) {
+  index <- seq(along=gmtList)
   gsnames <- gsName(gmtList)
-    genes <- gsGenes(gmtList)
-    gsizes <- gsSize(gmtList)
+  genes <- gsGenes(gmtList)
+  gsizes <- gsSize(gmtList)
+  if(BioQC::hasNamespace(gmtList)) {
     cate <- gsNamespace(gmtList)
-    gdf <- data.frame(geneset=gsnames, namespace=cate)
-    gage.res <- gage::gage(logFC, gsets=genes, 
-                           set.size=c(min(gsizes), max(gsizes)),
-                           ref=NULL, samp=NULL, ...)
-    greater <- as.data.frame(gage.res$greater[,c("stat.mean", "p.val", "q.val", "set.size")])
-    less <- as.data.frame(gage.res$less[,c("p.val", "q.val")])
-    greater$geneset <- gsnames
-    less$geneset <- gsnames
-    greater <- merge(greater, gdf, by="geneset")
-    less <- merge(less, gdf, by="geneset")
-    res.raw <- merge(greater, less, by=c("geneset","namespace"),
-                     suffix=c(".greater", ".less"))
-    direction <- with(res.raw, ifelse(p.val.less<p.val.greater, "Down", "Up"))
-    pVal.pmin <- with(res.raw, ifelse(p.val.less<p.val.greater, p.val.less, p.val.greater))
-    pVal <- pVal.pmin * 2; pVal[pVal>1] <- 1
-
-    ## TODO: contributing genes
-
-    res <- data.frame(Namespace=res.raw$namespace,
-                      GeneSet=res.raw$geneset,
-                      NGenes=res.raw$set.size,
-                      Direction=direction,
-                      PValue=pVal,
-                      FDR=rep(NA,length(pVal)))
-    res <- subset(res, NGenes>=1 & !is.na(PValue) & !is.nan(PValue))
-    res$FDR <- p.adjust(res$PValue, "fdr")
+  } else {
+    cate <- rep(NA, length(gsnames))
+  }
+  
+  gdf <- data.frame(genesetIndex=index, geneset=gsnames, namespace=cate)
+  gage.res <- gage::gage(logFC, gsets=genes, 
+                         set.size=c(min(gsizes), max(gsizes)),
+                         ref=NULL, samp=NULL, ...)
+  greater <- as.data.frame(cbind(stat.mean=gage.res$stats[,"stat.mean"],
+                                 gage.res$greater[,c("p.val", "q.val", "set.size")]))
+  less <- as.data.frame(gage.res$less[,c("p.val", "q.val")])
+  greater$geneset <- gsnames
+  less$geneset <- gsnames
+  greater <- merge(greater, gdf, by="geneset")
+  less <- merge(less, gdf, by="geneset")
+  res.raw <- merge(greater, less, by=c("geneset","namespace"),
+                   suffix=c(".greater", ".less"))
+  direction <- with(res.raw, ifelse(p.val.less<p.val.greater, "Down", "Up"))
+  resRawIndex <- res.raw$genesetIndex.greater
+  resRawGenes <- genes[resRawIndex]
+  pVal.pmin <- with(res.raw, ifelse(p.val.less<p.val.greater, p.val.less, p.val.greater))
+  pVal <- pVal.pmin * 2; pVal[pVal>1] <- 1
+  
+  contGenes <- vector("character", nrow(res.raw))
+  isUp <- !is.na(direction) & direction=="Up"
+  isDown <- !is.na(direction) & direction=="Down"
+  
+  contGenes[isUp] <- vapply(resRawGenes[isUp], function(upGenes) {
+    res <- logFC[upGenes]
+    posRes <- sort(res[!is.na(res) & res>0], decreasing=TRUE)
+    res <- printContributingGenes(names(posRes), unname(posRes))
     return(res)
+  }, "Gene(1)")
+  contGenes[isDown] <- vapply(resRawGenes[isDown], function(downGenes) {
+    res <- logFC[downGenes]
+    negRes <- sort(res[!is.na(res) & res<0], decreasing = FALSE)
+    res <- printContributingGenes(names(negRes), unname(negRes))
+    return(res)
+  }, "Gene(-1)")
+  
+  ## TODO: contributing genes
+  res <- data.frame(Namespace=res.raw$namespace,
+                    GeneSet=res.raw$geneset,
+                    NGenes=res.raw$set.size,
+                    Direction=direction,
+                    Correlation=NA,
+                    EffectSize=res.raw$stat.mean,
+                    PValue=pVal,
+                    FDR=rep(NA,length(pVal)),
+                    Score=ribiosUtils::pScore(pVal, 
+                                              sign=ifelse(direction=="Up", 1, -1)),
+                    PValue.cor0.01=NA,
+                    FDR.cor0.01=NA,
+                    Score.core0.01=NA,
+                    ContributingGenes=contGenes)
+  res <- subset(res, NGenes>=1 & !is.na(PValue) & !is.nan(PValue))
+  res$FDR <- p.adjust(res$PValue, "fdr")
+  return(res)
 }
 
 #' Perform the GAGE analysis for EdgeResult and GmtList
