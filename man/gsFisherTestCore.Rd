@@ -59,6 +59,8 @@ gsFisherTestCore(c("OutOfUniverse", myGenes), myGeneSet1, myUniverse, checkUnive
 }
 \references{
 \describe{
-  \item{Hosack \emph{et al.}}{Hosack, Douglas A., Glynn Dennis, Brad T. Sherman, H. Clifford Lane, and Richard A. Lempicki. Identifying Biological Themes within Lists of Genes with EASE. Genome Biology 4 (2003): R70. \url{https://doi.org/10.1186/gb-2003-4-10-r70}}
+  \item{Hosack \emph{et al.}}{Hosack, Douglas A., Glynn Dennis, Brad T.
+  Sherman, H. Clifford Lane, and Richard A. Lempicki. Identifying Biological
+  Themes within Lists of Genes with EASE. Genome Biology 4 (2003): R70. \doi{10.1186/gb-2003-4-10-r70}}
 }
 }
