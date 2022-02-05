@@ -166,6 +166,55 @@ cameraTable2graph <- function(df, jacThr=0.25, plot=TRUE, ...) {
     return(retObj)
 }
 
+#' Read significant CAMERA results into a tibble
+#' @param file A tsv file, output of \code{\link{biosCamera}}
+#' @param returnAllContrasts Logical, if TRUE, results of all contrasts for gene-sets that are significant in at least one contrast are returned.
+#' @param maxPValue Numeric, max unadjusted P-value of CAMERA that is considered significant
+#' @param minAbsEffectSize Numeric, minimal absolute effect size
+#' @param minNGenes Integer, size of the smallest gene set that is considered
+#' @param maxNGenes Integer, size of the largest gene set that is considered
+#' @param excludeNamespace Character, vector of namespaces to be excluded
+#' @importFrom dplyr `%>%` filter
+#' @export
+readSigCameraResults <- function(file, 
+                                 returnAllContrasts=TRUE,
+                                 maxPValue=0.01, 
+                                 minAbsEffectSize=0.5,
+                                 minNGenes=5, 
+                                 maxNGenes=200,
+                                 excludeNamespace=c("goslim", "immunespace", 
+                                                    "immunomics", "mbdisease",
+                                                    "mbpathology", "mbtoxicity",
+                                                    "msigdbC7", "msigdbC2",
+                                                    "MolecularPhenotyping")) {
+  EffectSize <- Namespace <- NULL
+  cameraRes <- readCameraResults(file)
+  cameraSig <- cameraRes %>% filter(PValue<maxPValue,
+                                    NGenes>=minNGenes,
+                                    NGenes<=maxNGenes,
+                                    abs(EffectSize)>=minAbsEffectSize,
+                                    ! Namespace %in% excludeNamespace)
+  if(returnAllContrasts) {
+    res <- cameraRes %>% filter(GeneSet %in% cameraSig$GeneSet) 
+  } else {
+    res <- cameraSig
+  }
+  return(res)
+}
+
+#' Read significant CAMERA results into a matrix
+#' @param file A tsv file, output of \code{\link{biosCamera}}
+#' @param ... passed to \code{readSigCameraResults}
+#' @importFrom ribiosUtils longdf2matrix
+#' @export
+readSigCameraScoreMatrix <- function(file, ...) {
+  sigRes <- readSigCameraResults(file, returnAllContrasts = TRUE, 
+                                 ...)
+  res <- sigRes %>% 
+    longdf2matrix(row.col="GeneSet", column.col="Contrast", value.col="Score")
+  return(res)
+}
+
 ## #' @export
 ## expandSigCameraResults <- function(cameraTable,
 ##                                    pVal=0.01, minNGenes=3, includeAllFromSigGenesets=FALSE) {
