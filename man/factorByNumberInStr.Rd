@@ -18,3 +18,7 @@ Make a factor vector from a character vector by the order of the parsed numbers
 factorByNumberInStr(c("D1", "D10", "D15", "D3.5"))
 factorByNumberInStr(c("D1", "D10", "D15", "D3.5"), decreasing=FALSE)
 }
+\seealso{
+\code{\link{orderByNumberInStr}}, which returns the order of strings
+by numbers in them
+}

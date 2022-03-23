@@ -18,3 +18,7 @@ Order strings by numbers in them
 \examples{
 orderByNumberInStr(c("D1", "D10", "D15", "D3.5"))
 }
+\seealso{
+\code{\link{factorByNumberInStr}}, which makes factors with levels
+ordered by numbers in the string
+}

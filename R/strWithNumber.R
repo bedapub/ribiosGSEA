@@ -5,6 +5,8 @@
 #' @importFrom readr parse_number
 #' @examples
 #' orderByNumberInStr(c("D1", "D10", "D15", "D3.5"))
+#' @seealso \code{\link{factorByNumberInStr}}, which makes factors with levels
+#' ordered by numbers in the string
 #' @export
 orderByNumberInStr <- function(str, ...) {
   num <- readr::parse_number(as.character(str))
@@ -18,6 +20,8 @@ orderByNumberInStr <- function(str, ...) {
 #' @examples
 #' factorByNumberInStr(c("D1", "D10", "D15", "D3.5"))
 #' factorByNumberInStr(c("D1", "D10", "D15", "D3.5"), decreasing=FALSE)
+#' @seealso \code{\link{orderByNumberInStr}}, which returns the order of strings
+#' by numbers in them
 #' @export
 factorByNumberInStr <- function(str, decreasing=TRUE) {
   ord <- orderByNumberInStr(str, decreasing=decreasing)
