@@ -3,7 +3,9 @@
 \docType{data}
 \name{GeMS_BASE_URL}
 \alias{GeMS_BASE_URL}
-\title{GeMS base URL}
+\title{GeMS base URL
+To set GeMS base URL in your environment, use `GeMS_BASE_URL=value` in your
+"~/.Renviron" file}
 \format{
 An object of class \code{character} of length 1.
 }
@@ -12,5 +14,7 @@ GeMS_BASE_URL
 }
 \description{
 GeMS base URL
+To set GeMS base URL in your environment, use `GeMS_BASE_URL=value` in your
+"~/.Renviron" file
 }
 \keyword{datasets}

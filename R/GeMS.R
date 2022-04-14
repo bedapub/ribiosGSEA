@@ -234,32 +234,57 @@ getUserSetsFromGeMS <- function(user=ribiosUtils::whoami()) {
 #'   \item name
 #'   \item genes
 #' }
-#' @seealso \code{\link{getSetsFromGeMS}}
+#' @seealso \code{\link{getSetsWithNamesFromGeMS}}
 #' @examples 
 #' \dontrun{
-#' getSetFromGeMS("Plasma_sc")
+#' getSetWithNameFromGeMS("Plasma_sc")
 #' }
 #' @export
-getSetFromGeMS <- function(setName) {
+getSetWithNameFromGeMS <- function(setName) {
   body <- list(setName=setName)
   response <- getJsonResponse(GeMS_GENESETS_URL, body)
   my_content <- unlist(lapply(response$genes[[1]], function(x) x[[1]][1]))
-  res <- list(name=setName, genes=my_content)
+  res <- list(name=setName, 
+              desc=response$desc[1],
+              genes=my_content)
   return(res)
 }
 
 #' Get one or more gene-sets with their names
-#' @param setName Character strings
+#' @param setNames Character strings
 #' @return A GmtList object
-#' @seealso \code{\link{getSetFromGeMS}}
+#' @seealso \code{\link{getSetWithNameFromGeMS}}
 #' @examples 
 #' \dontrun{
-#' getSetsFromGeMS(c("Plasma_sc", "Bcell_l_Danaher17"))
+#' getSetsWithNamesFromGeMS(c("Plasma_sc", "Bcell_l_Danaher17"))
 #' }
 #' @export
-getSetsFromGeMS <- function(setNames=NULL) {
-  gmtList <- lapply(setNames, getSetFromGeMS)
+getSetsWithNamesFromGeMS <- function(setNames=NULL) {
+  gmtList <- lapply(setNames, getSetWithNameFromGeMS)
   res <- BioQC::GmtList(gmtList)
+  return(res)
+}
+
+#' Get gene-sets for application
+#' @param property Character string, property to query
+#' @param value Character string, property value
+#' @return A GmtList object
+#' @examples 
+#' \dontrun{
+#' getSetsWithPropertyFromGeMS("meta.application", "rtbeda_CIT")
+#' }
+#' @export
+getSetsWithPropertyFromGeMS <- function(property="meta.application",
+                                       value="") {
+  body <- list(property=value)
+  names(body) <- property
+  response <- getJsonResponse(GeMS_GENESETS_URL, body)
+  gmt_lists <- lapply(1:nrow(response), function(i) {
+    list(name=response$setName[i],
+         desc=response$desc[i],
+         genes=sapply(response$genes[[i]], function(x) x[[1]][1]))
+  })
+  res <- GmtList(gmt_lists)
   return(res)
 }
 

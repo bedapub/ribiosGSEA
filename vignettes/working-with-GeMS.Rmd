@@ -98,6 +98,27 @@ Now we check the genesets of the user *test*, we expect to see the two gene sets
 getUserSetsFromGeMS(user="test")
 ```
 
+### Task 4: Retrieve gene-sets with names
+
+The following example shows how genesest can be retrieved by their names. The 
+example was kindly provided by Martha Serrano.
+
+```{r getSetsWithNames}
+getSetsWithNamesFromGeMS(c("Plasma_sc", "Bcell_l_Danaher17"))
+```
+
+A caveat of using this function is that it envokes an API call for each geneset. If you need to extract multiple gene-sets, use getSetsWithPropertyFromGeMS (see below).
+
+### Task 5: Retrieve gene-sets with a certain property
+
+The following example shows how genesest can be retrieved by matching properties, in this case all cell-marker gene-sets provided by the BESCA package.
+
+```{r}
+besca_markers <- getSetsWithPropertyFromGeMS("meta.geneset", "besca_markers")
+print(besca_markers)
+```
+
+
 ## Conclusions
 
 This is a very brief introduction of how to working with GeMS within R. In case of questions or suggestions, please reach out to [Jitao David Zhang](mailto:jitao_david.zhang@roche.com) or [Laura Badi](mailto:laura.badi@roche.com).
