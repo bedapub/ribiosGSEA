@@ -2,8 +2,11 @@
 NULL
 
 #' GeMS base URL
+#' To set GeMS base URL in your environment, use `GeMS_BASE_URL=value` in your
+#' "~/.Renviron" file
 #' @export
-GeMS_BASE_URL <- "http://biocomp:1234/api"
+GeMS_BASE_URL <- Sys.getenv("GeMS_BASE_URL")
+if(GeMS_BASE_URL=="") GeMS_BASE_URL <- "http://biocomp:1234/api"
 
 #' GeMS insert URL
 #' @export
@@ -221,6 +224,42 @@ getUserSetsFromGeMS <- function(user=ribiosUtils::whoami()) {
   } else {
     res <- df[, fieldsOfInterest]
   }
+  return(res)
+}
+
+#' Get one gene-set with its name
+#' @param setName Character string
+#' @return A list of two elements
+#' \enumerate{
+#'   \item name
+#'   \item genes
+#' }
+#' @seealso \code{\link{getSetsFromGeMS}}
+#' @examples 
+#' \dontrun{
+#' getSetFromGeMS("Plasma_sc")
+#' }
+#' @export
+getSetFromGeMS <- function(setName) {
+  body <- list(setName=setName)
+  response <- getJsonResponse(GeMS_GENESETS_URL, body)
+  my_content <- unlist(lapply(response$genes[[1]], function(x) x[[1]][1]))
+  res <- list(name=setName, genes=my_content)
+  return(res)
+}
+
+#' Get one or more gene-sets with their names
+#' @param setName Character strings
+#' @return A GmtList object
+#' @seealso \code{\link{getSetFromGeMS}}
+#' @examples 
+#' \dontrun{
+#' getSetsFromGeMS(c("Plasma_sc", "Bcell_l_Danaher17"))
+#' }
+#' @export
+getSetsFromGeMS <- function(setNames=NULL) {
+  gmtList <- lapply(setNames, getSetFromGeMS)
+  res <- BioQC::GmtList(gmtList)
   return(res)
 }
 
