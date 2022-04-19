@@ -103,8 +103,23 @@ getUserSetsFromGeMS(user="test")
 The following example shows how genesest can be retrieved by their names. The 
 example was kindly provided by Martha Serrano.
 
+**Warning**: As shown in the example above, it is very easy to alter 
+genesets in the database. Therefore always make gene set snapshots, never
+read live data from the database.
+
+```{r include=FALSE}
+dir.create("data/", showWarnings = FALSE)
+```
+
 ```{r getSetsWithNames}
-getSetsWithNamesFromGeMS(c("Plasma_sc", "Bcell_l_Danaher17"))
+gmt_test1_filename <- "data/test1.gmt"
+if (file.exists(gmt_test1_filename)) {
+  gmt_test1 <- readGmt(gmt_test1_filename)
+} else {
+  gmt_test1 <- getSetsWithNamesFromGeMS(c("Plasma_sc", "Bcell_l_Danaher17"))
+  writeGmt(gmt_test1, gmt_test1_filename)
+}
+gmt_test1
 ```
 
 A caveat of using this function is that it envokes an API call for each geneset. If you need to extract multiple gene-sets, use getSetsWithPropertyFromGeMS (see below).
@@ -113,15 +128,29 @@ A caveat of using this function is that it envokes an API call for each geneset.
 
 The following example shows how genesest can be retrieved by matching properties, in this case all cell-marker gene-sets provided by the BESCA package.
 
+Again, we are using GMT snapshots for reproducibility.
+
 ```{r}
-besca_markers <- getSetsWithPropertyFromGeMS("meta.geneset", "besca_markers")
+besca_markers_filename <- "data/besca_markers.gmt"
+if (file.exists(besca_markers_filename)) {
+  besca_markers <- readGmt(besca_markers_filename)
+} else {
+  besca_markers <- getSetsWithPropertyFromGeMS("meta.geneset", "besca_markers")
+  writeGmt(besca_markers, besca_markers_filename)
+}
 print(besca_markers)
 ```
 
+```{r include=FALSE}
+# cleanup
+unlink("data", recursive = TRUE)
+```
 
 ## Conclusions
 
-This is a very brief introduction of how to working with GeMS within R. In case of questions or suggestions, please reach out to [Jitao David Zhang](mailto:jitao_david.zhang@roche.com) or [Laura Badi](mailto:laura.badi@roche.com).
+This is a very brief introduction of how to working with GeMS within R. 
+Make sure to make snapshots instead of using live data from the database.
+In case of questions or suggestions, please reach out to [Jitao David Zhang](mailto:jitao_david.zhang@roche.com) or [Laura Badi](mailto:laura.badi@roche.com).
 
 
 # Session information
