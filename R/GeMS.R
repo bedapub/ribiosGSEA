@@ -6,7 +6,7 @@ NULL
 #' "~/.Renviron" file
 #' @export
 GeMS_BASE_URL <- Sys.getenv("GeMS_BASE_URL")
-if(GeMS_BASE_URL=="") GeMS_BASE_URL <- "http://biocomp:1234/api"
+if(GeMS_BASE_URL=="") GeMS_BASE_URL <- "http://biocomp.roche.com:1234/api"
 
 #' GeMS insert URL
 #' @export
