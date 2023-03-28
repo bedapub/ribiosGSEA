@@ -56,6 +56,7 @@ isGeMSReachable <- function() {
 #' @export
 getJsonResponse <- function(url, body) {
   response <- httr::POST(url, body=body, encode='json')
+  ## TODO: in case the returned information is not a JSON, throw an error
   returnJSON <- jsonlite::fromJSON(httr::content(response, 'text', encoding='UTF-8'))
   return(returnJSON$response)
 }
