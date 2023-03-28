@@ -6,7 +6,7 @@ NULL
 #' "~/.Renviron" file
 #' @export
 GeMS_BASE_URL <- Sys.getenv("GeMS_BASE_URL")
-if(GeMS_BASE_URL=="") GeMS_BASE_URL <- "http://biocomp.roche.com:1234/api"
+if(GeMS_BASE_URL=="") GeMS_BASE_URL <- "https://pred-gems.roche.com/api"
 
 #' GeMS insert URL
 #' @export
@@ -64,7 +64,6 @@ getJsonResponse <- function(url, body) {
 #' @param gmtList A \code{GmtList} object defined in the \code{BioQC} package
 #' @param geneFormat Integer index of gene format. 0 stands for official human gene symbol
 #' @param source Character, source of the gene set
-#' @param xref External reference, will be written in the meta field of the backend database
 #' @param taxID Integer, NCBI taxonomy ID of the species.
 #' @param user The user name
 #' @param subtype Subtype of the geneset
@@ -77,23 +76,28 @@ getJsonResponse <- function(url, body) {
 #'   list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
 #'   list(name="GS_C", desc="gene set C", genes=NULL))
 #' testGmt <- BioQC::GmtList(testList)
-#' insertGmtListToGeMSBody(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+#' insertGmtListToGeMSBody(testGmt, geneFormat=0, source="Test")
 #' @export
 insertGmtListToGeMSBody <- function(gmtList,
                                     geneFormat=0,
                                     source="PubMed",
-                                    xref="",
                                     taxID=9606,
                                     user=ribiosUtils::whoami(),
                                     subtype="",
                                     domain="") {
-  parsed <- lapply(gmtList, function(x) unname(unlist(x[c("name", "desc", "genes")])))
+  parsed <- lapply(gmtList, function(x) {
+    name <- x["name"]
+    desc <- x["desc"]
+    type <- ""
+    genes <- x["genes"]
+    res <- unname(unlist(c(name, desc, type, genes)))
+  })
+  names(parsed) <- NULL
   gemsPars <- list(gf=geneFormat,
                    so=source,
-                   meta=list(xref=xref),
                    ti=taxID,
                    us=user)
-  dataList <- list(headers=c("setName", "desc", "genes"),
+  dataList <- list(headers=c("setName", "desc", "type", "genes"),
                    parsed=parsed,
                    params=gemsPars)
   return(dataList)
@@ -103,7 +107,6 @@ insertGmtListToGeMSBody <- function(gmtList,
 #' @param gmtList A \code{GmtList} object defined in the \code{BioQC} package
 #' @param geneFormat Integer index of gene format. 0 stands for official human gene symbol
 #' @param source Character, source of the gene set
-#' @param xref External reference, will be written in the meta field of the backend database
 #' @param taxID Integer, NCBI taxonomy ID of the species.
 #' @param user The user name
 #' @param subtype Subtype of the geneset
@@ -118,14 +121,13 @@ insertGmtListToGeMSBody <- function(gmtList,
 #'     list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
 #'     list(name="GS_C", desc="gene set C", genes=NULL))
 #'   testGmt <- BioQC::GmtList(testList)
-#'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+#'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test")
 #'   ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 #' }
 #' @export
 insertGmtListToGeMS <- function(gmtList,
                                 geneFormat=0,
                                 source="PubMed",
-                                xref="",
                                 taxID=9606,
                                 user=ribiosUtils::whoami(),
                                 subtype="",
@@ -133,11 +135,11 @@ insertGmtListToGeMS <- function(gmtList,
   dataList <- insertGmtListToGeMSBody(gmtList=gmtList,
                                   geneFormat=geneFormat,
                                   source=source,
-                                  xref=xref,
                                   taxID=taxID,
                                   user=user,
                                   subtype=subtype,
                                   domain=domain)
+
   return(getJsonResponse(GeMS_INSERT_URL, dataList))
 }
 
@@ -182,7 +184,7 @@ removeFromGeMSBody <- function(setName="",
 #'     list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
 #'     list(name="GS_C", desc="gene set C", genes=NULL))
 #'   testGmt <- BioQC::GmtList(testList)
-#'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+#'   ## insertGmtListToGeMS(testGmt, geneFormat=0, source="Test")
 #'   ## removeFromGeMS(setName=c("GS_A", "GS_B", "GS_C"), source="Test")
 #' }
 #' @export
