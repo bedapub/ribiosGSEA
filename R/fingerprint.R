@@ -45,8 +45,8 @@ gseaResQvalue <- function(file, threshold=1E-4, log=FALSE, posLog=FALSE) {
 #' 
 #' @aliases gseaResQvalue gseaResES
 #' @param file GSEA output tab-delimited file, usually with the file name
-#' \sQuote{gsea\_report\_for.*\_pos\_.*\.xls} or
-#' \sQuote{gsea\_report\_for.*\_neg\_.*\.xls}. Located in GSEA output
+#' \sQuote{gsea_report_for.*_pos_.*\.xls} or
+#' \sQuote{gsea_report_for.*_neg_.*\.xls}. Located in GSEA output
 #' directory.
 #' @param threshold Valid for q value: what is the minimum threshold of q-value
 #' (FDR)? It can be set to the number of permutation tests divided by \code{1}.
