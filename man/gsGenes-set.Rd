@@ -19,6 +19,6 @@ Set gene-set genes
 }
 \section{Functions}{
 \itemize{
-\item \code{gsGenes<-,AnnoBroadGseaResItem,character-method}: Assign gene-set genes to AnnoBroadGseaResItem
-}}
+\item \code{gsGenes(object = AnnoBroadGseaResItem) <- value}: Assign gene-set genes to AnnoBroadGseaResItem
 
+}}

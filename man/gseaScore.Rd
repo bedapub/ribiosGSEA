@@ -39,9 +39,9 @@ missing in one or more conditions.
 }
 \section{Functions}{
 \itemize{
-\item \code{gseaScores}: gseaScore applied to multiple objects
-}}
+\item \code{gseaScores()}: gseaScore applied to multiple objects
 
+}}
 \seealso{
 \code{\link{gseaNP}}, \code{\link{gseaFDR}}, \code{\link{gseaFWER}}
 to get p-values.

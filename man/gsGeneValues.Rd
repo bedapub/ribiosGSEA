@@ -20,10 +20,10 @@ Return gene-set gene values
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{AnnoBroadGseaResItem}: Return values associated with the genes in a
+\item \code{gsGeneValues(AnnoBroadGseaResItem)}: Return values associated with the genes in a
 gene-set in an AnnoBroadGseaResItem object in a numeric vector.
 
-\item \code{AnnoBroadGseaRes}: Return values associated with the genes in a
+\item \code{gsGeneValues(AnnoBroadGseaRes)}: Return values associated with the genes in a
 gene-set in an AnnoBroadGseaRes object in a list of numeric vectors.
-}}
 
+}}

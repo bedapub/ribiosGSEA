@@ -11,8 +11,8 @@ readSigCameraResults(
   minAbsEffectSize = 0.5,
   minNGenes = 5,
   maxNGenes = 200,
-  excludeNamespace = c("goslim", "immunespace", "immunomics", "mbdisease",
-    "mbpathology", "mbtoxicity", "msigdbC7", "msigdbC2", "MolecularPhenotyping")
+  excludeNamespace = c("goslim", "immunespace", "immunomics", "mbdisease", "mbpathology",
+    "mbtoxicity", "msigdbC7", "msigdbC2", "MolecularPhenotyping")
 )
 }
 \arguments{

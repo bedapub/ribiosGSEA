@@ -17,7 +17,7 @@ Return GSEA enrichment score profile
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get GSEA enrichment profile
+\item \code{gseaESprofile(BroadGseaResItem)}: Get GSEA enrichment profile
 from a BroadGseaResItem object
-}}
 
+}}

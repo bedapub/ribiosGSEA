@@ -24,9 +24,9 @@ Return hits
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{FisherResult}: Return hits from a FisherResult object
+\item \code{hits(FisherResult)}: Return hits from a FisherResult object
 
-\item \code{FisherResultList}: Return hits from a FisherResultList object, returning a list
+\item \code{hits(FisherResultList)}: Return hits from a FisherResultList object, returning a list
 if \code{geneset} is missing, or gene-set genes if \code{geneset} is present.
-}}
 
+}}

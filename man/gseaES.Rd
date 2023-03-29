@@ -23,10 +23,10 @@ Return GSEA enrichment scores
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get GSEA enrichment score from a BroadGseaResItem object
+\item \code{gseaES(BroadGseaResItem)}: Get GSEA enrichment score from a BroadGseaResItem object
 
-\item \code{AnnoBroadGseaRes}: Get GSEA enrichment score from an AnnoBroadGseaRes object
+\item \code{gseaES(AnnoBroadGseaRes)}: Get GSEA enrichment score from an AnnoBroadGseaRes object
 
-\item \code{AnnoBroadGseaResList}: Get GSEA enrichment score from an AnnoBroadGseaResList object
+\item \code{gseaES(AnnoBroadGseaResList)}: Get GSEA enrichment score from an AnnoBroadGseaResList object
+
 }}
-

@@ -17,7 +17,7 @@ Return gene-set gene indices
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get gene-set gene indices
+\item \code{gsGeneIndices(BroadGseaResItem)}: Get gene-set gene indices
 from a BroadGseaResItem object, returning a vector of integers.
-}}
 
+}}

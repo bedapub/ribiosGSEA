@@ -22,8 +22,8 @@ Return the effective size of gene-set
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{FisherResult}: Effective sizes of gene-set, returning an integer.
+\item \code{gsEffectiveSize(FisherResult)}: Effective sizes of gene-set, returning an integer.
 
-\item \code{FisherResultList}: Effective sizes of Gene-sets, returning an integer vector.
+\item \code{gsEffectiveSize(FisherResultList)}: Effective sizes of Gene-sets, returning an integer vector.
+
 }}
-

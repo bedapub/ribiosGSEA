@@ -23,13 +23,13 @@ Return GSEA normalized enrichment scores
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get GSEA normalized enrichment score 
+\item \code{gseaNES(BroadGseaResItem)}: Get GSEA normalized enrichment score 
 from a BroadGseaResItem object
 
-\item \code{AnnoBroadGseaRes}: Get GSEA normalized enrichment score 
+\item \code{gseaNES(AnnoBroadGseaRes)}: Get GSEA normalized enrichment score 
 from an AnnoBroadGseaRes object
 
-\item \code{AnnoBroadGseaResList}: Get GSEA normalized enrichment score 
+\item \code{gseaNES(AnnoBroadGseaResList)}: Get GSEA normalized enrichment score 
 from an AnnoBroadGseaResList object
-}}
 
+}}

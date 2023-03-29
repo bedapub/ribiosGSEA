@@ -25,11 +25,11 @@ Return gene-set namespace
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{GmtList}: Return gene-set namespace from a GmtList object
+\item \code{gsNamespace(GmtList)}: Return gene-set namespace from a GmtList object
 
-\item \code{FisherResult}: Return gene-set namespace from a FisherResult object
+\item \code{gsNamespace(FisherResult)}: Return gene-set namespace from a FisherResult object
 
-\item \code{FisherResultList}: Return gene-set namespace from a FisherResultList 
+\item \code{gsNamespace(FisherResultList)}: Return gene-set namespace from a FisherResultList 
 object.
-}}
 
+}}

@@ -8,7 +8,6 @@ insertGmtListToGeMSBody(
   gmtList,
   geneFormat = 0,
   source = "PubMed",
-  xref = "",
   taxID = 9606,
   user = ribiosUtils::whoami(),
   subtype = "",
@@ -21,8 +20,6 @@ insertGmtListToGeMSBody(
 \item{geneFormat}{Integer index of gene format. 0 stands for official human gene symbol}
 
 \item{source}{Character, source of the gene set}
-
-\item{xref}{External reference, will be written in the meta field of the backend database}
 
 \item{taxID}{Integer, NCBI taxonomy ID of the species.}
 
@@ -43,5 +40,5 @@ testList <- list(list(name="GS_A", desc=NULL, genes=c("MAPK14", "JAK1", "EGFR"))
   list(name="GS_B", desc="gene set B", genes=c("ABCA1", "DDR1", "DDR2")),
   list(name="GS_C", desc="gene set C", genes=NULL))
 testGmt <- BioQC::GmtList(testList)
-insertGmtListToGeMSBody(testGmt, geneFormat=0, source="Test", xref="PMID:000000")
+insertGmtListToGeMSBody(testGmt, geneFormat=0, source="Test")
 }

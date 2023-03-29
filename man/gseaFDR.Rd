@@ -23,13 +23,13 @@ Return GSEA FDR
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get GSEA FDR values
+\item \code{gseaFDR(BroadGseaResItem)}: Get GSEA FDR values
 from a BroadGseaResItem object
 
-\item \code{AnnoBroadGseaRes}: Get GSEA FDR values
+\item \code{gseaFDR(AnnoBroadGseaRes)}: Get GSEA FDR values
 from an AnnoBroadGseaRes object
 
-\item \code{AnnoBroadGseaResList}: Get GSEA FDR values
+\item \code{gseaFDR(AnnoBroadGseaResList)}: Get GSEA FDR values
 from an AnnoBroadGseaResList object
-}}
 
+}}

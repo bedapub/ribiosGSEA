@@ -19,7 +19,7 @@ Set gene-set gene statistics (values)
 }
 \section{Functions}{
 \itemize{
-\item \code{gsGeneValues<-,AnnoBroadGseaResItem,numeric-method}: Assign values associated with gene-set genes to
+\item \code{gsGeneValues(object = AnnoBroadGseaResItem) <- value}: Assign values associated with gene-set genes to
 an annoBraoadGseaResItem object
-}}
 
+}}

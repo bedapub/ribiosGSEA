@@ -59,11 +59,11 @@ instead.
 }
 \section{Functions}{
 \itemize{
-\item \code{gseaResQvalue}: The function to extract the Q-value
+\item \code{gseaResQvalue()}: The function to extract the Q-value
 
 Extract Q-values from GSEA result file
-}}
 
+}}
 \examples{
 
 gseaDirZip <- system.file(package="ribiosGSEA","extdata/gseaDirs.zip")

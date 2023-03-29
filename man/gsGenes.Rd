@@ -25,13 +25,13 @@ Return gene-set genes
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{AnnoBroadGseaResItem}: Get gene-set genes
+\item \code{gsGenes(AnnoBroadGseaResItem)}: Get gene-set genes
 from a BroadGseaResItem object, returning a character string vector.
 
-\item \code{AnnoBroadGseaRes}: Get gene-set genes from an AnnoBroadGseaRes object,
+\item \code{gsGenes(AnnoBroadGseaRes)}: Get gene-set genes from an AnnoBroadGseaRes object,
 returning a list of character string vectors.
 
-\item \code{GmtList}: Get gene-set genes from a GmtList object, returning a
+\item \code{gsGenes(GmtList)}: Get gene-set genes from a GmtList object, returning a
 list of character string vector. It uses the implementation in BioQC.
-}}
 
+}}

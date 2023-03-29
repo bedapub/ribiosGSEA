@@ -23,13 +23,13 @@ Return GSEA number of permutation
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get GSEA number of permutations
+\item \code{gseaNP(BroadGseaResItem)}: Get GSEA number of permutations
 from a BroadGseaResItem object
 
-\item \code{AnnoBroadGseaRes}: Get GSEA number of permutations
+\item \code{gseaNP(AnnoBroadGseaRes)}: Get GSEA number of permutations
 from an AnnoBroadGseaRes object
 
-\item \code{AnnoBroadGseaResList}: Get GSEA number of permutations
+\item \code{gseaNP(AnnoBroadGseaResList)}: Get GSEA number of permutations
 from an AnnoBroadGseaResList object
-}}
 
+}}

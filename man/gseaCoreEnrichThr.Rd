@@ -20,10 +20,10 @@ Return GSEA core enrichment score threshold
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get the threshold value of GSEA core enrichment
+\item \code{gseaCoreEnrichThr(BroadGseaResItem)}: Get the threshold value of GSEA core enrichment
 from a BroadGseaResItem object
 
-\item \code{AnnoBroadGseaRes}: Get the threshold value of GSEA core enrichment
+\item \code{gseaCoreEnrichThr(AnnoBroadGseaRes)}: Get the threshold value of GSEA core enrichment
 from an AnnoBroadGseaRes object
-}}
 
+}}

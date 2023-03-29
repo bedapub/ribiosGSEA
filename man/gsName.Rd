@@ -33,16 +33,16 @@ Return gene-set name
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get gene-set name from a BroadGseaResItem object
+\item \code{gsName(BroadGseaResItem)}: Get gene-set name from a BroadGseaResItem object
 
-\item \code{AnnoBroadGseaRes}: Get gene-set name from an AnnoBroadGseaRes object
+\item \code{gsName(AnnoBroadGseaRes)}: Get gene-set name from an AnnoBroadGseaRes object
 
-\item \code{FisherResult}: Get gene-set name from a FisherResult object
+\item \code{gsName(FisherResult)}: Get gene-set name from a FisherResult object
 
-\item \code{FisherResultList}: Get gene-set name from a FisherResultList object
+\item \code{gsName(FisherResultList)}: Get gene-set name from a FisherResultList object
 
-\item \code{GmtList}: Get gene-set name from a GmtList object
+\item \code{gsName(GmtList)}: Get gene-set name from a GmtList object
 
-\item \code{FisherResultList}: Get gene-set name from a FisherResultList object
+\item \code{gsName(FisherResultList)}: Get gene-set name from a FisherResultList object
+
 }}
-

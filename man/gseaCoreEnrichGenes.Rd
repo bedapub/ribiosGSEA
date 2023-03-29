@@ -21,12 +21,12 @@ Return GSEA core enrichment genes (also known as leading-edge genes)
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{AnnoBroadGseaResItem}: Return core enriched genes (also known as
+\item \code{gseaCoreEnrichGenes(AnnoBroadGseaResItem)}: Return core enriched genes (also known as
 leading-edge genes) in an AnnoBroadGseaResItem object as a character string
 vector.
 
-\item \code{AnnoBroadGseaRes}: Return core enriched genes (also known as
+\item \code{gseaCoreEnrichGenes(AnnoBroadGseaRes)}: Return core enriched genes (also known as
 leading-edge genes) in an AnnoBroadGseaRes object as a list of character 
 string vectors.
-}}
 
+}}

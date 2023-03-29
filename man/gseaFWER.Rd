@@ -23,13 +23,13 @@ Return GSEA FWER values
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{BroadGseaResItem}: Get GSEA FWER values
+\item \code{gseaFWER(BroadGseaResItem)}: Get GSEA FWER values
 from a BroadGseaResItem object
 
-\item \code{AnnoBroadGseaRes}: Get GSEA FWER values
+\item \code{gseaFWER(AnnoBroadGseaRes)}: Get GSEA FWER values
 from an AnnoBroadGseaRes object
 
-\item \code{AnnoBroadGseaResList}: Get GSEA FWER values
+\item \code{gseaFWER(AnnoBroadGseaResList)}: Get GSEA FWER values
 from an AnnoBroadGseaResList object
-}}
 
+}}

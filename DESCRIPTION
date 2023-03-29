@@ -79,7 +79,7 @@ LinkingTo: Rcpp
 LazyLoad: yes
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Remotes:
     github::bedapub/ribiosIO,
     github::bedapub/ribiosMath,

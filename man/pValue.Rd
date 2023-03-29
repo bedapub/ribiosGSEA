@@ -30,16 +30,16 @@ Return P-values
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{FisherResult}: Return the p-value from a FisherResult
+\item \code{pValue(FisherResult)}: Return the p-value from a FisherResult
 
-\item \code{FisherResultList}: Return the p-values from a FisherResultList. If \code{ind}
+\item \code{pValue(FisherResultList)}: Return the p-values from a FisherResultList. If \code{ind}
 is missing, all p-values are returned; otherwise, the subset indicated by
 \code{ind} is returned.
 
-\item \code{FisherResult}: Return the FDR-value from a FisherResult
+\item \code{fdrValue(FisherResult)}: Return the FDR-value from a FisherResult
 
-\item \code{FisherResultList}: Return the FDR-values from a FisherResultList. If \code{ind}
+\item \code{fdrValue(FisherResultList)}: Return the FDR-values from a FisherResultList. If \code{ind}
 is missing, all FDR-values are returned; otherwise, the subset indicated by
 \code{ind} is returned.
-}}
 
+}}
