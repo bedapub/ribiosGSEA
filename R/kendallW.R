@@ -294,7 +294,10 @@ kendallWinfo <- function(object) UseMethod("kendallWinfo")
 #' @export
 kendallWinfo.matrix <- function(object) return(attr(object, "info"))
 
-#' @describeIn kendallWinfo Assign kendallW information to a matrix
+#' S3 method to assign kendallW information to a matrix
+#' @param object matrix
+#' @param value assigned value
+#' @return The \code{matrix} containing grouping information
 #' @export
 `kendallWinfo<-.matrix` <- function(object, value) {
 	attr(object, "info") <- value
