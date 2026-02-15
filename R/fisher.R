@@ -50,7 +50,7 @@ minFDRvalue <- function(object) {
 #' Return a data.frame of top gene-sets with the lowest p-values
 #' @param object An FisherResultList object
 #' @param N Integer, the number of returned gene-sets
-# '@return A data.frame
+#' @return A \code{data.frame}
 #' @export
 topGeneSetTable <- function(object, N) {
       ps <- pValue(object)
@@ -77,6 +77,7 @@ topOrSigGeneSetTable <- function(object, fdr=0.05, N=10) {
 #' Print a FisherResult object
 #' @param x A FisherResult object
 #' @param ... Not used
+#' @return \code{x}, invisibly.
 #' @export
 print.FisherResult <- function(x, ...) {
   if(!is.na(gsNamespace(x)))
@@ -88,12 +89,14 @@ print.FisherResult <- function(x, ...) {
       paste(hits(x), collapse=","), "\n")
   cat("Fisher's exact p value:", pValue(x), "\n")
   cat("BH FDR value:", fdrValue(x), "\n")
+  invisible(x)
 }
 
 #' Print a FisherResultList object
 #'
 #' @param x A \code{FisherResultList} object
 #' @param ... Not used
+#' @return \code{x}, invisibly.
 #' @export
 print.FisherResultList <- function(x, ...) {
    cat("--- One-sided Fisher's exact tests for gene sets ---\n")
@@ -102,6 +105,7 @@ print.FisherResultList <- function(x, ...) {
    cat(sprintf("Total gene sets: %d\n", length(x)))
    cat(sprintf("Minimal P-value: %e\n", minPvalue(x)))
    cat(sprintf("Minimal FDR-value: %e\n", minFDRvalue(x)))
+   invisible(x)
 }
 
 #' The core algorithm to perform Fisher's exact test on a gene set
@@ -361,8 +365,8 @@ utils::globalVariables(c("logFC", "Contrast", "FDR",
 #' 
 #' @importFrom ribiosNGS dgeTable
 #' @importFrom dplyr filter pull `%>%` ungroup arrange group_by
-#' @return 
-#' ## TODO: example
+#' @return A \code{data.table} containing Fisher's exact test results for
+#' positively and negatively regulated genes.
 fisherTestEdgeResult <- function(edgeResult,
                              gmtList,
                              contrast, 

@@ -18,6 +18,9 @@ sets}
 
 \item{doParallel}{Logical, whether \code{parallel::mclapply} should be used. Since at the current setting it makes a job running forever, use \code{TRUE} only if you are debugging the code.}
 }
+\value{
+A \code{data.frame} containing CAMERA results across contrasts.
+}
 \description{
 Apply the CAMERA method to a DGEList object and a contrast
 }
@@ -34,8 +37,8 @@ exPdata <- data.frame(Name=sprintf("Sample\%d", 1:ncol(exMat)),
 exDgeList <- DGEList(exMat, genes=exFdata, samples=exPdata)
 exDgeList <- edgeR::estimateDisp(exDgeList, exDesign)
 cameraDGEListByContrast(exDgeList, index=1:5, design=exDesign, contrasts=exContrast)
-cameraDGEListByContrast(exDgeList, 
+cameraDGEListByContrast(exDgeList,
   index=list(1:5, 6:10),
   design=exDesign, contrasts=exContrast)
-  
+
 }

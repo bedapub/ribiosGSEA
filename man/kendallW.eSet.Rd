@@ -28,6 +28,9 @@ rows belong to the same gene.}
 
 \item{...}{Not used}
 }
+\value{
+An \code{ExpressionSet} object with consolidated features.
+}
 \description{
 Compute Kendall's W for an eSet object
 }

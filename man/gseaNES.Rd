@@ -18,6 +18,9 @@ gseaNES(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric vector of normalized enrichment scores.
+}
 \description{
 Return GSEA normalized enrichment scores
 }

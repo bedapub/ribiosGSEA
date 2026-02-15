@@ -14,6 +14,9 @@ gsGeneValues(object) <- value
 
 \item{value}{Value}
 }
+\value{
+The modified object.
+}
 \description{
 Set gene-set gene statistics (values)
 }

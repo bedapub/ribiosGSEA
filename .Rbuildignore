@@ -4,6 +4,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^\.github$
 ^Makefile$
 ^coverage\.txt$
 ^coverage\.r$

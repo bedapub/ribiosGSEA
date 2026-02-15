@@ -1,6 +1,7 @@
 #' Print S3 object FishersMethodResult
-#' @param x An object of the \code{FisherMethodResult} (S3) class
+#' @param x An object of the \code{FishersMethodResult} (S3) class
 #' @param ... Not used
+#' @return \code{x}, invisibly.
 #' @export
 print.FishersMethodResult <- function(x, ...) {
   cat("Combined P by Fisher's Method:\n")
@@ -10,6 +11,7 @@ print.FishersMethodResult <- function(x, ...) {
   cat("-- Use 'x$chisq' and 'x$df' to extract Chi-square statistic and degree of freedom, respectively\n")
   if(!is.null(x$validp))
     cat("-- Valid p-values used for calculation are available. Use 'x$validp' to extract them.")
+  invisible(x)
 }
 
 #' Fisher's method to combine multiple p-values

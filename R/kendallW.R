@@ -236,7 +236,7 @@ kendallWmat <- function(mat,
   sgls.names <- paste(row.factor[is.sglFac],
                       rownames(sglmat), sep="|")
   if(summary!="none") {
-    muls <- unlist(lapply(mul2sgl, function(x) x$ids), use.names=F, recursive=F)
+    muls <- unlist(lapply(mul2sgl, function(x) x$ids), use.names=FALSE, recursive=FALSE)
     muls.names <- paste(rep(levels(mulmatFac), sapply(mul2sgl, function(x) length(x$ids))),
                         sapply(muls, paste, collapse="|"),sep="|")
   } else {
@@ -276,20 +276,29 @@ kendallWmat <- function(mat,
   return(res.mat)
 }
 
-#' S3 method for kendallW
+#' S3 generic for kendallW
 #' @param object An object
 #' @param ... Other parameters
+#' @return A matrix with an \code{info} attribute, see \code{\link{kendallWmat}}.
 #' @export kendallW
 kendallW <- function(object, ...) UseMethod("kendallW")
 
-#' S3 method for kendallW information
+#' S3 generic for kendallW information
 #' @param object An object
+#' @return A \code{data.frame} containing grouping information.
 # @export
 kendallWinfo <- function(object) UseMethod("kendallWinfo")
 `kendallWinfo<-` <- function(object, value) UseMethod("kendallWinfo<-")
 
-#' @export 
+#' @describeIn kendallWinfo Extract kendallW information from a matrix
+#' @export
 kendallWinfo.matrix <- function(object) return(attr(object, "info"))
+
+#' S3 method to assign kendallW information to a matrix
+#' @param object matrix
+#' @param value assigned value
+#' @return The \code{matrix} containing grouping information
+#' @export
 `kendallWinfo<-.matrix` <- function(object, value) {
 	attr(object, "info") <- value
 	return(object)
@@ -304,8 +313,9 @@ kendallWinfo.matrix <- function(object) return(attr(object, "info"))
 #' @param na.rm Logical, whether \code{NA} values should be removed
 #' @param alpha Numeric, passed to \code{kendallWmat}
 #' @param ... Not used
+#' @return A matrix with an \code{info} attribute, see \code{\link{kendallWmat}}.
 #' @seealso \code{\link{kendallWmat}}
-#' @export 
+#' @export
 kendallW.matrix <- function(object,
 			    row.factor,
 			    summary=c("none", "mean", "median",
@@ -324,6 +334,7 @@ kendallW.matrix <- function(object,
 #' @param na.rm Logical, whether \code{NA} values should be removed
 #' @param alpha Numeric, passed to \code{kendallWmat}
 #' @param ... Not used
+#' @return An \code{ExpressionSet} object with consolidated features.
 #' @seealso \code{\link{kendallWmat}}
 #' @importFrom Biobase exprs
 #' @importClassesFrom Biobase eSet

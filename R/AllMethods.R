@@ -323,10 +323,7 @@ setMethod("gseaCoreEnrichGenes", "AnnoBroadGseaRes", function(object) {
 ## setAs
 ##----------------------------------------##
 
-#' Convert a list of AnnoBroadGseaResItem objects to an AnnoBroadGseaRes object
-#' @param from A list of AnnoBroadGseaResItem objects
-#' @param to An AnnoBroadGseaRes objecct
-#' @export
+## Convert a list of AnnoBroadGseaResItem objects to an AnnoBroadGseaRes object
 setAs(from="list", to="AnnoBroadGseaRes", def=function(from,to) {
   haltifnot(all(sapply(from, function(x) is(x, "AnnoBroadGseaResItem"))),
             msg="Input list must be of AnnoBroadGseaResItem objects")
@@ -334,10 +331,7 @@ setAs(from="list", to="AnnoBroadGseaRes", def=function(from,to) {
   return(res)
 })
 
-#' Convert a list of AnnoBroadGseaRes to an AnnoBroadGseaResList object
-#' @param from A list of AnnoBroadGseaRes objects
-#' @param to An AnnoBroadGseaResList objecct
-#' @export
+## Convert a list of AnnoBroadGseaRes to an AnnoBroadGseaResList object
 setAs(from="list", to="AnnoBroadGseaResList", def=function(from,to) {
   haltifnot(all(sapply(from, function(x) is(x, "AnnoBroadGseaRes"))),
             msg="Input list must be of AnnoBroadGseaRes objects")

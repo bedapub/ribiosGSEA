@@ -70,7 +70,7 @@ NULL
 #' @export doGse
 doGse <- function(edgeResult, gmtList, doParallel=FALSE) {
   res <- try(camera(edgeResult, gmtList, doParallel=doParallel))
-  if(class(res)=="try-error") {
+  if(inherits(res, "try-error")) {
     res <- logFCgage(edgeResult, gmtList)
   }
   return(res)

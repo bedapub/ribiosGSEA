@@ -2,13 +2,24 @@
 % Please edit documentation in R/kendallW.R
 \name{kendallWinfo}
 \alias{kendallWinfo}
-\title{S3 method for kendallW information}
+\alias{kendallWinfo.matrix}
+\title{S3 generic for kendallW information}
 \usage{
 kendallWinfo(object)
+
+\method{kendallWinfo}{matrix}(object)
 }
 \arguments{
 \item{object}{An object}
 }
-\description{
-S3 method for kendallW information
+\value{
+A \code{data.frame} containing grouping information.
 }
+\description{
+S3 generic for kendallW information
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{kendallWinfo(matrix)}: Extract kendallW information from a matrix
+
+}}

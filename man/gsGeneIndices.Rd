@@ -12,6 +12,9 @@ gsGeneIndices(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+An integer vector of gene indices.
+}
 \description{
 Return gene-set gene indices
 }

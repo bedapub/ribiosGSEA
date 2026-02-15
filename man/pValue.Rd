@@ -25,6 +25,9 @@ pValue(object, ...)
 
 \item{ind}{An integer or logical vector for subsetting}
 }
+\value{
+A numeric vector of p-values.
+}
 \description{
 Return P-values
 }

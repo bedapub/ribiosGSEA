@@ -11,6 +11,9 @@ readSigCameraScoreMatrix(file, ...)
 
 \item{...}{passed to \code{readSigCameraResults}}
 }
+\value{
+A numeric matrix with gene-sets as rows and contrasts as columns.
+}
 \description{
 Read significant CAMERA results into a matrix
 }

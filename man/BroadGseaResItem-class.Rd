@@ -4,6 +4,9 @@
 \name{BroadGseaResItem-class}
 \alias{BroadGseaResItem-class}
 \title{A S4 class representing the atom structure of results of the BROAD GSEA tool}
+\value{
+An object of class \code{BroadGseaResItem}.
+}
 \description{
 A S4 class representing the atom structure of results of the BROAD GSEA tool
 }

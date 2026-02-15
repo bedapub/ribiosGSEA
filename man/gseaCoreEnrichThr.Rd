@@ -15,6 +15,9 @@ gseaCoreEnrichThr(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric value.
+}
 \description{
 Return GSEA core enrichment score threshold
 }

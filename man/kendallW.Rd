@@ -2,7 +2,7 @@
 % Please edit documentation in R/kendallW.R
 \name{kendallW}
 \alias{kendallW}
-\title{S3 method for kendallW}
+\title{S3 generic for kendallW}
 \usage{
 kendallW(object, ...)
 }
@@ -11,6 +11,9 @@ kendallW(object, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+A matrix with an \code{info} attribute, see \code{\link{kendallWmat}}.
+}
 \description{
-S3 method for kendallW
+S3 generic for kendallW
 }

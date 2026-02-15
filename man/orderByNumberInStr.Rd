@@ -12,6 +12,9 @@ orderByNumberInStr(str, ...)
 \item{...}{Passed to \code{order}, by default \code{decreasing} is
 \code{TRUE}, i.e. the descending order is reported.}
 }
+\value{
+An integer vector of indices.
+}
 \description{
 Order strings by numbers in them
 }

@@ -3,9 +3,12 @@
 #' @param gmtList A \code{GmtList} object
 #' @param file Character string, output file name
 #'
-#' @note 
+#' @return Invisibly returns \code{NULL}. Called for its side effect of writing
+#' the GMT file.
+#'
+#' @note
 #' The function will be moved to BioQC once the ribiosIO is reposited in CRAN
-#' 
+#'
 #' @importFrom ribiosIO write_gmt
 #' @importFrom BioQC readGmt
 #' @examples
@@ -51,9 +54,11 @@ readMPSGmt <- function(file) {
 #'  \item{RONET: which is a collection of publicly available pathway databases including REACTOME and NCI-Nature}
 #'  \item{goslim}
 #' }
+#' @return A \code{GmtList} object containing the default gene-set collections.
+#'
 #' @importFrom BioQC appendGmtList readGmt
 #' @importFrom ribiosUtils assertFile
-#' @examples 
+#' @examples
 #' \dontrun{
 #'   ## this cannot be run because the files are not located there
 #'   ## readDefaultGenesets("/tmp/defaultGmts")

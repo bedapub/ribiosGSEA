@@ -37,7 +37,8 @@ geneset that are quantified}
 expression table (\code{dgeTbl}).}
 }
 \value{
-## TODO: example
+A \code{data.table} containing Fisher's exact test results for
+positively and negatively regulated genes.
 }
 \description{
 Run Fisher's exact test on an EdgeResult object

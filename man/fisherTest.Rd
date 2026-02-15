@@ -15,6 +15,9 @@ fisherTest(genes, genesets, universe, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+A \code{FisherResult} object or a \code{data.table} of results.
+}
 \description{
 Perform Fisher's exact test
 }

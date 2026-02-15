@@ -13,6 +13,9 @@ readCameraResults(file, minNGenes = 3, maxNGenes = 1000)
 
 \item{maxNGenes}{NULL or integer, genesets with more genes are filtered out}
 }
+\value{
+A \code{tibble} containing the CAMERA results.
+}
 \description{
 Read CAMERA results into a tibble object
 }

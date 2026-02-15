@@ -17,6 +17,9 @@ gsEffectiveSize(object, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+An integer vector of effective sizes.
+}
 \description{
 Return the effective size of gene-set
 }

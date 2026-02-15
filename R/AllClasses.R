@@ -1,11 +1,12 @@
 #' @include ribiosGSEA-package.R
 NULL
 
-##----------------------------------------------## 
+##----------------------------------------------##
 ## Classes for generic gene-set analysis results
-##---------------------------------------------## 
+##---------------------------------------------##
 
 #' A generic, virtual S4 class for gene-set analysis result
+#' @return An object of class \code{GeneSetResult} (virtual).
 #' @export
 setClass("GeneSetResult",
          representation=list(
@@ -17,6 +18,7 @@ setClass("GeneSetResult",
          contains="VIRTUAL")
 
 #' Result of Fisher's exact test
+#' @return An object of class \code{FisherResult}.
 #' @export
 setClass("FisherResult",
          representation=list(hits="character"),
@@ -24,6 +26,7 @@ setClass("FisherResult",
 
 
 #' A list of results of Fisher's exact test
+#' @return An object of class \code{FisherResultList}.
 #' @export
 setClass("FisherResultList",
          representation=list(
@@ -33,9 +36,9 @@ setClass("FisherResultList",
          contain="list")
 
 
-##---------------------------------------## 
+##---------------------------------------##
 ## Classes for BROAD GSEA tools
-##---------------------------------------## 
+##---------------------------------------##
 
 #' A S4 class representing the atom structure of results of the BROAD GSEA tool
 #' @slot geneset Character, gene-set name
@@ -48,6 +51,7 @@ setClass("FisherResultList",
 #' @slot esProfile Numeric, enrichment score profile
 #' @slot coreEnrichThr Numeric
 #'
+#' @return An object of class \code{BroadGseaResItem}.
 #' @export
 setClass("BroadGseaResItem",
          representation=list(geneset="character",
@@ -65,6 +69,7 @@ setClass("BroadGseaResItem",
 #' @slot gsGenes Vector of character strings, gene-set genes
 #' @slot gsGeneValues Vector of numeric values, statistics of gene-set genes
 #'
+#' @return An object of class \code{AnnoBroadGseaResItem}.
 #' @export
 setClass("AnnoBroadGseaResItem",
          representation=list("gsGenes"="character",
@@ -72,10 +77,11 @@ setClass("AnnoBroadGseaResItem",
          contains="BroadGseaResItem")
 
 #' Annotated BROAD GSEA Results for one contrast
+#' @return An object of class \code{AnnoBroadGseaRes}.
 #' @export
 setClass("AnnoBroadGseaRes", contains="list")
 
 #' A list of AnnoBroadGseaRes objects
+#' @return An object of class \code{AnnoBroadGseaResList}.
 #' @export
 setClass("AnnoBroadGseaResList", contains="list") #3 a list of AnnoBroadGseaRes objects
-            

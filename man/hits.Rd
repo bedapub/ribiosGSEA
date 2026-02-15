@@ -19,6 +19,9 @@ hits(object, ...)
 
 \item{geneset}{Character string, gene-set name}
 }
+\value{
+A character vector or list of hit genes.
+}
 \description{
 Return hits
 }

@@ -30,6 +30,7 @@ gseaLns <- function(filename, pattern="file", fileext=".rnk") {
 #' The command builds command-line command to run gene-permutation GSEA
 #' over many rank files.
 #'
+#' @return A character vector of shell commands to run GSEA.
 #' @export
 buildBroadGSEAcomm <- function(gseaJar,
 			       javaBin, 

@@ -4,6 +4,9 @@
 \name{AnnoBroadGseaResList-class}
 \alias{AnnoBroadGseaResList-class}
 \title{A list of AnnoBroadGseaRes objects}
+\value{
+An object of class \code{AnnoBroadGseaResList}.
+}
 \description{
 A list of AnnoBroadGseaRes objects
 }

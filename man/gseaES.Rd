@@ -18,6 +18,9 @@ gseaES(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric vector of enrichment scores.
+}
 \description{
 Return GSEA enrichment scores
 }

@@ -20,6 +20,9 @@ gsGenes(object, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+A character vector or list of character vectors of gene-set genes.
+}
 \description{
 Return gene-set genes
 }

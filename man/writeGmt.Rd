@@ -11,6 +11,10 @@ writeGmt(gmtList, file)
 
 \item{file}{Character string, output file name}
 }
+\value{
+Invisibly returns \code{NULL}. Called for its side effect of writing
+the GMT file.
+}
 \description{
 Write an GmtList object into a file
 }

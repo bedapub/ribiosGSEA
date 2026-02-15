@@ -12,6 +12,9 @@ gseaESprofile(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric vector of enrichment score profiles.
+}
 \description{
 Return GSEA enrichment score profile
 }

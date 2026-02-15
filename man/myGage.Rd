@@ -13,6 +13,9 @@ myGage(logFC, gmtList, ...)
 
 \item{...}{Other parameters passed to \code{\link[gage]{gage}}}
 }
+\value{
+A \code{data.frame} containing enrichment analysis results.
+}
 \description{
 Wrap the gage::gage method to report consistent results as the CAMERA method
 }

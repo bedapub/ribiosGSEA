@@ -11,8 +11,8 @@ gseaResES(file, normalized = FALSE)
 }
 \arguments{
 \item{file}{GSEA output tab-delimited file, usually with the file name
-\sQuote{gsea\_report\_for.*\_pos\_.*\.xls} or
-\sQuote{gsea\_report\_for.*\_neg\_.*\.xls}. Located in GSEA output
+\sQuote{gsea_report_for.*_pos_.*.xls} or
+\sQuote{gsea_report_for.*_neg_.*.xls}. Located in GSEA output
 directory.}
 
 \item{threshold}{Valid for q value: what is the minimum threshold of q-value

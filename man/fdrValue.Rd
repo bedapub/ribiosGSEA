@@ -11,6 +11,9 @@ fdrValue(object, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+A numeric vector of FDR values.
+}
 \description{
 Return FDR values
 }

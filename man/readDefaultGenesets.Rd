@@ -11,6 +11,9 @@ readDefaultGenesets(path, mps = FALSE)
 
 \item{mps}{Logical,  whether molecular-phenotypic screening (MPS) genesets should be read in as pathway-centric namespaces (\code{TRUE}) or as one namespace named \code{MolecularPhenotyping} (\code{FALSE}).}
 }
+\value{
+A \code{GmtList} object containing the default gene-set collections.
+}
 \description{
 In Roche Bioinformatics we use a default collection of gene-sets for gene-set enrichment analysis. This function loads this collection.
 }
