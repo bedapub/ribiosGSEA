@@ -11,6 +11,9 @@ gsGeneCount(object, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+An integer vector of gene counts.
+}
 \description{
 Return gene-set gene count
 }

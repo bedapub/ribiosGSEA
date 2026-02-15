@@ -18,6 +18,9 @@ gseaNP(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric vector.
+}
 \description{
 Return GSEA number of permutation
 }

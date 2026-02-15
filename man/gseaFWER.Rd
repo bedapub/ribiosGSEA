@@ -18,6 +18,9 @@ gseaFWER(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric vector of FWER values.
+}
 \description{
 Return GSEA FWER values
 }

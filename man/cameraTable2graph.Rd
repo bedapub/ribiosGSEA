@@ -15,6 +15,10 @@ cameraTable2graph(df, jacThr = 0.25, plot = TRUE, ...)
 
 \item{...}{Passed to \code{plot}}
 }
+\value{
+A list with two elements: \code{graph} (an igraph object) and
+\code{resTbl} (a data.frame with columns Namespace, GeneSet, Score).
+}
 \description{
 Convert a CAMERA table into a graph
 }

@@ -2,8 +2,20 @@
 % Please edit documentation in R/ribiosGSEA-package.R
 \docType{package}
 \name{ribiosGSEA-package}
+\alias{ribiosGSEA}
 \alias{ribiosGSEA-package}
-\title{The ribiosGSEA package}
+\title{ribiosGSEA: Gene-Set Enrichment Analysis Tools in 'ribios'}
 \description{
-The ribiosGSEA package supports gene-set analysis
+Provides data structure and functions for gene-set analysis and post-processing of analysis results.
 }
+\author{
+\strong{Maintainer}: Jitao David Zhang \email{jitao_david.zhang@roche.com} (\href{https://orcid.org/0000-0002-3085-0909}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Balasz Banfai [contributor]
+  \item F.Hoffmann-La Roche AG [copyright holder]
+}
+
+}
+\keyword{internal}

@@ -11,6 +11,9 @@
 
 \item{...}{Not used}
 }
+\value{
+\code{x}, invisibly.
+}
 \description{
 Print a FisherResult object
 }

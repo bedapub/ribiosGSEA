@@ -11,6 +11,9 @@ factorByNumberInStr(str, decreasing = TRUE)
 
 \item{decreasing}{Logical, whether decreasing or increasing order is desied, passed to \code{order}.}
 }
+\value{
+A factor with levels ordered by the parsed numbers.
+}
 \description{
 Make a factor vector from a character vector by the order of the parsed numbers
 }

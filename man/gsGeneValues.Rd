@@ -15,6 +15,9 @@ gsGeneValues(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric vector or list of numeric vectors of gene values.
+}
 \description{
 Return gene-set gene values
 }

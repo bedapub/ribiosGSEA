@@ -4,6 +4,9 @@
 \name{FisherResult-class}
 \alias{FisherResult-class}
 \title{Result of Fisher's exact test}
+\value{
+An object of class \code{FisherResult}.
+}
 \description{
 Result of Fisher's exact test
 }

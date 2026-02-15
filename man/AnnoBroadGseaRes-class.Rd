@@ -4,6 +4,9 @@
 \name{AnnoBroadGseaRes-class}
 \alias{AnnoBroadGseaRes-class}
 \title{Annotated BROAD GSEA Results for one contrast}
+\value{
+An object of class \code{AnnoBroadGseaRes}.
+}
 \description{
 Annotated BROAD GSEA Results for one contrast
 }

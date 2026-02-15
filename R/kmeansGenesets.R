@@ -123,5 +123,3 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
               repGenesetClusters=orderedRepGenesetClusters)
   return(res)
 }
-
-assignInNamespace("kmeansGeneset", kmeansGeneset, "ribiosGSEA")

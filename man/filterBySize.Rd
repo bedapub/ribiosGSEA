@@ -13,6 +13,9 @@ filterBySize(object, min, max)
 
 \item{max}{Integer, maximum size}
 }
+\value{
+The filtered object.
+}
 \description{
 Filter by size
 }

@@ -20,6 +20,9 @@ gsNamespace(object, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+A character vector of gene-set namespaces.
+}
 \description{
 Return gene-set namespace
 }

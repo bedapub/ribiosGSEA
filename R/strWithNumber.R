@@ -2,6 +2,7 @@
 #' @param str A vector of character trings
 #' @param ... Passed to \code{order}, by default \code{decreasing} is
 #' \code{TRUE}, i.e. the descending order is reported.
+#' @return An integer vector of indices.
 #' @importFrom readr parse_number
 #' @examples
 #' orderByNumberInStr(c("D1", "D10", "D15", "D3.5"))
@@ -17,6 +18,7 @@ orderByNumberInStr <- function(str, ...) {
 #' Make a factor vector from a character vector by the order of the parsed numbers
 #' @param str Strings
 #' @param decreasing Logical, whether decreasing or increasing order is desied, passed to \code{order}.
+#' @return A factor with levels ordered by the parsed numbers.
 #' @examples
 #' factorByNumberInStr(c("D1", "D10", "D15", "D3.5"))
 #' factorByNumberInStr(c("D1", "D10", "D15", "D3.5"), decreasing=FALSE)

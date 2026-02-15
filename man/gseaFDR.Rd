@@ -18,6 +18,9 @@ gseaFDR(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A numeric vector of FDR values.
+}
 \description{
 Return GSEA FDR
 }

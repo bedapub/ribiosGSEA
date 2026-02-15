@@ -33,6 +33,9 @@ The function merges the output of \code{camera} with default options with
 the output of \code{biosCamera}, which appends additional information to 
 camera methods, to return a comprehensive table as output.}
 }
+\value{
+A \code{data.frame} containing merged CAMERA results.
+}
 \description{
 Merge CAMERA results using limma default parameters and biosCamera parameters
 }

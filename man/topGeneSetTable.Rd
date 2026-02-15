@@ -11,6 +11,9 @@ topGeneSetTable(object, N)
 
 \item{N}{Integer, the number of returned gene-sets}
 }
+\value{
+A \code{data.frame}
+}
 \description{
 Return a data.frame of top gene-sets with the lowest p-values
 }

@@ -1,12 +1,8 @@
-#' The ribiosGSEA package
-#'
-#' The ribiosGSEA package supports gene-set analysis
-#'
-#' @docType package
+#' @keywords internal
 #' @useDynLib ribiosGSEA, .registration=TRUE, .fixes=`_ribiosGSEA_`
-#' @name ribiosGSEA-package
-NULL
+"_PACKAGE"
 
+#' @importFrom Rcpp evalCpp
 #' @importFrom ribiosExpression DesignContrast
 #' @importFrom ribiosNGS EdgeObject
 #' @importFrom edgeR DGEList
@@ -16,7 +12,7 @@ NULL
 #'             pchisq pt qt sd var model.matrix
 NULL
 
-## following lines make it not necessary to document 
+## following lines make it not necessary to document
 ## re-exported functions
 
 #' @export

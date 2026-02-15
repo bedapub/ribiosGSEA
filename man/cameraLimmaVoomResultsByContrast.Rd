@@ -23,6 +23,8 @@ sets}
 }
 \value{
 A \code{data.frame} containing CAMERA results.
+
+A \code{data.frame} containing CAMERA results across contrasts.
 }
 \description{
 Apply the CAMERA method to a DGEList object

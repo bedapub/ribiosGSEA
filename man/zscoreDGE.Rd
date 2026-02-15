@@ -16,6 +16,10 @@ zscoreDGE(y, design = NULL, contrast = ncol(design))
 The function is a carbon copy of edgeR:::.zscoreDGE, which is unfortunately
 not exported}
 }
+\value{
+A numeric matrix of z-scores with the same dimensions as the input
+count matrix.
+}
 \description{
 Calculate mid-p quantile residuals
 }

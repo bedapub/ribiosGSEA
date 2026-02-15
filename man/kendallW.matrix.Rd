@@ -28,6 +28,9 @@ rows belong to the same gene.}
 
 \item{...}{Not used}
 }
+\value{
+A matrix with an \code{info} attribute, see \code{\link{kendallWmat}}.
+}
 \description{
 Compute Kendall's W for a matrix
 }

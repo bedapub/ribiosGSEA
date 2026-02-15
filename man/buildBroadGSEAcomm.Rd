@@ -42,6 +42,9 @@ permutation) jar file}
 The command builds command-line command to run gene-permutation GSEA
 over many rank files.}
 }
+\value{
+A character vector of shell commands to run GSEA.
+}
 \description{
 Build the command-line command to run BROAD GSEA
 }

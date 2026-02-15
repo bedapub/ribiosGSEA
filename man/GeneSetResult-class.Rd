@@ -4,6 +4,9 @@
 \name{GeneSetResult-class}
 \alias{GeneSetResult-class}
 \title{A generic, virtual S4 class for gene-set analysis result}
+\value{
+An object of class \code{GeneSetResult} (virtual).
+}
 \description{
 A generic, virtual S4 class for gene-set analysis result
 }

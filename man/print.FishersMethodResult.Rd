@@ -7,9 +7,12 @@
 \method{print}{FishersMethodResult}(x, ...)
 }
 \arguments{
-\item{x}{An object of the \code{FisherMethodResult} (S3) class}
+\item{x}{An object of the \code{FishersMethodResult} (S3) class}
 
 \item{...}{Not used}
+}
+\value{
+\code{x}, invisibly.
 }
 \description{
 Print S3 object FishersMethodResult

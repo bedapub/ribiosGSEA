@@ -4,6 +4,9 @@
 \name{AnnoBroadGseaResItem-class}
 \alias{AnnoBroadGseaResItem-class}
 \title{Annotated BROAD GSEA result item}
+\value{
+An object of class \code{AnnoBroadGseaResItem}.
+}
 \description{
 Annotated BROAD GSEA result item
 }

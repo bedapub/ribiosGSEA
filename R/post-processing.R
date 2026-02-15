@@ -67,6 +67,7 @@ parseCameraContributingGenes <- function(cameraResTbl, genesets) {
 #' @param file CAMERA results file
 #' @param minNGenes NULL or integer, genesets with fewer genes are filtered out
 #' @param maxNGenes NULL or integer, genesets with more genes are filtered out
+#' @return A \code{tibble} containing the CAMERA results.
 #' @importFrom readr read_tsv
 #' @export readCameraResults
 readCameraResults <- function(file, minNGenes=3, maxNGenes=1000) {
@@ -103,7 +104,10 @@ expandCameraTableGenes <- function(tbl) {
 #' @param plot Logical, whether plotting the results
 #' @param ... Passed to \code{plot}
 #'
-#' @importFrom igraph make_empty_graph graph_from_adjacency_matrix 
+#' @return A list with two elements: \code{graph} (an igraph object) and
+#' \code{resTbl} (a data.frame with columns Namespace, GeneSet, Score).
+#'
+#' @importFrom igraph make_empty_graph graph_from_adjacency_matrix
 #'     layout_in_circle V
 #' @importFrom ribiosUtils pairwiseJaccardIndex matchColumn boundNorm
 #' @importFrom ribiosPlot royalbluegrayred
@@ -174,6 +178,7 @@ cameraTable2graph <- function(df, jacThr=0.25, plot=TRUE, ...) {
 #' @param minNGenes Integer, size of the smallest gene set that is considered
 #' @param maxNGenes Integer, size of the largest gene set that is considered
 #' @param excludeNamespace Character, vector of namespaces to be excluded
+#' @return A \code{tibble} containing filtered CAMERA results.
 #' @importFrom dplyr `%>%` filter
 #' @export
 readSigCameraResults <- function(file, 
@@ -205,6 +210,7 @@ readSigCameraResults <- function(file,
 #' Read significant CAMERA results into a matrix
 #' @param file A tsv file, output of \code{\link{biosCamera}}
 #' @param ... passed to \code{readSigCameraResults}
+#' @return A numeric matrix with gene-sets as rows and contrasts as columns.
 #' @importFrom ribiosUtils longdf2matrix
 #' @export
 readSigCameraScoreMatrix <- function(file, ...) {

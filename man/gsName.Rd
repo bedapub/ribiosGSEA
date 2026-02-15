@@ -28,6 +28,9 @@ gsName(object, ...)
 
 \item{...}{Other parameters}
 }
+\value{
+A character vector of gene-set names.
+}
 \description{
 Return gene-set name
 }

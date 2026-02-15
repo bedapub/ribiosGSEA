@@ -16,6 +16,9 @@ gseaCoreEnrichGenes(object)
 \arguments{
 \item{object}{An object}
 }
+\value{
+A character vector of core enrichment genes.
+}
 \description{
 Return GSEA core enrichment genes (also known as leading-edge genes)
 }

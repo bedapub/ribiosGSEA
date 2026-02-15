@@ -30,6 +30,9 @@ readSigCameraResults(
 
 \item{excludeNamespace}{Character, vector of namespaces to be excluded}
 }
+\value{
+A \code{tibble} containing filtered CAMERA results.
+}
 \description{
 Read significant CAMERA results into a tibble
 }

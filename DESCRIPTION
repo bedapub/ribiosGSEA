@@ -1,8 +1,8 @@
 Package: ribiosGSEA
 Type: Package
-Title: Gene-Set Enrichment Analysis Tools in Ribios
+Title: Gene-Set Enrichment Analysis Tools in 'ribios'
 Version: 1.6.6
-Date: 2023-03-28
+Date: 2026-02-15
 Authors@R:
   c(person(given = "Jitao David",
          family = "Zhang",
@@ -15,12 +15,11 @@ Authors@R:
     person("F.Hoffmann-La Roche AG", role="cph"))
 Description: Provides data structure and functions for gene-set analysis and post-processing of analysis results.
 Depends:
-    R (>= 2.1.0)
+    R (>= 4.1.0)
 Imports:
     Rcpp,
     methods,
     ribiosIO,
-    ribiosMath,
     ribiosUtils(>= 1.1-9),
     ribiosExpression,
     ribiosPlot,
@@ -29,11 +28,7 @@ Imports:
     parallel,
     limma,
     Biobase,
-    MASS,
-    lattice,
-    latticeExtra,
     BioQC (>= 1.13.2),
-    globaltest,
     edgeR,
     dplyr,
     data.table,
@@ -76,13 +71,12 @@ Collate:
     'prettyRonetGenesetNames.R'
     'strWithNumber.R'
 LinkingTo: Rcpp
-LazyLoad: yes
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
+Additional_repositories: https://bedapub.r-universe.dev
 Remotes:
     github::bedapub/ribiosIO,
-    github::bedapub/ribiosMath,
     github::bedapub/ribiosUtils,
     github::bedapub/ribiosExpression,
     github::bedapub/ribiosPlot,
