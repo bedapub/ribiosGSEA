@@ -44,8 +44,10 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install gettext
-          echo "CPPFLAGS=-I$(brew --prefix gettext)/include" >> $GITHUB_ENV
-          echo "LDFLAGS=-L$(brew --prefix gettext)/lib" >> $GITHUB_ENV
+          mkdir -p ~/.R
+          echo "CPPFLAGS += -I$(brew --prefix gettext)/include" >> ~/.R/Makevars
+          echo "LDFLAGS += -L$(brew --prefix gettext)/lib" >> ~/.R/Makevars
+
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
