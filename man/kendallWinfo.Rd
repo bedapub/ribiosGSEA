@@ -3,11 +3,14 @@
 \name{kendallWinfo}
 \alias{kendallWinfo}
 \alias{kendallWinfo.matrix}
+\alias{kendallWinfo<-.matrix}
 \title{S3 generic for kendallW information}
 \usage{
 kendallWinfo(object)
 
 \method{kendallWinfo}{matrix}(object)
+
+\method{kendallWinfo}{matrix}(object) <- value
 }
 \arguments{
 \item{object}{An object}
@@ -21,5 +24,10 @@ S3 generic for kendallW information
 \section{Methods (by class)}{
 \itemize{
 \item \code{kendallWinfo(matrix)}: Extract kendallW information from a matrix
+
+}}
+\section{Functions}{
+\itemize{
+\item \code{kendallWinfo(matrix) <- value}: Assign kendallW information to a matrix
 
 }}

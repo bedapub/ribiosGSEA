@@ -293,6 +293,9 @@ kendallWinfo <- function(object) UseMethod("kendallWinfo")
 #' @describeIn kendallWinfo Extract kendallW information from a matrix
 #' @export
 kendallWinfo.matrix <- function(object) return(attr(object, "info"))
+
+#' @describeIn kendallWinfo Assign kendallW information to a matrix
+#' @export
 `kendallWinfo<-.matrix` <- function(object, value) {
 	attr(object, "info") <- value
 	return(object)
