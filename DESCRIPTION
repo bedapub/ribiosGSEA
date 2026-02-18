@@ -77,3 +77,9 @@ RoxygenNote: 7.3.3
 Additional_repositories: https://bedapub.r-universe.dev
 URL: https://github.com/bedapub/ribiosGSEA
 BugReports: https://github.com/bedapub/ribiosGSEA/issues
+Remotes:
+    github::bedapub/ribiosIO,
+    github::bedapub/ribiosPlot,
+    github::bedapub/ribiosExpression,
+    github::bedapub/ribiosNGS
+
