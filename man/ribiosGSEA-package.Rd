@@ -8,6 +8,14 @@
 \description{
 Provides data structure and functions for gene-set analysis and post-processing of analysis results.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/bedapub/ribiosGSEA}
+  \item Report bugs at \url{https://github.com/bedapub/ribiosGSEA/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Jitao David Zhang \email{jitao_david.zhang@roche.com} (\href{https://orcid.org/0000-0002-3085-0909}{ORCID})
 
