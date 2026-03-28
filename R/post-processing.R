@@ -40,9 +40,16 @@ parseContributingGenes <- function(str) {
 #' @export parseGenesetsContributingGenes
 parseGenesetsContributingGenes <- function(str, genesets) {
   stopifnot(length(str)==length(genesets))
+  if(length(str) == 0) {
+    return(data.frame(GeneSet=character(0),
+                      Gene=character(0),
+                      Stat=numeric(0)))
+  }
   genes <- parseContributingGenes(str)
-  res <- cbind(GeneSet=rep(genesets, sapply(genes, nrow)),
-               do.call(rbind, genes))
+  geneDf <- do.call(rbind, genes)
+  res <- data.frame(GeneSet=rep(genesets, sapply(genes, nrow)),
+                    Gene=geneDf$Gene,
+                    Stat=geneDf$Stat)
   return(res)
 }
 
@@ -55,6 +62,9 @@ parseGenesetsContributingGenes <- function(str, genesets) {
 #' 
 #' @export parseCameraContributingGenes
 parseCameraContributingGenes <- function(cameraResTbl, genesets) {
+  if(length(genesets) == 0) {
+    return(list())
+  }
   res <- cameraResTbl %>% dplyr::filter(GeneSet %in% genesets) %>% 
     (function(x) parseGenesetsContributingGenes(x$ContributingGenes, x$GeneSet)) %>%
     (function(x) split(as.character(x$Gene), x$GeneSet))
