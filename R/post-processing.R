@@ -117,8 +117,7 @@ expandCameraTableGenes <- function(tbl) {
 #' @return A list with two elements: \code{graph} (an igraph object) and
 #' \code{resTbl} (a data.frame with columns Namespace, GeneSet, Score).
 #'
-#' @importFrom igraph make_empty_graph graph_from_adjacency_matrix
-#'     layout_in_circle V
+#' @importFrom igraph make_empty_graph graph_from_adjacency_matrix layout_in_circle V
 #' @importFrom ribiosUtils pairwiseJaccardIndex matchColumn boundNorm
 #' @importFrom ribiosPlot royalbluegrayred
 #' @export

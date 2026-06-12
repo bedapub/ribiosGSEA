@@ -24,7 +24,6 @@ Publicly available genesets include
 \itemize{
  \item{MSigDB: collections C2, C7 and Hallmark}
  \item{RONET: which is a collection of publicly available pathway databases including REACTOME and NCI-Nature}
- \item{goslim}
 }
 }
 \examples{

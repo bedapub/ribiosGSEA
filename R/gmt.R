@@ -52,7 +52,6 @@ readMPSGmt <- function(file) {
 #' \itemize{
 #'  \item{MSigDB: collections C2, C7 and Hallmark}
 #'  \item{RONET: which is a collection of publicly available pathway databases including REACTOME and NCI-Nature}
-#'  \item{goslim}
 #' }
 #' @return A \code{GmtList} object containing the default gene-set collections.
 #'
@@ -92,7 +91,6 @@ readDefaultGenesets <- function(path,
     gscs <- BioQC::readGmt(MolecularPhenotyping=mps.pathway,
                     upstream=upstream.file,
                     ronet=ronet.file,
-                    goslim=goslim.file,
                     mbdisease=mbdisease.file,
                     mbmetabolic=mbmetabolic.file,
                     mbpath=mbpath.file,
