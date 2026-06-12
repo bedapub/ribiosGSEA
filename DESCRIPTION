@@ -1,8 +1,8 @@
 Package: ribiosGSEA
 Type: Package
 Title: Gene-Set Enrichment Analysis Tools in 'ribios'
-Version: 1.6.7
-Date: 2026-03-28
+Version: 1.6.8
+Date: 2026-06-12
 Authors@R:
   c(person(given = "Jitao David",
          family = "Zhang",
