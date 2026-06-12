@@ -44,6 +44,20 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
               identical(rownames(enrichProfMatrix),
                         names(genesetGenes)))
   gsNames <- as.character(rownames(enrichProfMatrix))
+  ## Handle edge case: fewer than 2 gene-sets cannot be clustered
+  if(nrow(enrichProfMatrix) < 2) {
+    singleCluster <- factor(rep("GenesetCluster1", nrow(enrichProfMatrix)))
+    singleDf <- data.frame(GenesetCluster="GenesetCluster1",
+                           GenesetInd=seq_len(nrow(enrichProfMatrix)),
+                           GenesetName=gsNames,
+                           JaccardIndex=1,
+                           CumJaccardIndex=1,
+                           IsRepresentative=TRUE)
+    return(list(kmeans=NULL,
+                genesetClusterData=singleDf,
+                repGenesets=gsNames,
+                repGenesetClusters=singleCluster))
+  }
   maxOptK <- floor(nrow(enrichProfMatrix)/2)
   if(optK>maxOptK) {
     optK <- maxOptK
@@ -105,9 +119,13 @@ kmeansGeneset <- function(enrichProfMatrix, genesetGenes,
     clusterAvgProf <- matrix(clusterAvgProfList, ncol=1,
                              dimnames = list(names(clusterAvgProfList), NULL))
   }
-  clusterHclust <- stats::hclust(stats::dist(clusterAvgProf), 
-                                 "ward.D2")
-  clusterOrder <- clusterHclust$label[clusterHclust$order]
+  if(nrow(clusterAvgProf) >= 2) {
+    clusterHclust <- stats::hclust(stats::dist(clusterAvgProf), 
+                                   "ward.D2")
+    clusterOrder <- clusterHclust$label[clusterHclust$order]
+  } else {
+    clusterOrder <- rownames(clusterAvgProf)
+  }
   
   gsClusters <- factor(gsCompOverlapSelInd,
                        levels=clusterOrder)
