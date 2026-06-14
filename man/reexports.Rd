@@ -15,12 +15,12 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{edgeR}{\code{\link[edgeR]{DGEList}}}
+  \item{edgeR}{\code{\link[edgeR:DGEList]{DGEList()}}}
 
-  \item{limma}{\code{\link[limma]{camera}}}
+  \item{limma}{\code{\link[limma:camera]{camera()}}}
 
-  \item{ribiosExpression}{\code{\link[ribiosExpression]{DesignContrast}}, \code{\link[ribiosExpression]{designMatrix}}}
+  \item{ribiosExpression}{\code{\link[ribiosExpression:DesignContrast]{DesignContrast()}}, \code{\link[ribiosExpression:designMatrix]{designMatrix()}}}
 
-  \item{ribiosNGS}{\code{\link[ribiosNGS]{EdgeObject}}}
+  \item{ribiosNGS}{\code{\link[ribiosNGS:EdgeObject]{EdgeObject()}}}
 }}
 

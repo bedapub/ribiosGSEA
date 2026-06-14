@@ -52,7 +52,6 @@ readMPSGmt <- function(file) {
 #' \itemize{
 #'  \item{MSigDB: collections C2, C7 and Hallmark}
 #'  \item{RONET: which is a collection of publicly available pathway databases including REACTOME and NCI-Nature}
-#'  \item{goslim}
 #' }
 #' @return A \code{GmtList} object containing the default gene-set collections.
 #'
@@ -66,14 +65,13 @@ readMPSGmt <- function(file) {
 #' @export
 readDefaultGenesets <- function(path,
                                 mps=FALSE) {
-  assertFile(msigdb.c2.file <- file.path(path, "msigdb.c2.all.symbols.gmt"))
-  assertFile(msigdb.c7.file <- file.path(path, "msigdb.c7.all.symbols.gmt"))
-  assertFile(msigdb.hallmark.file <- file.path(path, "msigdb.hallmark.all.symbols.gmt"))
+  assertFile(msigdb.c2.file <- file.path(path, "msigdb.c2.gmt"))
+  assertFile(msigdb.c7.file <- file.path(path, "msigdb.c7.gmt"))
+  assertFile(msigdb.hallmark.file <- file.path(path, "msigdb.hallmark.gmt"))
   
   assertFile(mps.pathway <- file.path(path, "MolecularPhenotyping-genesets.gmt"))
   
   assertFile(ronet.file <- file.path(path, "path.ronet.roche.symbols.gmt"))
-  assertFile(goslim.file <- file.path(path, "go_slim.bp.roche.symbols.gmt"))
 
   assertFile(upstream.file <- file.path(path, "MetaBase.downstream.expression.gmt"))  
   assertFile(mbdisease.file <- file.path(path, "MetaBase.DiseaseBiomarker.gmt"))
@@ -81,24 +79,18 @@ readDefaultGenesets <- function(path,
   assertFile(mbpath.file <- file.path(path, "MetaBase.PathwayMap.gmt"))
   assertFile(mbtoxicity.file <- file.path(path, "MetaBase.Toxicity.gmt"))
   assertFile(mbpathology.file <- file.path(path, "MetaBase.ToxicPathology.gmt"))
-  assertFile(mbprocess.file <- file.path(path, "MetaBase.TRprocesses.gmt"))
-
-  assertFile(immunomics.file <- file.path(path, "exp.immune.roche.symbols.gmt"))
-  assertFile(immunespace.file <- file.path(path, "immunespace.gmt"))
+  assertFile(mbprocess.file <- file.path(path, "MetaBase.ProcessNetwork.gmt"))
   
   if(mps) {
     mpsGSCs <- readMPSGmt(mps.pathway)
     gscs <- BioQC::readGmt(msigdbC2=msigdb.c2.file,
                     msigdbC7=msigdb.c7.file,
-                    msigdbHallmark = msigdb.hallmark.file,
-                    immunomics = immunomics.file,
-                    immunespace = immunespace.file)
+                    msigdbHallmark = msigdb.hallmark.file)
     gscs <- appendGmtList(mpsGSCs, gscs)
   } else {
     gscs <- BioQC::readGmt(MolecularPhenotyping=mps.pathway,
                     upstream=upstream.file,
                     ronet=ronet.file,
-                    goslim=goslim.file,
                     mbdisease=mbdisease.file,
                     mbmetabolic=mbmetabolic.file,
                     mbpath=mbpath.file,
@@ -107,9 +99,7 @@ readDefaultGenesets <- function(path,
                     mbpathology=mbpathology.file,
                     msigdbC2=msigdb.c2.file,
                     msigdbC7=msigdb.c7.file,
-                    msigdbHallmark = msigdb.hallmark.file,
-                    immunomics = immunomics.file,
-                    immunespace = immunespace.file)
+                    msigdbHallmark = msigdb.hallmark.file)
   }
   return(gscs)
 }

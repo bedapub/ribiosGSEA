@@ -8,8 +8,7 @@
 #' @importFrom edgeR DGEList
 #' @importFrom utils read.table write.table
 #' @importFrom methods as callGeneric is new
-#' @importFrom stats ave cor fisher.test kmeans median p.adjust
-#'             pchisq pt qt sd var model.matrix
+#' @importFrom stats ave cor fisher.test kmeans median p.adjust pchisq pt qt sd var model.matrix
 NULL
 
 ## following lines make it not necessary to document

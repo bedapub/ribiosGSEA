@@ -1,8 +1,8 @@
 Package: ribiosGSEA
 Type: Package
 Title: Gene-Set Enrichment Analysis Tools in 'ribios'
-Version: 1.6.7
-Date: 2026-03-28
+Version: 1.6.8
+Date: 2026-06-12
 Authors@R:
   c(person(given = "Jitao David",
          family = "Zhang",
@@ -73,7 +73,6 @@ Collate:
 LinkingTo: Rcpp
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 Additional_repositories: https://bedapub.r-universe.dev
 URL: https://github.com/bedapub/ribiosGSEA
 BugReports: https://github.com/bedapub/ribiosGSEA/issues
@@ -82,4 +81,4 @@ Remotes:
     github::bedapub/ribiosPlot,
     github::bedapub/ribiosExpression,
     github::bedapub/ribiosNGS
-
+Config/roxygen2/version: 8.0.0
