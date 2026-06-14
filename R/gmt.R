@@ -79,7 +79,7 @@ readDefaultGenesets <- function(path,
   assertFile(mbpath.file <- file.path(path, "MetaBase.PathwayMap.gmt"))
   assertFile(mbtoxicity.file <- file.path(path, "MetaBase.Toxicity.gmt"))
   assertFile(mbpathology.file <- file.path(path, "MetaBase.ToxicPathology.gmt"))
-  assertFile(mbprocess.file <- file.path(path, "MetaBase.ProcessesNetwork.gmt"))
+  assertFile(mbprocess.file <- file.path(path, "MetaBase.ProcessNetwork.gmt"))
   
   if(mps) {
     mpsGSCs <- readMPSGmt(mps.pathway)
